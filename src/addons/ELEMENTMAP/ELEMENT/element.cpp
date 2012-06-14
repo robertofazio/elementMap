@@ -12,6 +12,15 @@ void element::init(int _type,int _width, int _height, int _internalFormat)
 	fboLeft.allocate(elementWidth,elementHeight, internalFormat);
 	fboRight.allocate(elementWidth,elementHeight, internalFormat);
 	
+	// clear the buffers from past 
+	fboLeft.begin();
+	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
+	fboLeft.end();
+
+	fboRight.begin();
+	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
+	fboRight.end();
+	
 	printf("element w:%d - h:%d \n",elementWidth,elementHeight);
 }
 

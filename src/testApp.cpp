@@ -19,7 +19,7 @@ void testApp::setup()
 	
 	// create & setup elements on this app 
 	elemImg.setup("./images/testHD.jpg", "", false);
-	elemImg2.setup("./images/img1.jpg", "", false);
+	elemImg2.setup("./images/img1.jpg", "./images/img2.jpg", true);
 	elemV1.setup("./movies/left.mov","./movies/right.mov",true);
 	elemSy.setup("Arena","a",1920,1080);
 	
@@ -62,17 +62,18 @@ void testApp::draw()
 	ofSetColor(255,255);
 	elemMix.drawIntoFbo(isStereoCapable);
 	ofSetColor(255,255);
-	elemMix.drawOutput(20,420,1920/2,1080/2);
+	elemMix.drawOutput(20,420,ofGetWidth()/2,ofGetHeight()/2);
 
 	// just draw the preview inputs of mixer
 	ofSetColor(255,255);
-	int previewWidth = (1920-(20*myElements.size()))/myElements.size();
+	int previewWidth = (ofGetWidth()-(20*myElements.size()))/myElements.size();
 	int previewHeight = previewWidth / (float(ofGetWidth())/float(ofGetHeight()));
 	for(int i=0;i<myElements.size();i++)
 	{
 		glDrawBuffer(GL_BACK);
 		ofSetColor(255);
 		myElements[i]->fboLeft.draw( (20*i) + (previewWidth*i),20,previewWidth,previewHeight);
+		
 	}
 
 }

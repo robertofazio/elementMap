@@ -9,6 +9,5 @@ enum typeOfElement {ELEMENT_MASK,ELEMENT_VIDEO,ELEMENT_IMG,ELEMENT_SYPHON,ELEMEN
 #include "elementSyphon.h"
 #include "elementMixer.h"
 #include "elementImage.h"
-#include "elementMask.h"
 
 #endif

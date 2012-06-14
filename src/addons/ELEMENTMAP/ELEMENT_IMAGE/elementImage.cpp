@@ -34,20 +34,43 @@ void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 
 	if(getDrawInStereo())
 	{
-		// stereo
-		fboLeft.begin();
-		ofBackground(0,0,0,0);
-		ofSetColor(255);
-		leftImage.draw(0,0,getWidth(),getHeight());
-		fboLeft.end();
 		
-		//----------
-		
-		fboRight.begin();
-		ofBackground(0,0,0,0);
-		ofSetColor(255);
-		rightImage.draw(0,0,getWidth(),getHeight());
-		fboRight.end();
+		if(!getSwapLeftRight())
+		{
+			// stereo
+			fboLeft.begin();
+			ofBackground(0,0,0,0);
+			ofSetColor(255);
+			leftImage.draw(0,0,getWidth(),getHeight());
+			fboLeft.end();
+			
+			//----------
+			
+			fboRight.begin();
+			ofBackground(0,0,0,0);
+			ofSetColor(255);
+			rightImage.draw(0,0,getWidth(),getHeight());
+			fboRight.end();
+			
+		}
+		else
+		{
+			// stereo swapped
+			fboLeft.begin();
+			ofBackground(0,0,0,0);
+			ofSetColor(255);
+			rightImage.draw(0,0,getWidth(),getHeight());
+			fboLeft.end();
+			
+			//----------
+			
+			fboRight.begin();
+			ofBackground(0,0,0,0);
+			ofSetColor(255);
+			leftImage.draw(0,0,getWidth(),getHeight());
+			fboRight.end();
+			
+		}
 	}
 	else 
 	{
