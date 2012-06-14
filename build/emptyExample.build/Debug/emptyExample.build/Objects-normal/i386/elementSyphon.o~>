@@ -1,0 +1,3 @@
+/Users/eloimaduell/Documents/OF_MAC/OF_007_DEVELOP_ROBERTOFAZIO/apps/ROBERTO/ELEMENTMAP_1/src/addons/ELEMENTMAP/ELEMENT_SYPHON/elementSyphon.cpp: In member function 'void elementSyphon::setup(std::string, std::string, int, int)':
+/Users/eloimaduell/Documents/OF_MAC/OF_007_DEVELOP_ROBERTOFAZIO/apps/ROBERTO/ELEMENTMAP_1/src/addons/ELEMENTMAP/ELEMENT_SYPHON/elementSyphon.cpp:25: error: expected unqualified-id before '}' token
+/Users/eloimaduell/Documents/OF_MAC/OF_007_DEVELOP_ROBERTOFAZIO/apps/ROBERTO/ELEMENTMAP_1/src/addons/ELEMENTMAP/ELEMENT_SYPHON/elementSyphon.cpp:25: error: expected `;' before '}' token
