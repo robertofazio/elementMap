@@ -3,11 +3,14 @@
 
 void element::init(int _type,int _width, int _height, int _internalFormat)
 {
+
 	elementWidth	= _width;
 	elementHeight	= _height;
 	internalFormat	= _internalFormat;
 	type			= _type;
 	swapLeftRight	= false;
+	opacity			= 1.0;
+	hide			= false;
 	
 	fboLeft.allocate(elementWidth,elementHeight, internalFormat);
 	fboRight.allocate(elementWidth,elementHeight, internalFormat);
@@ -22,6 +25,14 @@ void element::init(int _type,int _width, int _height, int _internalFormat)
 	fboRight.end();
 	
 	printf("element w:%d - h:%d \n",elementWidth,elementHeight);
+}
+
+
+//-----------------------------------------------------------------
+void element::setOpacityColor()
+{
+	// put color based on opacity
+	glColor4f(getOpacity(),getOpacity(),getOpacity(),getOpacity());
 }
 
 //
@@ -57,6 +68,16 @@ void element::setInternalFormat(int _i)
 void element::setSwapLeftRight(bool b)
 {
 	swapLeftRight = b;	
+}
+//-----------------------------------------------------------------------
+void element::setOpacity(float f)
+{
+	opacity = f;	
+}
+//-----------------------------------------------------------------------
+void element::setHide(bool b)
+{
+	hide = b;	
 }
 
 
@@ -95,7 +116,17 @@ int element::getElementType()
 {
 	return (type);
 }
+//-----------------------------------------------------------------------
 bool element::getSwapLeftRight()
 {
 	return swapLeftRight;
+}//-----------------------------------------------------------------------
+bool element::getHide()
+{
+	return hide;
+}
+//-----------------------------------------------------------------------
+float element::getOpacity()
+{
+	return (opacity);
 }

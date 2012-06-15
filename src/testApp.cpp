@@ -38,7 +38,7 @@ void testApp::setup()
 
 	int * drawingBlendModes = new int[myElements.size()-1];
 	drawingBlendModes[0]=3;
-	drawingBlendModes[1]=1;
+	drawingBlendModes[1]=3;
 	drawingBlendModes[2]=9;
 	
 	
@@ -81,6 +81,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 
+	elemImg.setHide(true);
 }
 
 //--------------------------------------------------------------
@@ -94,6 +95,9 @@ void testApp::keyReleased(int key){
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
 
+	elemMix.setOpacity(float(y)/float(ofGetHeight()));
+
+	elemV1.setOpacity(float(y)/float(ofGetHeight()));
 }
 
 //--------------------------------------------------------------

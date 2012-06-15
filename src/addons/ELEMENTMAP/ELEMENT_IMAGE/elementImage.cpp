@@ -32,53 +32,62 @@ void elementImage::update()
 void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 {
 
-	if(getDrawInStereo())
+	if(!hide)
 	{
-		
-		if(!getSwapLeftRight())
+
+		if(getDrawInStereo())
 		{
-			// stereo
-			fboLeft.begin();
-			ofBackground(0,0,0,0);
-			ofSetColor(255);
-			leftImage.draw(0,0,getWidth(),getHeight());
-			fboLeft.end();
 			
-			//----------
-			
-			fboRight.begin();
-			ofBackground(0,0,0,0);
-			ofSetColor(255);
-			rightImage.draw(0,0,getWidth(),getHeight());
-			fboRight.end();
-			
+			if(!getSwapLeftRight())
+			{
+				// stereo
+				fboLeft.begin();
+				ofBackground(0,0,0,0);
+				setOpacityColor();
+				leftImage.draw(0,0,getWidth(),getHeight());
+				fboLeft.end();
+				
+				//----------
+				
+				fboRight.begin();
+				ofBackground(0,0,0,0);
+				setOpacityColor();
+				rightImage.draw(0,0,getWidth(),getHeight());
+				fboRight.end();
+				
+			}
+			else
+			{
+				// stereo swapped
+				fboLeft.begin();
+				ofBackground(0,0,0,0);
+				setOpacityColor();
+				rightImage.draw(0,0,getWidth(),getHeight());
+				fboLeft.end();
+				
+				//----------
+				
+				fboRight.begin();
+				ofBackground(0,0,0,0);
+				setOpacityColor();
+				leftImage.draw(0,0,getWidth(),getHeight());
+				fboRight.end();
+				
+			}
 		}
-		else
+		else 
 		{
-			// stereo swapped
+			// mono
 			fboLeft.begin();
 			ofBackground(0,0,0,0);
-			ofSetColor(255);
-			rightImage.draw(0,0,getWidth(),getHeight());
-			fboLeft.end();
-			
-			//----------
-			
-			fboRight.begin();
-			ofBackground(0,0,0,0);
-			ofSetColor(255);
+			setOpacityColor();
 			leftImage.draw(0,0,getWidth(),getHeight());
-			fboRight.end();
-			
+			fboLeft.end();
 		}
 	}
 	else 
 	{
-		// mono
-		fboLeft.begin();
-		ofBackground(0,0,0,0);
-		leftImage.draw(0,0,getWidth(),getHeight());
-		fboLeft.end();
+		
 	}
 
 }

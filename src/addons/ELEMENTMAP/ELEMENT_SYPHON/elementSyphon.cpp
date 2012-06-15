@@ -28,15 +28,19 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
 //-----------------------------------------------------------------
 void elementSyphon::drawIntoFbo(bool _drawMonoOrStereo)
 {
+
+	if(!hide)
+	{
+
+		fboLeft.begin();
+		// we need to clear the fbo in order to keep alpha background clean ?¿
+		// ofBackgrouns works better ?
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		ofBackground(0,0,0,0);
+		setOpacityColor();
+		syphonClient.draw(0,0,getWidth(),getHeight());
+
+		fboLeft.end();
+	}
 	
-	fboLeft.begin();
-	// we need to clear the fbo in order to keep alpha background clean ?¿
-	// ofBackgrouns works better ?
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	ofBackground(0,0,0,0);
-	ofSetColor(255,255,255,255);
-	syphonClient.draw(0,0,getWidth(),getHeight());
-
-	fboLeft.end();
-
 }

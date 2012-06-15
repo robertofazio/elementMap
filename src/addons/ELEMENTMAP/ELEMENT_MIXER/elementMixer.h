@@ -34,6 +34,7 @@ class elementMixer : public element
 
 	vector<element*>	sceneElements;
 	int*				elementsOrder;
+	vector<float*>		elementsOpacity;
 	int*				elementsBlendModes;
 	int					blendMode;
 	ofShader			shader;
@@ -42,6 +43,9 @@ class elementMixer : public element
 	// used to help on drawing ...
 	ofImage				blacktexture;
 	
+	private : 
+	
+	void				updateOpacity();
 	
 };
 
