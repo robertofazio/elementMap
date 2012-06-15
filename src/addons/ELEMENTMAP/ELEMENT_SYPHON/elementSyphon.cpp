@@ -29,8 +29,11 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
 void elementSyphon::drawIntoFbo(bool _drawMonoOrStereo)
 {
 
-	if(!hide)
+	if(isActive)
 	{
+
+		// update the clear state of the object 
+		if(isClear) isClear=false;
 
 		fboLeft.begin();
 		// we need to clear the fbo in order to keep alpha background clean ?¿
@@ -42,5 +45,16 @@ void elementSyphon::drawIntoFbo(bool _drawMonoOrStereo)
 
 		fboLeft.end();
 	}
+	// we control with isClear if the fbo is already clean, so no need to clean all the time
+	else if(!isClear)
+	{
+		fboLeft.begin();
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+		fboLeft.end();
+		
+		isClear=true;
+	}
+	
 	
 }

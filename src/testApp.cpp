@@ -79,13 +79,22 @@ void testApp::draw()
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void testApp::keyPressed(int key)
+{
+	if(key=='a')
+	{
+		elemImg.setIsActive(false);
+	}
+	else if(key=='s')
+	{
+		elemImg.setIsActive(true);
+	}
 
-	elemImg.setHide(true);
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void testApp::keyReleased(int key)
+{
 	if(!elemV1.getDrawInStereo()) elemV1.setDrawInStereo(true);
 	else elemV1.setDrawInStereo(false);
 	drawAllStereo=!drawAllStereo;

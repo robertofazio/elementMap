@@ -32,8 +32,12 @@ void elementImage::update()
 void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 {
 
-	if(!hide)
+	if(isActive)
 	{
+		// update the clear state of the object 
+		if(isClear) isClear=false;
+		
+		this->setDrawInStereo(_drawMonoOrStereo);
 
 		if(getDrawInStereo())
 		{
@@ -85,9 +89,19 @@ void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 			fboLeft.end();
 		}
 	}
-	else 
+	else if(!isClear)
 	{
+		fboLeft.begin();
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+		fboLeft.end();
 		
+		fboRight.begin();
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+		fboRight.end();
+		
+		isClear=true;
 	}
 
 }

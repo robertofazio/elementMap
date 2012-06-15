@@ -8,9 +8,11 @@ void element::init(int _type,int _width, int _height, int _internalFormat)
 	elementHeight	= _height;
 	internalFormat	= _internalFormat;
 	type			= _type;
-	swapLeftRight	= false;
 	opacity			= 1.0;
-	hide			= false;
+	swapLeftRight	= false;
+	isShow			= true;
+	isActive		= true;
+	isClear			= false;
 	
 	fboLeft.allocate(elementWidth,elementHeight, internalFormat);
 	fboRight.allocate(elementWidth,elementHeight, internalFormat);
@@ -24,6 +26,9 @@ void element::init(int _type,int _width, int _height, int _internalFormat)
 	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
 	fboRight.end();
 	
+	
+	setupUI(this);
+	
 	printf("element w:%d - h:%d \n",elementWidth,elementHeight);
 }
 
@@ -32,7 +37,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat)
 void element::setOpacityColor()
 {
 	// put color based on opacity
-	glColor4f(getOpacity(),getOpacity(),getOpacity(),getOpacity());
+	glColor4f(getOpacity(),getOpacity(),getOpacity(),1.0f);
 }
 
 //
@@ -75,9 +80,14 @@ void element::setOpacity(float f)
 	opacity = f;	
 }
 //-----------------------------------------------------------------------
-void element::setHide(bool b)
+void element::setIsShow(bool b)
 {
-	hide = b;	
+	isShow = b;	
+}
+//-----------------------------------------------------------------------
+void element::setIsActive(bool b)
+{
+	isActive = b;	
 }
 
 
@@ -121,9 +131,14 @@ bool element::getSwapLeftRight()
 {
 	return swapLeftRight;
 }//-----------------------------------------------------------------------
-bool element::getHide()
+bool element::getIsShow()
 {
-	return hide;
+	return isShow;
+}
+//-----------------------------------------------------------------------
+bool element::getIsActive()
+{
+	return isActive;
 }
 //-----------------------------------------------------------------------
 float element::getOpacity()

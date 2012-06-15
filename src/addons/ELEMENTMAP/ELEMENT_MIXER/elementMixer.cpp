@@ -39,7 +39,7 @@ void elementMixer::update()
 //-----------------------------------------------------------------
 void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 {
-	if(!hide)
+	if(isActive)
 	{
 
 		setDrawInStereo(_drawMonoOrStereo);
@@ -47,12 +47,13 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		// we make all the elements to draw them selves into their Fbo 
 		for(int i=0;i<sceneElements.size();i++)
 		{
-			if(sceneElements[i]->getDrawInStereo()) sceneElements[i]->drawIntoFbo(true);
-			else sceneElements[i]->drawIntoFbo(false);
+				if(sceneElements[i]->getDrawInStereo()) sceneElements[i]->drawIntoFbo(true);
+				else sceneElements[i]->drawIntoFbo(false);
 		}
 
 		// and now we paint all the layers with the PSblend mixer shader 
-		// once per channel
+		// once per channel left and right 
+		// here the left :
 		//////////////////////////
 		fboLeft.begin();
 		shader.begin();
@@ -75,6 +76,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		shader.end();        
 		fboLeft.end();
 		
+		// here the right :
 		//////////////////////////
 		
 		fboRight.begin();
@@ -115,7 +117,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 //-----------------------------------------------------------------
 void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 {
-	if(!hide)
+	if(isActive)
 	{
 
 		switch (outputStereoMode) 

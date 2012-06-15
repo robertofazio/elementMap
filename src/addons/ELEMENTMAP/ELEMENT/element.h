@@ -3,8 +3,9 @@
 #define ELEMENT_H
 
 #include "ofMain.h"
+#include "elementUIBase.h"
 
-class element : public ofNode
+class element : public ofNode, elementUIBase 
 {
 	public :
 	
@@ -21,7 +22,8 @@ class element : public ofNode
 	void			setInternalFormat(int _i);
 	void			setSwapLeftRight(bool b);
 	void			setOpacity(float f);
-	void			setHide(bool b);
+	void			setIsShow(bool b);
+	void			setIsActive(bool b);
 	
 	bool			getIsStereo();
 	bool			getDrawInStereo();
@@ -30,28 +32,35 @@ class element : public ofNode
 	int				getInternalFormat();
 	int				getElementType();	
 	bool			getSwapLeftRight();
-	bool			getHide();
+	bool			getIsShow();
+	bool			getIsActive();
 	float			getOpacity();
 	
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
 	
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
+	
 	protected :
-	// helpers 
+
+	bool			isActive;	// indicates that we don't want this element to loose any time of cpu, so doesn't draw in preview or in draw
 	void			setOpacityColor();
-	bool			hide;
+	bool			isShow;		// indicates we want to keep the element to preview but not draw it on the output
+	bool			isClear;	// indicates if the fbo's have been cleared to black to avoid clearing on every draw
 	int				elementWidth;
 	int				elementHeight;
 
+	
 	private :
+	
 	int				type;
 	bool			isStereo;
 	int				internalFormat; //GL_RGB,GL_RGBA ...
 	bool			drawInStereo;
 	bool			swapLeftRight;
 	float			opacity;
-
+	
+	
 };
 
 #endif;
