@@ -1,1 +1,3 @@
-i686-apple-darwin10-gcc-4.2.1: -lpthread: linker input file unused because linking not done
+/Users/eloimaduell/Documents/OF_MAC/OF_071_ELEMENT/apps/robertoFazio/element/src/addons/ELEMENTMAP/ELEMENT_VIDEO/elementVideo.cpp: In member function 'void elementVideo::setup(std::string, std::string, bool, int, int, std::string)':
+/Users/eloimaduell/Documents/OF_MAC/OF_071_ELEMENT/apps/robertoFazio/element/src/addons/ELEMENTMAP/ELEMENT_VIDEO/elementVideo.cpp:36: error: no matching function for call to 'elementVideo::init(int, int, int, int&, std::string&)'
+/Users/eloimaduell/Documents/OF_MAC/OF_071_ELEMENT/apps/robertoFazio/element/src/addons/ELEMENTMAP/ELEMENT/element.h:14: note: candidates are: void element::init(int, int, int, int)
