@@ -12,17 +12,21 @@
 
 
 //-----------------------------------------------------------------
-void elementMixer::setup(int _width, int _height, int _stereoMode,vector<element*>* _elements,int* _elementsOrder, int* _elementsBlendModes)
+void elementMixer::setup(int _width, int _height, int _stereoMode,vector<element*>* _elements,int* _elementsOrder,int _posX, int _posY,string _name)
 {
 	setOutputStereoMode(_stereoMode);
 	
-	this->init(5,_width,_height,GL_RGBA);
+	xPos = _posX;
+	yPos = _posY;
+
+	this->init(5,_width,_height,GL_RGBA,_name);
 	sceneElements = *_elements;
 	elementsOrder = _elementsOrder;
-	elementsBlendModes = _elementsBlendModes;
-    blendMode = 1;	
+	elementsBlendModes = new int[sceneElements.size()];
+    blendMode = 0;	
 	shader.load("./shaders/pssh");
 	blacktexture.loadImage("./images/blackTexture.jpg");
+	
 	
 }
 
@@ -47,8 +51,12 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		// we make all the elements to draw them selves into their Fbo 
 		for(int i=0;i<sceneElements.size();i++)
 		{
-				if(sceneElements[i]->getDrawInStereo()) sceneElements[i]->drawIntoFbo(true);
-				else sceneElements[i]->drawIntoFbo(false);
+			if(sceneElements[i]->getDrawInStereo()) sceneElements[i]->drawIntoFbo(true);
+			else sceneElements[i]->drawIntoFbo(false);
+			if(i<sceneElements.size()-1)
+			{
+				elementsBlendModes[i] = sceneElements[i]->getBlendingMode();
+			}
 		}
 
 		// and now we paint all the layers with the PSblend mixer shader 
@@ -62,6 +70,11 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 			string texName = string("tex"+ofToString(i));
 			shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeft.getTextureReference(), i+1);
 		}
+		
+		//elementsBlendModes[0]=3;
+		//elementsBlendModes[1]=3;
+		//elementsBlendModes[2]=9;
+		
 		
 		shader.setUniform1iv("applyModes",elementsBlendModes, sceneElements.size()-1);
 		ofEnableAlphaBlending();

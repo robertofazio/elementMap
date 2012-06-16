@@ -8,7 +8,7 @@ elementVideo::elementVideo()
 }
 
 //-----------------------------------------------------------------
-void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isStereo)
+void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isStereo,int _xPos, int _yPos,string _name)
 {
 	setIsStereo(_isStereo);
 	setDrawInStereo(_isStereo);
@@ -27,7 +27,13 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isSter
 	{
 		printf("·");
 	}
-	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal);	
+	
+	xPos = _xPos;
+	yPos = _yPos;
+	
+	//elementUIBase::setGUIOrigin(_xPos,_yPos);
+
+	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name);	
 	
 }
 

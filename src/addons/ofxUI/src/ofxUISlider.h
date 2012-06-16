@@ -88,6 +88,7 @@ public:
         
 		label->setParent(label); 
 		label->setRectParent(rect); 
+        label->setEmbedded(true);
         increment = 1.0;         
     }
 
@@ -318,7 +319,7 @@ public:
 		}		
 	}
 	
-    void stateChange()
+    virtual void stateChange()
     {                
         switch (state) {
             case OFX_UI_STATE_NORMAL:

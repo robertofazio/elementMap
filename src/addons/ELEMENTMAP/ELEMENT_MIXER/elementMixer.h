@@ -21,7 +21,7 @@ class elementMixer : public element
 	
 	elementMixer(){};
 	void update();
-	void setup(int _width, int _height, int _stereoMode,vector<element*>* _elements,int* _elementsOrder, int* _elementsBlendModes);
+	void setup(int _width, int _height, int _stereoMode,vector<element*>* _elements,int* _elementsOrder,int _posX, int _posY,string _name);
 	void setOutputStereoMode(int _stereoMode);
 	void drawIntoFbo(bool _drawMonoOrStereo);
 	void drawOutput(int _x, int _y,int _width, int _height);

@@ -12,7 +12,7 @@ class elementSyphon : public element
 	
 	elementSyphon();
 	
-	void setup(string _applicationName,string _serverName,int _width, int _height);
+	void setup(string _applicationName,string _serverName,int _width, int _height,int _posX, int _posY,string _name);
 	void drawIntoFbo(bool _drawMonoOrStereo);
 	void update(){};
 	

@@ -9,7 +9,7 @@ elementSyphon::elementSyphon()
 }
 
 //-----------------------------------------------------------------
-void elementSyphon::setup(string _applicationName,string _serverName,int _width,int _height)
+void elementSyphon::setup(string _applicationName,string _serverName,int _width,int _height,int _posX, int _posY,string _name)
 {
 	setIsStereo(false);
 	setDrawInStereo(false);
@@ -18,9 +18,12 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
 	syphonClient.setServerName(_serverName);
 	syphonClient.setup();
 	
+	xPos = _posX;
+	yPos = _posY;
+
 	// seems like syphonClient can't read w and h ?¿
 	//this->init(int(syphonClient.getWidth()),int(syphonClient.getHeight()),GL_RGBA);	
-	this->init(3,_width,_height,GL_RGBA);	
+	this->init(3,_width,_height,GL_RGBA,_name);	
 
 }
 

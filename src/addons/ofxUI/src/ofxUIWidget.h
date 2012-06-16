@@ -59,6 +59,7 @@ public:
         color_padded_rect_outline = OFX_UI_COLOR_PADDED_OUTLINE;     
         
         dead = false; 
+        embedded = false; 
     }
     
     virtual ~ofxUIWidget() 
@@ -243,7 +244,12 @@ public:
 	{
 		name = _name; 
 	}
-	
+    
+	virtual void setState(int _state)
+    {
+        state = _state; 
+    }
+    
 	virtual void setDrawPadding(bool _draw_padded_rect)
 	{
 		draw_padded_rect = _draw_padded_rect; 
@@ -412,7 +418,7 @@ public:
 	virtual void setPadding(float _padding)
 	{
 		padding = _padding; 
-		paddedRect->set(rect->getX()-padding, rect->getY()-padding, rect->getWidth()+padding*2.0, rect->getHeight()+padding*2.0);
+		paddedRect->set(-padding, -padding, rect->getWidth()+padding*2.0, rect->getHeight()+padding*2.0);
 	}
 	
 	virtual float getPadding()
@@ -433,6 +439,16 @@ public:
     virtual bool isDraggable()
     {
         return false; 
+    }
+    
+    virtual bool isEmbedded()
+    {
+        return embedded; 
+    }
+    
+    virtual void setEmbedded(bool _embedded)
+    {
+        embedded = _embedded; 
     }
     
     void setID(int _id)
@@ -459,6 +475,7 @@ public:
     {
         return false; 
     }
+    
 
 protected:    
 	ofxUIWidget *parent; 
@@ -471,6 +488,7 @@ protected:
     int id;     
     bool hit; 
     int state; 
+    bool embedded;
     
 	bool draw_back;         //Rendering Properties 
 	bool draw_outline; 

@@ -1,14 +1,18 @@
 #include "element.h"
 
 
-void element::init(int _type,int _width, int _height, int _internalFormat)
+void element::init(int _type,int _width, int _height, int _internalFormat, string _name)
 {
+	
 
+	
 	elementWidth	= _width;
 	elementHeight	= _height;
 	internalFormat	= _internalFormat;
 	type			= _type;
+	elementName		= _name;
 	opacity			= 1.0;
+	blendingMode	= 0;
 	swapLeftRight	= false;
 	isShow			= true;
 	isActive		= true;
@@ -25,8 +29,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat)
 	fboRight.begin();
 	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
 	fboRight.end();
-	
-	
+		
 	setupUI(this);
 	
 	printf("element w:%d - h:%d \n",elementWidth,elementHeight);
@@ -89,6 +92,11 @@ void element::setIsActive(bool b)
 {
 	isActive = b;	
 }
+//-----------------------------------------------------------------------
+void element::setBlendingMode(int _i)
+{
+	blendingMode = _i;
+}
 
 
 
@@ -145,3 +153,16 @@ float element::getOpacity()
 {
 	return (opacity);
 }
+//-----------------------------------------------------------------------
+string element::getElementName()
+{
+	return (elementName);	
+}
+//-----------------------------------------------------------------------
+int element::getBlendingMode()
+{
+	return (blendingMode);	
+}
+
+
+

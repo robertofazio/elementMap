@@ -18,10 +18,10 @@ void testApp::setup()
 	
 	
 	// create & setup elements on this app 
-	elemImg.setup("./images/testHD.jpg", "", false);
-	elemImg2.setup("./images/img1.jpg", "./images/img2.jpg", true);
-	elemV1.setup("./movies/left.mov","./movies/right.mov",true);
-	elemSy.setup("Arena","a",1920,1080);
+	elemImg.setup("./images/testHD.jpg", "", false,1030,300,"test Pattern");
+	elemImg2.setup("./images/img1.jpg", "./images/img2.jpg", true,1460,300,"Image 1");
+	elemV1.setup("./movies/left.mov","./movies/right.mov",true,20,300,"left/right movies");
+	elemSy.setup("Arena","a",1920,1080,520,300,"Arena:A");
 	
 	// add elements to the vector
 	myElements.push_back(&elemV1);
@@ -36,13 +36,8 @@ void testApp::setup()
 	drawingOrder[2]=2;
 	drawingOrder[3]=3;
 
-	int * drawingBlendModes = new int[myElements.size()-1];
-	drawingBlendModes[0]=3;
-	drawingBlendModes[1]=3;
-	drawingBlendModes[2]=9;
 	
-	
-	elemMix.setup(1920,1080,ELM_STEREO_OPENGL,&myElements,drawingOrder,drawingBlendModes);
+	elemMix.setup(1920,1080,ELM_STEREO_OPENGL,&myElements,drawingOrder,1000,500,"4chan mixer");
 	
 	ofBackground(255, 0,0);
 	
@@ -62,7 +57,7 @@ void testApp::draw()
 	ofSetColor(255,255);
 	elemMix.drawIntoFbo(isStereoCapable);
 	ofSetColor(255,255);
-	elemMix.drawOutput(20,420,ofGetWidth()/2,ofGetHeight()/2);
+	elemMix.drawOutput(20,500,ofGetWidth()/2,ofGetHeight()/2);
 
 	// just draw the preview inputs of mixer
 	ofSetColor(255,255);
@@ -102,11 +97,9 @@ void testApp::keyReleased(int key)
 
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void testApp::mouseMoved(int x, int y )
+{
 
-	elemMix.setOpacity(float(y)/float(ofGetHeight()));
-
-	elemV1.setOpacity(float(y)/float(ofGetHeight()));
 }
 
 //--------------------------------------------------------------

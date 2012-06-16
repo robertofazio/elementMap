@@ -62,12 +62,32 @@ public:
 		label = new ofxUILabel(w+padding*2.0,0, (name+" LABEL"), name, _size); 
 		label->setParent(label); 
 		label->setRectParent(rect); 
-		
+        label->setEmbedded(true);		
         setValue(_value); 
         drawLabel = true;
         label->setVisible(drawLabel);      
     }
         
+    virtual void draw() 
+    {
+        ofPushStyle(); 
+        
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA); 
+        
+        drawPadded();
+        drawPaddedOutline();        
+        
+        drawBack();
+        
+        drawOutline();
+        drawOutlineHighlight();
+        
+        drawFill();
+        drawFillHighlight();
+        
+        ofPopStyle();
+    }
+    
     virtual void setDrawPadding(bool _draw_padded_rect)
 	{
 		draw_padded_rect = _draw_padded_rect; 
@@ -135,7 +155,14 @@ public:
 #ifdef TARGET_OPENGLES
             state = OFX_UI_STATE_NORMAL;        
 #else            
-            state = OFX_UI_STATE_OVER; 
+            if(rect->inside(x, y))
+            {
+                state = OFX_UI_STATE_OVER; 
+            }
+            else
+            {
+                state = OFX_UI_STATE_NORMAL;                         
+            }
 #endif 
             setValue(false); 
 			triggerEvent(this); 
