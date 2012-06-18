@@ -114,3 +114,25 @@ void elementVideo::drawIntoFbo(bool _drawMonoOrStereo)
 	
 	
 }
+
+//-----------------------------------------------------------------
+void elementVideo::setPause(bool _b)
+{
+    leftChannelPlayer.setPaused(_b);
+	rightChannelPlayer.setPaused(_b);
+
+}
+
+//-----------------------------------------------------------------
+bool elementVideo::getIsPaused()
+{
+    return leftChannelPlayer.isPaused();
+}
+
+
+//-----------------------------------------------------------------
+void elementVideo::rewind()
+{
+    leftChannelPlayer.setFrame(0);
+    rightChannelPlayer.setFrame(0);
+}

@@ -56,8 +56,8 @@ void elementUIBase::setupUI(element* _parentElement)
     UI->setDrawOutline(false);
     UI->setFontSize(OFX_UI_FONT_MEDIUM, 8);
     UI->setFontSize(OFX_UI_FONT_SMALL, 5);
-    UI->setPadding(2);
-	    
+    UI->setWidgetSpacing(1.5);
+    
     UI->addWidgetDown(new ofxUILabel(parentElement->getElementName(), OFX_UI_FONT_MEDIUM));
 	UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getIsActive(),"isActive"));
 	UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getIsShow(),"isShow"));    
@@ -66,19 +66,28 @@ void elementUIBase::setupUI(element* _parentElement)
 	if (parentElement->getIsStereo() ) UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getDrawInStereo(),"isDrawInStereo"));
     UI->addWidgetDown(new ofxUISlider(100,10,0.0,1.0,parentElement->getOpacity() ,"opacity"));
 
+    
+    //width and height
     UI->addWidgetDown(new ofxUISlider(100,10,0,1920,parentElement->getWidth() ,"width"));
     UI->addWidgetDown(new ofxUISlider(100,10,0,1080,parentElement->getHeight() ,"height"));
 
     
+    //simple controls for video element: play/pause and rewind
+    if (type == ELEMENT_VIDEO)
+    {
+        UI->addWidgetDown(new ofxUIToggle(10,10,((testApp*)ofGetAppPtr())->elemV1.getIsPaused(),"pause"));    
+        UI->addWidgetDown(new ofxUIButton(10, 10, false, "rewind"));
+    }
+    
     //all elements except for mixer need blend modes selection
-	if (type!=5)
+	if (type!=ELEMENT_MIXER)
     {   
         listBlendModes = new ofxUIDropDownList(100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setAutoClose(true);
         UI->addWidgetDown(listBlendModes);
     }
     //but mixer needs output mode selection:
-	if (type==5)
+	else
     {
         listOutputModes = new ofxUIDropDownList(100, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setAutoClose(true);
@@ -86,7 +95,7 @@ void elementUIBase::setupUI(element* _parentElement)
     }
     
     ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent);    
-
+ 
 }
 
 //--------------------------------------------------------------
@@ -116,6 +125,16 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setDrawInStereo(toggle->getValue());
 	}
+    else if(e.widget->getName()=="pause")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		((testApp*)ofGetAppPtr())->elemV1.setPause(toggle->getValue());
+	}
+    else if(e.widget->getName()=="rewind")
+	{
+		((testApp*)ofGetAppPtr())->elemV1.rewind();
+	}
+    
     if(e.widget->getName()=="width")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;

@@ -19,10 +19,10 @@ void testApp::setup()
 	
 	
 	// create & setup elements on this app 
-	elemImg.setup("./images/testHD.jpg", "", false,1030,300,"test Pattern");
-	elemImg2.setup("./images/left.jpg", "./images/right.jpg", true,1460,300,"left/right images");
-	elemV1.setup("./movies/left.mov","./movies/right.mov",true,20,300,"left/right movies");
-	elemSy.setup("","",1920,1080,520,300,"Syphon:server");
+	elemImg.setup("./images/testHD.jpg", "", false,1030,280,"test Pattern");
+	elemImg2.setup("./images/left.jpg", "./images/right.jpg", true,1460,280,"left/right images");
+	elemV1.setup("./movies/left.mov","./movies/right.mov",true,20,280,"left/right movies");
+	elemSy.setup("","",1920,1080,520,280,"Syphon:server");
 	
 	// add elements to the vector
 	myElements.push_back(&elemV1);

@@ -68,7 +68,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		shader.begin();
 		for(int i=0;i<sceneElements.size();i++)
 		{
-			string texName = string("tex"+ofToString(i));
+            string texName = string("tex"+ofToString(i));
 			shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeft.getTextureReference(), i+1);
 		}
 		

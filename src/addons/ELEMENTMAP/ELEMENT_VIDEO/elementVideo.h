@@ -20,7 +20,13 @@ class elementVideo : public element
 	void drawIntoFbo(bool _drawMonoOrStereo);
 	void update();
 	
-	
+    void setPause(bool _b);
+	void rewind();
+    
+    
+    bool getIsPaused();
+    
+    
 	ofVideoPlayer leftChannelPlayer;
 	ofVideoPlayer rightChannelPlayer;
 
