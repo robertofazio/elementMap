@@ -5,14 +5,12 @@
 #include "ofxUI.h"
 //#include "element.h"
 
-
 // class is declared here as a forward declaration
 // in james words :
 // basically what that does is tell  elementUIBase 
 // "I promise that when you compile there will be a class called element"
 // but you don't get to see what it is until compilation
 class element;
-
 
 class  elementUIBase
 {
@@ -25,7 +23,7 @@ class  elementUIBase
 	
 	ofxUICanvas*			UI;
 	element*				parentElement;
-	
+    
 	//void setGUIOrigin(int _x,int _y);
 	int						xPos;
 	int						yPos;
@@ -35,5 +33,8 @@ class  elementUIBase
 	ofxUIDropDownList*		listBlendModes;
 	vector<string>			blendingNames; 
 
+    ofxUIDropDownList*      listOutputModes;
+    vector<string>          outputModesNames;
+    
 };
 #endif

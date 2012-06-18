@@ -6,6 +6,7 @@ int num = 1;
 void testApp::setup()
 {	
 	ofEnableAlphaBlending();
+    ofEnableSmoothing();
 	
 	// test that GL_STEREO is working on this machine
 	GLboolean isStereoCapable = false;
@@ -18,10 +19,10 @@ void testApp::setup()
 	
 	
 	// create & setup elements on this app 
-	elemImg.setup("./images/testHD.jpg", "", false,1030,300,"test Pattern");
-	elemImg2.setup("./images/img1.jpg", "./images/img2.jpg", true,1460,300,"Image 1");
-	elemV1.setup("./movies/left.mov","./movies/right.mov",true,20,300,"left/right movies");
-	elemSy.setup("Arena","a",1920,1080,520,300,"Arena:A");
+	elemImg.setup("./images/testHD.jpg", "", false,1030,280,"test Pattern");
+	elemImg2.setup("./images/left.jpg", "./images/right.jpg", true,1460,280,"left/right images");
+	elemV1.setup("./movies/left.mov","./movies/right.mov",true,20,280,"left/right movies");
+	elemSy.setup("","",1920,1080,520,280,"Syphon:server");
 	
 	// add elements to the vector
 	myElements.push_back(&elemV1);
@@ -37,7 +38,7 @@ void testApp::setup()
 	drawingOrder[3]=3;
 
 	
-	elemMix.setup(1920,1080,ELM_STEREO_OPENGL,&myElements,drawingOrder,1000,500,"4chan mixer");
+	elemMix.setup(1920,1080,ELM_STEREO_ANAGLYPH,&myElements,drawingOrder,1000,600,"4chan mixer");
 	
 	ofBackground(255, 0,0);
 	
@@ -76,23 +77,12 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	if(key=='a')
-	{
-		elemImg.setIsActive(false);
-	}
-	else if(key=='s')
-	{
-		elemImg.setIsActive(true);
-	}
 
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-	if(!elemV1.getDrawInStereo()) elemV1.setDrawInStereo(true);
-	else elemV1.setDrawInStereo(false);
-	drawAllStereo=!drawAllStereo;
 }
 
 

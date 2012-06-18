@@ -1,4 +1,5 @@
 #include "elementMixer.h"
+#include  "testApp.h"
 
 //#include "elementSyphon.h"
 
@@ -67,7 +68,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		shader.begin();
 		for(int i=0;i<sceneElements.size();i++)
 		{
-			string texName = string("tex"+ofToString(i));
+            string texName = string("tex"+ofToString(i));
 			shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeft.getTextureReference(), i+1);
 		}
 		
@@ -234,20 +235,34 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 //-----------------------------------------------------------------
 void elementMixer::drawInfo()
 {
-	
-	if(getIsStereo())
-	{
-		ofSetColor(0,255,0);
-		ofDrawBitmapString("GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
-	}
-	else 
-	{
-		ofSetColor(255,0,0);
-		ofDrawBitmapString("no GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
-	}
-	ofSetColor(255,255,0);
-	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-100,ofGetHeight()-80);
+#define ELM_STEREO_OPENGL		0
+#define ELM_STEREO_ANAGLYPH		1
+#define ELM_STEREO_LEFTRIGHT	2
+#define ELM_STEREO_TOPBOTTOM	3
+#define ELM_STEREO_MONO			4
 
+    ofPushStyle();
+    ofSetColor(0,255,0);
+	
+    if (outputStereoMode == 0)      //modalità opengl stereo
+    {
+        if (((testApp*)ofGetAppPtr())->isStereoCapable) ofDrawBitmapString("GL_STEREO",ofGetWidth()-920,ofGetHeight()-100);    
+        else {
+        ofPushStyle();
+        ofSetColor(0,255,0);
+        ofDrawBitmapString("GL_STEREO NOT SUPPORTED",ofGetWidth()-920,ofGetHeight()-100);    
+        ofPopStyle();
+        }
+    }
+    else if (outputStereoMode == 1) ofDrawBitmapString("ANAGLYPH",ofGetWidth()-920,ofGetHeight()-100);   
+    else if (outputStereoMode == 2) ofDrawBitmapString("NOT YET IMPLEMENTED",ofGetWidth()-920,ofGetHeight()-100);   
+    else if (outputStereoMode == 3) ofDrawBitmapString("NOT YET IMPLEMENTED",ofGetWidth()-920,ofGetHeight()-100);   
+    else if (outputStereoMode == 4) ofDrawBitmapString("MONO",ofGetWidth()-920,ofGetHeight()-100);   
+
+	ofSetColor(255,255,0);
+	ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()),ofGetWidth()-920,ofGetHeight()-80);
+
+    ofPopStyle();
 }
 
 //-----------------------------------------------------------------
