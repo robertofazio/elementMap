@@ -38,7 +38,7 @@ void testApp::setup()
 	drawingOrder[3]=3;
 
 	
-	elemMix.setup(1920,1080,ELM_STEREO_ANAGLYPH,&myElements,drawingOrder,1000,500,"4chan mixer");
+	elemMix.setup(1920,1080,ELM_STEREO_ANAGLYPH,&myElements,drawingOrder,1000,600,"4chan mixer");
 	
 	ofBackground(255, 0,0);
 	

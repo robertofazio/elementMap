@@ -5,8 +5,6 @@
 #include "ofxUI.h"
 //#include "element.h"
 
-
-
 // class is declared here as a forward declaration
 // in james words :
 // basically what that does is tell  elementUIBase 
