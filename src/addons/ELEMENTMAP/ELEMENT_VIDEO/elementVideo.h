@@ -19,14 +19,13 @@ class elementVideo : public element
 	void setup(string _leftChannel, string _rightChannel, bool _isStereo, int _posX, int _posY,string _name);
 	void drawIntoFbo(bool _drawMonoOrStereo);
 	void update();
-	
-    void setPause(bool _b);
-	void rewind();
     
+    void setPause(bool _b);
+    void rewind();
     
     bool getIsPaused();
-    
-    
+
+	
 	ofVideoPlayer leftChannelPlayer;
 	ofVideoPlayer rightChannelPlayer;
 

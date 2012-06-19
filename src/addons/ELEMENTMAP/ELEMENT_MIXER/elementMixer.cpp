@@ -1,5 +1,4 @@
 #include "elementMixer.h"
-#include  "testApp.h"
 
 //#include "elementSyphon.h"
 
@@ -24,6 +23,7 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,vector<element
 	sceneElements = *_elements;
 	elementsOrder = _elementsOrder;
 	elementsBlendModes = new int[sceneElements.size()];
+	elementsOpacity = new float[sceneElements.size()];
     blendMode = 0;	
 	shader.load("./shaders/pssh");
 	blacktexture.loadImage("./images/blackTexture.jpg");
@@ -57,7 +57,9 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 			if(i<sceneElements.size()-1)
 			{
 				elementsBlendModes[i] = sceneElements[i]->getBlendingMode();
+				
 			}
+			elementsOpacity[i] = sceneElements[i]->getOpacity();
 		}
 
 		// and now we paint all the layers with the PSblend mixer shader 
@@ -68,7 +70,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		shader.begin();
 		for(int i=0;i<sceneElements.size();i++)
 		{
-            string texName = string("tex"+ofToString(i));
+			string texName = string("tex"+ofToString(i));
 			shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeft.getTextureReference(), i+1);
 		}
 		
@@ -76,7 +78,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		//elementsBlendModes[1]=3;
 		//elementsBlendModes[2]=9;
 		
-		
+		shader.setUniform1fv("opacities", elementsOpacity,sceneElements.size());
 		shader.setUniform1iv("applyModes",elementsBlendModes, sceneElements.size()-1);
 		ofEnableAlphaBlending();
 		
@@ -235,41 +237,33 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 //-----------------------------------------------------------------
 void elementMixer::drawInfo()
 {
-#define ELM_STEREO_OPENGL		0
-#define ELM_STEREO_ANAGLYPH		1
-#define ELM_STEREO_LEFTRIGHT	2
-#define ELM_STEREO_TOPBOTTOM	3
-#define ELM_STEREO_MONO			4
+	ofSetColor(0,255,0);
 
-    ofPushStyle();
-    ofSetColor(0,255,0);
-	
-    if (outputStereoMode == 0)      //modalità opengl stereo
-    {
-        if (((testApp*)ofGetAppPtr())->isStereoCapable) ofDrawBitmapString("GL_STEREO",ofGetWidth()-920,ofGetHeight()-100);    
-        else {
-        ofPushStyle();
-        ofSetColor(0,255,0);
-        ofDrawBitmapString("GL_STEREO NOT SUPPORTED",ofGetWidth()-920,ofGetHeight()-100);    
-        ofPopStyle();
-        }
-    }
-    else if (outputStereoMode == 1) ofDrawBitmapString("ANAGLYPH",ofGetWidth()-920,ofGetHeight()-100);   
-    else if (outputStereoMode == 2) ofDrawBitmapString("NOT YET IMPLEMENTED",ofGetWidth()-920,ofGetHeight()-100);   
-    else if (outputStereoMode == 3) ofDrawBitmapString("NOT YET IMPLEMENTED",ofGetWidth()-920,ofGetHeight()-100);   
-    else if (outputStereoMode == 4) ofDrawBitmapString("MONO",ofGetWidth()-920,ofGetHeight()-100);   
-
+	switch (outputStereoMode) 
+	{
+		case ELM_STEREO_OPENGL:
+			ofDrawBitmapString("GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
+			break;
+			
+		case ELM_STEREO_MONO:
+			ofDrawBitmapString("MONO",ofGetWidth()-100,ofGetHeight()-100);
+			break;
+		case ELM_STEREO_ANAGLYPH:
+			ofDrawBitmapString("ANAGLYPH",ofGetWidth()-100,ofGetHeight()-100);
+			break;
+		default:
+			break;
+	}
 	ofSetColor(255,255,0);
-	ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()),ofGetWidth()-920,ofGetHeight()-80);
+	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-100,ofGetHeight()-80);
 
-    ofPopStyle();
 }
 
 //-----------------------------------------------------------------
 void elementMixer::drawQuadGeometry()
 {
 	// this is a worarround. using a blacktexture 
-	blacktexture.draw(0,0,1920,1080);
+	blacktexture.draw(0,0,elementWidth,elementHeight);
 	/*
 	glBegin(GL_QUADS);
 	
