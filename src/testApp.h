@@ -46,5 +46,5 @@ class testApp : public ofBaseApp{
 	
 	bool					drawPreviews;
 	bool					drawUIs;
-	
+    bool                    bFullscreen;
 };

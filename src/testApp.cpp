@@ -22,7 +22,6 @@ void testApp::setup()
 	if (isStereoCapable) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
 	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
 	
-	
 	int previewWidth = (ofGetWidth()-(20*myElements.size()))/4;
 	int previewHeight = previewWidth / (float(ofGetWidth())/float(ofGetHeight()));
 
@@ -51,6 +50,7 @@ void testApp::setup()
 	ofBackground(255, 0,0);
 	
 	drawAllStereo=true;
+    bFullscreen=false;
 }
 
 //--------------------------------------------------------------
@@ -62,7 +62,17 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {	
-	// prepare and draw mixer element
+	
+    if (bFullscreen) 
+    {
+        ofSetColor(255,255);
+        elemMix.drawOutput(0,0,ofGetWidth(),ofGetHeight());
+
+    }
+        else 
+        {
+    
+    // prepare and draw mixer element
 	ofSetColor(255,255);
 	elemMix.drawIntoFbo(isStereoCapable);
 	ofSetColor(255,255);
@@ -83,6 +93,7 @@ void testApp::draw()
 			
 		}
 	}
+        }
 }
 
 //--------------------------------------------------------------
@@ -98,6 +109,24 @@ void testApp::keyPressed(int key)
 	}
 	else if(key=='f')
 	{
+        bFullscreen=!bFullscreen;
+        
+        if (bFullscreen) {
+            drawPreviews=false;
+            myElements[0]->UI->setVisible(false);
+			myElements[1]->UI->setVisible(false);
+			myElements[2]->UI->setVisible(false);
+			myElements[3]->UI->setVisible(false);
+			elemMix.UI->setVisible(false);
+        } else
+        {
+            drawPreviews=true;
+            myElements[0]->UI->setVisible(true);
+			myElements[1]->UI->setVisible(true);
+			myElements[2]->UI->setVisible(true);
+			myElements[3]->UI->setVisible(true);
+			elemMix.UI->setVisible(true);
+        }
 		ofToggleFullscreen();
 	}
     else if(key=='g')
