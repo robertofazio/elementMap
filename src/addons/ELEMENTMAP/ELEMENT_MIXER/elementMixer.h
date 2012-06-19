@@ -10,9 +10,9 @@
 // 
 #define ELM_STEREO_OPENGL		0
 #define ELM_STEREO_ANAGLYPH		1
-#define ELM_STEREO_LEFTRIGHT	2
-#define ELM_STEREO_TOPBOTTOM	3
-#define ELM_STEREO_MONO			4
+#define ELM_STEREO_MONO			2
+#define ELM_STEREO_LEFTRIGHT	3
+#define ELM_STEREO_TOPBOTTOM	4
 
 
 class elementMixer : public element
@@ -34,8 +34,9 @@ class elementMixer : public element
 
 	vector<element*>	sceneElements;
 	int*				elementsOrder;
-	vector<float*>		elementsOpacity;
 	int*				elementsBlendModes;
+	float*				elementsOpacity;
+
 	int					blendMode;
 	ofShader			shader;
 	int					outputStereoMode;

@@ -23,6 +23,7 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,vector<element
 	sceneElements = *_elements;
 	elementsOrder = _elementsOrder;
 	elementsBlendModes = new int[sceneElements.size()];
+	elementsOpacity = new float[sceneElements.size()];
     blendMode = 0;	
 	shader.load("./shaders/pssh");
 	blacktexture.loadImage("./images/blackTexture.jpg");
@@ -56,7 +57,9 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 			if(i<sceneElements.size()-1)
 			{
 				elementsBlendModes[i] = sceneElements[i]->getBlendingMode();
+				
 			}
+			elementsOpacity[i] = sceneElements[i]->getOpacity();
 		}
 
 		// and now we paint all the layers with the PSblend mixer shader 
@@ -75,7 +78,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		//elementsBlendModes[1]=3;
 		//elementsBlendModes[2]=9;
 		
-		
+		shader.setUniform1fv("opacities", elementsOpacity,sceneElements.size());
 		shader.setUniform1iv("applyModes",elementsBlendModes, sceneElements.size()-1);
 		ofEnableAlphaBlending();
 		
@@ -234,16 +237,22 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 //-----------------------------------------------------------------
 void elementMixer::drawInfo()
 {
-	
-	if(getIsStereo())
+	ofSetColor(0,255,0);
+
+	switch (outputStereoMode) 
 	{
-		ofSetColor(0,255,0);
-		ofDrawBitmapString("GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
-	}
-	else 
-	{
-		ofSetColor(255,0,0);
-		ofDrawBitmapString("no GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
+		case ELM_STEREO_OPENGL:
+			ofDrawBitmapString("GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
+			break;
+			
+		case ELM_STEREO_MONO:
+			ofDrawBitmapString("MONO",ofGetWidth()-100,ofGetHeight()-100);
+			break;
+		case ELM_STEREO_ANAGLYPH:
+			ofDrawBitmapString("ANAGLYPH",ofGetWidth()-100,ofGetHeight()-100);
+			break;
+		default:
+			break;
 	}
 	ofSetColor(255,255,0);
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-100,ofGetHeight()-80);
@@ -254,7 +263,7 @@ void elementMixer::drawInfo()
 void elementMixer::drawQuadGeometry()
 {
 	// this is a worarround. using a blacktexture 
-	blacktexture.draw(0,0,1920,1080);
+	blacktexture.draw(0,0,elementWidth,elementHeight);
 	/*
 	glBegin(GL_QUADS);
 	

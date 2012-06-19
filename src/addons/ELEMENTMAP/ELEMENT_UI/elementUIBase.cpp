@@ -5,6 +5,9 @@
 // in james words :
 #include "element.h"
 
+//same thing for testSpp, because we point to the mixer element:
+#include "testApp.h"
+
 //--------------------------------------------------------------
 elementUIBase::elementUIBase()
 {
@@ -34,26 +37,56 @@ elementUIBase::elementUIBase()
 	blendingNames.push_back("Bor");
 	blendingNames.push_back("Luminosity");
 	
+	outputModesNames.push_back("OPENGL");
+    outputModesNames.push_back("ANAGLYPH");
+//    outputModesNames.push_back("LEFTRIGHT");
+//    outputModesNames.push_back("TOPBOTTOM");    
+    outputModesNames.push_back("MONO");
 	
 }
 //--------------------------------------------------------------
 void elementUIBase::setupUI(element* _parentElement)
 {
+
+	
 	printf("setupUI %d %d\n",xPos,yPos);
 	parentElement =  _parentElement;
 	
-    UI = new ofxUICanvas(xPos,yPos, 200,800);
-
-	
-	listBlendModes = new ofxUIDropDownList(100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
-	listBlendModes->setAutoClose(true);
+    int type = parentElement->getElementType();    
+    
+    UI = new ofxUICanvas(xPos,yPos, 300,900);
+    UI->setDrawBack(false);
+    UI->setDrawOutline(false);
+    UI->setFontSize(OFX_UI_FONT_MEDIUM, 8);
+    UI->setFontSize(OFX_UI_FONT_SMALL, 6);
+    UI->setPadding(2);
 	
     UI->addWidgetDown(new ofxUILabel(parentElement->getElementName(), OFX_UI_FONT_MEDIUM));
-	UI->addWidgetDown(new ofxUIToggle(20,20,parentElement->getIsActive(),"isActive"));
-    UI->addWidgetDown(new ofxUISlider(100,20,0.0,1.0,parentElement->getOpacity() ,"opacity"));
-	UI->addWidgetDown(listBlendModes);
-	ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent);    
-
+    UI->addWidgetDown(new ofxUISlider(100,10,0.0,1.0,parentElement->getOpacity() ,"opacity"));
+	UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getIsActive(),"isActive"));
+    
+    //show stereo drawing option only for stereo elements
+	if (parentElement->getIsStereo() ) UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getDrawInStereo(),"isDrawInStereo"));
+	    
+    //all elements except for mixer need blend modes selection
+	if (type!=5)
+    {   
+        listBlendModes = new ofxUIDropDownList(100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes->setAutoClose(true);
+        UI->addWidgetDown(listBlendModes);
+    }
+    //but mixer needs output mode selection:
+	if (type==5)
+    {
+		// TODO we need to implement case in mixer ... 
+		//UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getSwapLeftRight(),"Swap Left/Right"));
+		
+        listOutputModes = new ofxUIDropDownList(100, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes->setAutoClose(true);
+        UI->addWidgetDown(listOutputModes);
+    }
+    
+    ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 
 }
 
 //--------------------------------------------------------------
@@ -73,6 +106,19 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setIsActive(toggle->getValue());
 	}
+    else if(e.widget->getName()=="isDrawInStereo")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		parentElement->setDrawInStereo(toggle->getValue());
+	}
+    
+	else if( e.widget->getParent()->getName()=="Swap Left/Right")
+	{
+		// TODO we need to implement case in mixer ... 
+		//ofxUIToggle *toggleSwap = (ofxUIToggle *) e.widget;
+		//parentElement->setSwapLeftRight(toggleSwap->getValue());
+	}
+    
 	else if( e.widget->getParent()->getName()=="Blending Mode")
 	{
 		for(int i=0;i<blendingNames.size();i++)
@@ -83,6 +129,17 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 			}			
 		}
 	}
+    else if( e.widget->getParent()->getName()=="Output Mode")
+	{
+		for(int i=0;i<outputModesNames.size();i++)
+		{
+			if(name==outputModesNames[i]) 
+			{
+                ((testApp*)ofGetAppPtr())->elemMix.setOutputStereoMode(i);
+			}			
+		}
+	}
+	
 }
 
 ////--------------------------------------------------------------

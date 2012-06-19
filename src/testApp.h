@@ -41,4 +41,10 @@ class testApp : public ofBaseApp{
 	bool					drawAllStereo;
 	
 	
+	int						outputResolutionX;
+	int						outputResolutionY;
+	
+	bool					drawPreviews;
+	bool					drawUIs;
+	
 };

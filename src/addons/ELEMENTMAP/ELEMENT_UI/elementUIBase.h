@@ -33,7 +33,10 @@ class  elementUIBase
 	protected :
 	
 	ofxUIDropDownList*		listBlendModes;
+	ofxUIDropDownList*		listOutputModes;
 	vector<string>			blendingNames; 
+	vector<string>          outputModesNames;
+
 
 };
 #endif
