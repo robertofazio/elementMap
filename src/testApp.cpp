@@ -28,7 +28,7 @@ void testApp::setup()
 	// create & setup elements on this app 
 	elemImg.setup("./images/testPattern1024.jpg", "", false, (20*3) + (previewWidth*3),300,"Test Pattern");
 	elemImg2.setup("./images/left.png", "./images/right.png", true, (20*2) + (previewWidth*2),300,"Images");
-	elemV1.setup("./movies/left.mov","./movies/right.mov",true,20,300,"Movies");
+	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true,20,300,"Movies");
 	elemSy.setup("","",outputResolutionX,outputResolutionY, (20*1) + (previewWidth*1),300,"Syphon");
 	
 	// add elements to the vector
@@ -65,6 +65,8 @@ void testApp::draw()
 	
     if (bFullscreen) 
     {
+        ofSetColor(255,255);
+        elemMix.drawIntoFbo(isStereoCapable);
         ofSetColor(255,255);
         elemMix.drawOutput(0,0,ofGetWidth(),ofGetHeight());
 
@@ -109,25 +111,32 @@ void testApp::keyPressed(int key)
 	}
 	else if(key=='f')
 	{
+        ofToggleFullscreen();
         bFullscreen=!bFullscreen;
         
-        if (bFullscreen) {
+        if (bFullscreen) 
+        {
+            
             drawPreviews=false;
+
             myElements[0]->UI->setVisible(false);
 			myElements[1]->UI->setVisible(false);
 			myElements[2]->UI->setVisible(false);
 			myElements[3]->UI->setVisible(false);
 			elemMix.UI->setVisible(false);
-        } else
+        } 
+        else
         {
+            
             drawPreviews=true;
+            
             myElements[0]->UI->setVisible(true);
 			myElements[1]->UI->setVisible(true);
 			myElements[2]->UI->setVisible(true);
 			myElements[3]->UI->setVisible(true);
 			elemMix.UI->setVisible(true);
         }
-		ofToggleFullscreen();
+		
 	}
     else if(key=='g')
 	{
@@ -156,9 +165,9 @@ void testApp::keyPressed(int key)
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-	if(!elemV1.getDrawInStereo()) elemV1.setDrawInStereo(true);
-	else elemV1.setDrawInStereo(false);
-	drawAllStereo=!drawAllStereo;
+//	if(!elemV1.getDrawInStereo()) elemV1.setDrawInStereo(true);
+//	else elemV1.setDrawInStereo(false);
+//	drawAllStereo=!drawAllStereo;
 }
 
 
