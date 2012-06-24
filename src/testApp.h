@@ -29,22 +29,22 @@ class testApp : public ofBaseApp{
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 	
-	vector<element*>			myElements;	
+	element**				myElements;	
 	elementVideo			elemV1;
 	elementSyphon			elemSy;
 	elementMixer			elemMix;
 	elementImage			elemImg;
 	elementImage			elemImg2;
+	int						numOfElements;
 	
 	GLboolean				isStereoCapable;
-	
-	bool					drawAllStereo;
-	
+		
 	
 	int						outputResolutionX;
 	int						outputResolutionY;
 	
 	bool					drawPreviews;
 	bool					drawUIs;
+	int*					drawingOrder;
 	
 };

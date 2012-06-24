@@ -2,6 +2,7 @@
 
 //#include "elementSyphon.h"
 
+#include "elementVideo.h"
 
 // TODO ::
 // add support for alpha values on the PSmode mixer
@@ -12,22 +13,30 @@
 
 
 //-----------------------------------------------------------------
-void elementMixer::setup(int _width, int _height, int _stereoMode,vector<element*>* _elements,int* _elementsOrder,int _posX, int _posY,string _name)
+void elementMixer::setup(int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name)
 {
 	setOutputStereoMode(_stereoMode);
-	
+	if(outputStereoMode==0)
+	{	
+		this->setDrawInStereo(true);
+		this->setIsStereo(true);
+		
+	}
+	// UI params
 	xPos = _posX;
 	yPos = _posY;
 
-	this->init(5,_width,_height,GL_RGBA,_name);
-	sceneElements = *_elements;
+	this->init(5,_width,_height,GL_RGBA,_name,this->getIsStereo());
+	sceneElements = _elements;
+	numOfElements = _numOfElements;
 	elementsOrder = _elementsOrder;
-	elementsBlendModes = new int[sceneElements.size()];
-	elementsOpacity = new float[sceneElements.size()];
+	elementsBlendModes = new int[numOfElements];
+	elementsOpacity = new float[numOfElements];
     blendMode = 0;	
 	shader.load("./shaders/pssh");
 	blacktexture.loadImage("./images/blackTexture.jpg");
 	
+	useNoShader = false;
 	
 }
 
@@ -35,7 +44,7 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,vector<element
 //-----------------------------------------------------------------
 void elementMixer::update()
 {
-	for(int i=0;i<sceneElements.size();i++)
+	for(int i=0;i<numOfElements;i++)
 	{
 		sceneElements[i]->update();
 	}		
@@ -49,81 +58,108 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 
 		setDrawInStereo(_drawMonoOrStereo);
 
-		// we make all the elements to draw them selves into their Fbo 
-		for(int i=0;i<sceneElements.size();i++)
+		// KO :: we make all the elements to draw them selves into their Fbo 
+		// and compile the blend and opacities (OPTIMIZABLE?)
+		for(int i=0;i<numOfElements;i++)
 		{
-			if(sceneElements[i]->getDrawInStereo()) sceneElements[i]->drawIntoFbo(true);
-			else sceneElements[i]->drawIntoFbo(false);
-			if(i<sceneElements.size()-1)
+			// I DEACTIVATED FBO INTO ELEMENTS !!!
+			////////////////////////////////////
+			//if(sceneElements[i]->getDrawInStereo()) sceneElements[i]->drawIntoFbo(true);
+			//else sceneElements[i]->drawIntoFbo(false);
+			if(i<numOfElements-1)
 			{
-				elementsBlendModes[i] = sceneElements[i]->getBlendingMode();
+				elementsBlendModes[i] = sceneElements[elementsOrder[i]]->getBlendingMode();
 				
 			}
-			elementsOpacity[i] = sceneElements[i]->getOpacity();
+			elementsOpacity[i] = sceneElements[elementsOrder[i]]->getOpacity();
 		}
 
 		// and now we paint all the layers with the PSblend mixer shader 
 		// once per channel left and right 
+		
+		//////////////////////////
 		// here the left :
 		//////////////////////////
 		fboLeft.begin();
-		shader.begin();
-		for(int i=0;i<sceneElements.size();i++)
+
+		if(useNoShader)
 		{
-			string texName = string("tex"+ofToString(i));
-			shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeft.getTextureReference(), i+1);
+			// performance test 
+			sceneElements[0]->drawLeft(0,0,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
+			sceneElements[1]->drawLeft(0,384,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
+			sceneElements[2]->drawLeft(512,384,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
+			sceneElements[3]->drawLeft(512,0,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
 		}
-		
-		//elementsBlendModes[0]=3;
-		//elementsBlendModes[1]=3;
-		//elementsBlendModes[2]=9;
-		
-		shader.setUniform1fv("opacities", elementsOpacity,sceneElements.size());
-		shader.setUniform1iv("applyModes",elementsBlendModes, sceneElements.size()-1);
-		ofEnableAlphaBlending();
-		
-		//sceneElements[0]->fboLeft.draw(0,0,1920,1080); 
-		
-		drawQuadGeometry();
-		//sceneElements[0]->fboLeft.draw(0,0);
-		
-		ofDisableAlphaBlending();
-		
-		shader.end();        
+		else 
+		{
+			shader.begin();
+			for(int i=0;i<numOfElements;i++)
+			{
+				string texName = string("tex"+ofToString(i));
+				//printf("L%d :: %s \n",i,sceneElements[elementsOrder[i]]->getElementName().c_str());
+				shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->getLeftTexture(), i+1);
+			}
+					
+			shader.setUniform1fv("opacities", elementsOpacity,numOfElements);
+			shader.setUniform1iv("applyModes",elementsBlendModes, numOfElements-1);
+
+			ofEnableAlphaBlending();
+			// this function has to paint the quad geometry as 
+			// the texture comes from the shader... 
+			// now it's not implemented but using a workrround
+			drawQuadGeometry();
+			ofDisableAlphaBlending();
+
+			shader.end();   
+		}
 		fboLeft.end();
 		
+		//////////////////////////
 		// here the right :
 		//////////////////////////
 		
 		fboRight.begin();
-		shader.begin();
-		shader.setUniform1i("numOfTextures",sceneElements.size());
-		for(int i=0;i<sceneElements.size();i++)
+
+		if(useNoShader)
 		{
-			string texName = string("tex"+ofToString(i));
-
-			if(sceneElements[elementsOrder[i]]->getDrawInStereo())
-			{
-				shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboRight.getTextureReference(), i+1);
-			}
-			else
-			{
-				shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeft.getTextureReference(), i+1);
-			}
+			// performance test 
+			sceneElements[0]->drawRight(0,0,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
+			sceneElements[1]->drawRight(0,384,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
+			sceneElements[2]->drawLeft(512,384,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
+			sceneElements[3]->drawRight(512,0,sceneElements[0]->getWidth()/2,sceneElements[0]->getHeight()/2);
 		}
-		
-		shader.setUniform1iv("applyModes",elementsBlendModes, sceneElements.size()-1);
-		ofEnableAlphaBlending();
-		//	sceneElements[0]->fboRight.draw(0,0,1920,1080); 
-		
-		// this function has to paint the quad geometry as 
-		// the texture comes from the shader... 
-		// now it's not implemented but using a workrround
-		drawQuadGeometry();
-		//sceneElements[0]->fboRight.draw(0,0);
+		else 
+		{
 
-		ofDisableAlphaBlending();
-		shader.end();
+			shader.begin();
+			shader.setUniform1i("numOfTextures",numOfElements);
+			for(int i=0;i<numOfElements;i++)
+			{
+				string texName = string("tex"+ofToString(i));
+
+				if(sceneElements[elementsOrder[i]]->getDrawInStereo())
+				{
+					//printf("R%d :: %s \n",i,sceneElements[elementsOrder[i]]->getElementName().c_str());
+					shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->getRightTexture(), i+1);
+				}
+				else
+				{
+					//printf("R%d :: %s \n",i,sceneElements[elementsOrder[i]]->getElementName().c_str());
+					shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->getLeftTexture(), i+1);
+				}
+			}
+			
+			shader.setUniform1iv("applyModes",elementsBlendModes, numOfElements-1);
+			
+			ofEnableAlphaBlending();
+			// this function has to paint the quad geometry as 
+			// the texture comes from the shader... 
+			// now it's not implemented but using a workrround
+			drawQuadGeometry();
+			ofDisableAlphaBlending();
+			
+			shader.end();
+		}
 		fboRight.end();
 
 	}
@@ -144,10 +180,10 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				{
 					// STEREO PIPELINE
 					// Clear the buffers 
-					glDrawBuffer(GL_BACK_LEFT);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					glDrawBuffer(GL_BACK_RIGHT);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+					//glDrawBuffer(GL_BACK_LEFT);
+					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					//glDrawBuffer(GL_BACK_RIGHT);
+					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 					
 					// left
 					glDrawBuffer(GL_BACK_LEFT);	
@@ -166,10 +202,10 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				{
 					// STEREO PIPELINE SWAPPED
 					// Clear the buffers 
-					glDrawBuffer(GL_BACK_LEFT);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					glDrawBuffer(GL_BACK_RIGHT);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+					//glDrawBuffer(GL_BACK_LEFT);
+					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					//glDrawBuffer(GL_BACK_RIGHT);
+					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 					
 					// left
 					glDrawBuffer(GL_BACK_LEFT);	
@@ -190,8 +226,8 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 			case ELM_STEREO_MONO:
 					// MONO PIPELINE ... works?
 					// Clear buffer
-					glDrawBuffer(GL_BACK);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+					//glDrawBuffer(GL_BACK);
+					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 					//ofSetupGraphicDefaults();	
 					setOpacityColor();
 					fboLeft.draw(_x,_y,_width,_height);
@@ -201,8 +237,8 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 			case ELM_STEREO_ANAGLYPH:
 				// MONO PIPELINE ... works?
 				// Clear buffer
-				glDrawBuffer(GL_BACK);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+				//glDrawBuffer(GL_BACK);
+				//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 				//ofSetupGraphicDefaults();	
 				
 				// left
@@ -309,3 +345,13 @@ void elementMixer::updateOpacity()
 	//elementsOpacity[0] = *sceneElements[0]->getOpacity();
 	
 }
+
+
+//void elementMixer::drawLeft(int x, int y, int w, int h)
+//{
+//}
+//
+//
+//void elementMixer::drawRight(int x, int y, int w, int h)
+//{
+//}

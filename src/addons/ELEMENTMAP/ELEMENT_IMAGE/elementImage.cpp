@@ -20,10 +20,11 @@ void elementImage::setup(string _leftImage, string _rightImage, bool _isStereo,i
 	}
 	leftImage.loadImage(_leftImage);
 	
+	// UI params
 	xPos = _posX;
 	yPos = _posY;
 
-	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name);	
+	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name,this->getIsStereo());	
 }
 
 //-----------------------------------------------------------------
@@ -32,6 +33,7 @@ void elementImage::update()
 
 }
 
+/*
 //-----------------------------------------------------------------
 void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 {
@@ -109,3 +111,31 @@ void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 	}
 
 }
+*/
+
+//-----------------------------------------------------------------
+void elementImage::drawLeft(int x, int y, int w, int h)
+{
+	leftImage.draw(x,y,w,h);	
+}
+
+
+//-----------------------------------------------------------------
+void elementImage::drawRight(int x, int y, int w, int h)
+{
+	rightImage.draw(x,y,w,h);	
+}
+
+
+//-----------------------------------------------------------------
+ofTexture& elementImage::getLeftTexture()
+{
+	return (leftImage.getTextureReference());	
+}
+
+//-----------------------------------------------------------------
+ofTexture& elementImage::getRightTexture()
+{
+	return (rightImage.getTextureReference());	
+}
+

@@ -5,15 +5,19 @@
 #include "ofMain.h"
 #include "elementUIBase.h"
 
-class element : public ofNode, public elementUIBase 
+class element : public ofNode , public elementUIBase 
 {
 	public :
 	
 	element(){};
 	
-	void init(int _type,int _width, int _height,int internalformat,string _name);
+	void init(int _type,int _width, int _height,int internalformat,string _name,bool _isStereo);
 	virtual void update() =0;
 	virtual void drawIntoFbo(bool _drawMonoOrStereo) =0;
+	virtual void drawLeft(int x, int y, int w, int h) =0;
+	virtual void drawRight(int x, int y, int w, int h) =0;
+	virtual ofTexture& getLeftTexture() =0;
+	virtual ofTexture& getRightTexture() =0;
 	
 	void			setIsStereo(bool _b);
 	void			setDrawInStereo(bool _b);

@@ -1,11 +1,11 @@
 #include "element.h"
 
 
-void element::init(int _type,int _width, int _height, int _internalFormat, string _name)
+void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo)
 {
-	
+	printf("\n································································\n");
+	printf(">> element init :: %s :: w:%d - h:%d \n",_name.c_str(),_width,_height);
 
-	
 	elementWidth	= _width;
 	elementHeight	= _height;
 	internalFormat	= _internalFormat;
@@ -17,22 +17,30 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	isShow			= true;
 	isActive		= true;
 	isClear			= false;
+	isStereo		= _isStereo;
+	drawInStereo	= _isStereo;
+	blendingMode	= 0;
 	
-	fboLeft.allocate(elementWidth,elementHeight, internalFormat);
-	fboRight.allocate(elementWidth,elementHeight, internalFormat);
+	if(type==5)
+	{
+		
+		fboLeft.allocate(elementWidth,elementHeight, internalFormat);
+		fboRight.allocate(elementWidth,elementHeight, internalFormat);
+		// clear the buffers from past (thnkx to matteo)
+		fboLeft.begin();
+		glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
+		fboLeft.end();
+		
+		fboRight.begin();
+		glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
+		fboRight.end();
+		
+	}
 	
-	// clear the buffers from past 
-	fboLeft.begin();
-	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
-	fboLeft.end();
-
-	fboRight.begin();
-	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
-	fboRight.end();
 		
 	setupUI(this);
 	
-	printf("element w:%d - h:%d \n",elementWidth,elementHeight);
+	printf("································································\n");
 }
 
 

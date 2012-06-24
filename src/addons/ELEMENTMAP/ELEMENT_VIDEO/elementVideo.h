@@ -17,9 +17,14 @@ class elementVideo : public element
 	elementVideo();
 	
 	void setup(string _leftChannel, string _rightChannel, bool _isStereo, int _posX, int _posY,string _name);
-	void drawIntoFbo(bool _drawMonoOrStereo);
+	void drawIntoFbo(bool _drawMonoOrStereo){};
 	void update();
 	
+	void drawLeft(int x, int y, int w, int h);
+	void drawRight(int x, int y, int w, int h);
+	ofTexture& getLeftTexture();
+	ofTexture& getRightTexture();
+
 	
 	ofVideoPlayer leftChannelPlayer;
 	ofVideoPlayer rightChannelPlayer;

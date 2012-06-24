@@ -28,6 +28,8 @@ class ofxSyphonClient {
 	float getWidth();
 	float getHeight();
     
+	ofTexture& getTextureReference();
+	
 	protected:
 	void* mClient;
     void* latestImage;

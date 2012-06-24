@@ -145,4 +145,9 @@ float ofxSyphonClient::getHeight()
 	return mTex.texData.height;
 }
 
+ofTexture& ofxSyphonClient::getTextureReference()
+{
+	return mTex;
+}	
+
 

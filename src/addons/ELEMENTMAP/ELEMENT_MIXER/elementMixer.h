@@ -21,18 +21,25 @@ class elementMixer : public element
 	
 	elementMixer(){};
 	void update();
-	void setup(int _width, int _height, int _stereoMode,vector<element*>* _elements,int* _elementsOrder,int _posX, int _posY,string _name);
+	void setup(int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name);
 	void setOutputStereoMode(int _stereoMode);
 	void drawIntoFbo(bool _drawMonoOrStereo);
 	void drawOutput(int _x, int _y,int _width, int _height);
-	void drawQuadGeometry();
+	void drawLeft(int x, int y, int w, int h){};
+	void drawRight(int x, int y, int w, int h){};
+	ofTexture& getLeftTexture(){};
+	ofTexture& getRightTexture(){};
 	
+	void drawQuadGeometry();
 	void drawInfo();
 
 
+	bool				useNoShader;
+
 	private :
 
-	vector<element*>	sceneElements;
+	element**			sceneElements;
+	int					numOfElements;
 	int*				elementsOrder;
 	int*				elementsBlendModes;
 	float*				elementsOpacity;
@@ -43,8 +50,6 @@ class elementMixer : public element
 	
 	// used to help on drawing ...
 	ofImage				blacktexture;
-	
-	private : 
 	
 	void				updateOpacity();
 	

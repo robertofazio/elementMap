@@ -13,8 +13,13 @@ class elementSyphon : public element
 	elementSyphon();
 	
 	void setup(string _applicationName,string _serverName,int _width, int _height,int _posX, int _posY,string _name);
-	void drawIntoFbo(bool _drawMonoOrStereo);
+	void drawIntoFbo(bool _drawMonoOrStereo){};
 	void update(){};
+	void drawLeft(int x, int y, int w, int h);
+	void drawRight(int x, int y, int w, int h);
+	ofTexture& getLeftTexture();
+	ofTexture& getRightTexture();
+
 	
 	ofxSyphonClient	syphonClient;
 	

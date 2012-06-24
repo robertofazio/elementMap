@@ -19,6 +19,7 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isSter
 		rightChannelPlayer.loadMovie(_rightChannel);
 		rightChannelPlayer.play();
 	}
+	
 	//leftChannelPlayer.loadMovie(_leftChannel,OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
 	leftChannelPlayer.loadMovie(_leftChannel);
 	leftChannelPlayer.play();
@@ -28,12 +29,12 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isSter
 		printf("·");
 	}
 	
+	// UI params
 	xPos = _xPos;
 	yPos = _yPos;
 	
-	//elementUIBase::setGUIOrigin(_xPos,_yPos);
 
-	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name);	
+	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo());	
 	
 }
 
@@ -44,73 +45,29 @@ void elementVideo::update()
 	rightChannelPlayer.idleMovie();
 }
 
+
 //-----------------------------------------------------------------
-void elementVideo::drawIntoFbo(bool _drawMonoOrStereo)
+void elementVideo::drawLeft(int x, int y, int w, int h)
 {
-	if(isActive)
-	{
-		// update the clear state of the object 
-		if(isClear) isClear=false;
-
-		this->setDrawInStereo(_drawMonoOrStereo);
-
-		if(this->getDrawInStereo())
-		{
-			// stereo
-			if(!getSwapLeftRight())
-			{
-				fboLeft.begin();
-				setOpacityColor();
-				leftChannelPlayer.draw(0,0,getWidth(),getHeight());
-				fboLeft.end();
-				
-				//----------
-				
-				fboRight.begin();
-				setOpacityColor();
-				rightChannelPlayer.draw(0,0,getWidth(),getHeight());
-				fboRight.end();
-			}
-			else 
-			{
-				fboLeft.begin();
-				setOpacityColor();
-				rightChannelPlayer.draw(0,0,getWidth(),getHeight());
-				fboLeft.end();
-				
-				//----------
-				
-				fboRight.begin();
-				setOpacityColor();
-				leftChannelPlayer.draw(0,0,getWidth(),getHeight());
-				fboRight.end();
-			}
-
-		}
-		else 
-		{
-			// mono
-			fboLeft.begin();
-			setOpacityColor();
-			leftChannelPlayer.draw(0,0,getWidth(),getHeight());
-			fboLeft.end();
-
-		}
-	}
-	else if(!isClear)
-	{
-		fboLeft.begin();
-		glClearColor(0.0, 0.0, 0.0, 0.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-		fboLeft.end();
-		
-		fboRight.begin();
-		glClearColor(0.0, 0.0, 0.0, 0.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-		fboRight.end();
-		
-		isClear=true;
-	}
-	
-	
+	leftChannelPlayer.draw(x,y,w,h);
 }
+
+
+//-----------------------------------------------------------------
+void elementVideo::drawRight(int x, int y, int w, int h)
+{
+	rightChannelPlayer.draw(x,y,w,h);		
+}
+
+//-----------------------------------------------------------------
+ofTexture& elementVideo::getLeftTexture()
+{
+	return (leftChannelPlayer.getTextureReference());	
+}
+
+//-----------------------------------------------------------------
+ofTexture& elementVideo::getRightTexture()
+{
+	return (rightChannelPlayer.getTextureReference());	
+}
+
