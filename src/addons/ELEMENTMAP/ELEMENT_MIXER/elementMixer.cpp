@@ -312,6 +312,13 @@ void elementMixer::drawPreview(int x, int y, int w, int h)
             effects[a]->drawGUI(x, y, w, h);
         }
     }
+
+    if(effects.size() == 0)
+        {
+        setOpacityColor();
+        fboLeft.draw(x, y, w, h);
+        }
+
 }
 
 //-----------------------------------------------------------------

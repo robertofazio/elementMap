@@ -60,7 +60,7 @@ void testApp::setup()
 	
 	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder,650,650,"mixer");
 	
-    elemMix.addFX(ELEMENT_FX_MASK);
+//    elemMix.addFX(ELEMENT_FX_MASK);
 	ofBackground(0, 0,60);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
@@ -70,6 +70,8 @@ void testApp::setup()
 	elemV1.setOpacity(0.5f);
 	elemSy.setOpacity(0.5f);
 	
+    bFullscreen=false;
+    
 }
 
 //--------------------------------------------------------------
@@ -81,7 +83,23 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {	
-	// prepare and draw mixer element
+	
+    if (bFullscreen) {
+        
+
+        ofSetColor(0,0);
+        elemMix.drawIntoFbo(isStereoCapable);
+        ofSetColor(255, 255, 255);
+        //elemMix.drawOutput(ofGetWidth()/2,340,ofGetWidth()/2,ofGetHeight()/2);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        elemMix.drawPreview(0,0,ofGetWidth(),ofGetHeight());
+ 
+        
+    }
+    else 
+    {
+    // prepare and draw mixer element
 	ofSetColor(0,0);
 	elemMix.drawIntoFbo(isStereoCapable);
 //	ofSetColor(255,255);
@@ -115,7 +133,8 @@ void testApp::draw()
 //	ofDrawBitmapString(ofToString(f) + " /\n/ " + ofToString(medianFrameStep),100,100);
 //	lastTime=ofGetElapsedTimeMillis();
 //	num=num+1;
-	
+
+    }
 }
 
 //--------------------------------------------------------------
@@ -143,29 +162,34 @@ void testApp::keyPressed(int key)
 	}
 	else if(key=='f')
 	{
-		printf("fps : %f\n",ofGetFrameRate());
+//		printf("fps : %f\n",ofGetFrameRate());
+        drawUIs=!drawUIs;
+        
+        if(drawUIs)
+		{	
+			myElements[0]->UI->setVisible(true);
+			myElements[1]->UI->setVisible(true);
+			myElements[2]->UI->setVisible(true);
+			myElements[3]->UI->setVisible(true);
+			elemMix.UI->setVisible(true);
+		}
+		else 
+		{
+			myElements[0]->UI->setVisible(false);
+			myElements[1]->UI->setVisible(false);
+			myElements[2]->UI->setVisible(false);
+			myElements[3]->UI->setVisible(false);
+			elemMix.UI->setVisible(false);
+		}
+
+        bFullscreen=!bFullscreen;
+        ofToggleFullscreen();
 	}
 	else if(key=='g')
 	{
 		drawUIs=!drawUIs;
 		
-		if(drawUIs)
-		{	
-//			myElements[0]->UI->setVisible(true);
-//			myElements[1]->UI->setVisible(true);
-//			myElements[2]->UI->setVisible(true);
-//			myElements[3]->UI->setVisible(true);
-//			elemMix.UI->setVisible(true);
-		}
-		else 
-		{
-//			myElements[0]->UI->setVisible(false);
-//			myElements[1]->UI->setVisible(false);
-//			myElements[2]->UI->setVisible(false);
-//			myElements[3]->UI->setVisible(false);
-//			elemMix.UI->setVisible(false);
-		}
-
+		
 	}
 }
 
