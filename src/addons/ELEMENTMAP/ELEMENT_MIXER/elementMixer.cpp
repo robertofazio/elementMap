@@ -50,6 +50,27 @@ void elementMixer::update()
 	}		
 }
 
+void elementMixer::applyFX()
+{
+ for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+            effects[a]->applyFX();
+    }
+}
+
+
+void elementMixer::addFX(int type)       // Mauro
+{
+    switch(type)
+    {
+        case ELEMENT_FX_MASK:            
+            newEffect.init(ELEMENT_FX_MASK, fboLeft.getTextureReference());
+            effects.push_back(&newEffect);
+            break;
+    }    
+}
+
 //-----------------------------------------------------------------
 void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 {
@@ -97,7 +118,10 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 			{
 				string texName = string("tex"+ofToString(i));
 				//printf("L%d :: %s \n",i,sceneElements[elementsOrder[i]]->getElementName().c_str());
-				shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->getLeftTexture(), i+1);
+              //  if(sceneElements[elementsOrder[i]]->effects.size() == 0)
+                    shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->getLeftTexture(), i+1);
+               // else
+                 //  shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->effects[0]->finalFbo.getTextureReference(), i+1);
 			}
 					
 			shader.setUniform1fv("opacities", elementsOpacity,numOfElements);
@@ -270,9 +294,34 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 	}
 }
 
+void elementMixer::drawPreview(int x, int y, int w, int h)
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+        {
+            applyFX();
+            setOpacityColor();
+      //      fboLeft.draw(x, y, w, h);
+            effects[a]->finalFbo.draw(x, y, w, h);
+        }
+        else
+            effects[a]->getLeftTexture().draw(x, y, w, h);
+        if(effects[a]->getGUIVisible())
+        {
+            effects[a]->drawGUI(x, y, w, h);
+        }
+    }
+}
+
 //-----------------------------------------------------------------
 void elementMixer::drawInfo()
 {
+    
+    ofPushStyle();
+	ofSetColor(255,255,0);
+	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-100,ofGetHeight()-80);
+    
 	ofSetColor(0,255,0);
 
 	switch (outputStereoMode) 
@@ -290,8 +339,7 @@ void elementMixer::drawInfo()
 		default:
 			break;
 	}
-	ofSetColor(255,255,0);
-	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-100,ofGetHeight()-80);
+    ofPopStyle();
 
 }
 

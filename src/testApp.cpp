@@ -41,6 +41,10 @@ void testApp::setup()
 	myElements[2] = &elemImg2;
 	myElements[3] = &elemSy;
 	
+//    elemImg.addFX(ELEMENT_FX_MASK);
+//    elemImg2.addFX(ELEMENT_FX_MASK);
+//    elemSy.addFX(ELEMENT_FX_MASK);
+    
 //	myElements.push_back(&elemV1);
 //	myElements.push_back(&elemSy);
 //	myElements.push_back(&elemImg2);
@@ -54,8 +58,9 @@ void testApp::setup()
 	drawingOrder[3]=3;
 
 	
-	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_OPENGL,myElements,numOfElements,drawingOrder,650,650,"mixer");
+	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder,650,650,"mixer");
 	
+    elemMix.addFX(ELEMENT_FX_MASK);
 	ofBackground(0, 0,60);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
@@ -77,10 +82,15 @@ void testApp::update()
 void testApp::draw()
 {	
 	// prepare and draw mixer element
-	ofSetColor(255,255);
+	ofSetColor(0,0);
 	elemMix.drawIntoFbo(isStereoCapable);
-	ofSetColor(255,255);
-	elemMix.drawOutput(20,340,ofGetWidth()/2,ofGetHeight()/2);
+//	ofSetColor(255,255);
+    ofSetColor(255, 255, 255);
+	//elemMix.drawOutput(ofGetWidth()/2,340,ofGetWidth()/2,ofGetHeight()/2);
+    elemMix.drawInfo();
+    glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    elemMix.drawPreview(20,340,ofGetWidth()/2,ofGetHeight()/2);
 
 	if(drawPreviews)
 	{	
@@ -91,7 +101,10 @@ void testApp::draw()
 		glDrawBuffer(GL_BACK);
 		for(int i=0;i<numOfElements;i++)
 		{
-			myElements[drawingOrder[i]]->drawLeft(20+(drawingOrder[i]*ofGetWidth()/4),20,ofGetWidth()/4,ofGetHeight()/4);
+            if(myElements[drawingOrder[i]]->effects.size() == 0)
+                myElements[drawingOrder[i]]->drawLeft(20+(drawingOrder[i]*ofGetWidth()/4),20,ofGetWidth()/4,ofGetHeight()/4);
+			else
+                myElements[drawingOrder[i]]->drawPreview(20+(drawingOrder[i]*ofGetWidth()/4),20,ofGetWidth()/4,ofGetHeight()/4);
 			
 		}
 	}

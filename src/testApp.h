@@ -10,6 +10,8 @@
 #include "ofMain.h"
 #include "elementMain.h"
 #include "ofxSimpleGuiToo.h"
+#include "ElementFX.h"
+#include "ElementFXMask.h"
 
 class testApp : public ofBaseApp{
 

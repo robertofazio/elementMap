@@ -4,6 +4,8 @@
 
 #include "ofMain.h"
 #include "elementUIBase.h"
+#include "ElementFX.h"
+#include "ElementFXMask.h"
 
 class element : public ofNode , public elementUIBase 
 {
@@ -45,7 +47,14 @@ class element : public ofNode , public elementUIBase
 	
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
-	
+    
+    
+	ElementFXMask newEffect;                                            // Non capisco perchè, ma se dichiaro l'effetto all'interno del metodo, poi ho problemi
+    vector<ElementFX*>       effects;                                   // Mauro;
+    virtual void                    drawPreview(int x, int y, int w, int h) = 0;    // Mauro
+    virtual void                    addFX(int type) = 0;                            // Mauro
+    virtual void                    applyFX() = 0;
+    
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	
 	protected :

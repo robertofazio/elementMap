@@ -35,7 +35,9 @@ class elementMixer : public element
 
 
 	bool				useNoShader;
-
+    void                applyFX();
+    void                addFX(int type);       // Mauro
+    void drawPreview(int x, int y, int w, int h);
 	private :
 
 	element**			sceneElements;

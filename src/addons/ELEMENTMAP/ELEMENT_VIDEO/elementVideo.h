@@ -19,7 +19,9 @@ class elementVideo : public element
 	void setup(string _leftChannel, string _rightChannel, bool _isStereo, int _posX, int _posY,string _name);
 	void drawIntoFbo(bool _drawMonoOrStereo){};
 	void update();
-	
+	void    addFX(int type); // Mauro
+	void    applyFX(); // Mauro
+    void drawPreview(int x, int y, int w, int h);
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
 	ofTexture& getLeftTexture();

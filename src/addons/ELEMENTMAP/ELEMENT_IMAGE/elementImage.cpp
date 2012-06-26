@@ -113,17 +113,64 @@ void elementImage::drawIntoFbo(bool _drawMonoOrStereo)
 }
 */
 
+
+void elementImage::drawPreview(int x, int y, int w, int h)
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+        {
+            applyFX();
+            effects[a]->finalFbo.draw(x, y, w, h);
+        }
+        else
+            effects[a]->getLeftTexture().draw(x, y, w, h);
+        if(effects[a]->getGUIVisible())
+        {
+            effects[a]->drawGUI(x, y, w, h);
+        }
+    }
+    if(effects.size() == 0)
+    {
+        this->drawLeft(x, y, w, h);
+    }
+}
+
+void elementImage::applyFX()
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+            effects[a]->applyFX();
+    }
+}
+
+void elementImage::addFX(int type)       // Mauro
+{
+    switch(type)
+    {
+        case ELEMENT_FX_MASK:            
+            newEffect.init(ELEMENT_FX_MASK, leftImage.getTextureReference());
+            effects.push_back(&newEffect);
+            break;
+    }    
+}
+
 //-----------------------------------------------------------------
 void elementImage::drawLeft(int x, int y, int w, int h)
 {
+    //fboLeft.draw(x,y,w,h);
 	leftImage.draw(x,y,w,h);	
+    this->applyFX();
 }
 
 
 //-----------------------------------------------------------------
 void elementImage::drawRight(int x, int y, int w, int h)
 {
+	//fboRight.draw(x,y,w,h);
 	rightImage.draw(x,y,w,h);	
+    this->applyFX();
 }
 
 

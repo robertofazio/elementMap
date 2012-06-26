@@ -29,6 +29,50 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
 
 }
 
+
+void elementSyphon::addFX(int type)       // Mauro
+{
+    switch(type)
+    {
+        case ELEMENT_FX_MASK:            
+            newEffect.init(ELEMENT_FX_MASK, syphonClient.getTextureReference());
+            effects.push_back(&newEffect);
+            break;
+    }    
+}
+
+void elementSyphon::drawPreview(int x, int y, int w, int h)
+{
+//    for(int a = 0; a < effects.size(); a++)
+//    {
+//        if(effects[a]->getIsActive())
+//        {
+//            applyFX();
+//            effects[a]->finalFbo.draw(x, y, w, h);
+//        }
+//        else
+//            effects[a]->getLeftTexture().draw(x, y, w, h);
+//        if(effects[a]->getGUIVisible())
+//        {
+//            effects[a]->drawGUI(x, y, w, h);
+//        }
+//    }
+  //  if(effects.size() == 0)
+    //    drawLeft(x,y, w, h);
+}
+
+void elementSyphon::applyFX()
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+        {
+            //effects[a]->getLeftTexture() = syphonClient.getTextureReference();
+            effects[a]->applyFX(syphonClient.getTextureReference());
+        }
+    }
+}
+
 //-----------------------------------------------------------------
 void elementSyphon::drawLeft(int x, int y, int w, int h)
 {

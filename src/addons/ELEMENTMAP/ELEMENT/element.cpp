@@ -20,7 +20,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	isStereo		= _isStereo;
 	drawInStereo	= _isStereo;
 	blendingMode	= 0;
-	
+    
 	if(type==5)
 	{
 		
@@ -42,6 +42,38 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	
 	printf("································································\n");
 }
+
+
+/*
+void element::drawPreview(int x, int y, int w, int h)
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+         {
+            applyFX();
+            effects[a]->finalFbo.draw(x, y, w, h);
+         }
+        else
+          effects[a]->getLeftTexture().draw(x, y, w, h);
+        if(effects[a]->getGUIVisible())
+        {
+            effects[a]->drawGUI(x, y, w, h);
+        }
+    }
+}
+*/
+
+/*
+void element::applyFX()
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+       if(effects[a]->getIsActive())
+            effects[a]->applyFX();
+    }
+}
+*/
 
 
 //-----------------------------------------------------------------

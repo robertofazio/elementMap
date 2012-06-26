@@ -38,6 +38,34 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isSter
 	
 }
 
+void elementVideo::addFX(int type)
+{
+    
+}
+
+void elementVideo::applyFX()
+{
+    
+}
+
+void elementVideo::drawPreview(int x, int y, int w, int h)
+{
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+        {
+            applyFX();
+            effects[a]->finalFbo.draw(x, y, w, h);
+        }
+        else
+            effects[a]->getLeftTexture().draw(x, y, w, h);
+        if(effects[a]->getGUIVisible())
+        {
+            effects[a]->drawGUI(x, y, w, h);
+        }
+    }
+}
+
 //-----------------------------------------------------------------
 void elementVideo::update()
 {
