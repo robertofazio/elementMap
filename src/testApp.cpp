@@ -70,7 +70,20 @@ void testApp::setup()
 	elemV1.setOpacity(0.5f);
 	elemSy.setOpacity(0.5f);
 	
+    
     bFullscreen=false;
+    
+    //warp stuff:
+    text.allocate(outputResolutionX,outputResolutionY, GL_RGBA);
+    //default grid= 4x4 control points
+    xRes=4;
+    yRes=4;
+    //create grid coordinates
+    createGrid(xRes, yRes);    
+    //start with active warp
+    bWarpActive=true;
+
+    
     
 }
 
@@ -86,14 +99,46 @@ void testApp::draw()
 	
     if (bFullscreen) {
         
-
+        ofBackground(0,0,0,255);
         ofSetColor(0,0);
         elemMix.drawIntoFbo(isStereoCapable);
         ofSetColor(255, 255, 255);
+
+        //load texture from mixer fbo (repeat for right side when we will want stereo mode....)
+        text=elemMix.fboLeft.getTextureReference();
+
+        text.draw(0,0,outputResolutionX, outputResolutionY);
+       
+        
+        //bind texture
+        glEnable(text.getTextureData().textureTarget);
+        
+        //create correspondence between control points and texture points
+        int quad=1;
+        int index=0;
+        
+        while (quad<(nQuads+1)) {
+            glBegin(GL_QUADS);
+            for (int vertex=0; vertex<4; vertex++) 
+            {
+                glTexCoord2f(texVert[index].x, texVert[index].y);
+                glVertex2f(vertici[index].x, vertici[index].y);
+                
+                index++;
+            }
+            glEnd();
+            quad++;
+        }
+        
+        glDisable(text.getTextureData().textureTarget);
+        
+        if (bWarpActive) drawGrid();    
+        
         //elemMix.drawOutput(ofGetWidth()/2,340,ofGetWidth()/2,ofGetHeight()/2);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        elemMix.drawPreview(0,0,ofGetWidth(),ofGetHeight());
+//        glEnable(GL_BLEND);
+//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+//        elemMix.drawPreview(0,0,ofGetWidth(),ofGetHeight());
  
         
     }
@@ -140,29 +185,9 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	if(key=='a')
+	if(key=='f')
 	{
-		elemImg.setIsActive(false);
-	}
-	if(key=='1')
-	{
-		ofToggleFullscreen();
-	}
-	if(key=='u')
-	{
-		elemMix.useNoShader=true;
-	}
-	if(key=='U')
-	{
-		elemMix.useNoShader=false;
-	}
-	else if(key=='p')
-	{
-		drawPreviews=!drawPreviews;
-	}
-	else if(key=='f')
-	{
-//		printf("fps : %f\n",ofGetFrameRate());
+        //		printf("fps : %f\n",ofGetFrameRate());
         drawUIs=!drawUIs;
         
         if(drawUIs)
@@ -181,16 +206,143 @@ void testApp::keyPressed(int key)
 			myElements[3]->UI->setVisible(false);
 			elemMix.UI->setVisible(false);
 		}
-
+        
         bFullscreen=!bFullscreen;
         ofToggleFullscreen();
+	}
+
+    if (bFullscreen) {
+    
+        switch (key) {
+
+    case 'w':
+        bWarpActive=!bWarpActive;
+        break;
+        
+    case 'x':
+        if (bWarpActive)
+        {
+            xRes++;
+            if (xRes>MAX_RESOLUTION) xRes=MAX_RESOLUTION;
+            createGrid(xRes, yRes);
+        }
+        break;
+        
+    case 'z':
+        if (bWarpActive)
+        {
+            xRes--;
+            if (xRes<2) xRes=2;
+            createGrid(xRes, yRes);
+        }
+        break;
+        
+    case 'q':
+        if (bWarpActive)
+        {
+            yRes++;
+            if (yRes>MAX_RESOLUTION) yRes=MAX_RESOLUTION;
+            createGrid(xRes, yRes);
+        }
+        break;
+        
+    case 'a':
+        if (bWarpActive)
+        {
+            yRes--;
+            if (yRes<2) yRes=2;
+            createGrid(xRes, yRes);
+        }
+        break;
+        
+    case OF_KEY_UP:
+        if (bWarpActive)
+        {
+            
+            for (int i=0; i<nPoints; i++) {
+                
+                if (vertici[i].z==1)
+                {
+                    vertici[i].y-=1;
+                }
+            }
+        }
+        break;
+        
+    case OF_KEY_DOWN:
+        if (bWarpActive)
+        {
+            
+            for (int i=0; i<nPoints; i++) {
+                
+                if (vertici[i].z==1)
+                {
+                    vertici[i].y+=1;
+                }
+            }
+        }
+        break;
+        
+    case OF_KEY_LEFT:
+        if (bWarpActive)
+        {
+            
+            for (int i=0; i<nPoints; i++) {
+                
+                if (vertici[i].z==1)
+                {
+                    vertici[i].x-=1;
+                }
+            }
+        }
+        break;
+    case OF_KEY_RIGHT:
+        if (bWarpActive)
+        {
+            
+            for (int i=0; i<nPoints; i++) {
+                
+                if (vertici[i].z==1)
+                {
+                    vertici[i].x+=1;
+                }
+            }
+        }
+        break;
+    
+    default:
+        break;
+        }
+
+    }
+    
+    else {
+    if(key=='a')
+	{
+		elemImg.setIsActive(false);
+	}
+//	if(key=='1')
+//	{
+//		ofToggleFullscreen();
+//	}
+	if(key=='u')
+	{
+		elemMix.useNoShader=true;
+	}
+	if(key=='U')
+	{
+		elemMix.useNoShader=false;
+	}
+	else if(key=='p')
+	{
+		drawPreviews=!drawPreviews;
 	}
 	else if(key=='g')
 	{
 		drawUIs=!drawUIs;
-		
-		
 	}
+        
+    }
 }
 
 //--------------------------------------------------------------
@@ -208,11 +360,40 @@ void testApp::mouseMoved(int x, int y )
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
 
+    if (bWarpActive&&bFullscreen)
+    {
+        
+        for (int i=0; i<nPoints; i++) {
+            
+            if (vertici[i].z==1)
+            {
+                vertici[i].x=x;
+                vertici[i].y=y;
+            }
+        }
+    }
+    
+
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
 
+    if (bWarpActive&&bFullscreen)
+    {
+        
+        for (int i=0; i<nPoints; i++) {
+            
+            if (abs(mouseX-vertici[i].x)<10 && abs(mouseY-vertici[i].y)<10) {
+                vertici[i].z=1;
+            }
+            else vertici[i].z=0;   
+        }
+        
+    }
+
+    
 }
 
 //--------------------------------------------------------------
@@ -234,4 +415,78 @@ void testApp::gotMessage(ofMessage msg){
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+
+
+//WARP UTILITIES:
+//--------------------------------------------------------------
+void testApp::createGrid(int _xRes, int _yRes){ 
+    
+    nQuads=(xRes-1)*(yRes-1);
+    nPoints=4*nQuads;
+    
+    int index = 0;
+    int row=0;
+    int col=0;
+    
+    while (row<(_yRes-1)) {
+        for (int ind=0; ind<4; ind++) {
+            
+            if (ind==0 || ind==3) vertici[index].x=col*(outputResolutionX/(_xRes-1));
+            if (ind==1 || ind==2) vertici[index].x=(col+1)*(outputResolutionX/(_xRes-1));
+            
+            if (ind==0 || ind==1) vertici[index].y=row*(outputResolutionY/(_yRes-1)); 
+            if (ind==2 || ind==3) vertici[index].y=(row+1)*(outputResolutionY/(_yRes-1)); 
+            
+            texVert[index]=vertici[index];
+            
+            index++;
+        }
+        col++;
+        if (col>(_xRes-2)) 
+        {
+            row++;
+            col=0;
+        }
+    }
+}
+
+
+
+//--------------------------------------------------------------
+void testApp::drawGrid() {
+    
+    //draw Grid Lines
+    int quad=0;
+    int index=0;
+    
+    ofPushStyle();
+    ofSetColor(0,255,0,150);
+    ofFill();
+    ofSetLineWidth(1);
+    while (quad<nQuads) {
+        for (int vertex=0; vertex<4; vertex++) 
+        {
+            if (vertex!=0) ofLine(vertici[index-1].x, vertici[index-1].y, vertici[index].x, vertici[index].y);
+            index++;
+            
+        }
+        quad++;
+    }
+    ofPopStyle();
+    
+    
+    //draw Points
+    for (int point=0; point<nPoints; point++) {
+        ofPushStyle();
+        if (vertici[point].z==1) ofSetColor(255,0,0,255);
+        else ofSetColor(0,255,0,255);
+        ofFill();
+        ofCircle(vertici[point].x, vertici[point].y, 5, 5);
+        ofPopStyle();
+        
+    }
+    
+}
+
+
 

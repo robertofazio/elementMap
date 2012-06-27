@@ -1,5 +1,8 @@
 // this version HACKS ofAppGlutWindow in order to enable GL_STEREO mode !! 
 
+//by Ciz: ridurre questi valori per migliorare le performance in caso di necessitˆ!
+#define MAX_RESOLUTION  17
+#define MAX_POINTS 2048
 
 // TO : DO 
 
@@ -50,5 +53,29 @@ class testApp : public ofBaseApp{
 	int*					drawingOrder;
     
     bool                    bFullscreen;
+    
+    
+    //TEMPORARY SOLUTION: WARPING IS ONLY ACTIVE IN FULLSCREEN:
+    //warping vars and functions:
+    
+    void createGrid(int _xRes, int _yRes);
+    void drawGrid();
+    
+    ofTexture   text;
+    
+    int xRes;
+    int yRes;
+    
+    int nPoints;
+    int nQuads;
+    
+//    int width;
+//    int height;
+   
+    ofPoint vertici[MAX_POINTS];
+    ofPoint texVert[MAX_POINTS];
+    
+    bool bWarpActive;
+
 	
 };
