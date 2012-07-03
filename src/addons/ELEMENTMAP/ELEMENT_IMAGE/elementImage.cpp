@@ -132,7 +132,7 @@ void elementImage::drawPreview(int x, int y, int w, int h)
     }
     if(effects.size() == 0)
     {
-        this->drawLeft(x, y, w, h);
+        this->drawLeft(x, y, 100, 100 / (4/3));
     }
 }
 
@@ -155,6 +155,13 @@ void elementImage::addFX(int type)       // Mauro
             break;
     }    
 }
+/*
+//-----------------------------------------------------------------
+void elementImage::drawGraphic(int x, int y, int w, int h)
+{
+    //fboLeft.draw(x,y,w,h);
+	this->drawLeft(x, y, w, h);
+}*/
 
 //-----------------------------------------------------------------
 void elementImage::drawLeft(int x, int y, int w, int h)
@@ -186,3 +193,26 @@ ofTexture& elementImage::getRightTexture()
 	return (rightImage.getTextureReference());	
 }
 
+//-----------------------------------------------------------------
+void elementImage::drawStereo(int x, int y, int w, int h)
+{
+    fboLeftAnagliph.begin();
+    
+    //  ofClear(0, 0, 0);
+    // left
+    glColorMask(true, false, false, false);
+    //ofSetupGraphicDefaults();    
+    //    setOpacityColor();
+    leftImage.draw(0, 0);
+    
+    
+    // right
+    glColorMask(false, true, true, false);
+    //ofSetupGraphicDefaults();
+    //  setOpacityColor();
+    rightImage.draw(0, 0);
+    glColorMask(true, true, true, true);
+    
+    fboLeftAnagliph.end();
+    fboLeftAnagliph.draw(x, y, w, h);
+}

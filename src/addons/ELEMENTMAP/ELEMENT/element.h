@@ -16,9 +16,11 @@ class element : public ofNode , public elementUIBase
 	void init(int _type,int _width, int _height,int internalformat,string _name,bool _isStereo);
 	virtual void update() =0;
 	virtual void drawIntoFbo(bool _drawMonoOrStereo) =0;
+	virtual void drawGraphic(int x, int y, int w, int h);
 	virtual void drawLeft(int x, int y, int w, int h) =0;
 	virtual void drawRight(int x, int y, int w, int h) =0;
-	virtual ofTexture& getLeftTexture() =0;
+    virtual void drawStereo(int x, int y, int w, int h);
+    virtual ofTexture& getLeftTexture() =0;
 	virtual ofTexture& getRightTexture() =0;
 	
 	void			setIsStereo(bool _b);
@@ -31,6 +33,7 @@ class element : public ofNode , public elementUIBase
 	void			setIsShow(bool b);
 	void			setIsActive(bool b);
 	void			setBlendingMode(int _i);
+    void            initFont();
 	
 	bool			getIsStereo();
 	bool			getDrawInStereo();
@@ -44,9 +47,12 @@ class element : public ofNode , public elementUIBase
 	float			getOpacity();
 	string			getElementName();
 	int				getBlendingMode();
+    
+    ofTrueTypeFont          myFont;
 	
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
+    ofFbo           fboLeftAnagliph;
     
     
 	ElementFXMask newEffect;                                            // Non capisco perchè, ma se dichiaro l'effetto all'interno del metodo, poi ho problemi
@@ -72,7 +78,7 @@ class element : public ofNode , public elementUIBase
 	private :
 	
 	int				type;
-	bool			isStereo;
+//	bool			isStereo;           // I put in elementUIBase.h -> Mauro
 	int				internalFormat; //GL_RGB,GL_RGBA ...
 	bool			drawInStereo;
 	bool			swapLeftRight;

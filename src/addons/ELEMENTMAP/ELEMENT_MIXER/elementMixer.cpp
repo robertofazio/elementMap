@@ -37,6 +37,8 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,element** _ele
 	blacktexture.loadImage("./images/blackTexture.jpg");
 	
 	useNoShader = false;
+    
+    ofAddListener(UI->newGUIEvent,this,&elementMixer::guiEvent); 
 	
 }
 
@@ -115,14 +117,18 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		{
 			shader.begin();
 			for(int i=0;i<numOfElements;i++)
-			{
-				string texName = string("tex"+ofToString(i));
-				//printf("L%d :: %s \n",i,sceneElements[elementsOrder[i]]->getElementName().c_str());
-              //  if(sceneElements[elementsOrder[i]]->effects.size() == 0)
+                {
+                string texName = string("tex"+ofToString(i));
+                    //printf("L%d :: %s \n",i,sceneElements[elementsOrder[i]]->getElementName().c_str());
+                    //  if(sceneElements[elementsOrder[i]]->effects.size() == 0)
+   
+                    if(sceneElements[elementsOrder[i]]->getDrawInStereo())
+                    shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->fboLeftAnagliph, i+1);
+                   else
                     shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->getLeftTexture(), i+1);
-               // else
-                 //  shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->effects[0]->finalFbo.getTextureReference(), i+1);
-			}
+                    // else
+                    //  shader.setUniformTexture(texName.c_str(), sceneElements[elementsOrder[i]]->effects[0]->finalFbo.getTextureReference(), i+1);
+                }
 					
 			shader.setUniform1fv("opacities", elementsOpacity,numOfElements);
 			shader.setUniform1iv("applyModes",elementsBlendModes, numOfElements-1);
@@ -410,3 +416,65 @@ void elementMixer::updateOpacity()
 //void elementMixer::drawRight(int x, int y, int w, int h)
 //{
 //}
+
+
+
+//--------------------------------------------------------------
+void elementMixer::guiEvent(ofxUIEventArgs &e)
+{	
+	string name = e.widget->getName(); 
+	int kind = e.widget->getKind(); 
+	cout << "got MIXER event from: " << name << endl; 
+	
+	if(e.widget->getName()=="Opacity")
+	{
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+		parentElement->setOpacity(slider->getScaledValue());
+	}
+    else if(e.widget->getName()=="Test Pattern")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        cout << toggle->getValue() << endl;
+        if (toggle->getValue())
+        { 
+            sceneElements[0]->setOpacity(1);
+            sceneElements[0]->setIsShow(true);
+        }
+        else 
+        {
+            sceneElements[0]->setOpacity(0);
+            sceneElements[0]->setIsShow(false);
+        }
+        cout << sceneElements[0]->getOpacity() << endl;
+	}
+	else if(e.widget->getName()=="Visible")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		parentElement->setIsActive(toggle->getValue());
+	}
+    else if(e.widget->getName()=="isDrawInStereo")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		parentElement->setDrawInStereo(toggle->getValue());
+	}
+    
+	else if( e.widget->getParent()->getName()=="Swap Left/Right")
+	{
+		// TODO we need to implement case in mixer ... 
+		//ofxUIToggle *toggleSwap = (ofxUIToggle *) e.widget;
+		//parentElement->setSwapLeftRight(toggleSwap->getValue());
+	}
+    
+	else if( e.widget->getParent()->getName()=="Blending Mode")
+	{
+		for(int i=0;i<blendingNames.size();i++)
+		{
+			if(name==blendingNames[i]) 
+			{
+				parentElement->setBlendingMode(i);
+			}			
+		}
+	}
+	
+}
+

@@ -12,9 +12,10 @@
 
 #include "ofMain.h"
 #include "elementMain.h"
-#include "ofxSimpleGuiToo.h"
 #include "ElementFX.h"
 #include "ElementFXMask.h"
+
+#include "ofxQuadWarp.h"
 
 class testApp : public ofBaseApp{
 
@@ -61,6 +62,7 @@ class testApp : public ofBaseApp{
     void createGrid(int _xRes, int _yRes);
     void drawGrid();
     
+    ofImage     img;
     ofTexture   text;
     
     int xRes;
@@ -69,13 +71,29 @@ class testApp : public ofBaseApp{
     int nPoints;
     int nQuads;
     
-//    int width;
-//    int height;
-   
+    int width;
+    int height;
+    
     ofPoint vertici[MAX_POINTS];
     ofPoint texVert[MAX_POINTS];
+    ofPoint screenPos[MAX_POINTS];
+    ofPoint mainVertici[4];
+    int     mainIndex[4];
     
     bool bWarpActive;
+    bool bSposta;
+    
+    
+    //ofxQuadWarp
+    ofxQuadWarp quadWarp;
+    ofFbo       qwFbo;
+    ofMatrix4x4 mat;
+    string      comandi;
+    
+
+    
+    
+    ofTrueTypeFont          myFont;
 
 	
 };

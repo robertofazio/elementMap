@@ -71,15 +71,42 @@ void elementVideo::update()
 {
 	leftChannelPlayer.idleMovie();
 	rightChannelPlayer.idleMovie();
+    
+    fboLeftAnagliph.begin();
+    
+    //  ofClear(0, 0, 0);
+    // left
+    glColorMask(true, false, false, false);
+    //ofSetupGraphicDefaults();    
+    //  setOpacityColor();
+    leftChannelPlayer.draw(0, 0);
+    
+    // right
+    glColorMask(false, true, true, false);
+    //ofSetupGraphicDefaults();
+    //setOpacityColor();
+    rightChannelPlayer.draw(0, 0);
+    
+    glColorMask(true, true, true, true);
+    
+    fboLeftAnagliph.end();
+
 }
 
+
+/*
+//-----------------------------------------------------------------
+void elementVideo::drawGraphic(int x, int y, int w, int h)
+{
+	this->drawLeft(x,y,w,h);
+}
+*/
 
 //-----------------------------------------------------------------
 void elementVideo::drawLeft(int x, int y, int w, int h)
 {
 	leftChannelPlayer.draw(x,y,w,h);
 }
-
 
 //-----------------------------------------------------------------
 void elementVideo::drawRight(int x, int y, int w, int h)
@@ -99,3 +126,12 @@ ofTexture& elementVideo::getRightTexture()
 	return (rightChannelPlayer.getTextureReference());	
 }
 
+
+//-----------------------------------------------------------------
+void elementVideo::drawStereo(int x, int y, int w, int h)
+{
+
+
+fboLeftAnagliph.draw(x, y, w, h);
+//leftChannelPlayer.draw(x,y,w,h);
+}

@@ -72,12 +72,21 @@ void elementSyphon::applyFX()
         }
     }
 }
+/*
+//-----------------------------------------------------------------
+void elementSyphon::drawGraphic(int x, int y, int w, int h)
+{
+	this->drawLeft(x,y,w,h);
+}
+*/
+
 
 //-----------------------------------------------------------------
 void elementSyphon::drawLeft(int x, int y, int w, int h)
 {
 	syphonClient.draw(x,y,w,h);
 }
+
 
 
 //-----------------------------------------------------------------
@@ -99,4 +108,6 @@ ofTexture& elementSyphon::getRightTexture()
 	syphonClient.bind();
 	return (syphonClient.getTextureReference());	
 }
+
+
 

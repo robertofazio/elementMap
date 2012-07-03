@@ -32,6 +32,9 @@ class elementMixer : public element
 	
 	void drawQuadGeometry();
 	void drawInfo();
+    
+    void guiEvent(ofxUIEventArgs &e);
+
 
 
 	bool				useNoShader;

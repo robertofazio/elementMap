@@ -22,8 +22,10 @@ class elementVideo : public element
 	void    addFX(int type); // Mauro
 	void    applyFX(); // Mauro
     void drawPreview(int x, int y, int w, int h);
+//	void drawGraphic(int x, int y, int w, int h);
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
+    void    drawStereo(int x, int y, int w, int h);
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
 
