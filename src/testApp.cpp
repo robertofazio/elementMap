@@ -13,11 +13,14 @@ int margin = 10;
 void testApp::setup()
 {	
 	
-	outputResolutionX	= 1024;
-	outputResolutionY	= 768;
+//	outputResolutionX	= 1024;
+//	outputResolutionY	= 768;
+	outputResolutionX	= ofGetScreenWidth();
+	outputResolutionY	= ofGetScreenHeight();
 	drawPreviews		= true;
 	drawUIs				= true;
 	
+    
 	ofEnableAlphaBlending();
 	
 	// test that GL_STEREO is working on this machine
@@ -82,10 +85,10 @@ void testApp::setup()
     //------------WARP STUFF BEGIN ----------------
     
     //set texture w & h
-    width=1024;
-    height=768;
+    width=outputResolutionX;
+    height=outputResolutionY;
     //prepare a texture 
-    text.allocate(width, height, GL_RGB);
+    text.allocate(1024, 768, GL_RGB);
     //default grid= 4x4 control points
     xRes=4;
     yRes=4;
@@ -141,8 +144,9 @@ void testApp::draw()
     ofBackground(35, 31, 32);
 	
     if (bFullscreen) {
-        
+
         ofSetColor(0,0);
+        
         elemMix.drawIntoFbo(isStereoCapable);
         ofSetColor(255, 255, 255);
 
@@ -153,11 +157,17 @@ void testApp::draw()
         mat = quadWarp.getMatrix();
         //dai vertici del warp ricavo la matrice per 
         glPushMatrix();
+
+//        zoomRatioX=(ofGetScreenWidth()/1024.0f);
+//        zoomRatioY=ofGetScreenHeight()/768.0f;
+//        glScalef(zoomRatioX,zoomRatioY,1);
+        
+        
         glMultMatrixf(mat.getPtr());
         ofSetColor(ofColor :: white);
         //non so perchè, ma devo prima disegnare la texture, poi pulire il buffer,
         //altrimenti non me la disegna dopo! :(
-        text.draw(0,0,1024,768);
+        text.draw(0,0,width,height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         //bind texture
@@ -185,7 +195,6 @@ void testApp::draw()
         if (bWarpActive) drawGrid();        
         glPopMatrix();
 
-        
  
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
         

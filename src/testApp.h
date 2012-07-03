@@ -74,6 +74,9 @@ class testApp : public ofBaseApp{
     int width;
     int height;
     
+    float zoomRatioX;
+    float zoomRatioY;
+    
     ofPoint vertici[MAX_POINTS];
     ofPoint texVert[MAX_POINTS];
     ofPoint screenPos[MAX_POINTS];
