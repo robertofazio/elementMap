@@ -165,7 +165,11 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setDrawInStereo(toggle->getValue());
 	}
-    
+    else if(e.widget->getName()=="Mono/Stereo")
+        {
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        parentElement->setDrawInStereo(toggle->getValue());
+        }
 	else if( e.widget->getParent()->getName()=="Swap Left/Right")
 	{
 		// TODO we need to implement case in mixer ... 

@@ -35,7 +35,7 @@ void testApp::setup()
 	int previewHeight = previewWidth / (float(ofGetWidth())/float(ofGetHeight()));
 
 	// create & setup elements on this app 
-	elemImg.setup("./images/testPattern1024.jpg", "", false, 215 , (margin * 9) - 8 ,"Test Pattern");
+	elemImg.setup("./images/testPattern1024.jpg", "", false, -50000 , (margin * 9) - 8 ,"Test Pattern");
 	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 0),"Movies");
 	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", true, 215 , (margin * 9) - 8 + (190 * 2),"Images");
 	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 1),"Syphon");

@@ -434,18 +434,20 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
     else if(e.widget->getName()=="Test Pattern")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        cout << toggle->getValue() << endl;
         if (toggle->getValue())
         { 
             sceneElements[0]->setOpacity(1);
             sceneElements[0]->setIsShow(true);
+            
         }
         else 
         {
             sceneElements[0]->setOpacity(0);
             sceneElements[0]->setIsShow(false);
         }
-        cout << sceneElements[0]->getOpacity() << endl;
+        
+        sceneElements[0]->UI->setVisible(false);
+        
 	}
 	else if(e.widget->getName()=="Visible")
 	{
