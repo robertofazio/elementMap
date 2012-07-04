@@ -196,6 +196,9 @@ ofTexture& elementImage::getRightTexture()
 //-----------------------------------------------------------------
 void elementImage::drawStereo(int x, int y, int w, int h)
 {
+    if (isActive)
+    {
+        
     fboLeftAnagliph.begin();
     
     //  ofClear(0, 0, 0);
@@ -215,4 +218,16 @@ void elementImage::drawStereo(int x, int y, int w, int h)
     
     fboLeftAnagliph.end();
     fboLeftAnagliph.draw(x, y, w, h);
+    }
+    else {
+        fboLeftAnagliph.begin();
+        ofPushStyle();
+        ofSetColor(ofColor :: black);
+        ofFill();
+        ofRect(0,0,ofGetScreenWidth(),ofGetScreenHeight());
+        ofPopStyle();
+        fboLeftAnagliph.end();
+        
+    }
+
 }

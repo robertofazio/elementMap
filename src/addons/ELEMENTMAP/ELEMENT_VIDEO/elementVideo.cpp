@@ -69,16 +69,19 @@ void elementVideo::drawPreview(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementVideo::update()
 {
+    
+    if (isActive)
+    {
 	leftChannelPlayer.idleMovie();
 	rightChannelPlayer.idleMovie();
     
     fboLeftAnagliph.begin();
     
-    //  ofClear(0, 0, 0);
+    // ofClear(0, 0, 0);
     // left
     glColorMask(true, false, false, false);
     //ofSetupGraphicDefaults();    
-    //  setOpacityColor();
+    // setOpacityColor();
     leftChannelPlayer.draw(0, 0);
     
     // right
@@ -90,7 +93,18 @@ void elementVideo::update()
     glColorMask(true, true, true, true);
     
     fboLeftAnagliph.end();
-
+    } 
+    
+    else {
+        fboLeftAnagliph.begin();
+        ofPushStyle();
+        ofSetColor(ofColor :: black);
+        ofFill();
+        ofRect(0,0,ofGetScreenWidth(),ofGetScreenHeight());
+        ofPopStyle();
+        fboLeftAnagliph.end();
+   
+    }
 }
 
 
@@ -105,14 +119,18 @@ void elementVideo::drawGraphic(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementVideo::drawLeft(int x, int y, int w, int h)
 {
-	leftChannelPlayer.draw(x,y,w,h);
+    
+    leftChannelPlayer.draw(x,y,w,h);
 }
+
 
 //-----------------------------------------------------------------
 void elementVideo::drawRight(int x, int y, int w, int h)
 {
-	rightChannelPlayer.draw(x,y,w,h);		
+    
+    rightChannelPlayer.draw(x,y,w,h);		
 }
+
 
 //-----------------------------------------------------------------
 ofTexture& elementVideo::getLeftTexture()
@@ -132,6 +150,15 @@ void elementVideo::drawStereo(int x, int y, int w, int h)
 {
 
 
-fboLeftAnagliph.draw(x, y, w, h);
+    if(isActive) fboLeftAnagliph.draw(x, y, w, h);
+    else {
+        ofPushStyle();
+        ofSetColor(0,0,0,0);
+        ofFill();
+        ofRect(x,y,w,h);        
+        ofPopStyle();
+    }
+
+    
 //leftChannelPlayer.draw(x,y,w,h);
 }

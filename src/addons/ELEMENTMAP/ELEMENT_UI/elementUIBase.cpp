@@ -69,7 +69,7 @@ void elementUIBase::setupUI(element* _parentElement)
     if (type!=5)
     { 
     //  UI->addWidgetDown(new ofxUILabel(parentElement->getElementName(), OFX_UI_FONT_MEDIUM));
-    UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,parentElement->getIsActive(),"Visible"));
+    UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,parentElement->getIsActive(),"isActive"));
     if(this->isStereo)
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Mono/Stereo"));
     UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Mask"));
@@ -80,9 +80,7 @@ void elementUIBase::setupUI(element* _parentElement)
     UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,parentElement->getIsActive(),"Quad Warping"));
     UI->addWidget(new ofxUIToggle(marginLeft, posY += 20, 10,10,parentElement->getIsActive(),"Mesh Warping"));
     
-    //show stereo drawing option only for stereo elements
-//	if (parentElement->getIsStereo() ) UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getDrawInStereo(),"isDrawInStereo"));
-	    
+        
     //all elements except for mixer need blend modes selection
 	  
         marginLeft = 5;
@@ -95,7 +93,7 @@ void elementUIBase::setupUI(element* _parentElement)
         listBlendModes->setAutoClose(true);
         UI->addWidget(listBlendModes);
     }
-    //but mixer needs output mode selection:
+    //but mixer needs output mode selection and many other things :) 
 	if (type==5)
     {
         marginLeft = 5;
@@ -104,27 +102,24 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUIToggle(marginLeft, posY += 20, 10,10,parentElement->getIsActive(),"Test Pattern"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Visible"));
         
-  //      ofSetColor(0, 255, 206);
-//        ofLine(0, 0, 500, 400);
         posY += 20;
         ofxUISpacer* spacer = new ofxUISpacer(marginLeft, posY, 400, 1);
         spacer->setColorFill(ofColor(0, 255, 206));
         
         UI->addWidget(spacer);
+        
+        //prima colonna: video
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 10, 10, 10,parentElement->getIsActive(),"Play"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Pause"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Stop"));
-        
-        posY -= 50;
-        UI->addWidget(new ofxUIToggle(marginLeft + 100,posY += 10, 10, 10,parentElement->getIsActive(),"Rew"));
-        UI->addWidget(new ofxUIToggle(marginLeft + 100,posY += 20, 10, 10,parentElement->getIsActive(),"Forw"));
-        UI->addWidget(new ofxUIToggle(marginLeft + 100,posY += 20, 10, 10,parentElement->getIsActive(),"Sound on/off"));
-        //posY += 40;
-        
+        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Rew"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Video loop"));
-        UI->addWidget(new ofxUISlider(marginLeft, posY += 20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Video Speed"));
-        UI->addWidget(new ofxUISlider(marginLeft + 150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
-    //    UI->addWidget(new ofxUISlider(marginLeft, 90, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
+        
+        //seconda colonna: audio
+        posY -= 90;
+        UI->addWidget(new ofxUIToggle(marginLeft + 100, posY+=10, 10, 10, parentElement->getIsActive(),"Sound on/off"));
+        UI->addWidget(new ofxUISlider(marginLeft + 100, posY+=30, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
+        
         
 		// TODO we need to implement case in mixer ... 
 		//UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getSwapLeftRight(),"Swap Left/Right"));
@@ -155,10 +150,13 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setIsActive(toggle->getValue());
 	}
-	else if(e.widget->getName()=="Visible")
+	else if(e.widget->getName()=="isActive")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setIsActive(toggle->getValue());
+		if (toggle->getValue()) parentElement->setOpacity(1);
+        else parentElement->setOpacity(0);
+        
 	}
     else if(e.widget->getName()=="isDrawInStereo")
 	{

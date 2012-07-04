@@ -84,7 +84,7 @@ void elementSyphon::drawGraphic(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementSyphon::drawLeft(int x, int y, int w, int h)
 {
-	syphonClient.draw(x,y,w,h);
+    if (isActive)    syphonClient.draw(x,y,w,h);
 }
 
 
@@ -92,21 +92,22 @@ void elementSyphon::drawLeft(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementSyphon::drawRight(int x, int y, int w, int h)
 {
-	syphonClient.draw(x,y,w,h);	
+	if (isActive) syphonClient.draw(x,y,w,h);	
 }
 
 //-----------------------------------------------------------------
 ofTexture& elementSyphon::getLeftTexture()
 {
-	syphonClient.bind();
-	return (syphonClient.getTextureReference());
+        syphonClient.bind();
+        return (syphonClient.getTextureReference());   
+
 }
 
 //-----------------------------------------------------------------
 ofTexture& elementSyphon::getRightTexture()
 {
-	syphonClient.bind();
-	return (syphonClient.getTextureReference());	
+        syphonClient.bind();
+        return (syphonClient.getTextureReference());	    
 }
 
 

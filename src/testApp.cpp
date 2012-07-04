@@ -41,7 +41,7 @@ void testApp::setup()
 	elemImg.setup("./images/testPattern1024.jpg", "", false, -50000 , (margin * 9) - 8 ,"Test Pattern");
 	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 0),"Movies");
 	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", true, 215 , (margin * 9) - 8 + (190 * 2),"Images");
-	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 1),"Syphon");
+	elemSy.setup("","",ofGetScreenWidth(),ofGetScreenHeight(), 215 , (margin * 9) - 8 + (190 * 1),"Syphon");
 	
     
     elemImg.UI->toggleVisible();
@@ -107,7 +107,7 @@ void testApp::setup()
     quadWarp.setTopRightCornerPosition(mainVertici[1]);        
     quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
-    comandi ="ofxDreamTeamTotalWarper\n\n'w'\t\tactivate/deactivate warp\n's'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n\n'c'\t\tclear quad warp transfomration\n'r'\t\treset point position\n\nall working with arrow keys;\nquad warping support mouse drag too";
+    comandi ="ofxDreamTeamTotalWarper\n\n'w'\t\tactivate/deactivate warp\n's'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n \nall working with arrow keys;\n quad warping support mouse drag too";
 
     //------------WARP STUFF END ----------------
 
@@ -196,6 +196,30 @@ void testApp::draw()
         glPopMatrix();
 
  
+        if (bWarpActive)
+        {
+        for (int corner=0; corner<4; corner++)
+        {
+            ofPushStyle();
+            ofSetColor(ofColor :: white);
+            ofSetLineWidth(2);
+            ofNoFill();
+
+            if (vertici[mainIndex[corner]].z==0) {
+                ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-24,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+24);   
+                ofLine(screenPos[mainIndex[corner]].x-24,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+24,screenPos[mainIndex[corner]].y);
+            }
+            else 
+            {
+                ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
+                ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
+                ofSetColor(255,0,0);
+            }
+                ofRect(screenPos[mainIndex[corner]].x-12, screenPos[mainIndex[corner]].y-12, 24, 24);                //top left   
+                ofPopStyle();
+        }
+        }
+        
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
         
         ofDrawBitmapString(ofToString(ofGetFrameRate()), position);
@@ -205,14 +229,15 @@ void testApp::draw()
     {
         ofSetColor(255, 255, 255);
         myFont.drawString("element.Map", margin , margin * 4);
+    
     // prepare and draw mixer element
 	ofSetColor(0,0);
 	elemMix.drawIntoFbo(isStereoCapable);
-//	ofSetColor(255,255);
+    //ofSetColor(255,255);
 	//elemMix.drawOutput(ofGetWidth()/2,340,ofGetWidth()/2,ofGetHeight()/2);
- //   elemMix.drawInfo();
- //   glEnable(GL_BLEND);
-//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //elemMix.drawInfo();
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ofSetColor(0, 255, 206);
     ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
     elemMix.drawGraphic(650, margin * 8, 600, 450   );
@@ -220,7 +245,7 @@ void testApp::draw()
         
     ofSetColor(255, 255, 255);
     myFont.loadFont("verdana.ttf", 8);
-    myFont.drawString("Press 'f' to enter in fullscreen mode and edit warp and edit warp", 10 , ofGetWindowHeight() - 10);
+    myFont.drawString("Press 'f' to enter in fullscreen mode and edit warp", 10 , ofGetWindowHeight() - 10);
     myFont.loadFont("verdana.ttf", 14);
 
 	if(drawPreviews)
@@ -258,7 +283,6 @@ void testApp::keyPressed(int key)
 {
 	if(key=='f')
 	{
-        //		printf("fps : %f\n",ofGetFrameRate());
         drawUIs=!drawUIs;
         
         if(drawUIs)
@@ -552,7 +576,29 @@ void testApp::keyPressed(int key)
                 }
                 break;
                 
+            
+            case 'v':
                 
+                int attivo;
+                attivo=4;
+                
+                for (int c=0; c<4; c++) {
+                    if (vertici[mainIndex[c]].z==1) attivo=c;
+                }
+                
+                if (attivo<4) 
+                {
+                    vertici[mainIndex[attivo]].z=0;
+                    attivo++;
+                    if (attivo==4) attivo=0;
+                    vertici[mainIndex[attivo]].z=1;
+                }
+                else
+                {
+                vertici[mainIndex[0]].z=1;
+                }
+           
+                break;
                 
                 
             case 'r':
@@ -754,22 +800,21 @@ void testApp::drawGrid() {
     
     //draw Points
     for (int point=0; point<nPoints; point++) {
+
+        //punti della griglia
         ofPushStyle();
         if (vertici[point].z==1) ofSetColor(255,0,0,255);
         else ofSetColor(0,255,0,255);
         ofFill();
-        //un rettangolo per i 4 vertici principali
-        if (point==mainIndex[0]) ofRect(vertici[point].x, vertici[point].y, 10, 10);                //top left
-        else if (point==mainIndex[1]) ofRect(vertici[point].x-10, vertici[point].y, 10, 10);        //top right
-        else if (point==mainIndex[3]) ofRect(vertici[point].x, vertici[point].y-10, 10, 10);        //bottom left
-        else if (point==mainIndex[2]) ofRect(vertici[point].x-10, vertici[point].y-10, 10, 10);     //bottom right
-        //un cerchio per tutti gli altri
-        else ofCircle(vertici[point].x, vertici[point].y, 5, 5);
+ 
+        //vertici principali
+//        if (point==mainIndex[0]) ofRect(vertici[point].x, vertici[point].y, 10, 10);                //top left   
+//        else if (point==mainIndex[1]) ofRect(vertici[point].x-10, vertici[point].y, 10, 10);        //top right
+//        else if (point==mainIndex[3]) ofRect(vertici[point].x, vertici[point].y-10, 10, 10);        //bottom left
+//        else if (point==mainIndex[2]) ofRect(vertici[point].x-10, vertici[point].y-10, 10, 10);     //bottom right
+//        else  ofCircle(vertici[point].x, vertici[point].y, 5, 5);
         ofPopStyle();
-        
-    }
-    
-    
-}
 
+    }
+}
 
