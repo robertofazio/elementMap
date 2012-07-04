@@ -19,7 +19,6 @@ class element : public ofNode , public elementUIBase
 	virtual void drawGraphic(int x, int y, int w, int h);
 	virtual void drawLeft(int x, int y, int w, int h) =0;
 	virtual void drawRight(int x, int y, int w, int h) =0;
-    virtual void drawStereo(int x, int y, int w, int h);
     virtual ofTexture& getLeftTexture() =0;
 	virtual ofTexture& getRightTexture() =0;
 	
@@ -48,37 +47,37 @@ class element : public ofNode , public elementUIBase
 	string			getElementName();
 	int				getBlendingMode();
     
-    ofTrueTypeFont          myFont;
+    ofTrueTypeFont          verdana8;
+    ofTrueTypeFont          verdana10;
 	
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
-    ofFbo           fboLeftAnagliph;
     
     
 	ElementFXMask newEffect;                                            // Non capisco perchè, ma se dichiaro l'effetto all'interno del metodo, poi ho problemi
     vector<ElementFX*>       effects;                                   // Mauro;
-    virtual void                    drawPreview(int x, int y, int w, int h) = 0;    // Mauro
+    // virtual void                    drawPreview(int x, int y, int w, int h) = 0;    // Mauro
     virtual void                    addFX(int type) = 0;                            // Mauro
     virtual void                    applyFX() = 0;
     
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	
 	protected :
-
+    
 	void			setOpacityColor();
-
+    
 	bool			isActive;	// indicates that we don't want this element to loose any time of cpu, so doesn't draw in preview or in draw
 	bool			isShow;		// indicates we want to keep the element to preview but not draw it on the output
 	bool			isClear;	// indicates if the fbo's have been cleared to black to avoid clearing on every draw
 	int				elementWidth;
 	int				elementHeight;
 	int				blendingMode;
-
+    
 	
 	private :
 	
 	int				type;
-//	bool			isStereo;           // I put in elementUIBase.h -> Mauro
+    //	bool			isStereo;           // I put in elementUIBase.h -> Mauro
 	int				internalFormat; //GL_RGB,GL_RGBA ...
 	bool			drawInStereo;
 	bool			swapLeftRight;

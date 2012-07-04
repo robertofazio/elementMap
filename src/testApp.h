@@ -94,9 +94,10 @@ class testApp : public ofBaseApp{
     string      comandi;
     
 
+
     
-    
-    ofTrueTypeFont          myFont;
+    ofTrueTypeFont          verdana14;
+    ofTrueTypeFont          verdana8;
 
 	
 };

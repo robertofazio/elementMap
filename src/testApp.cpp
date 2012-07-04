@@ -41,7 +41,7 @@ void testApp::setup()
 	elemImg.setup("./images/testPattern1024.jpg", "", false, -50000 , (margin * 9) - 8 ,"Test Pattern");
 	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 0),"Movies");
 	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", true, 215 , (margin * 9) - 8 + (190 * 2),"Images");
-	elemSy.setup("","",ofGetScreenWidth(),ofGetScreenHeight(), 215 , (margin * 9) - 8 + (190 * 1),"Syphon");
+	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 1),"Syphon");
 	
     
     elemImg.UI->toggleVisible();
@@ -88,7 +88,7 @@ void testApp::setup()
     width=outputResolutionX;
     height=outputResolutionY;
     //prepare a texture 
-    text.allocate(1024, 768, GL_RGB);
+    text.allocate(width, height, GL_RGB);
     //default grid= 4x4 control points
     xRes=4;
     yRes=4;
@@ -112,10 +112,14 @@ void testApp::setup()
     //------------WARP STUFF END ----------------
 
     
-    myFont.loadFont("verdana.ttf", 14);
-	myFont.setLineHeight(12.0f);
-	myFont.setLetterSpacing(1.037);
+    verdana8.loadFont("verdana.ttf", 8);
+    verdana14.loadFont("verdana.ttf", 14);
     
+	verdana8.setLineHeight(12.0f);
+	verdana8.setLetterSpacing(1.037);
+    
+	verdana14.setLineHeight(12.0f);
+	verdana14.setLetterSpacing(1.037);    
 }
 
 //--------------------------------------------------------------
@@ -138,34 +142,30 @@ void testApp::update()
     //------------WARP STUFF END ----------------
 }
 
+
+
+
 //--------------------------------------------------------------
 void testApp::draw()
 {	
     ofBackground(35, 31, 32);
 	
+    ofSetColor(0,0);
+    elemMix.drawIntoFbo(isStereoCapable);
+    
     if (bFullscreen) {
-
-        ofSetColor(0,0);
-        
-        elemMix.drawIntoFbo(isStereoCapable);
+  
         ofSetColor(255, 255, 255);
-
         //load texture from mixer fbo (repeat for right side when we will want stereo mode....)
         text=elemMix.fboLeft.getTextureReference();
-
         
         mat = quadWarp.getMatrix();
         //dai vertici del warp ricavo la matrice per 
         glPushMatrix();
 
-//        zoomRatioX=(ofGetScreenWidth()/1024.0f);
-//        zoomRatioY=ofGetScreenHeight()/768.0f;
-//        glScalef(zoomRatioX,zoomRatioY,1);
-        
-        
         glMultMatrixf(mat.getPtr());
         ofSetColor(ofColor :: white);
-        //non so perchè, ma devo prima disegnare la texture, poi pulire il buffer,
+        //Cinzio: non so perchè, ma devo prima disegnare la texture, poi pulire il buffer,
         //altrimenti non me la disegna dopo! :(
         text.draw(0,0,width,height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -195,89 +195,75 @@ void testApp::draw()
         if (bWarpActive) drawGrid();        
         glPopMatrix();
 
- 
+        //draw special markers for wuad warp vertices
         if (bWarpActive)
         {
-        for (int corner=0; corner<4; corner++)
-        {
-            ofPushStyle();
-            ofSetColor(ofColor :: white);
-            ofSetLineWidth(2);
-            ofNoFill();
-
-            if (vertici[mainIndex[corner]].z==0) {
-                ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-24,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+24);   
-                ofLine(screenPos[mainIndex[corner]].x-24,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+24,screenPos[mainIndex[corner]].y);
-            }
-            else 
+            for (int corner=0; corner<4; corner++)
             {
-                ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
-                ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
-                ofSetColor(255,0,0);
-            }
-                ofRect(screenPos[mainIndex[corner]].x-12, screenPos[mainIndex[corner]].y-12, 24, 24);                //top left   
+                ofPushStyle();
+                ofSetColor(ofColor :: white);
+                ofSetLineWidth(2);
+                ofNoFill();
+                
+                if (vertici[mainIndex[corner]].z==0) {
+                    ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-24,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+24);   
+                    ofLine(screenPos[mainIndex[corner]].x-24,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+24,screenPos[mainIndex[corner]].y);
+                }
+                else 
+                {
+                    ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
+                    ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
+                    ofSetColor(255,0,0);
+                }
+                ofRect(screenPos[mainIndex[corner]].x-12, screenPos[mainIndex[corner]].y-12, 24, 24);  
                 ofPopStyle();
+            }
         }
-        }
+
+        
         
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
-        
         ofDrawBitmapString(ofToString(ofGetFrameRate()), position);
-        
     }
+                    
     else 
-    {
-        ofSetColor(255, 255, 255);
-        myFont.drawString("element.Map", margin , margin * 4);
     
-    // prepare and draw mixer element
-	ofSetColor(0,0);
-	elemMix.drawIntoFbo(isStereoCapable);
-    //ofSetColor(255,255);
-	//elemMix.drawOutput(ofGetWidth()/2,340,ofGetWidth()/2,ofGetHeight()/2);
-    //elemMix.drawInfo();
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ofSetColor(0, 255, 206);
-    ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
-    elemMix.drawGraphic(650, margin * 8, 600, 450   );
+    {
+    
+        ofSetColor(255, 255, 255);
+        
+        verdana14.drawString("element.Map", margin , margin * 4);
+        ofSetColor(0, 255, 206);
+        ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
+        elemMix.drawOutput(650, margin * 8, 600, 450   );
         
         
-    ofSetColor(255, 255, 255);
-    myFont.loadFont("verdana.ttf", 8);
-    myFont.drawString("Press 'f' to enter in fullscreen mode and edit warp", 10 , ofGetWindowHeight() - 10);
-    myFont.loadFont("verdana.ttf", 14);
-
-	if(drawPreviews)
-	{	
-		// just draw the preview inputs of mixer
-		ofSetColor(255,255);
-		int previewWidth = (ofGetWidth()-(20*numOfElements))/numOfElements;
-		int previewHeight = previewWidth / (4.0/3.0);
-		glDrawBuffer(GL_BACK);
-		for(int i = 0;i<numOfElements - 1;i++)
-		{
-         //   if(myElements[drawingOrder[i]]->effects.size() == 0)
+        ofSetColor(255, 255, 255);
+        verdana8.drawString("Press 'f' to enter in fullscreen mode and edit warp", 10 , ofGetWindowHeight() - 10);
+        
+        if(drawPreviews)    
+        {
+            // just draw the preview inputs of mixer
+            ofSetColor(255,255);
+            int previewWidth = (ofGetWidth()-(20*numOfElements))/numOfElements;
+            int previewHeight = previewWidth / (4.0/3.0);
+            glDrawBuffer(GL_BACK);
+            for(int i = 0;i<numOfElements - 1;i++)
+            {
                 ofSetColor(0, 255, 206);
                 ofLine(margin, (margin * 6) + ((i) * 190), 645, (margin * 6) + ((i) * 190));
                 ofSetColor(255, 255, 255);
-                myElements[drawingOrder[i]]->drawGraphic(margin ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH, (PREVIEW_HEIGHT));
-		//	else
-         //       myElements[drawingOrder[i]]->drawPreview(20+(drawingOrder[i]*ofGetWidth()/4),20, 100, 100 / (4/3));
-			
-		}
-	}
-	
-//	ofSetColor(255);
-//	float f = ofGetElapsedTimeMillis()-lastTime;
-//	medianFrameStep = (medianFrameStep + f) / float(num+1);
-//	ofDrawBitmapString(ofToString(f) + " /\n/ " + ofToString(medianFrameStep),100,100);
-//	lastTime=ofGetElapsedTimeMillis();
-//	num=num+1;
-
+                myElements[drawingOrder[i]]->drawGraphic(margin ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
+            }
+            
+        }
+        
     }
+    
 }
 
+
+                           
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
@@ -542,7 +528,7 @@ void testApp::keyPressed(int key)
                     }
                     
                     for (int i=0; i<nPoints; i++) {
-                        if (abs(nuovaX-texVert[i].x)<10 && abs(nuovaY-texVert[i].y)<10) vertici[i].z=1;
+                        if (abs(nuovaX-texVert[i].x)<20 && abs(nuovaY-texVert[i].y)<20) vertici[i].z=1;
                     }
                     
                 }
@@ -570,7 +556,7 @@ void testApp::keyPressed(int key)
                     }
                     
                     for (int i=0; i<nPoints; i++) {
-                        if (abs(nuovaX-texVert[i].x)<10 && abs(nuovaY-texVert[i].y)<10) vertici[i].z=1;
+                        if (abs(nuovaX-texVert[i].x)<20 && abs(nuovaY-texVert[i].y)<20) vertici[i].z=1;
                     }
                     
                 }
@@ -800,19 +786,11 @@ void testApp::drawGrid() {
     
     //draw Points
     for (int point=0; point<nPoints; point++) {
-
-        //punti della griglia
         ofPushStyle();
         if (vertici[point].z==1) ofSetColor(255,0,0,255);
         else ofSetColor(0,255,0,255);
         ofFill();
- 
-        //vertici principali
-//        if (point==mainIndex[0]) ofRect(vertici[point].x, vertici[point].y, 10, 10);                //top left   
-//        else if (point==mainIndex[1]) ofRect(vertici[point].x-10, vertici[point].y, 10, 10);        //top right
-//        else if (point==mainIndex[3]) ofRect(vertici[point].x, vertici[point].y-10, 10, 10);        //bottom left
-//        else if (point==mainIndex[2]) ofRect(vertici[point].x-10, vertici[point].y-10, 10, 10);     //bottom right
-//        else  ofCircle(vertici[point].x, vertici[point].y, 5, 5);
+        ofCircle(vertici[point].x, vertici[point].y, 5, 5);
         ofPopStyle();
 
     }
