@@ -24,7 +24,8 @@ void elementImage::setup(string _leftImage, string _rightImage, bool _isStereo,i
 	xPos = _posX;
 	yPos = _posY;
     
-	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name,this->getIsStereo());	
+//	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name,this->getIsStereo());	
+    this->init(2,int(ofGetScreenWidth()),int(ofGetScreenHeight()),GL_RGBA,_name,this->getIsStereo());	
 }
 
 //-----------------------------------------------------------------

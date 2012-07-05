@@ -26,7 +26,8 @@ class elementVideo : public element
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
 
-	
+	bool    isPaused;
+    
 	ofVideoPlayer leftChannelPlayer;
 	ofVideoPlayer rightChannelPlayer;
 

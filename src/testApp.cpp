@@ -13,8 +13,6 @@ int margin = 10;
 void testApp::setup()
 {	
 	
-//	outputResolutionX	= 1024;
-//	outputResolutionY	= 768;
 	outputResolutionX	= ofGetScreenWidth();
 	outputResolutionY	= ofGetScreenHeight();
 	drawPreviews		= true;
@@ -39,10 +37,11 @@ void testApp::setup()
 
 	// create & setup elements on this app 
 	elemImg.setup("./images/testPattern1024.jpg", "", false, -50000 , (margin * 9) - 8 ,"Test Pattern");
-	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 0),"Movies");
+	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
 	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", true, 215 , (margin * 9) - 8 + (190 * 2),"Images");
-	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 1),"Syphon");
+	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon");
 	
+    bPaused=false;
     
     elemImg.UI->toggleVisible();
     elemImg.setOpacity(1);
@@ -67,8 +66,8 @@ void testApp::setup()
 	// setup mix stuff
 	drawingOrder = new int[numOfElements];
 	drawingOrder[0]=2;
-	drawingOrder[1]=3;
-	drawingOrder[2]=1;
+	drawingOrder[1]=1;
+	drawingOrder[2]=3;
 	drawingOrder[3]=0;
 	
 	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer");
@@ -107,7 +106,7 @@ void testApp::setup()
     quadWarp.setTopRightCornerPosition(mainVertici[1]);        
     quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
-    comandi ="ofxDreamTeamTotalWarper\n\n'w'\t\tactivate/deactivate warp\n's'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n \nall working with arrow keys;\n quad warping support mouse drag too";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n's'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n \nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 
     //------------WARP STUFF END ----------------
 
@@ -296,6 +295,30 @@ void testApp::keyPressed(int key)
     
         switch (key) {
 
+            case ' ':
+                if (elemV1.leftChannelPlayer.isPlaying()) 
+                {
+                    elemV1.leftChannelPlayer.stop();
+                    elemV1.rightChannelPlayer.stop();
+                   
+                } 
+                else
+                {
+                    elemV1.leftChannelPlayer.play();
+                    elemV1.rightChannelPlayer.play();
+                } 
+                    
+                break;
+                
+            case OF_KEY_BACKSPACE:
+                elemV1.leftChannelPlayer.play();
+                elemV1.rightChannelPlayer.play();
+                elemV1.leftChannelPlayer.setPosition(0.0);
+                elemV1.rightChannelPlayer.setPosition(0.0);
+                elemV1.leftChannelPlayer.stop();
+                elemV1.rightChannelPlayer.stop();
+                break;
+                
             case 'w':
                 bWarpActive=!bWarpActive;
                 quadWarp.toggleShow();

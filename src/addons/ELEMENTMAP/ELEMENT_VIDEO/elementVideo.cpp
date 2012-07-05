@@ -33,8 +33,12 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, bool _isSter
 	xPos = _xPos;
 	yPos = _yPos;
 	
+//	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo());
+	this->init(1,int(ofGetScreenWidth()),int(ofGetScreenHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo());
+    
+    isPaused=false;
+    
 
-	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo());	
 	
 }
 

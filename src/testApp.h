@@ -94,6 +94,7 @@ class testApp : public ofBaseApp{
     string      comandi;
     
 
+    bool        bPaused;
 
     
     ofTrueTypeFont          verdana14;

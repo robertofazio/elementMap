@@ -1,6 +1,8 @@
 #include "elementMixer.h"
 #include "elementVideo.h"
 
+#include "testApp.h"
+
 // TODO ::
 // add support for alpha values on the PSmode mixer
 
@@ -126,45 +128,27 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 			case ELM_STEREO_OPENGL:
 				
 				if(!getSwapLeftRight())
-				{
-					// STEREO PIPELINE
-					// Clear the buffers 
-					//glDrawBuffer(GL_BACK_LEFT);
-					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					//glDrawBuffer(GL_BACK_RIGHT);
-					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
-					
-					// left
+                {
+                    // left
 					glDrawBuffer(GL_BACK_LEFT);	
-					//ofSetupGraphicDefaults();
 					setOpacityColor();
 					fboLeft.draw(_x,_y,_width,_height);
 					
 					// right
 					glDrawBuffer(GL_BACK_RIGHT);
-					//ofSetupGraphicDefaults();
 					setOpacityColor();
 					if(getDrawInStereo()) fboRight.draw(_x,_y,_width,_height);
 					else fboLeft.draw(_x,_y,_width,_height);
 				}
 				else 
 				{
-					// STEREO PIPELINE SWAPPED
-					// Clear the buffers 
-					//glDrawBuffer(GL_BACK_LEFT);
-					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					//glDrawBuffer(GL_BACK_RIGHT);
-					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
-					
 					// left
 					glDrawBuffer(GL_BACK_LEFT);	
-					//ofSetupGraphicDefaults();	
 					setOpacityColor();
 					fboRight.draw(_x,_y,_width,_height);
 					
 					// right
 					glDrawBuffer(GL_BACK_RIGHT);
-					//ofSetupGraphicDefaults();
 					setOpacityColor();
 					if(getDrawInStereo()) fboLeft.draw(_x,_y,_width,_height);
 					else fboLeft.draw(_x,_y,_width,_height);
@@ -173,32 +157,20 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				break;
 				
 			case ELM_STEREO_MONO:
-                // MONO PIPELINE ... works?
-                // Clear buffer
-                //glDrawBuffer(GL_BACK);
-                //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
-                //ofSetupGraphicDefaults();	
                 setOpacityColor();
                 fboLeft.draw(_x,_y,_width,_height);
 				
                 
 				break;
 			case ELM_STEREO_ANAGLYPH:
-				// MONO PIPELINE ... works?
-				// Clear buffer
-				//glDrawBuffer(GL_BACK);
-				//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
-				//ofSetupGraphicDefaults();	
-				
+ 
 				// left
 				glColorMask(true, false, false, false);
-				//ofSetupGraphicDefaults();	
 				setOpacityColor();
 				fboLeft.draw(_x,_y,_width,_height);
 				
 				// right
 				glColorMask(false, true, true, false);
-				//ofSetupGraphicDefaults();
 				setOpacityColor();
 				fboRight.draw(_x,_y,_width,_height);
 				
@@ -331,6 +303,29 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             }
         } 
     }
+    
+    if(e.widget->getName()=="Play")
+	{
+        ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.play();
+        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.play();
+
+	}
+
+
+    if(e.widget->getName()=="Pause")
+	{
+        ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.stop();
+        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.stop();
+	}
+    
+    if(e.widget->getName()=="Rew")
+	{
+        ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.setPosition(0.0);
+        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.setPosition(0.0);
+        
+	}
+
+    
     elementUIBase::guiEvent(e);
 }
 
