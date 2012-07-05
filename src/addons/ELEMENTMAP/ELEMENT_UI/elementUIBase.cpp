@@ -98,8 +98,8 @@ void elementUIBase::setupUI(element* _parentElement)
 	if (type==5)
     {
         marginLeft = 5;
-        posY = 470;
-        UI->addWidget(new ofxUIFPS(marginLeft, posY, OFX_UI_FONT_SMALL));
+        posY = 450;
+        //UI->addWidget(new ofxUIFPS(marginLeft, posY, OFX_UI_FONT_SMALL));
         UI->addWidget(new ofxUIToggle(marginLeft, posY += 20, 10,10,parentElement->getIsActive(),"Test Pattern"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Visible"));
         
@@ -118,8 +118,8 @@ void elementUIBase::setupUI(element* _parentElement)
         
         //seconda colonna: audio
         posY -= 90;
-        UI->addWidget(new ofxUIToggle(marginLeft + 100, posY+=10, 10, 10, parentElement->getIsActive(),"Sound on/off"));
-        UI->addWidget(new ofxUISlider(marginLeft + 100, posY+=30, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
+        UI->addWidget(new ofxUIToggle(marginLeft + 150, posY+=30, 10, 10, parentElement->getIsActive(),"Sound on/off"));
+        UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
 //        listOutputModes = new ofxUIDropDownList(marginLeft+100, posY+=450, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
 //        listOutputModes->setDrawBack(true);
 //        listOutputModes->setDrawOutlineHighLight(false);

@@ -315,13 +315,17 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
     if(e.widget->getName()=="Pause")
 	{
         ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.stop();
-        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.stop();
+        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.stop(); 
 	}
     
     if(e.widget->getName()=="Rew")
 	{
+        ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.play();
+        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.play();
         ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.setPosition(0.0);
         ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.setPosition(0.0);
+        ((testApp*)ofGetAppPtr())->elemV1.leftChannelPlayer.stop();
+        ((testApp*)ofGetAppPtr())->elemV1.rightChannelPlayer.stop(); 
         
 	}
 

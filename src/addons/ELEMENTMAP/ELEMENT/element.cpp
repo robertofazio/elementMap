@@ -51,15 +51,14 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 
 void element::initFont()
 {
-    
-    georgiaitalic8.loadFont("georgiai.ttf", 8);
-    georgiaitalic10.loadFont("georgiai.ttf", 10);
+    georgiaitalic8.loadFont("georgiaz.ttf", 7);
+    georgiaitalic10.loadFont("georgiaz.ttf", 9);
     
 	georgiaitalic8.setLineHeight(12.0f);
-	georgiaitalic8.setLetterSpacing(1.037);
+	georgiaitalic8.setLetterSpacing(1.017);
     
 	georgiaitalic10.setLineHeight(12.0f);
-	georgiaitalic10.setLetterSpacing(1.037);   
+	georgiaitalic10.setLetterSpacing(1.017);   
 }
 
 void element::drawGraphic(int x, int y, int w, int h)

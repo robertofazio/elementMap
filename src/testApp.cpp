@@ -37,8 +37,7 @@ void testApp::setup()
 
 	// create & setup elements on this app 
 	elemImg.setup("./images/testPattern1024.jpg", "", false, -50000 , (margin * 9) - 8 ,"Test Pattern");
-//	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
-    elemV1.setup("./movies/left1024.mov","",true, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
+	elemV1.setup("./movies/left1024.mov","./movies/right1024.mov",true, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
 	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", true, 215 , (margin * 9) - 8 + (190 * 2),"Images");
 	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon");
 	
@@ -127,17 +126,17 @@ void testApp::setup()
     //------------WARP STUFF END ----------------
 
     
-    georgiaitalic8.loadFont("georgiai.ttf", 8);
-    georgiaitalic14.loadFont("georgiai.ttf", 14);
+    georgiaitalic8.loadFont("georgiaz.ttf", 7);
+    georgiaitalic14.loadFont("georgiaz.ttf", 18);
     
 	georgiaitalic8.setLineHeight(12.0f);
-	georgiaitalic8.setLetterSpacing(1.037);
+	georgiaitalic8.setLetterSpacing(1.017);
     
 	georgiaitalic14.setLineHeight(12.0f);
-	georgiaitalic14.setLetterSpacing(1.037);    
+	georgiaitalic14.setLetterSpacing(1.017);    
     
      
-    logo.loadImage("./images/logo.jpg");
+    logo.loadImage("./images/logo.png");
     
 }
 
@@ -168,7 +167,7 @@ void testApp::update()
 void testApp::draw()
 {	
     ofBackground(35, 31, 32);
-	
+
     ofSetColor(0,0);
     elemMix.drawIntoFbo(isStereoCapable);
     
@@ -253,8 +252,11 @@ void testApp::draw()
     else 
     
     {
-    
-        ofSetColor(255, 255, 255);
+        
+        
+        //preview window (non-fulscreen)
+        
+       ofSetColor(255, 255, 255);
         
         georgiaitalic14.drawString("element.Map", margin , margin * 4);
         ofSetColor(0, 255, 206);
@@ -281,14 +283,9 @@ void testApp::draw()
             }
             
         }
-
-        logo.draw(1159, 550, 100, 100);
+      
+        logo.draw(1195, 2, 60, 60);
         
-//        ofPushStyle();
-//        ofSetColor(ofColor :: white);
-//        ofFill();
-//        ofRect(margin, 620, 200, 200);
-//        ofPopStyle();
     }
     
 }

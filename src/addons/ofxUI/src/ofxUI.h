@@ -138,13 +138,13 @@ enum ofxWidgetColorType
 //#ifdef TARGET_ANDROID
 //#define OFX_UI_FONT_NAME "newmediafett.ttf"
 //#else
-#define OFX_UI_FONT_NAME "GUI/georgiai.ttf"
+#define OFX_UI_FONT_NAME "GUI/georgiaz.ttf"
 //#endif
 
-#define OFX_UI_FONT_RESOLUTION 150
-#define OFX_UI_FONT_LARGE_SIZE 8
-#define OFX_UI_FONT_MEDIUM_SIZE 5
-#define OFX_UI_FONT_SMALL_SIZE 4
+#define OFX_UI_FONT_RESOLUTION 135
+#define OFX_UI_FONT_LARGE_SIZE 12
+#define OFX_UI_FONT_MEDIUM_SIZE 8
+#define OFX_UI_FONT_SMALL_SIZE 6
 
 #define OFX_UI_LABEL_DRAW_BACK false
 
