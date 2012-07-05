@@ -12,7 +12,7 @@ differenze rispetto alla branch "test":
 - salvataggio progetto (cioè dati del warp) su xml
  
 ***********************
-CONTROLLARE LA FINESTRA DI GELP: SONO CAMBIATI DEI TASTI! :)
+CONTROLLARE LA FINESTRA DI HELP: SONO CAMBIATI DEI TASTI! :)
 ***********************
 
 DA FARE:
