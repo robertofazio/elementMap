@@ -96,6 +96,7 @@ void testApp::setup()
     //start with active warp and transalte non-active
     bWarpActive=true;
     bSposta=false;
+    bHoldSelection=false;
     //quadWarper init    
     mainVertici[0]=ofPoint(0,0);            //top left
     mainVertici[1]=ofPoint(width,0);        //top right
@@ -106,7 +107,7 @@ void testApp::setup()
     quadWarp.setTopRightCornerPosition(mainVertici[1]);        
     quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 
     //------------WARP STUFF END ----------------
 
@@ -243,7 +244,7 @@ void testApp::draw()
         
         
         ofSetColor(255, 255, 255);
-        verdana8.drawString("Press 'f' to enter in fullscreen mode and edit warp", 10 , ofGetWindowHeight() - 10);
+        verdana8.drawString("Press 'f' to enter in fullscreen mode and edit warp; when in fullscreen press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
         if(drawPreviews)    
         {
@@ -656,10 +657,14 @@ void testApp::keyPressed(int key)
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
                 break;
                 
-            case 'h':
+            case 'i':
                 ofSystemAlertDialog(comandi);
                 break;
 
+            case 'h':
+                bHoldSelection=true;
+                break;
+                
     default:
         break;
         }
@@ -671,6 +676,13 @@ void testApp::keyPressed(int key)
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
+    switch (key) {
+        case 'h':
+            bHoldSelection=false;
+            break;
+
+    }
+    
 }
 
 
@@ -729,7 +741,10 @@ void testApp::mousePressed(int x, int y, int button){
             {
                 if (vertici[i].z==0) vertici[i].z=1;
             }
-            else vertici[i].z=0;   
+            else 
+            {
+                if (!bHoldSelection) vertici[i].z=0;      
+            }
             
         }
         

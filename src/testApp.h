@@ -85,7 +85,7 @@ class testApp : public ofBaseApp{
     
     bool bWarpActive;
     bool bSposta;
-    
+    bool bHoldSelection;
     
     //ofxQuadWarp
     ofxQuadWarp quadWarp;
