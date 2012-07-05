@@ -120,15 +120,16 @@ void elementUIBase::setupUI(element* _parentElement)
         posY -= 90;
         UI->addWidget(new ofxUIToggle(marginLeft + 150, posY+=30, 10, 10, parentElement->getIsActive(),"Sound on/off"));
         UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
-//        listOutputModes = new ofxUIDropDownList(marginLeft+100, posY+=450, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
-//        listOutputModes->setDrawBack(true);
-//        listOutputModes->setDrawOutlineHighLight(false);
-//        listOutputModes->setDrawPaddingOutline(false);
-//        listOutputModes->setPadding(0);
-//        listOutputModes->setDrawFill(true);
-//        listOutputModes->setAutoClose(true);
-//        UI->addWidgetDown(listOutputModes);
 
+        
+        listOutputModes = new ofxUIDropDownList(marginLeft + 250, posY-=80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes->setDrawBack(true);
+        listOutputModes->setDrawOutlineHighLight(false);
+        listOutputModes->setDrawPaddingOutline(false);
+        listOutputModes->setPadding( 0 );
+        listOutputModes->setDrawFill(true);
+        listOutputModes->setAutoClose(true);
+        UI->addWidget(listOutputModes);
     }
     
     if (type!=5) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 

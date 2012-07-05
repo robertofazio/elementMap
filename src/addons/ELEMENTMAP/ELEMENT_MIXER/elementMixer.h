@@ -30,6 +30,8 @@ class elementMixer : public element
 	ofTexture& getLeftTexture(){};
 	ofTexture& getRightTexture(){};
 	
+//    ofFbo   fboAnaglyph;
+    
 	void drawQuadGeometry();
 	void drawInfo();
     
@@ -41,7 +43,11 @@ class elementMixer : public element
     void                applyFX();
     void                addFX(int type);       // Mauro
     void drawPreview(int x, int y, int w, int h);
-	private :
+	
+    int					outputStereoMode;
+    
+    
+    private :
 
 	element**			sceneElements;
 	int					numOfElements;
@@ -51,7 +57,7 @@ class elementMixer : public element
 
 	int					blendMode;
 	ofShader			shader;
-	int					outputStereoMode;
+
 	
 	// used to help on drawing ...
 	ofImage				blacktexture;

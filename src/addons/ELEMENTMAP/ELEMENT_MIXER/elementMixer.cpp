@@ -26,7 +26,10 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,element** _ele
 	yPos = _posY;
 
 	this->init(5,_width,_height,GL_RGBA,_name,this->getIsStereo());
-	sceneElements = _elements;
+	
+//    fboAnaglyph.allocate(_width, _height, GL_RGBA);
+    
+    sceneElements = _elements;
 	numOfElements = _numOfElements;
 	elementsOrder = _elementsOrder;
 	elementsBlendModes = new int[numOfElements];
@@ -101,22 +104,30 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		//////////////////////////
         
 		if(this->getIsStereo())
-        {
-            fboRight.begin();
-            ofClear(0,0,0,0);
+            {
+                fboRight.begin();
+                ofClear(0,0,0,0);
+                
+                for(int a = 0; a < numOfElements; a++)
+                    if(sceneElements[elementsOrder[a]]->getIsActive())
+                        {
+                            float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
+                            ofSetColor(255, 255, 255, opacity);
+                            if(sceneElements[elementsOrder[a]]->getIsStereo())
+                                sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
+                            else
+                                sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
+                                }
+
+               fboRight.end();
             
-            for(int a = 0; a < numOfElements; a++)
-                if(sceneElements[elementsOrder[a]]->getIsActive())
-                {
-                    float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
-                    ofSetColor(255, 255, 255, opacity);
-                    sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
+                
                 }
-            
-            fboRight.end();
-        }
+        
 	}
 }
+
+
 
 //-----------------------------------------------------------------
 void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
@@ -162,17 +173,20 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				
                 
 				break;
+                
 			case ELM_STEREO_ANAGLYPH:
  
 				// left
 				glColorMask(true, false, false, false);
-				setOpacityColor();
+				//setOpacityColor();
+                ofSetColor(255, 255, 255);
 				fboLeft.draw(_x,_y,_width,_height);
 				
 				// right
 				glColorMask(false, true, true, false);
-				setOpacityColor();
-				fboRight.draw(_x,_y,_width,_height);
+//				setOpacityColor();
+				ofSetColor(255, 255, 255);
+                fboRight.draw(_x,_y,_width,_height);
 				
 				glColorMask(true, true, true, true);
 				
@@ -248,10 +262,10 @@ void elementMixer::drawQuadGeometry()
 void elementMixer::setOutputStereoMode(int _stereoMode)
 {
 	outputStereoMode = _stereoMode;
-	if((outputStereoMode == ELM_STEREO_ANAGLYPH) || (outputStereoMode == ELM_STEREO_MONO))
-		setIsStereo(false);
-	else
-		setIsStereo(true);
+//	if((outputStereoMode == ELM_STEREO_ANAGLYPH) || (outputStereoMode == ELM_STEREO_MONO))
+//		setIsStereo(false);
+//	else
+//		setIsStereo(true);
 }
 
 //-----------------------------------------------------------------

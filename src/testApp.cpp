@@ -18,7 +18,6 @@ void testApp::setup()
 	drawPreviews		= true;
 	drawUIs				= true;
 	
-    
 	ofEnableAlphaBlending();
 	
 	// test that GL_STEREO is working on this machine
@@ -91,6 +90,9 @@ void testApp::setup()
     height=outputResolutionY;
     //prepare a texture 
     text.allocate(width, height, GL_RGB);
+
+    fboAnaglyph.allocate(width, height, GL_RGB);
+    
     //default grid= 4x4 control points
     xRes=4;
     yRes=4;
@@ -174,8 +176,32 @@ void testApp::draw()
     if (bFullscreen) {
   
         ofSetColor(255, 255, 255);
-        //load texture from mixer fbo (repeat for right side when we will want stereo mode....)
-        text=elemMix.fboLeft.getTextureReference();
+        //load texture from mixer fbo 
+
+        //if anaglyph mode: prepare anaglyph texture!
+        if (elemMix.outputStereoMode==0)
+        {
+
+            fboAnaglyph.begin();
+            ofClear(0,0,0,0);
+            
+            // left
+            glColorMask(true, false, false, false);
+            ofSetColor(255, 255, 255);
+            elemMix.fboLeft.draw(0,0,width,height);
+            
+            // right
+            glColorMask(false, true, true, false);
+            ofSetColor(255, 255, 255);
+            elemMix.fboRight.draw(0,0,width,height);
+            
+            glColorMask(true, true, true, true);
+            fboAnaglyph.end();
+            
+            text=fboAnaglyph.getTextureReference();
+        }
+        
+        else text=elemMix.fboLeft.getTextureReference();
         
         mat = quadWarp.getMatrix();
         //dai vertici del warp ricavo la matrice per 
@@ -187,6 +213,7 @@ void testApp::draw()
         //altrimenti non me la disegna dopo! :(
         text.draw(0,0,width,height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         
         //bind texture
         glEnable(text.getTextureData().textureTarget);
@@ -213,7 +240,9 @@ void testApp::draw()
         if (bWarpActive) drawGrid();        
         glPopMatrix();
 
-        //draw special markers for wuad warp vertices
+        
+        
+        //draw special markers for quad warp vertices
         if (bWarpActive)
         {
             for (int corner=0; corner<4; corner++)

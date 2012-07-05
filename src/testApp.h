@@ -65,6 +65,8 @@ class testApp : public ofBaseApp{
     ofImage     img;
     ofTexture   text;
     
+    ofFbo   fboAnaglyph;
+    
     int xRes;
     int yRes;
     
