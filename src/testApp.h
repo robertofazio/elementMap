@@ -99,6 +99,8 @@ class testApp : public ofBaseApp{
     
     ofTrueTypeFont          verdana14;
     ofTrueTypeFont          verdana8;
+    
+    ofImage                 logo;
 
     // Save/load xml /thanks to Mauro!)
 	ofxXmlSettings		XML;

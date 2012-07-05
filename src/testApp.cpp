@@ -81,8 +81,11 @@ void testApp::setup()
     
     bFullscreen=false;
     
+    
+    
     //------------WARP STUFF BEGIN ----------------
     
+
     //set texture w & h
     width=outputResolutionX;
     height=outputResolutionY;
@@ -107,6 +110,17 @@ void testApp::setup()
     quadWarp.setTopRightCornerPosition(mainVertici[1]);        
     quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
+    
+    //auto-load last warp settings on startup
+    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+    createGrid(xRes, yRes);
+    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+    quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
+    quadWarp.setTopRightCornerPosition(mainVertici[1]);        
+    quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
+    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+
+    
     comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 
     //------------WARP STUFF END ----------------
@@ -120,6 +134,10 @@ void testApp::setup()
     
 	verdana14.setLineHeight(12.0f);
 	verdana14.setLetterSpacing(1.037);    
+    
+    
+    logo.loadImage("./images/logo.jpg");
+    
 }
 
 //--------------------------------------------------------------
@@ -262,7 +280,14 @@ void testApp::draw()
             }
             
         }
+
+        logo.draw(1159, 550, 100, 100);
         
+//        ofPushStyle();
+//        ofSetColor(ofColor :: white);
+//        ofFill();
+//        ofRect(margin, 620, 200, 200);
+//        ofPopStyle();
     }
     
 }
