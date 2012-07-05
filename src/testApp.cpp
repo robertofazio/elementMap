@@ -204,16 +204,21 @@ void testApp::draw()
                 ofSetLineWidth(2);
                 ofNoFill();
                 
-                if (vertici[mainIndex[corner]].z==0) {
+                if (vertici[mainIndex[corner]].z==0 || bSposta) {
                     ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-24,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+24);   
                     ofLine(screenPos[mainIndex[corner]].x-24,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+24,screenPos[mainIndex[corner]].y);
                 }
                 else 
                 {
-                    ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
-                    ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
+                    if (!bSposta)
+                    {
+                        ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
+                        ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
+                    }
                     ofSetColor(255,0,0);
                 }
+                if (bSposta) ofSetColor(255,0,0);
+
                 ofRect(screenPos[mainIndex[corner]].x-12, screenPos[mainIndex[corner]].y-12, 24, 24);  
                 ofPopStyle();
             }
@@ -809,13 +814,15 @@ void testApp::drawGrid() {
     
     //draw Points
     for (int point=0; point<nPoints; point++) {
+        if (!(point== mainIndex[0] || point== mainIndex[1] || point== mainIndex[2] || point== mainIndex[3]))
+        {
         ofPushStyle();
         if (vertici[point].z==1) ofSetColor(255,0,0,255);
         else ofSetColor(0,255,0,255);
         ofFill();
         ofCircle(vertici[point].x, vertici[point].y, 5, 5);
         ofPopStyle();
-
+        }
     }
 }
 
