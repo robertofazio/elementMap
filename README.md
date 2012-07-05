@@ -3,7 +3,7 @@ element.map
 
 updated on 05/07/2012
 
-differenze rispetto alle branch "test":
+differenze rispetto alla branch "test":
 
 - fullscreen funzionante (a discapito di qualche fps...)
 - interfaccia player video: play, pause e rewind
