@@ -178,30 +178,11 @@ void testApp::draw()
         ofSetColor(255, 255, 255);
         //load texture from mixer fbo 
 
-        //if anaglyph mode: prepare anaglyph texture!
-        if (elemMix.outputStereoMode==0)
-        {
+        if(elemMix.getOutputStereoMode() == ELM_STEREO_ANAGLYPH)
+            text=elemMix.fboAnagliph.getTextureReference();
+        else
+            text=elemMix.fboLeft.getTextureReference();
 
-            fboAnaglyph.begin();
-            ofClear(0,0,0,0);
-            
-            // left
-            glColorMask(true, false, false, false);
-            ofSetColor(255, 255, 255);
-            elemMix.fboLeft.draw(0,0,width,height);
-            
-            // right
-            glColorMask(false, true, true, false);
-            ofSetColor(255, 255, 255);
-            elemMix.fboRight.draw(0,0,width,height);
-            
-            glColorMask(true, true, true, true);
-            fboAnaglyph.end();
-            
-            text=fboAnaglyph.getTextureReference();
-        }
-        
-        else text=elemMix.fboLeft.getTextureReference();
         
         mat = quadWarp.getMatrix();
         //dai vertici del warp ricavo la matrice per 

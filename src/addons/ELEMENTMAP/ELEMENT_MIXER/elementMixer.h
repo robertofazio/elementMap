@@ -22,6 +22,7 @@ class elementMixer : public element
 	elementMixer(){};
 	void update();
 	void setup(int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name);
+    int  getOutputStereoMode();
 	void setOutputStereoMode(int _stereoMode);
 	void drawIntoFbo(bool _drawMonoOrStereo);
 	void drawOutput(int _x, int _y,int _width, int _height);
@@ -30,7 +31,7 @@ class elementMixer : public element
 	ofTexture& getLeftTexture(){};
 	ofTexture& getRightTexture(){};
 	
-//    ofFbo   fboAnaglyph;
+
     
 	void drawQuadGeometry();
 	void drawInfo();
@@ -42,9 +43,9 @@ class elementMixer : public element
 	bool				useNoShader;
     void                applyFX();
     void                addFX(int type);       // Mauro
+    ofFbo               fboAnagliph;
     void drawPreview(int x, int y, int w, int h);
 	
-    int					outputStereoMode;
     
     
     private :
@@ -57,6 +58,7 @@ class elementMixer : public element
 
 	int					blendMode;
 	ofShader			shader;
+    int					outputStereoMode;
 
 	
 	// used to help on drawing ...

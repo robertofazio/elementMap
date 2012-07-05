@@ -27,8 +27,8 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,element** _ele
 
 	this->init(5,_width,_height,GL_RGBA,_name,this->getIsStereo());
 	
-//    fboAnaglyph.allocate(_width, _height, GL_RGBA);
-    
+    fboAnagliph.allocate(_width ,_height, GL_RGBA);
+        
     sceneElements = _elements;
 	numOfElements = _numOfElements;
 	elementsOrder = _elementsOrder;
@@ -119,13 +119,32 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                                 }
 
-               fboRight.end();
-            
-                
-                }
-        
+                fboRight.end();
+            }
 	}
+    
+    if(outputStereoMode == ELM_STEREO_ANAGLYPH)
+    {
+        fboAnagliph.begin();
+        //     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        // left
+        glColorMask(true, false, false, false);
+        ofSetColor(255, 255, 255);
+        fboLeft.draw(0,0);
+        
+        
+        // right
+        glColorMask(false, true, true, false);
+        ofSetColor(255, 255, 255);
+        fboRight.draw(0, 0);
+        
+        glColorMask(true, true, true, true);
+        
+        fboAnagliph.end();
+    }
 }
+
 
 
 
@@ -173,23 +192,9 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				
                 
 				break;
-                
 			case ELM_STEREO_ANAGLYPH:
- 
-				// left
-				glColorMask(true, false, false, false);
-				//setOpacityColor();
-                ofSetColor(255, 255, 255);
-				fboLeft.draw(_x,_y,_width,_height);
-				
-				// right
-				glColorMask(false, true, true, false);
-//				setOpacityColor();
-				ofSetColor(255, 255, 255);
-                fboRight.draw(_x,_y,_width,_height);
-				
-				glColorMask(true, true, true, true);
-				
+                ofSetColor(255, 255, 255, ofMap(this->getOpacity(), 0, 1, 0, 255));
+                fboAnagliph.draw(_x, _y, _width, _height);
 				break;
 			default:
 				break;
@@ -198,31 +203,7 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 	}
 }
 
-/*
- 
- Cose in this function works for FX... now i remove and we add better code later
- void elementMixer::drawPreview(int x, int y, int w, int h)
- {
- for(int a = 0; a < effects.size(); a++)
- {
- if(effects[a]->getIsActive())
- {
- applyFX();
- setOpacityColor();
- effects[a]->finalFbo.draw(x, y, w, h);
- }
- else
- effects[a]->getLeftTexture().draw(x, y, w, h);
- if(effects[a]->getGUIVisible())
- {
- effects[a]->drawGUI(x, y, w, h);
- }
- }
- 
- if(effects.size() == 0)
- fboLeft.draw(x, y, w, h);
- }
- */
+
 
 //-----------------------------------------------------------------
 void elementMixer::drawInfo()
@@ -262,11 +243,20 @@ void elementMixer::drawQuadGeometry()
 void elementMixer::setOutputStereoMode(int _stereoMode)
 {
 	outputStereoMode = _stereoMode;
-//	if((outputStereoMode == ELM_STEREO_ANAGLYPH) || (outputStereoMode == ELM_STEREO_MONO))
-//		setIsStereo(false);
-//	else
-//		setIsStereo(true);
+	
+    if((outputStereoMode == ELM_STEREO_ANAGLYPH) || (outputStereoMode == ELM_STEREO_MONO))
+		setIsStereo(false);
+	else
+		setIsStereo(true);
 }
+
+
+//-----------------------------------------------------------------
+int elementMixer::getOutputStereoMode()
+{
+    return outputStereoMode;
+}
+
 
 //-----------------------------------------------------------------
 void elementMixer::updateOpacity()
