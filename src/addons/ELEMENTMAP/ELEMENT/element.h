@@ -47,8 +47,11 @@ class element : public ofNode , public elementUIBase
 	string			getElementName();
 	int				getBlendingMode();
     
-    ofTrueTypeFont          verdana8;
-    ofTrueTypeFont          verdana10;
+//    ofTrueTypeFont          verdana8;
+//    ofTrueTypeFont          verdana10;
+    
+    ofTrueTypeFont          georgiaitalic10;
+    ofTrueTypeFont          georgiaitalic8;
 	
 	ofFbo			fboLeft;
 	ofFbo			fboRight;

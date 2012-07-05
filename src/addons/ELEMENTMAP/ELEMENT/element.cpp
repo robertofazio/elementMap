@@ -51,14 +51,15 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 
 void element::initFont()
 {
-    verdana8.loadFont("verdana.ttf", 9);
-    verdana10.loadFont("verdana.ttf", 10);
     
-	verdana8.setLineHeight(12.0f);
-	verdana8.setLetterSpacing(1.037);
-	
-    verdana10.setLineHeight(12.0f);
-	verdana10.setLetterSpacing(1.037);
+    georgiaitalic8.loadFont("georgiai.ttf", 8);
+    georgiaitalic10.loadFont("georgiai.ttf", 10);
+    
+	georgiaitalic8.setLineHeight(12.0f);
+	georgiaitalic8.setLetterSpacing(1.037);
+    
+	georgiaitalic10.setLineHeight(12.0f);
+	georgiaitalic10.setLetterSpacing(1.037);   
 }
 
 void element::drawGraphic(int x, int y, int w, int h)
@@ -69,19 +70,19 @@ void element::drawGraphic(int x, int y, int w, int h)
         case 0:
             break;
         case 1:
-            verdana10.drawString("element.video", x , y + 11);
-            verdana10.drawString("element.video Preview", x + 448, y + 11);
+            georgiaitalic10.drawString("element.video", x , y + 11);
+            georgiaitalic10.drawString("element.video Preview", x + 448, y + 11);
             break;
         case 2:
-            verdana10.drawString("element.image", x , y + 11);
-            verdana10.drawString("element.image Preview", x + 448, y + 11);
+            georgiaitalic10.drawString("element.image", x , y + 11);
+            georgiaitalic10.drawString("element.image Preview", x + 448, y + 11);
             break;
         case 3:
-            verdana10.drawString("element.syphon", x , y + 11);
-            verdana10.drawString("element.syphon Preview", x + 448, y + 11);
+            georgiaitalic10.drawString("element.syphon", x , y + 11);
+            georgiaitalic10.drawString("element.syphon Preview", x + 448, y + 11);
             break;
         case 5:
-            verdana10.drawString("element.Map Main Preview", x , y);
+            georgiaitalic10.drawString("element.Map Main Preview", x , y);
             break;
     }
     
@@ -94,10 +95,10 @@ void element::drawGraphic(int x, int y, int w, int h)
         if(this->isStereo)
             this->drawRight(x + w + 4, y, w, h);
         
-        verdana8.drawString("Left", x , y + h+ 14);
+        georgiaitalic8.drawString("Left", x , y + h+ 14);
         
         if(this->isStereo)
-            verdana8.drawString("Right", x + w + 4 , y + h+ 14);
+            georgiaitalic8.drawString("Right", x + w + 4 , y + h+ 14);
         
         ofPushMatrix();
         ofTranslate(450, 0);

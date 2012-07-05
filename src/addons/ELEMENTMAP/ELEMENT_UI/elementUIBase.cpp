@@ -85,7 +85,7 @@ void elementUIBase::setupUI(element* _parentElement)
     //all elements except for mixer need blend modes selection
 	  
         marginLeft = 5;
-        listBlendModes = new ofxUIDropDownList(marginLeft - 8, 120, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes = new ofxUIDropDownList(marginLeft, 120, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);

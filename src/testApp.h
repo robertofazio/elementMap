@@ -97,8 +97,11 @@ class testApp : public ofBaseApp{
     bool        bPaused;
 
     
-    ofTrueTypeFont          verdana14;
-    ofTrueTypeFont          verdana8;
+//    ofTrueTypeFont          verdana14;
+//    ofTrueTypeFont          verdana8;
+
+    ofTrueTypeFont          georgiaitalic14;
+    ofTrueTypeFont          georgiaitalic8;
     
     ofImage                 logo;
 
