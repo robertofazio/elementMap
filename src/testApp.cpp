@@ -106,7 +106,7 @@ void testApp::setup()
     quadWarp.setTopRightCornerPosition(mainVertici[1]);        
     quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n's'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n \nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 
     //------------WARP STUFF END ----------------
 
@@ -300,6 +300,22 @@ void testApp::keyPressed(int key)
     
         switch (key) {
 
+            case 's':
+                saveXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+                cout << "Xml Saved" << endl;
+                break;
+
+            case 'l':
+                loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+                createGrid(xRes, yRes);
+                loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+                quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
+                quadWarp.setTopRightCornerPosition(mainVertici[1]);        
+                quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
+                quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+                break;
+
+                
             case ' ':
                 if (elemV1.leftChannelPlayer.isPlaying()) 
                 {
@@ -329,7 +345,7 @@ void testApp::keyPressed(int key)
                 quadWarp.toggleShow();
                 break;
                 
-            case 's':
+            case 't':
                 bSposta=!bSposta;
                 if (bSposta) 
                 {
@@ -826,3 +842,129 @@ void testApp::drawGrid() {
     }
 }
 
+
+
+//--------------------------------------------------------------
+void testApp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
+{
+    XML.addTag("warp");
+    XML.pushTag("warp");
+    XML.addValue("xRes", resX);
+    XML.addValue("yRes", resY);
+    
+    XML.addTag("vertici");
+    XML.pushTag("vertici");
+    XML.addValue("totVertici", totVertici);
+    for(int a = 0; a < totVertici; a++)
+    {
+        XML.addValue("values_" + ofToString(a) + "_x", vertici[a].x);
+        XML.addValue("values_" + ofToString(a) + "_y", vertici[a].y);
+        XML.addValue("values_" + ofToString(a) + "_z", vertici[a].z);
+    }
+    XML.popTag();
+    
+    XML.addTag("textVert");
+    XML.pushTag("textVert");
+    XML.addValue("totTextVert", totTextVert);
+    for(int a = 0; a < totTextVert; a++)
+    {
+        XML.addValue("values_" + ofToString(a) + "_x", textVert[a].x);
+        XML.addValue("values_" + ofToString(a) + "_y", textVert[a].y);
+        XML.addValue("values_" + ofToString(a) + "_z", textVert[a].z);
+    }
+    XML.popTag();
+    
+    XML.addTag("screenPos");
+    XML.pushTag("screenPos");
+    XML.addValue("totScreenPos", totScreenPos);
+    for(int a = 0; a < totScreenPos; a++)
+    {
+        XML.addValue("values_" + ofToString(a) + "_x", screenPos[a].x);
+        XML.addValue("values_" + ofToString(a) + "_y", screenPos[a].y);
+        XML.addValue("values_" + ofToString(a) + "_z", screenPos[a].z);
+    }
+    XML.popTag();
+    
+    XML.addTag("mainVertici");
+    XML.pushTag("mainVertici");
+    XML.addValue("totMainVertici", totMainVertici);
+    for(int a = 0; a < totMainVertici; a++)
+    {
+        XML.addValue("values_" + ofToString(a) + "_x", mainVertici[a].x);
+        XML.addValue("values_" + ofToString(a) + "_y", mainVertici[a].y);
+        XML.addValue("values_" + ofToString(a) + "_z", mainVertici[a].z);
+    }
+    XML.popTag();
+    
+    XML.addTag("mainIndex");
+    XML.pushTag("mainIndex");
+    XML.addValue("totMainIndex", totMainIndex);
+    for(int a = 0; a < totMainIndex; a++)
+        XML.addValue("values_" + ofToString(a), mainIndex[a]);
+    XML.popTag();
+    
+    XML.popTag();
+    XML.saveFile("elementWarp.xml");
+}
+
+
+
+//--------------------------------------------------------------
+void testApp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
+{
+    ofxXmlSettings tempXML;
+    tempXML.loadFile("elementWarp.xml");
+    
+    tempXML.pushTag("warp");
+    resX = tempXML.getValue("xRes", 0);
+    resY = tempXML.getValue("yRes", 0);
+    
+    tempXML.pushTag("vertici");
+    totVertici = tempXML.getValue("totVertici", 0);
+    for(int a = 0; a < totVertici; a++)
+    {
+        vertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+        vertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+        vertici[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+    }
+    tempXML.popTag();
+    
+    
+    tempXML.pushTag("textVert");
+    totTextVert = tempXML.getValue("totTextVert", 0);
+    for(int a = 0; a < totTextVert; a++)
+    {
+        textVert[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+        textVert[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+        textVert[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+    }
+    tempXML.popTag();
+    
+    tempXML.pushTag("screenPos");
+    totScreenPos = tempXML.getValue("totScreenPos", 0);
+    for(int a = 0; a < totTextVert; a++)
+    {
+        screenPos[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+        screenPos[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+        screenPos[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+    }
+    tempXML.popTag();
+    
+    tempXML.pushTag("mainVertici");
+    totMainVertici = tempXML.getValue("totMainVertici", 0);
+    for(int a = 0; a < totMainVertici; a++)
+    {
+        mainVertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+        mainVertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+        mainVertici[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+    }
+    tempXML.popTag();
+    
+    tempXML.pushTag("mainIndex");
+    totMainIndex = tempXML.getValue("totMainIndex", 0);
+    for(int a = 0; a < totMainIndex; a++)
+        mainIndex[a] = tempXML.getValue("values_" + ofToString(a), 0);
+    tempXML.popTag();
+    
+    tempXML.popTag();
+}

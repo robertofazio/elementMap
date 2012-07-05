@@ -100,5 +100,10 @@ class testApp : public ofBaseApp{
     ofTrueTypeFont          verdana14;
     ofTrueTypeFont          verdana8;
 
+    // Save/load xml /thanks to Mauro!)
+	ofxXmlSettings		XML;
+    void                saveXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex);
+    void                loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex);
+
 	
 };

@@ -2340,9 +2340,9 @@
     s = 0;
 }</string>
 		</dict>
-		<real>363161611.727584</real>
-		<string>{20144, 1597}</string>
-		<string>{20796, 0}</string>
+		<real>363162608.28102899</real>
+		<string>{22, 1713}</string>
+		<string>{10495, 0}</string>
 		<string>testApp::keyPressed(int key)</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
@@ -6181,19 +6181,19 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>465</integer>
+					<integer>216</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>466</integer>
+					<integer>218</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>467</integer>
+					<integer>217</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>468</integer>
+					<integer>219</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -6216,9 +6216,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>363139680.48492998</real>
-		<string>{1145, 899}</string>
-		<string>{1953, 0}</string>
+		<real>363161745.05288202</real>
+		<string>{1323, 1272}</string>
+		<string>{2079, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6614,9 +6614,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>363161611.72521299</real>
-		<string>{20144, 1597}</string>
-		<string>{20796, 0}</string>
+		<real>363162608.27772301</real>
+		<string>{22, 1713}</string>
+		<string>{10495, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8221,7 +8221,7 @@
 				<integer>672</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>363161395.55040199</real>
+			<real>363162556.96322799</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -8232,7 +8232,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 08:09</string>
+		<string>Today at 08:29</string>
 		<integer>234</integer>
 		<string>openFrameworks</string>
 		<dict>
@@ -8334,7 +8334,7 @@
 				<integer>681</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/addons/ELEMENTMAP/ELEMENT_MIXER/elementMixer.cpp</string>
+		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/testApp.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8352,7 +8352,7 @@
 				<integer>683</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/addons/ELEMENTMAP/ELEMENT_VIDEO/elementVideo.cpp</string>
+		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/addons/ELEMENTMAP/ELEMENT_MIXER/elementMixer.cpp</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8370,7 +8370,7 @@
 				<integer>685</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/addons/ELEMENTMAP/ELEMENT_VIDEO/elementVideo.h</string>
+		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/addons/ELEMENTMAP/ELEMENT_VIDEO/elementVideo.cpp</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8388,7 +8388,7 @@
 				<integer>687</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/testApp.h</string>
+		<string>file://localhost/Developer/Library/openFrameworks_0071/apps/element/element/src/addons/ELEMENTMAP/ELEMENT_VIDEO/elementVideo.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
