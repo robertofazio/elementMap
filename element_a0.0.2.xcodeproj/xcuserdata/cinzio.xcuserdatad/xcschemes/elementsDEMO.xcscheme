@@ -35,7 +35,10 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release">
-      <BuildableProductRunnable>
+      <PathRunnable
+         FilePath = "/Developer/Library/openFrameworks_0071/apps/element/element/bin/elementsDEMO.app">
+      </PathRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
@@ -43,7 +46,7 @@
             BlueprintName = "elementsDEMO"
             ReferencedContainer = "container:element_a0.0.2.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

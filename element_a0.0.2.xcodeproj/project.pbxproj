@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27C14C1115AB0E8F0013C8FC /* elementWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C14C0F15AB0E8F0013C8FC /* elementWarp.cpp */; };
 		27CCEB1F15A30B4800CBE171 /* ElementFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB1D15A30B4800CBE171 /* ElementFX.cpp */; };
 		27CCEB2315A30B5E00CBE171 /* ElementFxMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB2115A30B5E00CBE171 /* ElementFxMask.cpp */; };
 		27CCEB2815A30E2C00CBE171 /* ofxQuadWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB2615A30E2C00CBE171 /* ofxQuadWarp.cpp */; };
@@ -87,6 +88,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		27C14C0F15AB0E8F0013C8FC /* elementWarp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = elementWarp.cpp; sourceTree = "<group>"; };
+		27C14C1015AB0E8F0013C8FC /* elementWarp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elementWarp.h; sourceTree = "<group>"; };
 		27CCEB1D15A30B4800CBE171 /* ElementFX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementFX.cpp; path = ELEMENT_FX/ElementFX.cpp; sourceTree = "<group>"; };
 		27CCEB1E15A30B4800CBE171 /* ElementFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ElementFX.h; path = ELEMENT_FX/ElementFX.h; sourceTree = "<group>"; };
 		27CCEB2115A30B5E00CBE171 /* ElementFxMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementFxMask.cpp; path = ELEMENT_MASK/ElementFxMask.cpp; sourceTree = "<group>"; };
@@ -318,6 +321,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27C14C0E15AB0E8F0013C8FC /* ELEMENT_WARP */ = {
+			isa = PBXGroup;
+			children = (
+				27C14C0F15AB0E8F0013C8FC /* elementWarp.cpp */,
+				27C14C1015AB0E8F0013C8FC /* elementWarp.h */,
+			);
+			path = ELEMENT_WARP;
+			sourceTree = "<group>";
+		};
 		27CCEB1C15A30A9500CBE171 /* ELEMENT_FX */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,6 +647,7 @@
 		B01FA7DC1574DFE4007335D9 /* ELEMENTMAP */ = {
 			isa = PBXGroup;
 			children = (
+				27C14C0E15AB0E8F0013C8FC /* ELEMENT_WARP */,
 				27CCEB2015A30B4D00CBE171 /* ELEMENT_MASK */,
 				27CCEB1C15A30A9500CBE171 /* ELEMENT_FX */,
 				B0D7D26B158B839100528FBD /* ELEMENT_UI */,
@@ -1073,6 +1086,7 @@
 				27E193B515A4BD1C0005FCD0 /* ofxCvHaarFinder.cpp in Sources */,
 				27E193B615A4BD1C0005FCD0 /* ofxCvImage.cpp in Sources */,
 				27E193B715A4BD1C0005FCD0 /* ofxCvShortImage.cpp in Sources */,
+				27C14C1115AB0E8F0013C8FC /* elementWarp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
