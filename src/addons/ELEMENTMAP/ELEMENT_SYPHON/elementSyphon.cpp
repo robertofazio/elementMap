@@ -41,6 +41,7 @@ void elementSyphon::addFX(int type)       // Mauro
     }    
 }
 
+/*
 void elementSyphon::drawPreview(int x, int y, int w, int h)
 {
 //    for(int a = 0; a < effects.size(); a++)
@@ -60,6 +61,7 @@ void elementSyphon::drawPreview(int x, int y, int w, int h)
   //  if(effects.size() == 0)
     //    drawLeft(x,y, w, h);
 }
+ */
 
 void elementSyphon::applyFX()
 {
@@ -84,7 +86,7 @@ void elementSyphon::drawGraphic(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementSyphon::drawLeft(int x, int y, int w, int h)
 {
-    if (isActive)    syphonClient.draw(x,y,w,h);
+	syphonClient.draw(x,y,w,h);
 }
 
 
@@ -92,22 +94,21 @@ void elementSyphon::drawLeft(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementSyphon::drawRight(int x, int y, int w, int h)
 {
-	if (isActive) syphonClient.draw(x,y,w,h);	
+	syphonClient.draw(x,y,w,h);	
 }
 
 //-----------------------------------------------------------------
 ofTexture& elementSyphon::getLeftTexture()
 {
-        syphonClient.bind();
-        return (syphonClient.getTextureReference());   
-
+	syphonClient.bind();
+	return (syphonClient.getTextureReference());
 }
 
 //-----------------------------------------------------------------
 ofTexture& elementSyphon::getRightTexture()
 {
-        syphonClient.bind();
-        return (syphonClient.getTextureReference());	    
+	syphonClient.bind();
+	return (syphonClient.getTextureReference());	
 }
 
 

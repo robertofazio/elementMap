@@ -37,11 +37,12 @@ elementUIBase::elementUIBase()
 	blendingNames.push_back("Bor");
 	blendingNames.push_back("Luminosity");
 	
-	outputModesNames.push_back("OPENGL");
     outputModesNames.push_back("ANAGLYPH");
+    outputModesNames.push_back("MONO");
+//	  outputModesNames.push_back("OPENGL");
 //    outputModesNames.push_back("LEFTRIGHT");
 //    outputModesNames.push_back("TOPBOTTOM");    
-    outputModesNames.push_back("MONO");
+
 	
 }
 //--------------------------------------------------------------
@@ -84,7 +85,7 @@ void elementUIBase::setupUI(element* _parentElement)
     //all elements except for mixer need blend modes selection
 	  
         marginLeft = 5;
-        listBlendModes = new ofxUIDropDownList(marginLeft - 8, 120, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes = new ofxUIDropDownList(marginLeft, 120, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
@@ -97,8 +98,8 @@ void elementUIBase::setupUI(element* _parentElement)
 	if (type==5)
     {
         marginLeft = 5;
-        posY = 470;
-        UI->addWidget(new ofxUIFPS(marginLeft, posY, OFX_UI_FONT_SMALL));
+        posY = 450;
+        //UI->addWidget(new ofxUIFPS(marginLeft, posY, OFX_UI_FONT_SMALL));
         UI->addWidget(new ofxUIToggle(marginLeft, posY += 20, 10,10,parentElement->getIsActive(),"Test Pattern"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Visible"));
         
@@ -109,24 +110,26 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(spacer);
         
         //prima colonna: video
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 10, 10, 10,parentElement->getIsActive(),"Play"));
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Pause"));
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Stop"));
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Rew"));
+        UI->addWidget(new ofxUIButton(marginLeft,posY += 10, 10, 10,false, "Play"));
+        UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Pause"));
+//        UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Stop"));
+        UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Rew"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Video loop"));
         
         //seconda colonna: audio
         posY -= 90;
-        UI->addWidget(new ofxUIToggle(marginLeft + 100, posY+=10, 10, 10, parentElement->getIsActive(),"Sound on/off"));
-        UI->addWidget(new ofxUISlider(marginLeft + 100, posY+=30, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
+        UI->addWidget(new ofxUIToggle(marginLeft + 150, posY+=30, 10, 10, parentElement->getIsActive(),"Sound on/off"));
+        UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
+
         
-        
-		// TODO we need to implement case in mixer ... 
-		//UI->addWidgetDown(new ofxUIToggle(10,10,parentElement->getSwapLeftRight(),"Swap Left/Right"));
-		
-      //  listOutputModes = new ofxUIDropDownList(100, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
-      //  listOutputModes->setAutoClose(true);
-      //  UI->addWidgetDown(listOutputModes);
+        listOutputModes = new ofxUIDropDownList(marginLeft + 250, posY-=80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes->setDrawBack(true);
+        listOutputModes->setDrawOutlineHighLight(false);
+        listOutputModes->setDrawPaddingOutline(false);
+        listOutputModes->setPadding( 0 );
+        listOutputModes->setDrawFill(true);
+        listOutputModes->setAutoClose(true);
+        UI->addWidget(listOutputModes);
     }
     
     if (type!=5) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 
@@ -138,7 +141,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 {	
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
-	cout << "got event from: " << name << endl; 
+//	cout << "got event from: " << name << endl; 
 	
 	if(e.widget->getName()=="Opacity")
 	{
@@ -168,14 +171,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         parentElement->setDrawInStereo(toggle->getValue());
         }
-	else if( e.widget->getParent()->getName()=="Swap Left/Right")
-	{
-		// TODO we need to implement case in mixer ... 
-		//ofxUIToggle *toggleSwap = (ofxUIToggle *) e.widget;
-		//parentElement->setSwapLeftRight(toggleSwap->getValue());
-	}
-    
-	else if( e.widget->getParent()->getName()=="Blending Mode")
+    else if( e.widget->getParent()->getName()=="Blending Mode")
 	{
 		for(int i=0;i<blendingNames.size();i++)
 		{
@@ -197,13 +193,5 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	}
 	
 }
-
-////--------------------------------------------------------------
-//void elementUIBase::setGUIOrigin(int _x,int _y)
-//{
-//	xPos = _x;
-//	yPos = _y;
-//	
-//}
 
 

@@ -15,7 +15,8 @@
 #include "ElementFX.h"
 #include "ElementFXMask.h"
 
-#include "ofxQuadWarp.h"
+#include "elementWarp.h"
+
 
 class testApp : public ofBaseApp{
 
@@ -44,7 +45,6 @@ class testApp : public ofBaseApp{
 	int						numOfElements;
 	
 	GLboolean				isStereoCapable;
-		
 	
 	int						outputResolutionX;
 	int						outputResolutionY;
@@ -55,48 +55,24 @@ class testApp : public ofBaseApp{
     
     bool                    bFullscreen;
     
+    bool                    bSpeedUp;
     
-    //TEMPORARY SOLUTION: WARPING IS ONLY ACTIVE IN FULLSCREEN:
-    //warping vars and functions:
-    
-    void createGrid(int _xRes, int _yRes);
-    void drawGrid();
-    
-    ofImage     img;
     ofTexture   text;
     
-    int xRes;
-    int yRes;
-    
-    int nPoints;
-    int nQuads;
-    
-    int width;
-    int height;
-    
-    float zoomRatioX;
-    float zoomRatioY;
-    
-    ofPoint vertici[MAX_POINTS];
-    ofPoint texVert[MAX_POINTS];
-    ofPoint screenPos[MAX_POINTS];
-    ofPoint mainVertici[4];
-    int     mainIndex[4];
-    
-    bool bWarpActive;
-    bool bSposta;
-    
-    
-    //ofxQuadWarp
-    ofxQuadWarp quadWarp;
-    ofFbo       qwFbo;
-    ofMatrix4x4 mat;
+    ofFbo   fboAnaglyph;
+
     string      comandi;
     
+    elementWarp mainOutputWarp;
 
+    bool        bPaused;
+
+
+    ofTrueTypeFont          georgiaitalic14;
+    ofTrueTypeFont          georgiaitalic8;
     
-    
-    ofTrueTypeFont          myFont;
+    ofImage                 logo;
+
 
 	
 };

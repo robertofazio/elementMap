@@ -1,0 +1,34 @@
+<controls>
+    <SliderInt_ball1_X_>
+        <name>ball1_X :</name>
+        <value>-456</value>
+    </SliderInt_ball1_X_>
+    <SliderInt_ball1_Z_>
+        <name>ball1_Z :</name>
+        <value>-3872</value>
+    </SliderInt_ball1_Z_>
+    <SliderInt_ball1_Size_>
+        <name>ball1_Size :</name>
+        <value>632</value>
+    </SliderInt_ball1_Size_>
+    <SliderInt_ball2_X_>
+        <name>ball2_X :</name>
+        <value>168</value>
+    </SliderInt_ball2_X_>
+    <SliderInt_ball2_Z_>
+        <name>ball2_Z :</name>
+        <value>-560</value>
+    </SliderInt_ball2_Z_>
+    <SliderInt_ball2_Size_>
+        <name>ball2_Size :</name>
+        <value>160</value>
+    </SliderInt_ball2_Size_>
+    <SliderFloat_convergence_>
+        <name>convergence :</name>
+        <value>2112</value>
+    </SliderFloat_convergence_>
+    <SliderFloat_eye_separation_>
+        <name>eye separation :</name>
+        <value>14.4</value>
+    </SliderFloat_eye_separation_>
+</controls>
