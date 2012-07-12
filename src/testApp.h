@@ -55,6 +55,8 @@ class testApp : public ofBaseApp{
     
     bool                    bFullscreen;
     
+    bool                    bSpeedUp;
+    
     ofTexture   text;
     
     ofFbo   fboAnaglyph;

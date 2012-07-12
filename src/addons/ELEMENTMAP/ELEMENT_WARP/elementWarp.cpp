@@ -25,6 +25,7 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     createGrid(xRes, yRes);
     //start with active warp and transalte non-active
     bWarpActive=true;
+    bViewGrid=true;
     bSposta=false;
     bHoldSelection=false;
 
@@ -86,7 +87,7 @@ void elementWarp::warp(ofTexture _text)
     }
     
     glDisable(text.getTextureData().textureTarget);
-    if (bWarpActive) drawGrid();        
+    if (bWarpActive&&bViewGrid) drawGrid();        
     glPopMatrix();
     
     //draw special markers for quad warp vertices
@@ -100,8 +101,8 @@ void elementWarp::warp(ofTexture _text)
             ofNoFill();
             
             if (vertici[mainIndex[corner]].z==0 || bSposta) {
-                ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-24,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+24);   
-                ofLine(screenPos[mainIndex[corner]].x-24,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+24,screenPos[mainIndex[corner]].y);
+                ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-120,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+120);   
+                ofLine(screenPos[mainIndex[corner]].x-120,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+120,screenPos[mainIndex[corner]].y);
             }
             else 
             {
@@ -114,7 +115,8 @@ void elementWarp::warp(ofTexture _text)
             }
             if (bSposta) ofSetColor(255,0,0);
             
-            ofRect(screenPos[mainIndex[corner]].x-12, screenPos[mainIndex[corner]].y-12, 24, 24);  
+            ofSetLineWidth(10);
+            ofRect(screenPos[mainIndex[corner]].x-40, screenPos[mainIndex[corner]].y-40, 80, 80);  
             ofPopStyle();
         }
     }
@@ -388,21 +390,59 @@ void elementWarp::resetCorners()
     if (bWarpActive)
     {
         mainVertici[0]=ofPoint(0,0);            //top left
-    mainVertici[1]=ofPoint(width,0);        //top right
-    mainVertici[2]=ofPoint(width,height);   //bottom right
-    mainVertici[3]=ofPoint(0,height);       //bottom left
-    quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
-    quadWarp.setTopRightCornerPosition(mainVertici[1]);        
-    quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
-    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
+        mainVertici[1]=ofPoint(width,0);        //top right
+        mainVertici[2]=ofPoint(width,height);   //bottom right
+        mainVertici[3]=ofPoint(0,height);       //bottom left
+        quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
+        quadWarp.setTopRightCornerPosition(mainVertici[1]);        
+        quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
+        quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
     }
 }
 
 
 
+//--------------------------------------------------------------
+void elementWarp::resetPoint()
+{
+    if (bWarpActive)
+    {
+        
+        for (int i=0; i<nPoints; i++) {
+            
+            if (vertici[i].z==1)
+            {
+                //mi comporto diversamente se devo resettare il warp esterno
+                if (i==mainIndex[0]) 
+                { 
+                    mainVertici[0]=ofPoint(0,0);            //top left
+                    quadWarp.setTopLeftCornerPosition(mainVertici[0]);
+                }
+                else if (i==mainIndex[1]) 
+                { 
+                    mainVertici[1]=ofPoint(width,0);        //top right
+                    quadWarp.setTopRightCornerPosition(mainVertici[1]);
+                }
+                else if (i==mainIndex[2]) 
+                { 
+                    mainVertici[2]=ofPoint(width,height);   //bottom right
+                    quadWarp.setBottomRightCornerPosition(mainVertici[2]);
+                }
+                else if (i==mainIndex[3]) 
+                { 
+                    mainVertici[3]=ofPoint(0,height);       //bottom left
+                    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+                }
+                
+    
+                else vertici[i]=texVert[i];
+            }
+        }
+    }
+}
 
 //--------------------------------------------------------------
-void elementWarp::pointUP()
+void elementWarp::pointUP(int _delta)
 {
     if (bWarpActive)
     {
@@ -414,27 +454,27 @@ void elementWarp::pointUP()
             //se sono sul rettangolo esterno:
             if (i==mainIndex[0]) 
             { 
-                mainVertici[0].y-=1;
+                mainVertici[0].y-=_delta;
                 quadWarp.setTopLeftCornerPosition(mainVertici[0]);
             }
             else if (i==mainIndex[1]) 
             { 
-                mainVertici[1].y-=1;
+                mainVertici[1].y-=_delta;
                 quadWarp.setTopRightCornerPosition(mainVertici[1]);
             }
             else if (i==mainIndex[2]) 
             { 
-                mainVertici[2].y-=1;
+                mainVertici[2].y-=_delta;
                 quadWarp.setBottomRightCornerPosition(mainVertici[2]);
             }
             else if (i==mainIndex[3]) 
             { 
-                mainVertici[3].y-=1;
+                mainVertici[3].y-=_delta;
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
             //se sono in griglia:
-            else vertici[i].y-=1;
+            else vertici[i].y-=_delta;
             
         }
         }
@@ -443,7 +483,7 @@ void elementWarp::pointUP()
 
 
 //--------------------------------------------------------------
-void elementWarp::pointDOWN()
+void elementWarp::pointDOWN(int _delta)
 {
     if (bWarpActive)
     {
@@ -454,27 +494,27 @@ void elementWarp::pointDOWN()
             //se sono sul rettangolo esterno:
             if (i==mainIndex[0]) 
             { 
-                mainVertici[0].y+=1;
+                mainVertici[0].y+=_delta;
                 quadWarp.setTopLeftCornerPosition(mainVertici[0]);
             }
             else if (i==mainIndex[1]) 
             { 
-                mainVertici[1].y+=1;
+                mainVertici[1].y+=_delta;
                 quadWarp.setTopRightCornerPosition(mainVertici[1]);
             }
             else if (i==mainIndex[2]) 
             { 
-                mainVertici[2].y+=1;
+                mainVertici[2].y+=_delta;
                 quadWarp.setBottomRightCornerPosition(mainVertici[2]);
             }
             else if (i==mainIndex[3]) 
             { 
-                mainVertici[3].y+=1;
+                mainVertici[3].y+=_delta;
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
             //se sono in griglia:
-            else vertici[i].y+=1;
+            else vertici[i].y+=_delta;
         }
     }
     }
@@ -482,7 +522,7 @@ void elementWarp::pointDOWN()
 
 
 //--------------------------------------------------------------
-void elementWarp::pointLEFT()
+void elementWarp::pointLEFT(int _delta)
 {
     if (bWarpActive)
     {
@@ -494,27 +534,27 @@ void elementWarp::pointLEFT()
             //se sono sul rettangolo esterno:
             if (i==mainIndex[0]) 
             { 
-                mainVertici[0].x-=1;
+                mainVertici[0].x-=_delta;
                 quadWarp.setTopLeftCornerPosition(mainVertici[0]);
             }
             else if (i==mainIndex[1]) 
             { 
-                mainVertici[1].x-=1;
+                mainVertici[1].x-=_delta;
                 quadWarp.setTopRightCornerPosition(mainVertici[1]);
             }
             else if (i==mainIndex[2]) 
             { 
-                mainVertici[2].x-=1;
+                mainVertici[2].x-=_delta;
                 quadWarp.setBottomRightCornerPosition(mainVertici[2]);
             }
             else if (i==mainIndex[3]) 
             { 
-                mainVertici[3].x-=1;
+                mainVertici[3].x-=_delta;
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
             //se sono in griglia:
-            else vertici[i].x-=1;
+            else vertici[i].x-=_delta;
         }
         
     }
@@ -525,7 +565,7 @@ void elementWarp::pointLEFT()
 
 
 //--------------------------------------------------------------
-void elementWarp::pointRIGHT()
+void elementWarp::pointRIGHT(int _delta)
 {
     if (bWarpActive)
     {
@@ -537,27 +577,27 @@ void elementWarp::pointRIGHT()
             //se sono sul rettangolo esterno:
             if (i==mainIndex[0]) 
             { 
-                mainVertici[0].x+=1;
+                mainVertici[0].x+=_delta;
                 quadWarp.setTopLeftCornerPosition(mainVertici[0]);
             }
             else if (i==mainIndex[1]) 
             { 
-                mainVertici[1].x+=1;
+                mainVertici[1].x+=_delta;
                 quadWarp.setTopRightCornerPosition(mainVertici[1]);
             }
             else if (i==mainIndex[2]) 
             { 
-                mainVertici[2].x+=1;
+                mainVertici[2].x+=_delta;
                 quadWarp.setBottomRightCornerPosition(mainVertici[2]);
             }
             else if (i==mainIndex[3]) 
             { 
-                mainVertici[3].x+=1;
+                mainVertici[3].x+=_delta;
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
             //se sono in griglia:
-            else vertici[i].x+=1;
+            else vertici[i].x+=_delta;
         }
     }
     }
@@ -624,23 +664,6 @@ void elementWarp::selectPrevPoint()
 
 }
 
-//--------------------------------------------------------------
-void elementWarp::resetPoint()
-{
-
-if (bWarpActive)
-{
-    
-    for (int i=0; i<nPoints; i++) {
-        
-        if (vertici[i].z==1)
-        {
-            vertici[i]=texVert[i];
-        }
-    }
-}
-
-}
 
 
 

@@ -65,10 +65,11 @@ void testApp::setup()
 	ofSetLogLevel(OF_LOG_VERBOSE);
     
     bFullscreen=false;
+    bSpeedUp=false;
 
     mainOutputWarp.setup(outputResolutionX, outputResolutionY);
     
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 
     georgiaitalic8.loadFont("georgiaz.ttf", 7);
     georgiaitalic14.loadFont("georgiaz.ttf", 18);
@@ -227,10 +228,13 @@ void testApp::keyPressed(int key)
                 break;
                 
             case 'w':
-               mainOutputWarp.bWarpActive=!mainOutputWarp.bWarpActive;
-               mainOutputWarp.quadWarp.toggleShow();
+                mainOutputWarp.quadWarp.toggleShow();
+                mainOutputWarp.bWarpActive=!mainOutputWarp.bWarpActive;
+                break;     
 
-                break;
+            case 'g':
+                if (mainOutputWarp.bWarpActive) mainOutputWarp.bViewGrid=!mainOutputWarp.bViewGrid;
+                break;     
                 
             case 't':
                 mainOutputWarp.bSposta=!mainOutputWarp.bSposta;
@@ -258,19 +262,23 @@ void testApp::keyPressed(int key)
                 
                 
             case OF_KEY_UP:
-                mainOutputWarp.pointUP();
+                if (bSpeedUp) mainOutputWarp.pointUP(40);
+                else mainOutputWarp.pointUP(1);
                 break;
                 
             case OF_KEY_DOWN:
-                mainOutputWarp.pointDOWN();
+                if (bSpeedUp) mainOutputWarp.pointDOWN(40);
+                else mainOutputWarp.pointDOWN(1);
                 break;
                 
             case OF_KEY_LEFT:
-                mainOutputWarp.pointLEFT();
+                if (bSpeedUp) mainOutputWarp.pointLEFT(40);
+                else mainOutputWarp.pointLEFT(1);
                 break;
                 
             case OF_KEY_RIGHT:
-                mainOutputWarp.pointRIGHT();
+                if (bSpeedUp) mainOutputWarp.pointRIGHT(40);
+                else mainOutputWarp.pointRIGHT(1);
                 break;
                 
             case 'm':
@@ -303,6 +311,10 @@ void testApp::keyPressed(int key)
                 mainOutputWarp.bHoldSelection=true;
                 break;
                 
+            case '<':
+                bSpeedUp=true;
+                break;
+                
     default:
         break;
         }
@@ -318,6 +330,11 @@ void testApp::keyReleased(int key)
         case 'h':
             mainOutputWarp.bHoldSelection=false;
             break;
+            
+        case '<':
+            bSpeedUp=false;
+            break;
+
 
     }
     

@@ -37,10 +37,10 @@ class elementWarp
     void resetCorners();
     void resetPoint();
     
-    void pointUP();
-    void pointDOWN();
-    void pointLEFT();
-    void pointRIGHT();
+    void pointUP(int _delta);
+    void pointDOWN(int _delta);
+    void pointLEFT(int _delta);
+    void pointRIGHT(int _delta);
     
     void selectNextPoint();
     void selectPrevPoint();
@@ -76,6 +76,7 @@ class elementWarp
     bool bWarpActive;
     bool bSposta;
     bool bHoldSelection;
+    bool bViewGrid;
     
     //ofxQuadWarp
     ofxQuadWarp quadWarp;
