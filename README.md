@@ -1,19 +1,14 @@
 element.map
 ===========
 
-updated on 05/07/2012
-
-differenze rispetto alla branch "test":
+updated on 11/07/2012
 
 - fullscreen funzionante (a discapito di qualche fps...)
 - interfaccia player video: play, pause e rewind
 - in fullscreen: barra spazio=play/pause e backspace=rewind
 - ordine degli element (dal primo piano allo sfondo): syphon, video, image
 - salvataggio progetto (cioè dati del warp) su xml
+- selezione multipla punti della griglia
+- spostamento veloce o lento con le frecce
+- elementWarp adesso è una classe applicabile a ogni livello indipendentemente
  
-***********************
-CONTROLLARE LA FINESTRA DI HELP: SONO CAMBIATI DEI TASTI! :)
-***********************
-
-DA FARE:
-- selezione multipla dei punti del grid warp
