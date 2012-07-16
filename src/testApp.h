@@ -56,6 +56,7 @@ class testApp : public ofBaseApp{
     bool                    bFullscreen;
     
     bool                    bSpeedUp;
+    bool                    frameByframe;
     
     ofTexture   text;
     

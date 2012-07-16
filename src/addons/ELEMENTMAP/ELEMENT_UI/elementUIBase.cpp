@@ -120,7 +120,8 @@ void elementUIBase::setupUI(element* _parentElement)
         posY -= 90;
         UI->addWidget(new ofxUIToggle(marginLeft + 150, posY+=30, 10, 10, parentElement->getIsActive(),"Sound on/off"));
         UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
-
+        
+       
         
         listOutputModes = new ofxUIDropDownList(marginLeft + 250, posY-=80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);

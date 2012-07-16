@@ -69,7 +69,7 @@ void testApp::setup()
 
     mainOutputWarp.setup(outputResolutionX, outputResolutionY);
     
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.3\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys\n quad warping support mouse drag too\n\nSPACEBAR\tplay/stop video\nBACKSPACE\trewind video\n'p'\tpause\n':'\tNEXT FRAME\n';'\tPREVIOUS FRAME";
 
     georgiaitalic8.loadFont("georgiaz.ttf", 7);
     georgiaitalic14.loadFont("georgiaz.ttf", 18);
@@ -92,8 +92,6 @@ void testApp::update()
     if (bFullscreen) mainOutputWarp.updateCoordinates();
 
 }
-
-
 
 
 //--------------------------------------------------------------
@@ -136,6 +134,21 @@ void testApp::draw()
         
         ofSetColor(255, 255, 255);
         georgiaitalic8.drawString("Press 'f' to enter in fullscreen mode and edit warp; when in fullscreen press 'i' for info", 10 , ofGetWindowHeight() - 10);
+        
+// frame by frame
+        
+        ofDrawBitmapString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
+        ofDrawBitmapString("video frame Right " + ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 650, 710);
+        if (elemV1.leftChannelPlayer.getCurrentFrame() == elemV1.rightChannelPlayer.getCurrentFrame()) {
+            ofSetHexColor(0x00FFFF);            
+            ofDrawBitmapString("FRAME STERO SYNC", 650,740);
+            
+        }
+        
+        else {
+            ofSetHexColor(0xFF0000);
+            ofDrawBitmapString("FRAME STERO NOT IN SYNC", 650,740);
+        }
         
         if(drawPreviews)    
         {
@@ -216,6 +229,22 @@ void testApp::keyPressed(int key)
                     elemV1.rightChannelPlayer.play();
                 } 
                     
+                break;
+                
+            case 'p':
+                frameByframe=!frameByframe;
+                elemV1.leftChannelPlayer.setPaused(frameByframe);
+                elemV1.rightChannelPlayer.setPaused(frameByframe);
+                break;
+                
+            case ':':
+                elemV1.leftChannelPlayer.nextFrame();
+                elemV1.rightChannelPlayer.nextFrame();
+                break;
+                
+            case ';':
+                elemV1.leftChannelPlayer.previousFrame();
+                elemV1.rightChannelPlayer.previousFrame();
                 break;
                 
             case OF_KEY_BACKSPACE:
