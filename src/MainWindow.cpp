@@ -130,6 +130,7 @@ void MainWindow::draw()
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         elemMix.drawOutput(650, margin * 8, 600, 450   );
+        elemMix.UI->draw();
         
         
         ofSetColor(255, 255, 255);
@@ -223,6 +224,8 @@ void MainWindow::keyPressed(int key)
         elemV1.leftChannelPlayer.setPaused(frameByframe);
         elemV1.rightChannelPlayer.setPaused(frameByframe);        
     }
+    if(key == 'i')
+        ofSystemAlertDialog(comandi);
     
     /*
     if (bFullscreen) {
