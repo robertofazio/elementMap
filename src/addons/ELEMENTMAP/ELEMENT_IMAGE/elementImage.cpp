@@ -9,7 +9,7 @@ elementImage::elementImage()
 }
 
 //-----------------------------------------------------------------
-void elementImage::setup(string _leftImage, string _rightImage, bool _isStereo,int _posX, int _posY,string _name)
+void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, bool _isStereo,int _posX, int _posY,string _name)
 {
 	setIsStereo(_isStereo);
 	setDrawInStereo(_isStereo);
@@ -25,7 +25,7 @@ void elementImage::setup(string _leftImage, string _rightImage, bool _isStereo,i
 	yPos = _posY;
     
 //	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name,this->getIsStereo());	
-    this->init(2,int(ofGetScreenWidth()),int(ofGetScreenHeight()),GL_RGBA,_name,this->getIsStereo());	
+    this->init(2,int(_width),int(_height),GL_RGBA,_name,this->getIsStereo());	
 }
 
 //-----------------------------------------------------------------

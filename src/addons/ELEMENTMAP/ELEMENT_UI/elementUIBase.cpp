@@ -188,7 +188,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		{
 			if(name==outputModesNames[i]) 
 			{
-                ((testApp*)ofGetAppPtr())->elemMix.setOutputStereoMode(i);
+                ((testApp*)ofGetAppPtr())->mainWindow->elemMix.setOutputStereoMode(i);
 			}			
 		}
 	}
