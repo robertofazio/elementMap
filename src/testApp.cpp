@@ -60,8 +60,8 @@ void testApp::keyPressed(int key){
         case 'f':
             if(!outputFullScreen)
             {
-                outputFullScreen = true;
-                ofToggleFullscreen();
+                //outputFullScreen = true;
+                //ofToggleFullscreen();
             }
             //  outputWindow->mainOutputWarp.setup(outputSizeWidth, outputSizeHeight);
             // outputWindow->mainOutputWarp.setup(ofGetScreenWidth(), ofGetScreenHeight());

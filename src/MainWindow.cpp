@@ -69,7 +69,8 @@ void MainWindow::setup()
     
     mainOutputWarp.setup(outputResolutionX, outputResolutionY);
     
-    comandi ="element.map alpha 0.0.3\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys\n quad warping support mouse drag too\n\nSPACEBAR\tplay/stop video\nBACKSPACE\trewind video\n'p'\tpause\n':'\tNEXT FRAME\n';'\tPREVIOUS FRAME";
+    
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\t in main window hide/show GUI\n'f'\t\t in second window change fullscreen mode\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
     
     georgiaitalic8.loadFont("georgiaz.ttf", 7);
     georgiaitalic14.loadFont("georgiaz.ttf", 18);
@@ -180,7 +181,7 @@ void MainWindow::draw()
 //--------------------------------------------------------------
 void MainWindow::keyPressed(int key)
 {
-	if(key=='f')
+	if(key == OF_KEY_RETURN)
 	{
         drawUIs=!drawUIs;
         

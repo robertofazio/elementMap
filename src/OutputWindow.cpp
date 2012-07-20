@@ -15,7 +15,7 @@ OutputWindow::OutputWindow(testApp* _mainScene)
 {
     mainScene = _mainScene;
     bSpeedUp = false;
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'l'\treturn\t main window hide/show GUI\n\n'f'\t\t in second window fullscreen model\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 }
 
 void OutputWindow::windowResized(int &w, int &h)
@@ -37,6 +37,18 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 
             case 108: //'l':
                 mainOutputWarp.load();
+                break;
+            case 102:
+                ofToggleFullscreen();
+                
+                
+                if(ofGetWindowMode() == OF_WINDOW)
+                {
+                    ofSetWindowPosition(ofGetWindowPositionX(), 10);
+                    ofToggleFullscreen();
+                    ofSetWindowPosition(ofGetScreenWidth(), 0);
+                    ofToggleFullscreen();   
+                }
                 break;
                 
              /*   
