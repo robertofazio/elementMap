@@ -78,12 +78,17 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 break;
                 
             case 119: //'w':
+                mainOutputWarp.bViewGrid=false;
+                mainOutputWarp.deselectAll();
                 mainOutputWarp.quadWarp.toggleShow();
                 mainOutputWarp.bWarpActive=!mainOutputWarp.bWarpActive;
                 break;     
                 
             case 103: //'g':
-                if (mainOutputWarp.bWarpActive) mainOutputWarp.bViewGrid=!mainOutputWarp.bViewGrid;
+                mainOutputWarp.bWarpActive=false;
+                mainOutputWarp.quadWarp.hide();
+                mainOutputWarp.deselectAll();
+                mainOutputWarp.bViewGrid=!mainOutputWarp.bViewGrid;
                 break;     
                 
             case 116: //'t':

@@ -25,7 +25,7 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     createGrid(xRes, yRes);
     //start with active warp and transalte non-active
     bWarpActive=true;
-    bViewGrid=true;
+    bViewGrid=false;
     bSposta=false;
     bHoldSelection=false;
 
@@ -41,13 +41,13 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
     
     //auto-load last warp settings on startup
-//    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
-//    createGrid(xRes, yRes);
-//    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
-//    quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
-//    quadWarp.setTopRightCornerPosition(mainVertici[1]);        
-//    quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
-//    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+    createGrid(xRes, yRes);
+    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
+    quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
+    quadWarp.setTopRightCornerPosition(mainVertici[1]);        
+    quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
+    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
 
     
 }
@@ -87,7 +87,7 @@ void elementWarp::warp(ofTexture _text)
     }
     
     glDisable(text.getTextureData().textureTarget);
-    if (bWarpActive&&bViewGrid) drawGrid();        
+    if (bViewGrid) drawGrid();        
     glPopMatrix();
     
     //draw special markers for quad warp vertices
@@ -214,15 +214,15 @@ void elementWarp::drawGrid() {
     
     //draw Points
     for (int point=0; point<nPoints; point++) {
-        if (!(point== mainIndex[0] || point== mainIndex[1] || point== mainIndex[2] || point== mainIndex[3]))
-        {
+//        if (!(point== mainIndex[0] || point== mainIndex[1] || point== mainIndex[2] || point== mainIndex[3]))
+//        {
         ofPushStyle();
         if (vertici[point].z==1) ofSetColor(255,0,0,255);
         else ofSetColor(0,255,0,255);
         ofFill();
         ofCircle(vertici[point].x, vertici[point].y, 5, 5);
         ofPopStyle();
-        }
+//        }
    }
 }
 
@@ -231,7 +231,7 @@ void elementWarp::drawGrid() {
 //--------------------------------------------------------------
 void elementWarp::mouseDragged(int x, int y, int button){
     
-    if (bWarpActive && !bSposta)
+    if ( (bWarpActive||bViewGrid) && !bSposta)
     {
             for (int i=0; i<nPoints; i++) {
                 if (vertici[i].z==1)
@@ -268,9 +268,27 @@ void elementWarp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void elementWarp::mousePressed(int x, int y, int button){
     
-    if (bWarpActive && !bSposta)
+    if (!bSposta)
     {
-            for (int i=0; i<nPoints; i++) {
+    
+    if (bWarpActive)    //controlla se sono in prossimità dei vertici principali
+    {
+        
+        for (int c=0; c<4; c++) {
+            if (abs(x-screenPos[mainIndex[c]].x)<45 && abs(y-screenPos[mainIndex[c]].y)<45) 
+            {
+                if (vertici[mainIndex[c]].z==0) vertici[mainIndex[c]].z=1;
+            }
+            else 
+            {
+                if (!bHoldSelection) vertici[mainIndex[c]].z=0;      
+            }
+        }
+    }
+        else if (bViewGrid)     //cerca con minore tolleranza se ho selezionato un punto della griglia
+        {
+        
+        for (int i=0; i<nPoints; i++) {
                 if (abs(x-screenPos[i].x)<10 && abs(y-screenPos[i].y)<10) 
                 {
                     if (vertici[i].z==0) vertici[i].z=1;
@@ -281,16 +299,18 @@ void elementWarp::mousePressed(int x, int y, int button){
                 }
                 
             }
+        }
             
     }   
 }
 
 
 
+
 //--------------------------------------------------------------
 void elementWarp::increaseXgrid()
 {
-    if (bWarpActive)
+    if (bViewGrid)
     {
         xRes++;
         if (xRes>MAX_RESOLUTION) xRes=MAX_RESOLUTION;
@@ -302,7 +322,7 @@ void elementWarp::increaseXgrid()
 //--------------------------------------------------------------
 void elementWarp::decreaseXgrid()
 {
-    if (bWarpActive)
+    if (bViewGrid)
     {
         xRes--;
         if (xRes<2) xRes=2;
@@ -314,7 +334,7 @@ void elementWarp::decreaseXgrid()
 //--------------------------------------------------------------
 void elementWarp::increaseYgrid()
 {
-    if (bWarpActive)
+    if (bViewGrid)
     {
         yRes++;
     if (yRes>MAX_RESOLUTION) yRes=MAX_RESOLUTION;
@@ -325,7 +345,8 @@ void elementWarp::increaseYgrid()
 //--------------------------------------------------------------
 void elementWarp::decreaseYgrid()
 {
-    if (bWarpActive)
+//    if (bWarpActive)
+    if (bViewGrid)
     {
         yRes--;
         if (yRes<2) yRes=2;
@@ -405,7 +426,7 @@ void elementWarp::resetCorners()
 //--------------------------------------------------------------
 void elementWarp::resetPoint()
 {
-    if (bWarpActive)
+    if (bWarpActive||bViewGrid)
     {
         
         for (int i=0; i<nPoints; i++) {
@@ -444,7 +465,7 @@ void elementWarp::resetPoint()
 //--------------------------------------------------------------
 void elementWarp::pointUP(int _delta)
 {
-    if (bWarpActive)
+    if (bWarpActive||bViewGrid)
     {
         for (int i=0; i<nPoints; i++) {
         
@@ -473,8 +494,8 @@ void elementWarp::pointUP(int _delta)
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
-            //se sono in griglia:
-            else vertici[i].y-=_delta;
+            //se sono in griglia precisione massima:
+            else vertici[i].y-=1;
             
         }
         }
@@ -485,7 +506,7 @@ void elementWarp::pointUP(int _delta)
 //--------------------------------------------------------------
 void elementWarp::pointDOWN(int _delta)
 {
-    if (bWarpActive)
+    if (bWarpActive||bViewGrid)
     {
         for (int i=0; i<nPoints; i++) {
         
@@ -513,8 +534,8 @@ void elementWarp::pointDOWN(int _delta)
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
-            //se sono in griglia:
-            else vertici[i].y+=_delta;
+            //se sono in griglia precisione massima:
+            else vertici[i].y+=1;
         }
     }
     }
@@ -524,7 +545,7 @@ void elementWarp::pointDOWN(int _delta)
 //--------------------------------------------------------------
 void elementWarp::pointLEFT(int _delta)
 {
-    if (bWarpActive)
+    if (bWarpActive||bViewGrid)
     {
         
     for (int i=0; i<nPoints; i++) {
@@ -553,8 +574,8 @@ void elementWarp::pointLEFT(int _delta)
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
-            //se sono in griglia:
-            else vertici[i].x-=_delta;
+            //se sono in griglia precisione massima:
+            else vertici[i].x-=1;
         }
         
     }
@@ -567,7 +588,7 @@ void elementWarp::pointLEFT(int _delta)
 //--------------------------------------------------------------
 void elementWarp::pointRIGHT(int _delta)
 {
-    if (bWarpActive)
+    if (bWarpActive||bViewGrid)
     {
     
     for (int i=0; i<nPoints; i++) {
@@ -596,8 +617,8 @@ void elementWarp::pointRIGHT(int _delta)
                 quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
             }
             
-            //se sono in griglia:
-            else vertici[i].x+=_delta;
+            //se sono in griglia precisione massima:
+            else vertici[i].x+=1;
         }
     }
     }
@@ -608,7 +629,7 @@ void elementWarp::pointRIGHT(int _delta)
 //--------------------------------------------------------------
 void elementWarp::selectNextPoint()
 {
-    if (bWarpActive)
+    if (bViewGrid)
     {
         int nuovaX,nuovaY;
         
@@ -638,7 +659,7 @@ void elementWarp::selectNextPoint()
 //--------------------------------------------------------------
 void elementWarp::selectPrevPoint()
 {
-    if (bWarpActive)
+    if (bViewGrid)
     {
         int nuovaX,nuovaY;
         
@@ -664,6 +685,13 @@ void elementWarp::selectPrevPoint()
 
 }
 
+
+
+//--------------------------------------------------------------
+void elementWarp::deselectAll()
+{
+    for (int i=0; i<nPoints; i++) vertici[i].z=0;       
+}
 
 
 

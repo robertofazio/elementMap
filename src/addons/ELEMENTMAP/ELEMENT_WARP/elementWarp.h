@@ -33,6 +33,8 @@ class elementWarp
     
     void selectMainCorners();
     void selectNextMainCorner();
+    
+    void deselectAll();
 
     void resetCorners();
     void resetPoint();
