@@ -242,9 +242,14 @@ void MainWindow::keyPressed(int key)
     
     if(key == 'p')
     {
-        frameByframe=!frameByframe;
-        elemV1.leftChannelPlayer.setPaused(frameByframe);
-        elemV1.rightChannelPlayer.setPaused(frameByframe);        
+        elemV1.leftChannelPlayer.play();
+        elemV1.rightChannelPlayer.play();
+        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()+1);
+        elemV1.rightChannelPlayer.setFrame(elemV1.rightChannelPlayer.getCurrentFrame()+1);
+        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.leftChannelPlayer.setPaused(true);
+        elemV1.rightChannelPlayer.setPaused(true);
     }
     if(key == 'i')
         ofSystemAlertDialog(comandi);
