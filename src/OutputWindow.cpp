@@ -117,8 +117,7 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 break;
                 
                 
-            case 269:
-                cout << "UP" << endl;
+            case 269: //OF_KEY_UP
                 if (bSpeedUp) mainOutputWarp.pointUP(40);
                 else mainOutputWarp.pointUP(1);
                 break;

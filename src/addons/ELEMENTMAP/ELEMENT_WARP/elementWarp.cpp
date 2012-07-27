@@ -97,7 +97,7 @@ void elementWarp::warp(ofTexture _text)
         {
             ofPushStyle();
             ofSetColor(ofColor :: white);
-            ofSetLineWidth(2);
+
             ofNoFill();
             
             if (vertici[mainIndex[corner]].z==0 || bSposta) {
@@ -108,8 +108,14 @@ void elementWarp::warp(ofTexture _text)
             {
                 if (!bSposta)
                 {
+                    ofPushStyle();
+                    ofSetColor(ofColor :: green); 
+                    ofSetLineWidth(4);                        
                     ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
                     ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
+                    
+                    ofPopStyle();
+
                 }
                 ofSetColor(255,0,0);
             }
@@ -214,13 +220,11 @@ void elementWarp::drawGrid() {
     
     //draw Points
     for (int point=0; point<nPoints; point++) {
-//        if (!(point== mainIndex[0] || point== mainIndex[1] || point== mainIndex[2] || point== mainIndex[3]))
-//        {
         ofPushStyle();
         if (vertici[point].z==1) ofSetColor(255,0,0,255);
         else ofSetColor(0,255,0,255);
         ofFill();
-        ofCircle(vertici[point].x, vertici[point].y, 5, 5);
+        ofCircle(vertici[point].x, vertici[point].y, 8);
         ofPopStyle();
 //        }
    }
