@@ -37,7 +37,7 @@ void MainWindow::setup()
 	// create & setup elements on this app 
 	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"Test Pattern");
 	elemV1.setup("./movies/left1024.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
-	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", outputResolutionX,outputResolutionY, true, 215 , (margin * 9) - 8 + (190 * 2),"Images");
+	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Images");
 	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon");
 	
     bPaused=false;
