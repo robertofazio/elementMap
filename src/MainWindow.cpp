@@ -42,6 +42,15 @@ void MainWindow::setup()
 	
     bPaused=false;
     
+    //video starts at frame number 0 and paused
+    elemV1.leftChannelPlayer.play();
+    elemV1.rightChannelPlayer.play();
+    elemV1.leftChannelPlayer.setPosition(0.0);
+    elemV1.rightChannelPlayer.setPosition(0.0);
+    elemV1.leftChannelPlayer.stop();
+    elemV1.rightChannelPlayer.stop();
+
+    
     elemImg.UI->toggleVisible();
     elemImg.setOpacity(1);
     elemImg.setIsShow(true);
@@ -219,6 +228,18 @@ void MainWindow::keyPressed(int key)
             elemV1.rightChannelPlayer.play();
         } 
     }
+    
+    if (key== OF_KEY_BACKSPACE)
+    {
+    elemV1.leftChannelPlayer.play();
+    elemV1.rightChannelPlayer.play();
+    elemV1.leftChannelPlayer.setPosition(0.0);
+    elemV1.rightChannelPlayer.setPosition(0.0);
+    elemV1.leftChannelPlayer.stop();
+    elemV1.rightChannelPlayer.stop();
+    }
+
+    
     if(key == 'p')
     {
         frameByframe=!frameByframe;
