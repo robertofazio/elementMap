@@ -23,7 +23,6 @@ void ElementFX::init(int _type, ofTexture& originalLeftTexture)
     this->previewHeight = 0;
     this->resetFX();
     this->activeEvents();
-    cout << "INIT FX" << endl;
 }
 
 ofTexture& ElementFX::getLeftTexture()

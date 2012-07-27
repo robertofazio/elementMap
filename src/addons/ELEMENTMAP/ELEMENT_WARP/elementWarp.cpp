@@ -39,16 +39,10 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     quadWarp.setTopRightCornerPosition(mainVertici[1]);        
     quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
     quadWarp.setBottomLeftCornerPosition(mainVertici[3]);  
-    
+        
     //auto-load last warp settings on startup
-    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
-    createGrid(xRes, yRes);
-    loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
-    quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
-    quadWarp.setTopRightCornerPosition(mainVertici[1]);        
-    quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
-    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
-
+    load();
+    
     
 }
 
@@ -845,9 +839,9 @@ void elementWarp::load()
     loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
     createGrid(xRes, yRes);
     loadXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
-    quadWarp.setTopLeftCornerPosition(mainVertici[0]);            
-    quadWarp.setTopRightCornerPosition(mainVertici[1]);        
-    quadWarp.setBottomRightCornerPosition(mainVertici[2]); 
-    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+    quadWarp.setTopLeftCornerPosition(ofPoint(mainVertici[0].x, mainVertici[0].y));            
+    quadWarp.setTopRightCornerPosition(ofPoint(mainVertici[1].x, mainVertici[1].y));        
+    quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
+    quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));        
    
 }

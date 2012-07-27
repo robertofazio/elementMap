@@ -38,8 +38,11 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 
             case 108: //'l':
                 mainOutputWarp.load();
+                mainOutputWarp.updateCoordinates();
+
                 break;
-            case 102:
+                
+            case 102: //'f'
                 ofToggleFullscreen();
                 
                 
@@ -51,33 +54,7 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                     ofToggleFullscreen();   
                 }
                 break;
-                
-             /*   
-            case ' ':
-                if (elemV1.leftChannelPlayer.isPlaying()) 
-                {
-                    elemV1.leftChannelPlayer.stop();
-                    elemV1.rightChannelPlayer.stop();
-                    
-                } 
-                else
-                {
-                    elemV1.leftChannelPlayer.play();
-                    elemV1.rightChannelPlayer.play();
-                } 
-                
-                break;
-                
-            case OF_KEY_BACKSPACE:
-                elemV1.leftChannelPlayer.play();
-                elemV1.rightChannelPlayer.play();
-                elemV1.leftChannelPlayer.setPosition(0.0);
-                elemV1.rightChannelPlayer.setPosition(0.0);
-                elemV1.leftChannelPlayer.stop();
-                elemV1.rightChannelPlayer.stop();
-                */
-                break;
-                
+                                
             case 119: //'w':
                 mainOutputWarp.bViewGrid=false;
                 mainOutputWarp.deselectAll();
@@ -99,42 +76,58 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 
             case 120: // 'x':
                 mainOutputWarp.increaseXgrid();
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
                 
             case 122: //'z':
                 mainOutputWarp.decreaseXgrid();
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
                 
             case 113: //'q':
                 mainOutputWarp.increaseYgrid();
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
                 
             case 97: //'a':
                 mainOutputWarp.decreaseYgrid();
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
                 
             case 269: //OF_KEY_UP
                 if (bSpeedUp) mainOutputWarp.pointUP(40);
                 else mainOutputWarp.pointUP(1);
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
             case 270 ://OF_KEY_DOWN:
                 if (bSpeedUp) mainOutputWarp.pointDOWN(40);
                 else mainOutputWarp.pointDOWN(1);
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
             case 267: //OF_KEY_LEFT:
                 if (bSpeedUp) mainOutputWarp.pointLEFT(40);
                 else mainOutputWarp.pointLEFT(1);
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
             case 268: //OF_KEY_RIGHT:
                 if (bSpeedUp) mainOutputWarp.pointRIGHT(40);
                 else mainOutputWarp.pointRIGHT(1);
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
             case 109: //'m':
@@ -155,14 +148,18 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 if (bMela) 
                 {
                     mainOutputWarp.increaseXgrid();
-                    mainOutputWarp.decreaseYgrid();
-                    
+                    mainOutputWarp.decreaseXgrid();                    
                 }
                 else mainOutputWarp.resetPoint();
+                
+                mainOutputWarp.updateCoordinates();
+
                 break;
                 
             case 99: //'c':
                 mainOutputWarp.resetCorners();
+                mainOutputWarp.updateCoordinates();
+
                 break;
 
             case 104: //'h':
@@ -202,7 +199,7 @@ void OutputWindow::keyReleased(int key, ofxFenster *window)
 
 void OutputWindow::update()
 {
-	mainOutputWarp.updateCoordinates();
+//	mainOutputWarp.updateCoordinates();
 }
 
 void OutputWindow::setWindowShape(int w, int h)
@@ -229,6 +226,7 @@ void OutputWindow::draw()
 void OutputWindow::mouseDragged(int x, int y, int button,  ofxFenster* f)
 {
     mainOutputWarp.mouseDragged(x, y, button);
+    mainOutputWarp.updateCoordinates();
 }
 
 void OutputWindow::setup()
@@ -242,5 +240,6 @@ void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
     cout << y << endl;
     cout << btn << endl;
     mainOutputWarp.mousePressed(x, y, btn);
+    
     
 }

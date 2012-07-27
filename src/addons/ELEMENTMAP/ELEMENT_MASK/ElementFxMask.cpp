@@ -404,8 +404,6 @@ void ElementFXMask::keyPressed(ofKeyEventArgs &e)
             this->setIsInverted(!inv);
             this->modifyEffect();
             break;              
-        default:
-            cout << "Key pressed" << endl;
     }
 }
 
