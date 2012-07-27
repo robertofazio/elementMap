@@ -32,6 +32,7 @@ public:
     testApp*    mainScene;
     elementWarp mainOutputWarp;
     bool        bSpeedUp;
+    bool        bMela;
     string      comandi;
     void        windowResized(int &w, int &h);
 };

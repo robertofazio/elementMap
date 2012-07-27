@@ -15,7 +15,8 @@ OutputWindow::OutputWindow(testApp* _mainScene)
 {
     mainScene = _mainScene;
     bSpeedUp = false;
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'l'\treturn\t main window hide/show GUI\n\n'f'\t\t in second window fullscreen model\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    bMela = false;
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\ncmd+r\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'l'\treturn\t main window hide/show GUI\n\n'f'\t\tin second window fullscreen model\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 }
 
 void OutputWindow::windowResized(int &w, int &h)
@@ -25,7 +26,7 @@ void OutputWindow::windowResized(int &w, int &h)
 
 void OutputWindow::keyPressed(int key, ofxFenster* window) 
 {              
-    cout << "KEY RELESED OUTOUT" << endl;
+    cout << "KEY RELESED OUTPUT" << endl;
     cout << key << endl;
     
         switch (key) {
@@ -152,24 +153,29 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
                 
                 
             case 114: //'r':
-                mainOutputWarp.resetPoint();
+                if (bMela) 
+                {
+                    mainOutputWarp.increaseXgrid();
+                    mainOutputWarp.decreaseYgrid();
+                    
+                }
+                else mainOutputWarp.resetPoint();
                 break;
                 
             case 99: //'c':
                 mainOutputWarp.resetCorners();
                 break;
-                /*
-            case 'i':
-                ofSystemAlertDialog(comandi);
-                break;
-                */
-                
+
             case 104: //'h':
                 mainOutputWarp.bHoldSelection=true;
                 break;
                 
             case 60: //'<':
                 bSpeedUp=true;
+                break;
+                
+            case 262: // command
+                bMela=true;
                 break;
                 
             default:
@@ -187,6 +193,11 @@ void OutputWindow::keyReleased(int key, ofxFenster *window)
         case 60: // '<':
             bSpeedUp=false;
             break;
+            
+        case 262: // command
+            bMela=false;
+            break;
+
     }
 }
 
