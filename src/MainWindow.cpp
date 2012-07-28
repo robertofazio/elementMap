@@ -35,10 +35,10 @@ void MainWindow::setup()
 	int previewHeight = previewWidth / (float(ofGetWidth())/float(ofGetHeight()));
     
 	// create & setup elements on this app 
-	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"Test Pattern");
-	elemV1.setup("./movies/left1024.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
-	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Images");
-	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon");
+	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"Test Pattern", false);
+	elemV1.setup("./movies/left1024.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies", true);
+	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Images", true);
+	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
 	
     bPaused=false;
     
@@ -69,7 +69,7 @@ void MainWindow::setup()
 	drawingOrder[2]=3;
 	drawingOrder[3]=0;
 	
-	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer");
+	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
     
@@ -113,16 +113,6 @@ void MainWindow::draw()
     elemMix.drawIntoFbo(isStereoCapable);
     
     if (bFullscreen) {
-        /*
-        ofSetColor(255, 255, 255);
-        //load texture from mixer fbo 
-        if(elemMix.getOutputStereoMode() == ELM_STEREO_ANAGLYPH)
-            text=elemMix.fboAnagliph.getTextureReference();
-        else
-            text=elemMix.fboLeft.getTextureReference();
-        
-        mainOutputWarp.warp(text);
-        */
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
         ofDrawBitmapString(ofToString(ofGetFrameRate()), position);
     }
@@ -130,8 +120,6 @@ void MainWindow::draw()
     else 
         
     {
-        
-        
         //preview window (non-fulscreen)
         
         ofSetColor(255, 255, 255);
@@ -285,18 +273,19 @@ void MainWindow::mouseMoved(int x, int y )
 //--------------------------------------------------------------
 void MainWindow::mouseDragged(int x, int y, int button)
 {
-    
-    
-    if (bFullscreen )     mainOutputWarp.mouseDragged(x, y, button);
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mouseDragged(x, y, button);
+    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mouseDragged(x, y, button);
+    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mouseDragged(x, y, button);
     
 }
-
 //--------------------------------------------------------------
 void MainWindow::mousePressed(int x, int y, int button)
 {
-    
-    if (bFullscreen )    mainOutputWarp.mousePressed(x, y, button);
-    
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mousePressed(x, y, button);
+    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mousePressed(x, y, button);
+    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------

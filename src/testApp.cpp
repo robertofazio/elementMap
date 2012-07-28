@@ -26,9 +26,6 @@ void testApp::setup(){
     output->addListener(outputWindow);
     output->setWindowTitle("Output");
     
-    //outputWindow->mainOutputWarp.setup(ofGetScreenWidth(), ofGetScreenHeight());
-    outputWindow->mainOutputWarp.setup(outputSizeWidth, outputSizeHeight);
-    
     outputFullScreen = false;
     
 }
@@ -41,7 +38,6 @@ void testApp::mouseMovedEvent(ofMouseEventArgs &args)
 //--------------------------------------------------------------
 void testApp::update(){
     mainWindow->update();
-    outputWindow->mainOutputWarp.updateCoordinates();
 }
 
 //--------------------------------------------------------------
@@ -55,21 +51,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     cout << "Key Pressed" << key << endl;
-    mainWindow->keyPressed(key);
-    switch (key) {
-        case 'f':
-            if(!outputFullScreen)
-            {
-                //outputFullScreen = true;
-                //ofToggleFullscreen();
-            }
-            //  outputWindow->mainOutputWarp.setup(outputSizeWidth, outputSizeHeight);
-            // outputWindow->mainOutputWarp.setup(ofGetScreenWidth(), ofGetScreenHeight());
-            break;
-        default:
-            //        scene->keyPressed(key);
-            break;
-    }
+    mainWindow->keyPressed(key);    
 }
 
 //--------------------------------------------------------------

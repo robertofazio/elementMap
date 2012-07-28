@@ -12,7 +12,7 @@
 
 
 //-----------------------------------------------------------------
-void elementMixer::setup(int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name)
+void elementMixer::setup(int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable)
 {
 	setOutputStereoMode(_stereoMode);
 	if(outputStereoMode==0)
@@ -25,7 +25,7 @@ void elementMixer::setup(int _width, int _height, int _stereoMode,element** _ele
 	xPos = _posX;
 	yPos = _posY;
 
-	this->init(5,_width,_height,GL_RGBA,_name,this->getIsStereo());
+	this->init(5,_width,_height,GL_RGBA,_name,this->getIsStereo(), _isWarpable);
 	
     fboAnagliph.allocate(_width ,_height, GL_RGBA);
         
@@ -51,9 +51,12 @@ void elementMixer::update()
 	for(int i=0;i<numOfElements;i++)
 	{
 		sceneElements[i]->update();
-	}		
+	}
+    
+    if (isWarpable) warper.updateCoordinates();
 }
 
+//-----------------------------------------------------------------
 void elementMixer::applyFX()
 {
  for(int a = 0; a < effects.size(); a++)
@@ -64,6 +67,7 @@ void elementMixer::applyFX()
 }
 
 
+//-----------------------------------------------------------------
 void elementMixer::addFX(int type)       // Mauro
 {
     switch(type)

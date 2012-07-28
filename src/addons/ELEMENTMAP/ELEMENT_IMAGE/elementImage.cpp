@@ -9,7 +9,7 @@ elementImage::elementImage()
 }
 
 //-----------------------------------------------------------------
-void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, bool _isStereo,int _posX, int _posY,string _name)
+void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, bool _isStereo,int _posX, int _posY,string _name, bool _isWarpable)
 {
 	setIsStereo(_isStereo);
 	setDrawInStereo(_isStereo);
@@ -25,37 +25,14 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
 	yPos = _posY;
     
 //	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name,this->getIsStereo());	
-    this->init(2,int(_width),int(_height),GL_RGBA,_name,this->getIsStereo());	
+    this->init(2,int(_width),int(_height),GL_RGBA,_name,this->getIsStereo(), _isWarpable);	
 }
 
 //-----------------------------------------------------------------
 void elementImage::update()
 {
-    
+    if (isWarpable) warper.updateCoordinates();    
 }
-/*
- void elementImage::drawPreview(int x, int y, int w, int h)
- {
- for(int a = 0; a < effects.size(); a++)
- {
- if(effects[a]->getIsActive())
- {
- applyFX();
- effects[a]->finalFbo.draw(x, y, w, h);
- }
- else
- effects[a]->getLeftTexture().draw(x, y, w, h);
- if(effects[a]->getGUIVisible())
- {
- effects[a]->drawGUI(x, y, w, h);
- }
- }
- if(effects.size() == 0)
- {
- this->drawLeft(x, y, 100, 100 / (4/3));
- }
- }
- */
 
 void elementImage::applyFX()
 {
@@ -87,8 +64,23 @@ void elementImage::addFX(int type)       // Mauro
 //-----------------------------------------------------------------
 void elementImage::drawLeft(int x, int y, int w, int h)
 {
-    //fboLeft.draw(x,y,w,h);
-	leftImage.draw(x,y,w,h);	
+    
+    if (isWarpable)
+    {
+        fboLeft.begin();
+        ofPushMatrix();
+        ofSetColor(0, 0, 0,0);
+        ofRect(0,0,w,h);
+        ofPopMatrix();
+        
+        warper.draw(getLeftTexture());
+        fboLeft.end();
+        
+        fboLeft.draw(x,y,w,h);
+    }
+    else
+        leftImage.draw(x,y,w,h);	
+    
     this->applyFX();
 }
 
@@ -96,11 +88,24 @@ void elementImage::drawLeft(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementImage::drawRight(int x, int y, int w, int h)
 {
-	//fboRight.draw(x,y,w,h);
-	rightImage.draw(x,y,w,h);	
+    if (isWarpable)
+    {
+        
+        fboRight.begin();
+        ofPushMatrix();
+        ofSetColor(0, 0, 0,0);
+        ofRect(0,0,w,h);
+        ofPopMatrix();
+        
+        warper.draw(getRightTexture());
+        fboRight.end();
+        
+        fboRight.draw(x,y,w,h);
+    }
+    else
+        rightImage.draw(x,y,w,h);	
     this->applyFX();
 }
-
 
 //-----------------------------------------------------------------
 ofTexture& elementImage::getLeftTexture()

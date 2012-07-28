@@ -16,8 +16,11 @@ class elementWarp
 	elementWarp();
     
     void setup(int _outputWidth, int _outputHeight);
-    void warp(ofTexture _text);
+    void draw(ofTexture _text);
     void updateCoordinates();
+    
+    void warpKeyPressedHandler(int _key);
+    void warpKeyReleasedHandler(int _key);
     
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
@@ -79,6 +82,8 @@ class elementWarp
     bool bSposta;
     bool bHoldSelection;
     bool bViewGrid;
+    bool bMela;
+    bool bSpeedUp;
     
     //ofxQuadWarp
     ofxQuadWarp quadWarp;
