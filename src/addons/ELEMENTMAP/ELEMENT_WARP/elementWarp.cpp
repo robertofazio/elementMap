@@ -843,5 +843,4 @@ void elementWarp::load()
     quadWarp.setTopRightCornerPosition(ofPoint(mainVertici[1].x, mainVertici[1].y));        
     quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
     quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));        
-   
 }

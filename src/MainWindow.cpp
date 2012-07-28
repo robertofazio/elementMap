@@ -226,7 +226,8 @@ void MainWindow::keyPressed(int key)
         {
             elemV1.leftChannelPlayer.play();
             elemV1.rightChannelPlayer.play();
-        } 
+        }
+        
     }
     
     if (key== OF_KEY_BACKSPACE)
@@ -248,161 +249,12 @@ void MainWindow::keyPressed(int key)
         elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()+1);
         elemV1.rightChannelPlayer.setFrame(elemV1.rightChannelPlayer.getCurrentFrame()+1);
         cout << elemV1.rightChannelPlayer.getPosition() << endl;
-        elemV1.leftChannelPlayer.setPaused(true);
-        elemV1.rightChannelPlayer.setPaused(true);
+        elemV1.leftChannelPlayer.stop();
+        elemV1.rightChannelPlayer.stop();
+
     }
     if(key == 'i')
         ofSystemAlertDialog(comandi);
-    
-    /*
-    if (bFullscreen) {
-        
-        switch (key) {
-                
-            case 's':
-                mainOutputWarp.save();
-                break;
-                
-            case 'l':
-                mainOutputWarp.load();
-                break;
-                
-                
-            case ' ':
-                if (elemV1.leftChannelPlayer.isPlaying()) 
-                {
-                    elemV1.leftChannelPlayer.stop();
-                    elemV1.rightChannelPlayer.stop();
-                    
-                } 
-                else
-                {
-                    elemV1.leftChannelPlayer.play();
-                    elemV1.rightChannelPlayer.play();
-                } 
-                
-                break;
-                
-            case 'p':
-                frameByframe=!frameByframe;
-                elemV1.leftChannelPlayer.setPaused(frameByframe);
-                elemV1.rightChannelPlayer.setPaused(frameByframe);
-                break;
-                
-            case ':':
-                elemV1.leftChannelPlayer.nextFrame();
-                elemV1.rightChannelPlayer.nextFrame();
-                break;
-                
-            case ';':
-                elemV1.leftChannelPlayer.previousFrame();
-                elemV1.rightChannelPlayer.previousFrame();
-                break;
-                
-            case OF_KEY_BACKSPACE:
-                elemV1.leftChannelPlayer.play();
-                elemV1.rightChannelPlayer.play();
-                elemV1.leftChannelPlayer.setPosition(0.0);
-                elemV1.rightChannelPlayer.setPosition(0.0);
-                elemV1.leftChannelPlayer.stop();
-                elemV1.rightChannelPlayer.stop();
-                break;
-                
-            case 'w':
-                mainOutputWarp.quadWarp.toggleShow();
-                mainOutputWarp.bWarpActive=!mainOutputWarp.bWarpActive;
-                break;     
-                
-            case 'g':
-                if (mainOutputWarp.bWarpActive) mainOutputWarp.bViewGrid=!mainOutputWarp.bViewGrid;
-                break;     
-                
-            case 't':
-                mainOutputWarp.bSposta=!mainOutputWarp.bSposta;
-                mainOutputWarp.selectMainCorners();                
-                break;
-                
-            case 'x':
-                mainOutputWarp.increaseXgrid();
-                break;
-                
-                
-            case 'z':
-                mainOutputWarp.decreaseXgrid();
-                break;
-                
-                
-            case 'q':
-                mainOutputWarp.increaseYgrid();
-                break;
-                
-                
-            case 'a':
-                mainOutputWarp.decreaseYgrid();
-                break;
-                
-                
-            case OF_KEY_UP:
-                if (bSpeedUp) mainOutputWarp.pointUP(40);
-                else mainOutputWarp.pointUP(1);
-                break;
-                
-            case OF_KEY_DOWN:
-                if (bSpeedUp) mainOutputWarp.pointDOWN(40);
-                else mainOutputWarp.pointDOWN(1);
-                break;
-                
-            case OF_KEY_LEFT:
-                if (bSpeedUp) mainOutputWarp.pointLEFT(40);
-                else mainOutputWarp.pointLEFT(1);
-                break;
-                
-            case OF_KEY_RIGHT:
-                if (bSpeedUp) mainOutputWarp.pointRIGHT(40);
-                else mainOutputWarp.pointRIGHT(1);
-                break;
-                
-            case 'm':
-                mainOutputWarp.selectNextPoint();
-                break;
-                
-            case 'n':
-                mainOutputWarp.selectPrevPoint();
-                break;
-                
-                
-            case 'v':
-                mainOutputWarp.selectNextMainCorner();
-                break;
-                
-                
-            case 'r':
-                mainOutputWarp.resetPoint();
-                break;
-                
-            case 'c':
-                mainOutputWarp.resetCorners();
-                break;
-                
-            case 'i':
-                ofSystemAlertDialog(comandi);
-                break;
-                
-            case 'h':
-                mainOutputWarp.bHoldSelection=true;
-                break;
-                
-            case '<':
-                bSpeedUp=true;
-                break;
-                
-            default:
-                break;
-        }
-        
-     
-    }
-     */
     
 }
 
