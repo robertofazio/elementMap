@@ -44,6 +44,10 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
     this->initFont();
 }
 
+void element::resetOutput(int newWidth, int newHeight)
+{
+    if (isWarpable) warper.resetOutput(newWidth, newHeight);
+}
 
 void element::initFont()
 {

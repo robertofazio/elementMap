@@ -36,7 +36,7 @@ void MainWindow::setup()
     
 	// create & setup elements on this app 
 	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"Test Pattern", false);
-	elemV1.setup("./movies/left1024.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies", true);
+	elemV1.setup("./movies/left1024Audio.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies", true);
 	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Images", true);
 	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
 	
@@ -69,7 +69,7 @@ void MainWindow::setup()
 	drawingOrder[2]=3;
 	drawingOrder[3]=0;
 	
-	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
+	elemMix.setup(this, outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
     

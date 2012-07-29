@@ -14,6 +14,7 @@
 #define ELM_STEREO_LEFTRIGHT	3
 #define ELM_STEREO_TOPBOTTOM	4
 
+class MainWindow;
 
 class elementMixer : public element
 {
@@ -22,6 +23,7 @@ class elementMixer : public element
 	elementMixer(){};
 	void update();
 	void setup(int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable);
+    void setup(MainWindow* _mainWindow, int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable);
     int  getOutputStereoMode();
 	void setOutputStereoMode(int _stereoMode);
 	void drawIntoFbo(bool _drawMonoOrStereo);
@@ -32,6 +34,7 @@ class elementMixer : public element
 	ofTexture& getRightTexture(){};
 	
 
+    MainWindow*  mainWindow;
     
 	void drawQuadGeometry();
 	void drawInfo();
@@ -59,6 +62,7 @@ class elementMixer : public element
 	int					blendMode;
 	ofShader			shader;
     int					outputStereoMode;
+    int                 actualVolume;
 
 	
 	// used to help on drawing ...

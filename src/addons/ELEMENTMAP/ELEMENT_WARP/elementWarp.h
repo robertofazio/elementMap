@@ -16,6 +16,7 @@ class elementWarp
 	elementWarp();
     
     void setup(int _outputWidth, int _outputHeight);
+    void resetOutput(int newOutputWidth, int newOutputHeight);
     void draw(ofTexture _text);
     void updateCoordinates();
     

@@ -16,6 +16,7 @@ class element : public ofNode , public elementUIBase
 	element(){};
 	
 	void init(int _type,int _width, int _height,int internalformat,string _name,bool _isStereo, bool _isWarpable);
+    void resetOutput(int newWidth, int newHeight);
 	virtual void update() =0;
 	virtual void drawIntoFbo(bool _drawMonoOrStereo) =0;
 	virtual void drawGraphic(int x, int y, int w, int h);

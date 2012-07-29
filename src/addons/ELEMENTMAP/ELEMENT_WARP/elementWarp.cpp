@@ -48,6 +48,15 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     
 }
 
+void elementWarp::resetOutput(int newOutputWidth, int newOutputHeight)
+{
+    if(text.isAllocated())
+        text.clear();
+    
+    this->setup(newOutputWidth, newOutputHeight);
+}
+
+
 //-----------------------------------------------------------------
 void elementWarp::draw(ofTexture _text)
 {
@@ -702,6 +711,7 @@ void elementWarp::deselectAll()
 //--------------------------------------------------------------
 void elementWarp::warpKeyPressedHandler(int _key)
 {
+    cout << "Warp key" << _key << endl;
     switch (_key) {
             
         case 115: //'s':
@@ -709,6 +719,7 @@ void elementWarp::warpKeyPressedHandler(int _key)
             break;
             
         case 108: //'l':
+            cout << "Load" << endl;
             load();
             break;
             
