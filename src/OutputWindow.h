@@ -31,7 +31,6 @@ public:
     
     testApp*    mainScene;
 
-    string      comandi;
     void        windowResized(int &w, int &h);
 };
 

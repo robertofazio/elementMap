@@ -103,6 +103,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                 float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
                 ofSetColor(255, 255, 255, opacity);
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
+                if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
             }
 		
 		fboLeft.end();

@@ -14,7 +14,6 @@
 OutputWindow::OutputWindow(testApp* _mainScene)
 {
     mainScene = _mainScene;
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'l'\treturn\t main window hide/show GUI\n\n'f'\t\t in second window fullscreen model\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 }
 
 void OutputWindow::windowResized(int &w, int &h)
@@ -118,6 +117,14 @@ void OutputWindow::draw()
     
     
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 10,10);
+    
+    
+    if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
+    else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
+    else if (mainScene->mainWindow->elemImg2.isSelected==true) ofDrawBitmapString("IMAGE ELEMENT SELECTED", 10,30);
+    else ofDrawBitmapString("NO ELEMENTs SELECTED", 10,30);
+
+    
     
 }
 void OutputWindow::mouseDragged(int x, int y, int button,  ofxFenster* f)

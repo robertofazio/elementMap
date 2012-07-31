@@ -35,9 +35,9 @@ void MainWindow::setup()
 	int previewHeight = previewWidth / (float(ofGetWidth())/float(ofGetHeight()));
     
 	// create & setup elements on this app 
-	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"Test Pattern", false);
-	elemV1.setup("./movies/left1024Audio.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies", true);
-	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Images", true);
+	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"TestPattern", false);
+	elemV1.setup("./movies/left1024Audio.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movie", true);
+	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Image", true);
 	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
 	
     bPaused=false;
@@ -74,12 +74,8 @@ void MainWindow::setup()
 	ofSetLogLevel(OF_LOG_VERBOSE);
     
     bFullscreen=false;
-    bSpeedUp=false;
     
-    mainOutputWarp.setup(outputResolutionX, outputResolutionY);
-    
-    
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
     georgiaitalic8.loadFont("georgiaz.ttf", 7);
     georgiaitalic14.loadFont("georgiaz.ttf", 18);
@@ -98,9 +94,7 @@ void MainWindow::setup()
 //--------------------------------------------------------------
 void MainWindow::update()
 {
-	elemMix.update();
-    if (bFullscreen) mainOutputWarp.updateCoordinates();
-    
+	elemMix.update();    
 }
 
 
@@ -249,18 +243,6 @@ void MainWindow::keyPressed(int key)
 //--------------------------------------------------------------
 void MainWindow::keyReleased(int key)
 {
-    switch (key) {
-        case 'h':
-            mainOutputWarp.bHoldSelection=false;
-            break;
-            
-        case '<':
-            bSpeedUp=false;
-            break;
-            
-            
-    }
-    
 }
 
 

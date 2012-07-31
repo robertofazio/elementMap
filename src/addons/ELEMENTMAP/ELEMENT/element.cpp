@@ -23,7 +23,10 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
     isWarpable      = _isWarpable;
     isSelected      = false;
     
-    if (isWarpable) warper.setup(elementWidth, elementHeight);
+    if (isWarpable) 
+        {
+            warper.setup(elementWidth, elementHeight, _name);
+        }
     
 		fboLeft.allocate(elementWidth,elementHeight, internalFormat);
 		fboRight.allocate(elementWidth,elementHeight, internalFormat);

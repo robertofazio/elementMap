@@ -9,11 +9,15 @@ elementWarp::elementWarp()
 
 
 //-----------------------------------------------------------------
-void elementWarp::setup(int _outputWidth, int _outputHeight)
+void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
 {
     //set texture w & h
     width=_outputWidth;
     height=_outputHeight;
+
+    //file name for save/load settings
+    xmlName=_name+".xml";
+    cout << "XML FILE: " + xmlName << endl;
 
     //prepare a texture 
     text.allocate(width, height, GL_RGB);
@@ -59,7 +63,7 @@ void elementWarp::resetOutput(int newOutputWidth, int newOutputHeight)
     if(text.isAllocated())
         text.clear();
     
-    this->setup(newOutputWidth, newOutputHeight);
+    this->setup(newOutputWidth, newOutputHeight, xmlName);
 }
 
 
@@ -101,6 +105,8 @@ void elementWarp::draw(ofTexture _text)
     if (bViewGrid) drawGrid();        
     glPopMatrix();
     
+    
+    
     //draw special markers for quad warp vertices
     if (bWarpActive)
     {
@@ -137,6 +143,7 @@ void elementWarp::draw(ofTexture _text)
             ofPopStyle();
         }
     }
+
 
     
 }
@@ -947,7 +954,7 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     XML.popTag();
     
     XML.popTag();
-    XML.saveFile("elementWarp.xml");
+    XML.saveFile(xmlName);
 }
 
 
@@ -956,7 +963,7 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
 void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
 {
     ofxXmlSettings tempXML;
-    tempXML.loadFile("elementWarp.xml");
+    tempXML.loadFile(xmlName);
     
     tempXML.pushTag("warp");
     resX = tempXML.getValue("xRes", 0);
@@ -1035,4 +1042,18 @@ void elementWarp::load()
     quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
     quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));   
 //    updateCoordinates();
+}
+
+
+//--------------------------------------------------------------
+void elementWarp::drawElementOutline()
+{
+    ofPushStyle();
+    ofSetColor(ofColor :: red);
+    ofSetLineWidth(10);
+    ofLine(mainVertici[0], mainVertici[1]);
+    ofLine(mainVertici[1], mainVertici[2]);
+    ofLine(mainVertici[2], mainVertici[3]);
+    ofLine(mainVertici[3], mainVertici[0]);
+    ofPopStyle();
 }

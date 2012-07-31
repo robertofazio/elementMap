@@ -15,7 +15,7 @@ class elementWarp
 	
 	elementWarp();
     
-    void setup(int _outputWidth, int _outputHeight);
+    void setup(int _outputWidth, int _outputHeight, string _name);
     void resetOutput(int newOutputWidth, int newOutputHeight);
     void draw(ofTexture _text);
     void updateCoordinates();
@@ -59,6 +59,8 @@ class elementWarp
     void save();
     void load();
     
+    string      xmlName;
+    
     ofImage     img;
     ofTexture   text;
     
@@ -94,7 +96,7 @@ class elementWarp
     ofMatrix4x4 mat;
     string      comandi;
 
-    
+    void drawElementOutline();
 };
 
 #endif
