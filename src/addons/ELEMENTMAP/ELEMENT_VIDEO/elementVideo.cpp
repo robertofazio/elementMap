@@ -15,31 +15,19 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	
 	if(getIsStereo())
 	{
-		//rightChannelPlayer.loadMovie(_rightChannel,OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
 		rightChannelPlayer.loadMovie(_rightChannel);
 		rightChannelPlayer.play();
 	}
-	
-	//leftChannelPlayer.loadMovie(_leftChannel,OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
-	leftChannelPlayer.loadMovie(_leftChannel);
+    leftChannelPlayer.loadMovie(_leftChannel);
 	leftChannelPlayer.play();
-	
-	while(!leftChannelPlayer.isLoaded())
-	{
-		printf("·");
-	}
 	
 	// UI params
 	xPos = _xPos;
 	yPos = _yPos;
 	
-//	this->init(1,int(leftChannelPlayer.getWidth()),int(leftChannelPlayer.getHeight()),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo());
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo(), _isWarpable);
     
     isPaused=false;
-    
-
-	
 }
 
 void elementVideo::addFX(int type)
@@ -52,25 +40,6 @@ void elementVideo::applyFX()
     
 }
 
-/*
-void elementVideo::drawPreview(int x, int y, int w, int h)
-{
-    for(int a = 0; a < effects.size(); a++)
-    {
-        if(effects[a]->getIsActive())
-        {
-            applyFX();
-            effects[a]->finalFbo.draw(x, y, w, h);
-        }
-        else
-            effects[a]->getLeftTexture().draw(x, y, w, h);
-        if(effects[a]->getGUIVisible())
-        {
-            effects[a]->drawGUI(x, y, w, h);
-        }
-    }
-}
-*/
 //-----------------------------------------------------------------
 void elementVideo::update()
 {

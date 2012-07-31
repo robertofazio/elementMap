@@ -24,7 +24,6 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
 	xPos = _posX;
 	yPos = _posY;
     
-//	this->init(2,int(leftImage.getWidth()),int(leftImage.getHeight()),GL_RGBA,_name,this->getIsStereo());	
     this->init(2,int(_width),int(_height),GL_RGBA,_name,this->getIsStereo(), _isWarpable);	
 }
 

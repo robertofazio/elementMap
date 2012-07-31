@@ -60,10 +60,10 @@ void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
 //-----------------------------------------------------------------
 void elementWarp::resetOutput(int newOutputWidth, int newOutputHeight)
 {
-    if(text.isAllocated())
-        text.clear();
-    
-    this->setup(newOutputWidth, newOutputHeight, xmlName);
+//    if(text.isAllocated())
+//        text.clear();
+//    
+//    this->setup(newOutputWidth, newOutputHeight, xmlName);
 }
 
 
