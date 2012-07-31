@@ -76,6 +76,8 @@ class elementWarp
     ofPoint vertici[MAX_POINTS];
     ofPoint texVert[MAX_POINTS];
     ofPoint screenPos[MAX_POINTS];
+    ofPoint gridVert[MAX_POINTS];
+    
     ofPoint mainVertici[4];
     int     mainIndex[4];
     

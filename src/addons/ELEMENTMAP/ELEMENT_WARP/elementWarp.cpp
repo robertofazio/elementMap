@@ -18,12 +18,27 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     //prepare a texture 
     text.allocate(width, height, GL_RGB);
 
+    // QUAD WARPER INIT
+    bWarpActive=true;
+    mainVertici[0]=ofPoint(0,0);            //top left
+    mainVertici[1]=ofPoint(text.getWidth(),0);        //top right
+    mainVertici[2]=ofPoint(text.getWidth(),text.getHeight());   //bottom right
+    mainVertici[3]=ofPoint(0,text.getHeight());       //bottom left
+    quadWarp.setSourceRect( ofRectangle( 0, 0, text.getWidth(), text.getHeight() ) );              
+    quadWarp.setTopLeftCornerPosition(ofPoint(mainVertici[0].x, mainVertici[0].y));            
+    quadWarp.setTopRightCornerPosition(ofPoint(mainVertici[1].x, mainVertici[1].y));        
+    quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
+    quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));        
+        
+    // GRID WARPER INIT
     //default grid= 4x4 control points
     xRes=4;
     yRes=4;
     //create grid coordinates
+    bViewGrid=true;
     createGrid(xRes, yRes);
-    //start with active warp and transalte non-active
+
+    //start with everything deactivated
     bWarpActive=false;
     bViewGrid=false;
     bSposta=false;
@@ -31,23 +46,14 @@ void elementWarp::setup(int _outputWidth, int _outputHeight)
     bMela=false;
     bSpeedUp=false;
 
-    //quadWarper init    
-    mainVertici[0]=ofPoint(0,0);            //top left
-    mainVertici[1]=ofPoint(width,0);        //top right
-    mainVertici[2]=ofPoint(width,height);   //bottom right
-    mainVertici[3]=ofPoint(0,height);       //bottom left
-    quadWarp.setSourceRect( ofRectangle( 0, 0, width, height ) );              
-    quadWarp.setTopLeftCornerPosition(ofPoint(mainVertici[0].x, mainVertici[0].y));            
-    quadWarp.setTopRightCornerPosition(ofPoint(mainVertici[1].x, mainVertici[1].y));        
-    quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
-    quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));        
-        
+    
     //auto-load last warp settings on startup
     load();
     
     
 }
 
+//-----------------------------------------------------------------
 void elementWarp::resetOutput(int newOutputWidth, int newOutputHeight)
 {
     if(text.isAllocated())
@@ -84,7 +90,7 @@ void elementWarp::draw(ofTexture _text)
         {
             glTexCoord2f(texVert[index].x, texVert[index].y);
             glVertex2f(vertici[index].x, vertici[index].y);
-            
+                        
             index++;
         }
         glEnd();
@@ -169,14 +175,22 @@ void elementWarp::createGrid(int _xRes, int _yRes){
     while (row<(_yRes-1)) {
         for (int ind=0; ind<4; ind++) {
             
-            if (ind==0 || ind==3) vertici[index].x=col*(width/(_xRes-1));
-            if (ind==1 || ind==2) vertici[index].x=(col+1)*(width/(_xRes-1));
+            if (ind==0 || ind==3) gridVert[index].x=col*(width/(_xRes-1));
+            if (ind==1 || ind==2) gridVert[index].x=(col+1)*(width/(_xRes-1));
             
-            if (ind==0 || ind==1) vertici[index].y=row*(height/(_yRes-1)); 
-            if (ind==2 || ind==3) vertici[index].y=(row+1)*(height/(_yRes-1)); 
+            if (ind==0 || ind==1) gridVert[index].y=row*(height/(_yRes-1)); 
+            if (ind==2 || ind==3) gridVert[index].y=(row+1)*(height/(_yRes-1)); 
             
-            texVert[index]=vertici[index];
-            screenPos[index]=vertici[index];
+            vertici[index]=gridVert[index];
+            screenPos[index]=gridVert[index];
+
+            //            texVert[index]=vertici[index];
+            
+            if (ind==0 || ind==3) texVert[index].x=col*(text.getWidth()/(_xRes-1));
+            if (ind==1 || ind==2) texVert[index].x=(col+1)*(text.getWidth()/(_xRes-1));
+            
+            if (ind==0 || ind==1) texVert[index].y=row*(text.getHeight()/(_yRes-1)); 
+            if (ind==2 || ind==3) texVert[index].y=(row+1)*(text.getHeight()/(_yRes-1)); 
             
             index++;
         }
@@ -271,7 +285,6 @@ void elementWarp::mouseDragged(int x, int y, int button){
             }
         
     }
-//    updateCoordinates();    
 
 }
 
@@ -313,7 +326,6 @@ void elementWarp::mousePressed(int x, int y, int button){
             
     }   
 
-//    updateCoordinates();
 }
 
 
@@ -469,7 +481,7 @@ void elementWarp::resetPoint()
                 }
                 
     
-                else vertici[i]=texVert[i];
+                else vertici[i]=gridVert[i];
             }
         }
     }
@@ -817,7 +829,7 @@ void elementWarp::warpKeyPressedHandler(int _key)
                 increaseXgrid();
                 decreaseXgrid();
             }
-            resetPoint();
+            else resetPoint();
             break;
             
         case 99: //'c':
