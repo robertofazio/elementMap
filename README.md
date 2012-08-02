@@ -25,10 +25,12 @@ TO DO LIST:
 
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
-- Implementare la funzione Rotate e Zoom per ogni warp
+- Implementare la funzione Rotate e Zoom per ogni warp.
+- Controlli R,G,B per ogni element
 - Eliminare la preview di destra per ottimizzare risorse e lasciare solo quella di sinistra.
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Abilitare Blending Mode, solo 4 , i più classici, normal, add, etc..
+- Inserire uno slider opacità sul mixer finale , è utile in proiezione.
 - Interfaccia
 
 ===========
