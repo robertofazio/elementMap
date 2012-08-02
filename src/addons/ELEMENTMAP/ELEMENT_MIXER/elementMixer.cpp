@@ -101,9 +101,11 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
             if(sceneElements[elementsOrder[a]]->getIsActive())
             {
                 float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
+                ofPushStyle();
                 ofSetColor(255, 255, 255, opacity);
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                 if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
+                ofPopStyle();
             }
 		
 		fboLeft.end();
@@ -121,11 +123,15 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                     if(sceneElements[elementsOrder[a]]->getIsActive())
                         {
                             float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
-                            ofSetColor(255, 255, 255, opacity);
+                            ofPushStyle();
+
                             if(sceneElements[elementsOrder[a]]->getIsStereo())
                                 sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                             else
                                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
+                            
+                            ofPopStyle();
+
                                 }
 
                 fboRight.end();

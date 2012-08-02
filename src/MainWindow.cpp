@@ -17,7 +17,7 @@ void MainWindow::setup()
 	//outputResolutionY	= ofGetScreenHeight();
 	drawPreviews		= true;
 	drawUIs				= true;
-	
+
 	ofEnableAlphaBlending();
 	
 	// test that GL_STEREO is working on this machine

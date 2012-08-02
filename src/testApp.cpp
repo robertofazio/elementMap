@@ -18,8 +18,6 @@ void testApp::setup(){
     
 	ofBackground(0,0,0);
     
-    
-    
     outputWindow = new OutputWindow(this);
     int firstScreenWidth = ofGetScreenWidth() - 1;      // Se posiziono esattamente alla fine del primo schermo, la finestra viene spostato indietro e posizionata totalmente all'interno del primo schermo. Cos“ invece si posiziona nel secondo schermo
     output = ofxFensterManager::get()->createFenster(firstScreenWidth, 0, 1024, 768, OF_WINDOW);
