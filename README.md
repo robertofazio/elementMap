@@ -19,6 +19,7 @@ KNOWN ISSUES:
 - bug quando seleziono il quad senza aver premuto W si muove lo stesso
 - se ci sono più quad warp nello stesso punto li muovo entrambi
 - Picolo bug sul volume, quando si spegne e si muove lo slider si riattiva
+- In fullscreen ci va solo se si disattivano i quad, se premi 1-2-3 non fa più correttamente in fullscreen. Testato con un solo monitor.
 
 TO DO LIST:
 
