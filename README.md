@@ -1,6 +1,25 @@
 element.map
 ===========
 
+versione alpha 0.1.4 - 02/08/2012
+
+MAIN NEW FEATURES:
+
+- warp per ogni livello; nella finestra di output si seleziona il livello con i tasti '1' '2' e '3' ('0' per deselezionare), poi i comandi sono i soliti;
+- salva/caica funzionante sui singoli livelli;
+- aggiunto un bordo rosso per evidenziare il livello selezionato
+- l'opacità è tornata in funzione, e ora è gestita dal warper (che ha preso alcune funzioni del mixer..)
+- frame by frame ripristinato correttamente: ',' e '.' per avanzare/retrocedere di un frame nel video
+- controllo volume funzionante (by Mauro)
+
+KNOWN ISSUES:
+- il livello video non ha trasparenza esterna
+
+
+
+===========
+
+
 updated on 19/07/2012
 
 - aggiunta seconda finestra!
