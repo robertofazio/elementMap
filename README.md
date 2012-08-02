@@ -14,8 +14,15 @@ MAIN NEW FEATURES:
 
 KNOWN ISSUES:
 - il livello video non ha trasparenza esterna
+- Syphon problema di risoluzione 
+- bug quando seleziono il quad senza aver premuto W si muove lo stesso
+- se ci sono più quad warp nello stesso punto li muovo entrambi
 
-
+TO DO LIST:
+- Implementare la funzione Rotate e Zoom per ogni warp
+- eliminare la preview di destra per ottimizzare risorse e lasciare solo quella di sinistra.
+- possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
+- Abilitare Blending Mode, solo 4 , i più classici, normal, add, etc..
 
 ===========
 
