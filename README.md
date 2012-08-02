@@ -1,8 +1,10 @@
 element.map
 ===========
 Sterescopic media server tool for video mapping.
+
 elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in OpenFrameworks destinato a video proiezioni stereoscopiche con tecnologia attiva sydebyside.
 elementMap attualmente è destinato per piattaforme basate su OSX 10.7 e non è escluso lo sviluppo per Windows e Linux.
+
 E' possibile utilizzare più sorgenti esterne Syphon
 
 versione alpha 0.1.4 - 02/08/2012
@@ -15,6 +17,10 @@ MAIN NEW FEATURES:
 - l'opacità è tornata in funzione, e ora è gestita dal warper (che ha preso alcune funzioni del mixer..)
 - frame by frame ripristinato correttamente: ',' e '.' per avanzare/retrocedere di un frame nel video
 - controllo volume funzionante (by Mauro)
+- Attualmente gestisce 3 elements , video , immagine e syphon
+- Quad warper and fine warper mesh fino a 17x17 suddivisioni
+- Possibilità di salvare e caricare una sola configurazione 
+- Opacità per ogni element
 
 KNOWN ISSUES:
 
@@ -31,15 +37,21 @@ TO DO LIST:
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Controlli R,G,B per ogni element
+- Opacità generale per andare a nero nel mixer.
 - Eliminare la preview di destra per ottimizzare risorse e lasciare solo quella di sinistra.
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
+- Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
 - Abilitare Blending Mode, solo 4 , i più classici, normal, add, etc..
+- Flipping options, per flippare l'immagine
+- Maschera per ogni element
 - Inserire uno slider opacità sul mixer finale , è utile in proiezione.
 - Interfaccia
 - Stereoscopia Anaglifo
 - Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
 - Edge Blending
 - Multiproiezioni
+- Export as SVG / PNG / PDF - MAD MAPPER
+- Spacial Scanner to turn your video-projector into a 2d scanner - MAD MAPPER
 
 ===========
 
