@@ -64,8 +64,8 @@ void MainWindow::setup()
     
 	// setup mix stuff
 	drawingOrder = new int[numOfElements];
-	drawingOrder[0]=2;
-	drawingOrder[1]=1;
+	drawingOrder[0]=2;  
+	drawingOrder[1]=1;  
 	drawingOrder[2]=3;
 	drawingOrder[3]=0;
 	
@@ -75,7 +75,7 @@ void MainWindow::setup()
     
     bFullscreen=false;
     
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
     georgiaitalic8.loadFont("georgiaz.ttf", 7);
     georgiaitalic14.loadFont("georgiaz.ttf", 18);
@@ -214,16 +214,16 @@ void MainWindow::keyPressed(int key)
     
     if (key== OF_KEY_BACKSPACE)
     {
-    elemV1.leftChannelPlayer.play();
-    elemV1.rightChannelPlayer.play();
-    elemV1.leftChannelPlayer.setPosition(0.0);
-    elemV1.rightChannelPlayer.setPosition(0.0);
-    elemV1.leftChannelPlayer.stop();
-    elemV1.rightChannelPlayer.stop();
+        elemV1.leftChannelPlayer.play();
+        elemV1.rightChannelPlayer.play();
+        elemV1.leftChannelPlayer.setFrame(0);
+        elemV1.rightChannelPlayer.setFrame(0);
+        elemV1.leftChannelPlayer.stop();
+        elemV1.rightChannelPlayer.stop();
     }
 
     
-    if(key == 'p')
+    if(key == '.')
     {
         elemV1.leftChannelPlayer.play();
         elemV1.rightChannelPlayer.play();
@@ -235,6 +235,20 @@ void MainWindow::keyPressed(int key)
         elemV1.rightChannelPlayer.stop();
 
     }
+
+    if(key == ',')
+    {
+        elemV1.leftChannelPlayer.play();
+        elemV1.rightChannelPlayer.play();
+        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()-1);
+        elemV1.rightChannelPlayer.setFrame(elemV1.rightChannelPlayer.getCurrentFrame()-1);
+        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.leftChannelPlayer.stop();
+        elemV1.rightChannelPlayer.stop();
+        
+    }
+
     if(key == 'i')
         ofSystemAlertDialog(comandi);
     
