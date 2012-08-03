@@ -1,5 +1,6 @@
-element.map
-===========
+##element.map##
+********************
+
 Sterescopic media server tool for video mapping.
 
 elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in OpenFrameworks e dedicato a video proiezioni stereoscopiche con tecnologia attiva sydebyside.
@@ -30,7 +31,7 @@ KNOWN ISSUES:
 - se ci sono più quad warp nello stesso punto li muovo entrambi
 - Picolo bug sul volume, quando si spegne e si muove lo slider si riattiva
 
-- ##RISOLTO## In fullscreen ci va solo se si disattivano i quad, se premi 1-2-3 non fa più correttamente in fullscreen. Testato con un solo monitor.
+- RISOLTO: In fullscreen ci va solo se si disattivano i quad, se premi 1-2-3 non fa più correttamente in fullscreen. Testato con un solo monitor.
 
 TO DO LIST:
 
