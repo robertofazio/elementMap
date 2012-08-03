@@ -66,12 +66,24 @@ ISTRUZIONI:
 - Cliccare sulla finestra principale e premere 'f' per mandare in fullscreen la seconda finestra. Una volta in fullscreen la seconda finestra non tornerà più in modalità normale.
 - 'w' abilito disabilito la funzione quad warper sull'element selezionato. Col mouse seleziono i vari vertici attivi nel riquadro rosso.
 - con 'arrow_key' muovo il vertice selezionato, '<' + 'arrow_key' aumento lo step di movimento.
+- 'v' seleziono il vertice, '<' + 'arrow_key' aumento lo step di movimento.
 - 'g' visualizzo mesh warper una griglia finao a 17x17 suddivisioni
-- 'q' , 'a' aumento/diminuisco risoluzione vertical mesh
-- 'z' , 'x' aumento/diminuisco risoluzione orizontal mesh
+- 'q' , 'a' aumento/diminuisco risoluzione vertical mesh , controlled by mouse
+- 'z' , 'x' aumento/diminuisco risoluzione orizontal mesh , controlled by mouse
+- 'h' selezione multipla dei punti
+- 'c' clear quad warp
+- 'r' resetto mesh point
+- MELA 'r' retto tutti i punti
+- 'n' , 'm' next, previous point
+- 't' translate element , '<' + 'arrow_key' aumento lo step di movimento.
+- 's' salvo configurazione warp
+- 'l' carico configurazione
 - Premere 'f' sulla prima finestra per abilitare/disabilitare la GUI nella prima finestra;
 - I tasti per modificare il warp funzionano solo con il mouse sulla seconda finestra;
+- 'return' disabilito gui interfaccia
 - La barra per play/pausa funziona nella prima finestra;
+- 'backspace' stop 
+- ',' '.' framebyframe
 - Il tasto 'i' per l'help funziona nella prima finestra;
 
 updated on 11/07/2012
