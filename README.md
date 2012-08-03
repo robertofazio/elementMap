@@ -69,7 +69,6 @@ ISTRUZIONI:
 - 'g' visualizzo mesh warper una griglia finao a 17x17 suddivisioni
 - 'q' , 'a' aumento/diminuisco risoluzione vertical mesh
 - 'z' , 'x' aumento/diminuisco risoluzione orizontal mesh
-- 
 - Premere 'f' sulla prima finestra per abilitare/disabilitare la GUI nella prima finestra;
 - I tasti per modificare il warp funzionano solo con il mouse sulla seconda finestra;
 - La barra per play/pausa funziona nella prima finestra;
