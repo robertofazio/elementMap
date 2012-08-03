@@ -46,31 +46,62 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             break;
             
         case 48: // '0' = deselect all layers
+            mainScene->mainWindow->elemImg2.isSelected=true;
+            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
+            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
             mainScene->mainWindow->elemImg2.isSelected=false;
+
+            mainScene->mainWindow->elemSy.isSelected=true;
+            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
             mainScene->mainWindow->elemSy.isSelected=false;
+
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
             mainScene->mainWindow->elemV1.isSelected=false;
-            cout << "deselect" << endl;
             break;
             
         case 49: // '1' = select Syphon element
+            mainScene->mainWindow->elemImg2.isSelected=true;
+            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
+            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
             mainScene->mainWindow->elemImg2.isSelected=false;
+
             mainScene->mainWindow->elemSy.isSelected=true;
+            
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
             mainScene->mainWindow->elemV1.isSelected=false;
-            cout << "syphon selected" << endl;
             break;
             
         case 50: // '2' = select Video element
-            mainScene->mainWindow->elemImg2.isSelected=false;
-            mainScene->mainWindow->elemSy.isSelected=false;
             mainScene->mainWindow->elemV1.isSelected=true;
-            cout << "video selected" << endl;                
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
+
+            mainScene->mainWindow->elemSy.isSelected=true;
+            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
+            mainScene->mainWindow->elemSy.isSelected=false;
+
+            mainScene->mainWindow->elemV1.isSelected=true;  
             break;
             
         case 51: // '3' = select Image element
             mainScene->mainWindow->elemImg2.isSelected=true;
+
+            mainScene->mainWindow->elemSy.isSelected=true;
+            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
             mainScene->mainWindow->elemSy.isSelected=false;
+            
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
             mainScene->mainWindow->elemV1.isSelected=false;
-            cout << "image selected" << endl;
             break;
             
         default:
