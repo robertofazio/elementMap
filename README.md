@@ -17,19 +17,16 @@ MAIN FEATURES:
 - aggiunto un bordo rosso per evidenziare il livello selezionato
 - l'opacità è tornata in funzione, e ora è gestita dal warper (che ha preso alcune funzioni del mixer..)
 - frame by frame ripristinato correttamente: ',' e '.' per avanzare/retrocedere di un frame nel video
-- controllo volume funzionante (by Mauro)
+- Controllo audio
 - Attualmente gestisce 3 elements , video , immagine e syphon
 - Possibilità di salvare e caricare una sola configurazione 
-- Opacità per ogni element
+- Controllo opacità e visibilità per ogni element
 
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
 - Syphon problema di risoluzione 
-- RISOLTO: bug quando seleziono il quad senza aver premuto W si muove lo stesso
-- RISOLTO: se ci sono più quad warp nello stesso punto li muovo entrambi
 - Picolo bug sul volume, quando si spegne e si muove lo slider si riattiva
-- RISOLTO: In fullscreen ci va solo se si disattivano i quad, se premi 1-2-3 non fa più correttamente in fullscreen. Testato con un solo monitor.
 
 TO DO LIST:
 
