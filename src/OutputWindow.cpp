@@ -14,9 +14,6 @@
 OutputWindow::OutputWindow(testApp* _mainScene)
 {
     mainScene = _mainScene;
-    bSpeedUp = false;
-    bMela = false;
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\ncmd+r\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'l'\treturn\t main window hide/show GUI\n\n'f'\t\tin second window fullscreen model\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
 }
 
 void OutputWindow::windowResized(int &w, int &h)
@@ -26,180 +23,113 @@ void OutputWindow::windowResized(int &w, int &h)
 
 void OutputWindow::keyPressed(int key, ofxFenster* window) 
 {              
-    cout << "KEY RELESED OUTPUT" << endl;
+    cout << "KEY PRESSED OUTPUT" << endl;
     cout << key << endl;
     
-        switch (key) {
-                
-            case 115: //'s':
-                cout << "Saved" << endl;
-                mainOutputWarp.save();
-                break;
-                
-            case 108: //'l':
-                mainOutputWarp.load();
-                mainOutputWarp.updateCoordinates();
+    switch (key) {
+         
+        case 102: //'f'
+            mainScene->mainWindow->elemImg2.isSelected=false;
+            mainScene->mainWindow->elemSy.isSelected=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
 
-                break;
-                
-            case 102: //'f'
+            ofToggleFullscreen();
+            
+            if (ofGetWindowMode() == OF_WINDOW)
+            {
+                ofSetWindowPosition(ofGetWindowPositionX(), 10);
                 ofToggleFullscreen();
-                
-                
-                if(ofGetWindowMode() == OF_WINDOW)
-                {
-                    ofSetWindowPosition(ofGetWindowPositionX(), 10);
-                    ofToggleFullscreen();
-                    ofSetWindowPosition(ofGetScreenWidth(), 0);
-                    ofToggleFullscreen();   
-                }
-                break;
-                                
-            case 119: //'w':
-                mainOutputWarp.bViewGrid=false;
-                mainOutputWarp.deselectAll();
-                mainOutputWarp.quadWarp.toggleShow();
-                mainOutputWarp.bWarpActive=!mainOutputWarp.bWarpActive;
-                break;     
-                
-            case 103: //'g':
-                mainOutputWarp.bWarpActive=false;
-                mainOutputWarp.quadWarp.hide();
-                mainOutputWarp.deselectAll();
-                mainOutputWarp.bViewGrid=!mainOutputWarp.bViewGrid;
-                break;     
-                
-            case 116: //'t':
-                mainOutputWarp.bSposta=!mainOutputWarp.bSposta;
-                mainOutputWarp.selectMainCorners();                
-                break;
-                
-            case 120: // 'x':
-                mainOutputWarp.increaseXgrid();
-                mainOutputWarp.updateCoordinates();
+                ofSetWindowPosition(ofGetWindowPositionX(), 0);
+                ofToggleFullscreen();
+            }
+            
+            break;
+            
+        case 48: // '0' = deselect all layers
+            mainScene->mainWindow->elemImg2.isSelected=true;
+            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
+            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
+            mainScene->mainWindow->elemImg2.isSelected=false;
 
-                break;
-                
-                
-            case 122: //'z':
-                mainOutputWarp.decreaseXgrid();
-                mainOutputWarp.updateCoordinates();
+            mainScene->mainWindow->elemSy.isSelected=true;
+            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
+            mainScene->mainWindow->elemSy.isSelected=false;
 
-                break;
-                
-                
-            case 113: //'q':
-                mainOutputWarp.increaseYgrid();
-                mainOutputWarp.updateCoordinates();
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
+            break;
+            
+        case 49: // '1' = select Syphon element
+            mainScene->mainWindow->elemImg2.isSelected=true;
+            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
+            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
+            mainScene->mainWindow->elemImg2.isSelected=false;
 
-                break;
-                
-                
-            case 97: //'a':
-                mainOutputWarp.decreaseYgrid();
-                mainOutputWarp.updateCoordinates();
+            mainScene->mainWindow->elemSy.isSelected=true;
+            
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
+            break;
+            
+        case 50: // '2' = select Video element
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
 
-                break;
-                
-                
-            case 269: //OF_KEY_UP
-                if (bSpeedUp) mainOutputWarp.pointUP(40);
-                else mainOutputWarp.pointUP(1);
-                mainOutputWarp.updateCoordinates();
+            mainScene->mainWindow->elemSy.isSelected=true;
+            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
+            mainScene->mainWindow->elemSy.isSelected=false;
 
-                break;
-                
-            case 270 ://OF_KEY_DOWN:
-                if (bSpeedUp) mainOutputWarp.pointDOWN(40);
-                else mainOutputWarp.pointDOWN(1);
-                mainOutputWarp.updateCoordinates();
+            mainScene->mainWindow->elemV1.isSelected=true;  
+            break;
+            
+        case 51: // '3' = select Image element
+            mainScene->mainWindow->elemImg2.isSelected=true;
 
-                break;
-                
-            case 267: //OF_KEY_LEFT:
-                if (bSpeedUp) mainOutputWarp.pointLEFT(40);
-                else mainOutputWarp.pointLEFT(1);
-                mainOutputWarp.updateCoordinates();
-
-                break;
-                
-            case 268: //OF_KEY_RIGHT:
-                if (bSpeedUp) mainOutputWarp.pointRIGHT(40);
-                else mainOutputWarp.pointRIGHT(1);
-                mainOutputWarp.updateCoordinates();
-
-                break;
-                
-            case 109: //'m':
-                mainOutputWarp.selectNextPoint();
-                break;
-                
-            case 110: //'n':
-                mainOutputWarp.selectPrevPoint();
-                break;
-                
-                
-            case 118: //'v':
-                mainOutputWarp.selectNextMainCorner();
-                break;
-                
-                
-            case 114: //'r':
-                if (bMela) 
-                {
-                    mainOutputWarp.increaseXgrid();
-                    mainOutputWarp.decreaseXgrid();                    
-                }
-                else mainOutputWarp.resetPoint();
-                
-                mainOutputWarp.updateCoordinates();
-
-                break;
-                
-            case 99: //'c':
-                mainOutputWarp.resetCorners();
-                mainOutputWarp.updateCoordinates();
-
-                break;
-
-            case 104: //'h':
-                mainOutputWarp.bHoldSelection=true;
-                break;
-                
-            case 60: //'<':
-                bSpeedUp=true;
-                break;
-                
-            case 262: // command
-                bMela=true;
-                break;
-                
-            default:
-                break;
-        }
+            mainScene->mainWindow->elemSy.isSelected=true;
+            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
+            mainScene->mainWindow->elemSy.isSelected=false;
+            
+            mainScene->mainWindow->elemV1.isSelected=true;
+            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
+            break;
+            
+        default:
+            break;
+    }
+    
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO:
+    //da rendere un po' più dinamico, una volta che il mixer sarà definitivo o quasi;
+    //adesso è così tanto per provare velocemente se funziona...
+    if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.warpKeyPressedHandler(key);
+    else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.warpKeyPressedHandler(key);
+    else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.warpKeyPressedHandler(key);
+    
+    
 }
 
 void OutputWindow::keyReleased(int key, ofxFenster *window)
 {
-    switch (key) {
-        case 104: // 'h':
-            mainOutputWarp.bHoldSelection=false;
-            break;
-            
-        case 60: // '<':
-            bSpeedUp=false;
-            break;
-            
-        case 262: // command
-            bMela=false;
-            break;
-
-    }
+    if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.warpKeyReleasedHandler(key);
+    else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.warpKeyReleasedHandler(key);
+    else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.warpKeyReleasedHandler(key);
+    
 }
 
 void OutputWindow::update()
 {
-//	mainOutputWarp.updateCoordinates();
+    mainScene->mainWindow->	elemMix.update();
+    
 }
 
 void OutputWindow::setWindowShape(int w, int h)
@@ -213,20 +143,32 @@ void OutputWindow::draw()
     ofTexture   text;
     
     ofSetColor(255, 255, 255);
-    //load texture from mixer fbo 
-    if(mainScene->mainWindow->elemMix.getOutputStereoMode() == ELM_STEREO_ANAGLYPH)
-        text = mainScene->mainWindow->elemMix.fboAnagliph.getTextureReference();
-    else
-        text = mainScene->mainWindow->elemMix.fboLeft.getTextureReference();
     
-    mainOutputWarp.warp(text);
+    //draw directly mixer fbo
+    if(mainScene->mainWindow->elemMix.getOutputStereoMode() == ELM_STEREO_ANAGLYPH)
+        mainScene->mainWindow->elemMix.fboAnagliph.draw(0, 0);    
+    else
+        mainScene->mainWindow->elemMix.fboLeft.draw(0,0);
+    
+    
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 10,10);
+    
+    
+    if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
+    else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
+    else if (mainScene->mainWindow->elemImg2.isSelected==true) ofDrawBitmapString("IMAGE ELEMENT SELECTED", 10,30);
+    else ofDrawBitmapString("NO ELEMENTs SELECTED", 10,30);
+
     
     
 }
 void OutputWindow::mouseDragged(int x, int y, int button,  ofxFenster* f)
 {
-    mainOutputWarp.mouseDragged(x, y, button);
-    mainOutputWarp.updateCoordinates();
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+    if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.mouseDragged(x, y, button);
+    else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.mouseDragged(x, y, button);
+    else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.mouseDragged(x, y, button);
+    
 }
 
 void OutputWindow::setup()
@@ -236,10 +178,13 @@ void OutputWindow::setup()
 void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
 {
     cout << "MOUSE PRESSED OUTPUT" << endl;
-    cout << x << endl;
-    cout << y << endl;
-    cout << btn << endl;
-    mainOutputWarp.mousePressed(x, y, btn);
+    //    cout << x << endl;
+    //    cout << y << endl;
+    //    cout << btn << endl;
     
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+    if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.mousePressed(x, y, btn);
+    else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.mousePressed(x, y, btn);
+    else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.mousePressed(x, y, btn);
     
 }

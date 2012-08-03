@@ -30,10 +30,7 @@ public:
     void        setWindowShape(int w, int h);  
     
     testApp*    mainScene;
-    elementWarp mainOutputWarp;
-    bool        bSpeedUp;
-    bool        bMela;
-    string      comandi;
+
     void        windowResized(int &w, int &h);
 };
 

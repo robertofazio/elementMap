@@ -42,6 +42,10 @@ elementUIBase::elementUIBase()
 //	  outputModesNames.push_back("OPENGL");
 //    outputModesNames.push_back("LEFTRIGHT");
 //    outputModesNames.push_back("TOPBOTTOM");    
+    
+    resolutionName.push_back("1024x768 (4/3)");
+    resolutionName.push_back("1280x1024 (4/3)");
+    resolutionName.push_back("1920x1080 (16/9)");
 
 	
 }
@@ -119,10 +123,9 @@ void elementUIBase::setupUI(element* _parentElement)
         //seconda colonna: audio
         posY -= 90;
         UI->addWidget(new ofxUIToggle(marginLeft + 150, posY+=30, 10, 10, parentElement->getIsActive(),"Sound on/off"));
-        UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
+        UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0,100,50 ,"Sound Volume"));
         
-       
-        
+    
         listOutputModes = new ofxUIDropDownList(marginLeft + 250, posY-=80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
@@ -131,6 +134,16 @@ void elementUIBase::setupUI(element* _parentElement)
         listOutputModes->setDrawFill(true);
         listOutputModes->setAutoClose(true);
         UI->addWidget(listOutputModes);
+        
+        
+        listResolution = new ofxUIDropDownList(marginLeft + 350, posY, 130, "Resolution", resolutionName, OFX_UI_FONT_SMALL);
+        listResolution->setDrawBack(true);
+        listResolution->setDrawOutlineHighLight(false);
+        listResolution->setDrawPaddingOutline(false);
+        listResolution->setPadding( 0 );
+        listResolution->setDrawFill(true);
+        listResolution->setAutoClose(true);
+        UI->addWidget(listResolution);
     }
     
     if (type!=5) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 

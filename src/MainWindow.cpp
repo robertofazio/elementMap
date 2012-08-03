@@ -17,7 +17,7 @@ void MainWindow::setup()
 	//outputResolutionY	= ofGetScreenHeight();
 	drawPreviews		= true;
 	drawUIs				= true;
-	
+
 	ofEnableAlphaBlending();
 	
 	// test that GL_STEREO is working on this machine
@@ -35,10 +35,10 @@ void MainWindow::setup()
 	int previewHeight = previewWidth / (float(ofGetWidth())/float(ofGetHeight()));
     
 	// create & setup elements on this app 
-	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"Test Pattern");
-	elemV1.setup("./movies/left1024.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movies");
-	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Images");
-	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon");
+	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"TestPattern", false);
+	elemV1.setup("./movies/left1024Audio.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movie", true);
+	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Image", true);
+	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
 	
     bPaused=false;
     
@@ -64,22 +64,18 @@ void MainWindow::setup()
     
 	// setup mix stuff
 	drawingOrder = new int[numOfElements];
-	drawingOrder[0]=2;
-	drawingOrder[1]=1;
+	drawingOrder[0]=2;  
+	drawingOrder[1]=1;  
 	drawingOrder[2]=3;
 	drawingOrder[3]=0;
 	
-	elemMix.setup(outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer");
+	elemMix.setup(this, outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
     
     bFullscreen=false;
-    bSpeedUp=false;
     
-    mainOutputWarp.setup(outputResolutionX, outputResolutionY);
-    
-    
-    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\n quad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video";
+    comandi ="element.map alpha 0.0.2\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
     georgiaitalic8.loadFont("georgiaz.ttf", 7);
     georgiaitalic14.loadFont("georgiaz.ttf", 18);
@@ -98,9 +94,7 @@ void MainWindow::setup()
 //--------------------------------------------------------------
 void MainWindow::update()
 {
-	elemMix.update();
-    if (bFullscreen) mainOutputWarp.updateCoordinates();
-    
+	elemMix.update();    
 }
 
 
@@ -113,16 +107,6 @@ void MainWindow::draw()
     elemMix.drawIntoFbo(isStereoCapable);
     
     if (bFullscreen) {
-        /*
-        ofSetColor(255, 255, 255);
-        //load texture from mixer fbo 
-        if(elemMix.getOutputStereoMode() == ELM_STEREO_ANAGLYPH)
-            text=elemMix.fboAnagliph.getTextureReference();
-        else
-            text=elemMix.fboLeft.getTextureReference();
-        
-        mainOutputWarp.warp(text);
-        */
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
         ofDrawBitmapString(ofToString(ofGetFrameRate()), position);
     }
@@ -130,8 +114,6 @@ void MainWindow::draw()
     else 
         
     {
-        
-        
         //preview window (non-fulscreen)
         
         ofSetColor(255, 255, 255);
@@ -232,16 +214,16 @@ void MainWindow::keyPressed(int key)
     
     if (key== OF_KEY_BACKSPACE)
     {
-    elemV1.leftChannelPlayer.play();
-    elemV1.rightChannelPlayer.play();
-    elemV1.leftChannelPlayer.setPosition(0.0);
-    elemV1.rightChannelPlayer.setPosition(0.0);
-    elemV1.leftChannelPlayer.stop();
-    elemV1.rightChannelPlayer.stop();
+        elemV1.leftChannelPlayer.play();
+        elemV1.rightChannelPlayer.play();
+        elemV1.leftChannelPlayer.setFrame(0);
+        elemV1.rightChannelPlayer.setFrame(0);
+        elemV1.leftChannelPlayer.stop();
+        elemV1.rightChannelPlayer.stop();
     }
 
     
-    if(key == 'p')
+    if(key == '.')
     {
         elemV1.leftChannelPlayer.play();
         elemV1.rightChannelPlayer.play();
@@ -253,6 +235,20 @@ void MainWindow::keyPressed(int key)
         elemV1.rightChannelPlayer.stop();
 
     }
+
+    if(key == ',')
+    {
+        elemV1.leftChannelPlayer.play();
+        elemV1.rightChannelPlayer.play();
+        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()-1);
+        elemV1.rightChannelPlayer.setFrame(elemV1.rightChannelPlayer.getCurrentFrame()-1);
+        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.leftChannelPlayer.stop();
+        elemV1.rightChannelPlayer.stop();
+        
+    }
+
     if(key == 'i')
         ofSystemAlertDialog(comandi);
     
@@ -261,18 +257,6 @@ void MainWindow::keyPressed(int key)
 //--------------------------------------------------------------
 void MainWindow::keyReleased(int key)
 {
-    switch (key) {
-        case 'h':
-            mainOutputWarp.bHoldSelection=false;
-            break;
-            
-        case '<':
-            bSpeedUp=false;
-            break;
-            
-            
-    }
-    
 }
 
 
@@ -285,18 +269,19 @@ void MainWindow::mouseMoved(int x, int y )
 //--------------------------------------------------------------
 void MainWindow::mouseDragged(int x, int y, int button)
 {
-    
-    
-    if (bFullscreen )     mainOutputWarp.mouseDragged(x, y, button);
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mouseDragged(x, y, button);
+    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mouseDragged(x, y, button);
+    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mouseDragged(x, y, button);
     
 }
-
 //--------------------------------------------------------------
 void MainWindow::mousePressed(int x, int y, int button)
 {
-    
-    if (bFullscreen )    mainOutputWarp.mousePressed(x, y, button);
-    
+    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mousePressed(x, y, button);
+    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mousePressed(x, y, button);
+    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------

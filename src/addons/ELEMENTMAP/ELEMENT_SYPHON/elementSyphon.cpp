@@ -9,7 +9,7 @@ elementSyphon::elementSyphon()
 }
 
 //-----------------------------------------------------------------
-void elementSyphon::setup(string _applicationName,string _serverName,int _width,int _height,int _posX, int _posY,string _name)
+void elementSyphon::setup(string _applicationName,string _serverName,int _width,int _height,int _posX, int _posY,string _name, bool _isWarpable)
 {
 	setIsStereo(false);
 	setDrawInStereo(false);
@@ -23,9 +23,7 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
 	xPos = _posX;
 	yPos = _posY;
 
-	// seems like syphonClient can't read w and h ?¿
-	//this->init(int(syphonClient.getWidth()),int(syphonClient.getHeight()),GL_RGBA);	
-	this->init(3,_width,_height,GL_RGBA,_name,false);	
+	this->init(3,_width,_height,GL_RGBA,_name,false, _isWarpable);	
 
 }
 
@@ -82,11 +80,31 @@ void elementSyphon::drawGraphic(int x, int y, int w, int h)
 }
 */
 
-
+//-----------------------------------------------------------------
+void elementSyphon::update()
+{
+    if (isWarpable)  warper.updateCoordinates();
+}
 //-----------------------------------------------------------------
 void elementSyphon::drawLeft(int x, int y, int w, int h)
 {
-	syphonClient.draw(x,y,w,h);
+    if (isWarpable)
+    {
+        
+    
+        fboLeft.begin();
+        warper.draw(getLeftTexture());
+        fboLeft.end();
+        
+        ofPushStyle();
+        int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
+        ofSetColor(255, 255, 255,_opacity);
+        fboLeft.draw(x,y,w,h);
+        ofPopStyle();
+    }
+    else
+        
+        syphonClient.draw(x,y,w,h);
 }
 
 
@@ -94,8 +112,21 @@ void elementSyphon::drawLeft(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementSyphon::drawRight(int x, int y, int w, int h)
 {
-	syphonClient.draw(x,y,w,h);	
+    if (isWarpable)
+    {
+        fboRight.begin();
+        warper.draw(getRightTexture());
+        fboRight.end();
+        
+        int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
+        ofSetColor(255, 255, 255,_opacity);
+        fboRight.draw(x,y,w,h);
+        ofPopStyle();    }
+    else
+        syphonClient.draw(x,y,w,h);	
 }
+
+
 
 //-----------------------------------------------------------------
 ofTexture& elementSyphon::getLeftTexture()

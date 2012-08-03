@@ -12,9 +12,9 @@ class elementSyphon : public element
 	
 	elementSyphon();
 	
-	void setup(string _applicationName,string _serverName,int _width, int _height,int _posX, int _posY,string _name);
+	void setup(string _applicationName,string _serverName,int _width, int _height,int _posX, int _posY,string _name, bool _isWarpable);
 	void drawIntoFbo(bool _drawMonoOrStereo){};
-	void update(){};
+	void update();
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
     void    addFX(int type);       // Mauro
@@ -33,4 +33,4 @@ class elementSyphon : public element
 
 };
 
-#endif;
+#endif
