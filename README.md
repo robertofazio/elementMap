@@ -25,6 +25,7 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
+- Guando si salva con il tasto 's' si dovrebbero salvare tutte le impostazioni, di opacity, visibility,volume etc.. e non solo il warp
 - Syphon problema di risoluzione 
 - Picolo bug sul volume, quando si spegne e si muove lo slider si riattiva
 
