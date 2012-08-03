@@ -29,6 +29,10 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
     switch (key) {
          
         case 102: //'f'
+            mainScene->mainWindow->elemImg2.isSelected=false;
+            mainScene->mainWindow->elemSy.isSelected=false;
+            mainScene->mainWindow->elemV1.isSelected=false;
+
             ofToggleFullscreen();
             
             if (ofGetWindowMode() == OF_WINDOW)

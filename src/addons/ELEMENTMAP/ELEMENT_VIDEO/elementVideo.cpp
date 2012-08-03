@@ -30,16 +30,27 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     isPaused=false;
 }
 
-void elementVideo::addFX(int type)
-{
-    
-}
-
+//-----------------------------------------------------------------
 void elementVideo::applyFX()
 {
-    
+    for(int a = 0; a < effects.size(); a++)
+    {
+        if(effects[a]->getIsActive())
+            effects[a]->applyFX();
+    }
 }
 
+//-----------------------------------------------------------------
+void elementVideo::addFX(int type)       // Mauro
+{
+    switch(type)
+    {
+        case ELEMENT_FX_MASK:            
+            newEffect.init(ELEMENT_FX_MASK, leftChannelPlayer.getTextureReference());
+            effects.push_back(&newEffect);
+            break;
+    }    
+}
 //-----------------------------------------------------------------
 void elementVideo::update()
 {
