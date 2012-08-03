@@ -7,13 +7,16 @@
 #include "ElementFX.h"
 #include "ElementFXMask.h"
 
+#include "elementWarp.h"
+
 class element : public ofNode , public elementUIBase 
 {
 	public :
 	
 	element(){};
 	
-	void init(int _type,int _width, int _height,int internalformat,string _name,bool _isStereo);
+	void init(int _type,int _width, int _height,int internalformat,string _name,bool _isStereo, bool _isWarpable);
+    void resetOutput(int newWidth, int newHeight);
 	virtual void update() =0;
 	virtual void drawIntoFbo(bool _drawMonoOrStereo) =0;
 	virtual void drawGraphic(int x, int y, int w, int h);
@@ -47,8 +50,8 @@ class element : public ofNode , public elementUIBase
 	string			getElementName();
 	int				getBlendingMode();
     
-//    ofTrueTypeFont          verdana8;
-//    ofTrueTypeFont          verdana10;
+    bool            isSelected;
+    bool            isWarpable;
     
     ofTrueTypeFont          georgiaitalic10;
     ofTrueTypeFont          georgiaitalic8;
@@ -56,6 +59,7 @@ class element : public ofNode , public elementUIBase
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
     
+    elementWarp     warper;
     
 	ElementFXMask newEffect;                                            // Non capisco perchè, ma se dichiaro l'effetto all'interno del metodo, poi ho problemi
     vector<ElementFX*>       effects;                                   // Mauro;
@@ -90,4 +94,4 @@ class element : public ofNode , public elementUIBase
 	
 };
 
-#endif;
+#endif

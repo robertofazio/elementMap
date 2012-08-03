@@ -55,7 +55,6 @@ public:
     
     bool                    bFullscreen;
     
-    bool                    bSpeedUp;
     bool                    frameByframe;
     
     ofTexture   text;
@@ -63,8 +62,6 @@ public:
     ofFbo   fboAnaglyph;
     
     string      comandi;
-    
-    elementWarp mainOutputWarp;
     
     bool        bPaused;
     

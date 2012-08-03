@@ -16,7 +16,7 @@ class elementVideo : public element
 	
 	elementVideo();
 	
-	void setup(string _leftChannel, string _rightChannel, int _width, int _height, bool _isStereo, int _posX, int _posY,string _name);
+	void setup(string _leftChannel, string _rightChannel, int _width, int _height, bool _isStereo, int _posX, int _posY,string _name, bool _isWarpable);
 	void drawIntoFbo(bool _drawMonoOrStereo){};
 	void update();
 	void    addFX(int type); // Mauro
@@ -33,4 +33,4 @@ class elementVideo : public element
 
 };
 
-#endif;
+#endif

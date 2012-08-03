@@ -18,16 +18,11 @@ void testApp::setup(){
     
 	ofBackground(0,0,0);
     
-    
-    
     outputWindow = new OutputWindow(this);
     int firstScreenWidth = ofGetScreenWidth() - 1;      // Se posiziono esattamente alla fine del primo schermo, la finestra viene spostato indietro e posizionata totalmente all'interno del primo schermo. Cos“ invece si posiziona nel secondo schermo
     output = ofxFensterManager::get()->createFenster(firstScreenWidth, 0, 1024, 768, OF_WINDOW);
     output->addListener(outputWindow);
     output->setWindowTitle("Output");
-    
-    //outputWindow->mainOutputWarp.setup(ofGetScreenWidth(), ofGetScreenHeight());
-    outputWindow->mainOutputWarp.setup(outputSizeWidth, outputSizeHeight);
     
     outputFullScreen = false;
     
@@ -41,7 +36,6 @@ void testApp::mouseMovedEvent(ofMouseEventArgs &args)
 //--------------------------------------------------------------
 void testApp::update(){
     mainWindow->update();
-    outputWindow->mainOutputWarp.updateCoordinates();
 }
 
 //--------------------------------------------------------------
@@ -55,21 +49,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     cout << "Key Pressed" << key << endl;
-    mainWindow->keyPressed(key);
-    switch (key) {
-        case 'f':
-            if(!outputFullScreen)
-            {
-                //outputFullScreen = true;
-                //ofToggleFullscreen();
-            }
-            //  outputWindow->mainOutputWarp.setup(outputSizeWidth, outputSizeHeight);
-            // outputWindow->mainOutputWarp.setup(ofGetScreenWidth(), ofGetScreenHeight());
-            break;
-        default:
-            //        scene->keyPressed(key);
-            break;
-    }
+    mainWindow->keyPressed(key);    
 }
 
 //--------------------------------------------------------------

@@ -173,20 +173,23 @@ void ofxQuadWarp :: reset()
 
 void ofxQuadWarp :: onMouseDragged( ofMouseEventArgs& mouseArgs )
 {
-	for( int i=0; i<4; i++ )
-	{
-		if( anchors[ i ].isMouseDown() )
-		{
-			dstPoints[ i ].x = mouseArgs.x;
-            dstPoints[ i ].y = mouseArgs.y;
-            
-			anchors[ i ].setPos
-			(
-                mouseArgs.x - anchorSize * 0.5,
-                mouseArgs.y - anchorSize * 0.5
-            );
-		}
-	}
+// bypassato per dare il controllo pieno a elementWarp :)
+    
+//    for( int i=0; i<4; i++ )
+//	{
+//		if( anchors[ i ].isMouseDown() )
+//		{
+//			dstPoints[ i ].x = mouseArgs.x;
+//            dstPoints[ i ].y = mouseArgs.y;
+//            
+//			anchors[ i ].setPos
+//			(
+//                mouseArgs.x - anchorSize * 0.5,
+//                mouseArgs.y - anchorSize * 0.5
+//            );
+//		}
+//	}
+//    }
 }
 
 //----------------------------------------------------- corners.

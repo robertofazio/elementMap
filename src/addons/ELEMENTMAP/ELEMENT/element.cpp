@@ -1,7 +1,7 @@
 #include "element.h"
 
 
-void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo)
+void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo, bool _isWarpable)
 {
 	printf("\n································································\n");
 	printf(">> element init :: %s :: w:%d - h:%d \n",_name.c_str(),_width,_height);
@@ -20,12 +20,14 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	isStereo		= _isStereo;
 	drawInStereo	= _isStereo;
 	blendingMode	= 0;
+    isWarpable      = _isWarpable;
+    isSelected      = false;
     
+    if (isWarpable) 
+        {
+            warper.setup(elementWidth, elementHeight, _name);
+        }
     
-    
-	if(type==5)
-	{
-		
 		fboLeft.allocate(elementWidth,elementHeight, internalFormat);
 		fboRight.allocate(elementWidth,elementHeight, internalFormat);
 		// clear the buffers from past (thnkx to matteo)
@@ -36,9 +38,6 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 		fboRight.begin();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		fboRight.end();
-        
-	}
-	
 
 		
 	setupUI(this);
@@ -48,6 +47,10 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
     this->initFont();
 }
 
+void element::resetOutput(int newWidth, int newHeight)
+{
+    if (isWarpable) warper.resetOutput(newWidth, newHeight);
+}
 
 void element::initFont()
 {
@@ -90,7 +93,11 @@ void element::drawGraphic(int x, int y, int w, int h)
     {
         ofPushMatrix();
         ofTranslate(0, 20);
-        this->drawLeft(x, y, w, h);
+        
+        ofTexture   leftTemp;
+        leftTemp=this->getLeftTexture();
+        leftTemp.draw(x, y, w, h);
+//        this->drawLeft(x, y, w, h);
         if(this->isStereo)
             this->drawRight(x + w + 4, y, w, h);
         
