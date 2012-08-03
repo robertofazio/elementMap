@@ -8,18 +8,17 @@ elementMap attualmente è stato sviluppato per piattaforme basate su OS X 10.7 m
 
 E' possibile utilizzare più sorgenti esterne Syphon
 
-versione alpha 0.1.4 - 02/08/2012
+versione alpha 0.1.5 - 03/08/2012
 
-MAIN NEW FEATURES:
+MAIN FEATURES:
 
-- warp per ogni livello; nella finestra di output si seleziona il livello con i tasti '1' '2' e '3' ('0' per deselezionare), poi i comandi sono i soliti;
-- salva/caica funzionante sui singoli livelli;
+- Quad warper and fine warper mesh fino a 17x17 suddivisioni
+- salva/carica di una sola configurazione.
 - aggiunto un bordo rosso per evidenziare il livello selezionato
 - l'opacità è tornata in funzione, e ora è gestita dal warper (che ha preso alcune funzioni del mixer..)
 - frame by frame ripristinato correttamente: ',' e '.' per avanzare/retrocedere di un frame nel video
 - controllo volume funzionante (by Mauro)
 - Attualmente gestisce 3 elements , video , immagine e syphon
-- Quad warper and fine warper mesh fino a 17x17 suddivisioni
 - Possibilità di salvare e caricare una sola configurazione 
 - Opacità per ogni element
 
@@ -65,6 +64,7 @@ ISTRUZIONI:
 
 - Nel file "outputRes.xml" settare larghezza e altezza del secondo monitor o proiettore. 
 - Fare partire l'applicazione;
+- warp per ogni livello; nella finestra di output si seleziona il livello con i tasti '1' '2' e '3' ('0' per deselezionare), poi i comandi sono i soliti;
 - La seconda finestra dovrebbe già trovarsi nel secondo monitor;
 - Cliccare sulla finestra principale e premere 'f' per mandare in fullscreen la seconda finestra. Una volta in fullscreen la seconda finestra non tornerà più in modalità normale.
 - Premere 'f' sulla prima finestra per abilitare/disabilitare la GUI nella prima finestra;
