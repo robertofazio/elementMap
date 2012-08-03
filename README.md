@@ -53,18 +53,23 @@ TO DO LIST:
 
 ===========
 
-
-updated on 19/07/2012
-
-- aggiunta seconda finestra!
-
 ISTRUZIONI:
 
 - Nel file "outputRes.xml" settare larghezza e altezza del secondo monitor o proiettore. 
-- Fare partire l'applicazione;
-- warp per ogni livello; nella finestra di output si seleziona il livello con i tasti '1' '2' e '3' ('0' per deselezionare), poi i comandi sono i soliti;
+- Aprite elementMap;
 - La seconda finestra dovrebbe già trovarsi nel secondo monitor;
+- Da preferenze di sistema disattivare 'duplica monitor' e selezionare 'rileva monitor' dopodichè portare la seconda finestra 'output' nel secondo monitor ( videoproiettore )
+- Premere 'f' per andare in fullscreen
+- Verrà visualizzata un'immagine testPattern, un monoscopio che ha lo scopo di aiutare l'utente per effettuare una calibrazione colore del videoproiettore e la messa in asse.
+- Disattivare testPatter , verranno così visualizzati i vari element.
+- warp per ogni livello; nella finestra di output si seleziona il livello con i tasti '1' '2' e '3' ('0' per deselezionare), poi i comandi sono i soliti;
 - Cliccare sulla finestra principale e premere 'f' per mandare in fullscreen la seconda finestra. Una volta in fullscreen la seconda finestra non tornerà più in modalità normale.
+- 'w' abilito disabilito la funzione quad warper sull'element selezionato. Col mouse seleziono i vari vertici attivi nel riquadro rosso.
+- con 'arrow_key' muovo il vertice selezionato, '<' + 'arrow_key' aumento lo step di movimento.
+- 'g' visualizzo mesh warper una griglia finao a 17x17 suddivisioni
+- 'q' , 'a' aumento/diminuisco risoluzione vertical mesh
+- 'z' , 'x' aumento/diminuisco risoluzione orizontal mesh
+- 
 - Premere 'f' sulla prima finestra per abilitare/disabilitare la GUI nella prima finestra;
 - I tasti per modificare il warp funzionano solo con il mouse sulla seconda finestra;
 - La barra per play/pausa funziona nella prima finestra;
