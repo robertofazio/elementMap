@@ -8,10 +8,11 @@ elementMap attualmente è stato sviluppato per piattaforme basate su OS X 10.7 m
 
 E' possibile utilizzare più sorgenti esterne Syphon
 
-versione alpha 0.1.5 - 03/08/2012
+versione alpha 0.1.6 - 13/08/2012
 
 MAIN FEATURES:
 
+- Blending mode attivi su ogni livello (add, subtract, multiply, alpha, screen) e selezionabili da interfaccia
 - Quad warper and fine warper mesh fino a 17x17 suddivisioni
 - salva/carica di una sola configurazione.
 - aggiunto un bordo rosso per evidenziare il livello selezionato
@@ -25,7 +26,7 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
-- Guando si salva con il tasto 's' si dovrebbero salvare tutte le impostazioni, di opacity, visibility,volume etc.. e non solo il warp
+- Quando si salva con il tasto 's' si dovrebbero salvare tutte le impostazioni, di opacity, visibility,volume etc.. e non solo il warp
 - Syphon problema di risoluzione 
 - Picolo bug sul volume, quando si spegne e si muove lo slider si riattiva
 
@@ -39,7 +40,6 @@ TO DO LIST:
 - Eliminare la preview di destra per ottimizzare risorse e lasciare solo quella di sinistra.
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
-- Abilitare Blending Mode, solo 4 , i più classici, normal, add, etc..
 - Flipping options, per flippare l'immagine
 - Maschera per ogni element
 - Inserire uno slider opacità sul mixer finale , è utile in proiezione.
@@ -73,7 +73,7 @@ ISTRUZIONI:
 - 'h' selezione multipla dei punti
 - 'c' clear quad warp
 - 'r' resetto mesh point
-- MELA 'r' retto tutti i punti
+- MELA 'r' resetto tutti i punti
 - 'n' , 'm' next, previous point
 - 't' translate element , '<' + 'arrow_key' aumento lo step di movimento.
 - 's' salvo configurazione warp
