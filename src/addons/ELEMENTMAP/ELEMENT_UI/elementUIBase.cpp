@@ -11,31 +11,13 @@
 //--------------------------------------------------------------
 elementUIBase::elementUIBase()
 {
-	blendingNames.push_back("Normal");
-	blendingNames.push_back("Multiply");
-	blendingNames.push_back("Average");
+        
+	blendingNames.push_back("Disabled");
+	blendingNames.push_back("Alpha");
 	blendingNames.push_back("Add");
-	blendingNames.push_back("Substract");
-	blendingNames.push_back("Difference");
-	blendingNames.push_back("Negation");
-	blendingNames.push_back("Exclusion");
+	blendingNames.push_back("Subtract");
+	blendingNames.push_back("Multiply");
 	blendingNames.push_back("Screen");
-	blendingNames.push_back("Overlay");
-	blendingNames.push_back("SoftLight");
-	blendingNames.push_back("HardLight");
-	blendingNames.push_back("Dodge");
-	blendingNames.push_back("Burn");
-	blendingNames.push_back("LinearLight");
-	blendingNames.push_back("VividLight");
-	blendingNames.push_back("PinLight");
-	blendingNames.push_back("HardMix");
-	blendingNames.push_back("Reflect");
-	blendingNames.push_back("Glow");
-	blendingNames.push_back("Phoenix");
-	blendingNames.push_back("Hue");
-	blendingNames.push_back("Saturation");
-	blendingNames.push_back("Bor");
-	blendingNames.push_back("Luminosity");
 	
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
@@ -187,13 +169,13 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         }
     else if( e.widget->getParent()->getName()=="Blending Mode")
 	{
-		for(int i=0;i<blendingNames.size();i++)
-		{
-			if(name==blendingNames[i]) 
-			{
-				parentElement->setBlendingMode(i);
-			}			
-		}
+            if(name=="Disabled") parentElement->setBlendingMode(OF_BLENDMODE_DISABLED);
+            else if(name=="Alpha") parentElement->setBlendingMode(OF_BLENDMODE_ALPHA);
+            else if(name=="Add")parentElement->setBlendingMode(OF_BLENDMODE_ADD);
+            else if(name=="Subtract")parentElement->setBlendingMode(OF_BLENDMODE_SUBTRACT);
+            else if(name=="Multiply")parentElement->setBlendingMode(OF_BLENDMODE_MULTIPLY);
+            else if(name=="Screen")parentElement->setBlendingMode(OF_BLENDMODE_SCREEN);
+                
 	}
     else if( e.widget->getParent()->getName()=="Output Mode")
 	{

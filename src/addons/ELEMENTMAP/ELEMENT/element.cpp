@@ -12,14 +12,14 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	type			= _type;
 	elementName		= _name;
 	opacity			= 1.0;
-	blendingMode	= 0;
+	blendingMode	= OF_BLENDMODE_DISABLED;
 	swapLeftRight	= false;
 	isShow			= true;
 	isActive		= true;
 	isClear			= false;
 	isStereo		= _isStereo;
 	drawInStereo	= _isStereo;
-	blendingMode	= 0;
+	blendingMode	= OF_BLENDMODE_DISABLED;
     isWarpable      = _isWarpable;
     isSelected      = false;
     
@@ -171,9 +171,9 @@ void element::setIsActive(bool b)
 	isActive = b;	
 }
 //-----------------------------------------------------------------------
-void element::setBlendingMode(int _i)
+void element::setBlendingMode(ofBlendMode _bm)
 {
-	blendingMode = _i;
+	blendingMode = _bm;
 }
 
 //
@@ -235,7 +235,7 @@ string element::getElementName()
 	return (elementName);	
 }
 //-----------------------------------------------------------------------
-int element::getBlendingMode()
+ofBlendMode element::getBlendingMode()
 {
 	return (blendingMode);	
 }

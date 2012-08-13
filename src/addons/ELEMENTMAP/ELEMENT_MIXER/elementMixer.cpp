@@ -4,14 +4,6 @@
 #include "testApp.h"
 #include "MainWindow.h"
 
-// TODO ::
-// add support for alpha values on the PSmode mixer
-
-// find a solution for the drawQuadGeometry . 
-// now it's working because we're working an 
-// image and we're discarting the tex0 uniform in shader.
-
-
 //-----------------------------------------------------------------
 void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable)
 {
@@ -102,12 +94,19 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
             {
                 float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
                 ofPushStyle();
+
                 ofSetColor(255, 255, 255, opacity);
+                
+                               
+                ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                 if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
+                ofDisableBlendMode();
+                
                 ofPopStyle();
             }
 		
+
 		fboLeft.end();
 		
         //////////////////////////

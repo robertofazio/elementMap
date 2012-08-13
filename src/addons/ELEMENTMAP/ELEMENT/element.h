@@ -34,7 +34,7 @@ class element : public ofNode , public elementUIBase
 	void			setOpacity(float f);
 	void			setIsShow(bool b);
 	void			setIsActive(bool b);
-	void			setBlendingMode(int _i);
+	void			setBlendingMode(ofBlendMode _bm);
     void            initFont();
 	
 	bool			getIsStereo();
@@ -48,7 +48,7 @@ class element : public ofNode , public elementUIBase
 	bool			getIsActive();
 	float			getOpacity();
 	string			getElementName();
-	int				getBlendingMode();
+	ofBlendMode		getBlendingMode();
     
     bool            isSelected;
     bool            isWarpable;
@@ -78,7 +78,7 @@ class element : public ofNode , public elementUIBase
 	bool			isClear;	// indicates if the fbo's have been cleared to black to avoid clearing on every draw
 	int				elementWidth;
 	int				elementHeight;
-	int				blendingMode;
+	ofBlendMode		blendingMode;
     
 	
 	private :
