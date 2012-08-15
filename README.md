@@ -37,6 +37,7 @@ TO DO LIST:
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Controlli R,G,B per ogni element
 - Opacità generale per andare a nero nel mixer.
+- Possibilità di cambiare la priorità di ogni element
 - Eliminare la preview di destra per ottimizzare risorse e lasciare solo quella di sinistra.
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
