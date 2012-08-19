@@ -42,6 +42,7 @@ public:
 	elementMixer			elemMix;
 	elementImage			elemImg;
 	elementImage			elemImg2;
+    
 	int						numOfElements;
 	
 	GLboolean				isStereoCapable;
@@ -57,13 +58,11 @@ public:
     
     bool                    frameByframe;
     
-    ofTexture   text;
+    ofFbo                   fboAnaglyph;
     
-    ofFbo   fboAnaglyph;
+    string                  comandi;
     
-    string      comandi;
-    
-    bool        bPaused;
+    bool                    bPaused;
     
     
     ofTrueTypeFont          georgiaitalic14;

@@ -16,7 +16,7 @@
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
                BuildableName = "elementsDEMO.app"
                BlueprintName = "elementsDEMO"
-               ReferencedContainer = "container:element_a0.1.6.xcodeproj">
+               ReferencedContainer = "container:element_a0.1.8.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,7 +34,7 @@
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "elementsDEMO.app"
             BlueprintName = "elementsDEMO"
-            ReferencedContainer = "container:element_a0.1.6.xcodeproj">
+            ReferencedContainer = "container:element_a0.1.8.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,7 +53,7 @@
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "elementsDEMO.app"
             BlueprintName = "elementsDEMO"
-            ReferencedContainer = "container:element_a0.1.6.xcodeproj">
+            ReferencedContainer = "container:element_a0.1.8.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,7 +71,7 @@
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "elementsDEMO.app"
             BlueprintName = "elementsDEMO"
-            ReferencedContainer = "container:element_a0.1.6.xcodeproj">
+            ReferencedContainer = "container:element_a0.1.8.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

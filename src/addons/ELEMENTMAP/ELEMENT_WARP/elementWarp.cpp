@@ -172,7 +172,7 @@ for (int index=0; index<nPoints; index++) {
 //--------------------------------------------------------------
 void elementWarp::createGrid(int _xRes, int _yRes){ 
     
-    nQuads=(xRes-1)*(yRes-1);
+    nQuads=(_xRes-1)*(_yRes-1);
     nPoints=4*nQuads;
     
     int index = 0;
@@ -665,7 +665,8 @@ void elementWarp::selectNextPoint()
     {
         int nuovaX,nuovaY;
         
-        for (int i=0; i<nPoints; i++) {
+        for (int i=0; i<nPoints; i++) 
+        {
             
             if (vertici[i].z==1)
             {
@@ -842,12 +843,7 @@ void elementWarp::warpKeyPressedHandler(int _key)
         case 99: //'c':
             resetCorners();
             break;
-            /*
-             case 'i':
-             ofSystemAlertDialog(comandi);
-             break;
-             */
-            
+                       
         case 262: //command
             bMela=true;
             break;

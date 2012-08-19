@@ -12,10 +12,7 @@ int margin = 10;
 //--------------------------------------------------------------
 void MainWindow::setup()
 {	
-	
-	//outputResolutionX	= ofGetScreenWidth();
-	//outputResolutionY	= ofGetScreenHeight();
-	drawPreviews		= true;
+    drawPreviews		= true;
 	drawUIs				= true;
 
 	ofEnableAlphaBlending();
@@ -88,10 +85,10 @@ void MainWindow::setup()
     
     
     logo.loadImage("./images/logo.png");
-    
-    //di default disattivo pattern e syphon per comodità di test ;)
-    elemSy.setIsActive(false);
-    elemImg.setIsActive(false);    
+
+//    di default disattivo pattern e syphon per comodità di test ;)
+//    elemSy.setIsActive(false);
+//    elemImg.setIsActive(false);    
 }
 
 //--------------------------------------------------------------

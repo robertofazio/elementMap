@@ -18,14 +18,10 @@ OutputWindow::OutputWindow(testApp* _mainScene)
 
 void OutputWindow::windowResized(int &w, int &h)
 {
-    cout << "RESIZED OUTPUT" << endl;
 }
 
 void OutputWindow::keyPressed(int key, ofxFenster* window) 
 {              
-    cout << "KEY PRESSED OUTPUT" << endl;
-    cout << key << endl;
-    
     switch (key) {
          
         case 102: //'f'

@@ -81,7 +81,6 @@ void testApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
     outputWindow->setWindowShape(w, h);
-    //  scene->windowResized(w, h);
 }
 
 
@@ -92,19 +91,4 @@ void testApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
-    for(int a = 0; a < dragInfo.files.size(); a++)
-    {
-        string fileExt = "xxx";
-        fileExt[0] =  dragInfo.files[a][dragInfo.files[a].length() - 3];
-        fileExt[1] =  dragInfo.files[a][dragInfo.files[a].length() - 2];
-        fileExt[2] =  dragInfo.files[a][dragInfo.files[a].length() - 1];
-        if(fileExt == "xml")
-        {
-            cout << "XML" << endl;
-            //      scene->loadCamXML(dragInfo.files[a]);
-        }
-        // else
-        //   scene->dragEvent(dragInfo);
-        
-    }
 }

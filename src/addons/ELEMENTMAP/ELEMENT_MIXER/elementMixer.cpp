@@ -9,12 +9,10 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
 {
     mainWindow = _mainWindow;
 	setOutputMode(_outputMode);
-	if(outputMode==0)
-	{	
-		this->setDrawInStereo(true);
-		this->setIsStereo(true);
+
+    this->setDrawInStereo(true);
+    this->setIsStereo(true);
 		
-	}
 	// UI params
 	xPos = _posX;
 	yPos = _posY;
@@ -113,7 +111,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                         //legge il blending mode associato al livello e lo applica
                         ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
                         
-                        //disegna l'uscita dell'element secondo le sue dimensioni proprie
+                        //disegna l'uscita destra se sono in stereo sia l'element che il mixer
                         if (sceneElements[elementsOrder[a]]->getDrawInStereo()==false || getDrawInStereo()==false)
                             {
                                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());                                
@@ -161,11 +159,17 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 		{
             
 			case ELM_MONO:
+                ofPushStyle();
+                ofSetColor(255, 255, 255, ofMap(getOpacity(), 0, 1, 0, 255));
                 fboLeft.draw(_x,_y,_width,_height);
+                ofPopStyle();
             break;
                 
             case ELM_STEREO_ANAGLYPH:
+                ofPushStyle();
+                ofSetColor(255, 255, 255, ofMap(getOpacity(), 0, 1, 0, 255));
                 fboAnagliph.draw(_x,_y,_width,_height);
+                ofPopStyle();
 				break;
 
             case ELM_STEREO_OPENGL:
@@ -175,7 +179,6 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
                 fboRight.draw(_x,_y,_width,_height);
                 break;
 
-                
 			default:
 				break;
 		}   
@@ -245,6 +248,12 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
 	
     for(int a = 0; a < 4; a++)
     {
+        if(e.widget->getName()=="Main Opacity")
+        {
+            ofxUISlider *slider = (ofxUISlider *) e.widget;
+            setOpacity(slider->getScaledValue());
+        }
+        
         if(e.widget->getName()=="Test Pattern")
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
@@ -324,6 +333,12 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NONE);
         else
             mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NORMAL);
+	}
+    
+    if(e.widget->getName()=="Opacity")
+	{
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+		parentElement->setOpacity(slider->getScaledValue());
 	}
     
     
