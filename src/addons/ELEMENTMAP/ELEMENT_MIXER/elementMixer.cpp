@@ -155,21 +155,19 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 //-----------------------------------------------------------------
 void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 {
-		switch (outputMode) 
+    //opacità generale
+    ofPushStyle();
+    ofSetColor(255, 255, 255, ofMap(getOpacity(), 0, 1, 0, 255));
+    
+    switch (outputMode) 
 		{
             
 			case ELM_MONO:
-                ofPushStyle();
-                ofSetColor(255, 255, 255, ofMap(getOpacity(), 0, 1, 0, 255));
                 fboLeft.draw(_x,_y,_width,_height);
-                ofPopStyle();
             break;
                 
             case ELM_STEREO_ANAGLYPH:
-                ofPushStyle();
-                ofSetColor(255, 255, 255, ofMap(getOpacity(), 0, 1, 0, 255));
                 fboAnagliph.draw(_x,_y,_width,_height);
-                ofPopStyle();
 				break;
 
             case ELM_STEREO_OPENGL:
@@ -183,7 +181,7 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				break;
 		}   
 		
-    
+    ofPopStyle();
     drawInfo();
 
 }

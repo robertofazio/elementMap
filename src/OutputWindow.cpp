@@ -137,9 +137,9 @@ void OutputWindow::draw()
 {
     ofBackground(0, 0, 0); 
     
-    ofTexture   text;
-    
-    ofSetColor(255, 255, 255);
+//    ofTexture   text;
+    ofPushStyle();
+    ofSetColor(255, 255, 255, ofMap(mainScene->mainWindow->elemMix.getOpacity(), 0, 1, 0, 255));
     
     //draw directly mixer fbo
     if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_STEREO_ANAGLYPH)
@@ -148,7 +148,7 @@ void OutputWindow::draw()
     }
     else if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_MONO)
         mainScene->mainWindow->elemMix.fboLeft.draw(0,0);
-
+    ofPopStyle();
     
     if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
     else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
