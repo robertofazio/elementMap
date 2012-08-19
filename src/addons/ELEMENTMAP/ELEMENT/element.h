@@ -63,11 +63,6 @@ class element : public ofNode , public elementUIBase
     
     elementWarp     warper;
     
-	ElementFXMask newEffect;                                            // Non capisco perchè, ma se dichiaro l'effetto all'interno del metodo, poi ho problemi
-    vector<ElementFX*>       effects;                                   // Mauro;
-    // virtual void                    drawPreview(int x, int y, int w, int h) = 0;    // Mauro
-    virtual void                    addFX(int type) = 0;                            // Mauro
-    virtual void                    applyFX() = 0;
     
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	

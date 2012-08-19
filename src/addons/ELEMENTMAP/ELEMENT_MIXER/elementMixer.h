@@ -40,10 +40,6 @@ class elementMixer : public element
     void drawInfo();
     
     void guiEvent(ofxUIEventArgs &e);
-
-    void addFX(int type){};       // Mauro
-    void applyFX(){};             // Mauro
-
     
     //utilities:
     int  getOutputMode();
@@ -71,4 +67,4 @@ class elementMixer : public element
 	
 };
 
-#endif;
+#endif

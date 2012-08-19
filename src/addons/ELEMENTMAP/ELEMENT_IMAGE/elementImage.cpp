@@ -33,32 +33,6 @@ void elementImage::update()
     if (isWarpable) warper.updateCoordinates();    
 }
 
-void elementImage::applyFX()
-{
-    for(int a = 0; a < effects.size(); a++)
-    {
-        if(effects[a]->getIsActive())
-            effects[a]->applyFX();
-    }
-}
-
-void elementImage::addFX(int type)       // Mauro
-{
-    switch(type)
-    {
-        case ELEMENT_FX_MASK:            
-            newEffect.init(ELEMENT_FX_MASK, leftImage.getTextureReference());
-            effects.push_back(&newEffect);
-            break;
-    }    
-}
-/*
- //-----------------------------------------------------------------
- void elementImage::drawGraphic(int x, int y, int w, int h)
- {
- //fboLeft.draw(x,y,w,h);
- this->drawLeft(x, y, w, h);
- }*/
 
 //-----------------------------------------------------------------
 void elementImage::drawLeft(int x, int y, int w, int h)

@@ -13,13 +13,8 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	setIsStereo(_isStereo);
 	setDrawInStereo(_isStereo);
 	
-	if(getIsStereo())
-	{
-		rightChannelPlayer.loadMovie(_rightChannel);
-		rightChannelPlayer.play();
-	}
+	if(getIsStereo()) rightChannelPlayer.loadMovie(_rightChannel);
     leftChannelPlayer.loadMovie(_leftChannel);
-	leftChannelPlayer.play();
 	
 	// UI params
 	xPos = _xPos;
@@ -30,27 +25,6 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     isPaused=false;
 }
 
-//-----------------------------------------------------------------
-void elementVideo::applyFX()
-{
-    for(int a = 0; a < effects.size(); a++)
-    {
-        if(effects[a]->getIsActive())
-            effects[a]->applyFX();
-    }
-}
-
-//-----------------------------------------------------------------
-void elementVideo::addFX(int type)       // Mauro
-{
-    switch(type)
-    {
-        case ELEMENT_FX_MASK:            
-            newEffect.init(ELEMENT_FX_MASK, leftChannelPlayer.getTextureReference());
-            effects.push_back(&newEffect);
-            break;
-    }    
-}
 //-----------------------------------------------------------------
 void elementVideo::update()
 {

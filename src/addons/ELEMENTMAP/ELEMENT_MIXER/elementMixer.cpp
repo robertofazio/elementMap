@@ -302,10 +302,14 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
     if(e.widget->getName()=="Video loop")
 	{
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        if(toggle->getValue() == 0)
+        if(toggle->getValue() == 0) {
             mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NONE);
-        else
+            mainWindow->elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NONE);
+        }
+        else {
             mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NORMAL);
+            mainWindow->elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NORMAL);
+        }
 	}
     
     if(e.widget->getName()=="Opacity")

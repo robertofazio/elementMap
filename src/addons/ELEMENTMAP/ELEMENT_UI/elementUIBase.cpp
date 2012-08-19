@@ -134,18 +134,12 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 {	
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
-//	cout << "got event from: " << name << endl; 
 	
 	if(e.widget->getName()=="Opacity")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setOpacity(slider->getScaledValue());
 	}
-//    else if(e.widget->getName()=="Test pattern")
-//	{
-//		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-//		parentElement->setIsActive(toggle->getValue());
-//	}
 	else if(e.widget->getName()=="isActive")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;

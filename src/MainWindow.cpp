@@ -37,7 +37,8 @@ void MainWindow::setup()
     elemV1.rightChannelPlayer.setPosition(0.0);
     elemV1.leftChannelPlayer.stop();
     elemV1.rightChannelPlayer.stop();
-
+    elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NONE);
+    elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NONE);
     
     elemImg.UI->toggleVisible();
     elemImg.setOpacity(1);

@@ -335,7 +335,7 @@
 		B0F08214157523E100E57266 /* ofxSyphonServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServer.mm; sourceTree = "<group>"; };
 		B0F082281575242C00E57266 /* elementSyphon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = elementSyphon.cpp; sourceTree = "<group>"; };
 		B0F082291575242C00E57266 /* elementSyphon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elementSyphon.h; sourceTree = "<group>"; };
-		B0F083A715753E0F00E57266 /* elementMixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = elementMixer.cpp; sourceTree = "<group>"; };
+		B0F083A715753E0F00E57266 /* elementMixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = elementMixer.cpp; path = src/addons/ELEMENTMAP/ELEMENT_MIXER/elementMixer.cpp; sourceTree = SOURCE_ROOT; };
 		B0F083A815753E0F00E57266 /* elementMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elementMixer.h; sourceTree = "<group>"; };
 		B0F084E71575521900E57266 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		B0F0852E1575527B00E57266 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
@@ -1075,8 +1075,8 @@
 		B0F083A615753E0F00E57266 /* ELEMENT_MIXER */ = {
 			isa = PBXGroup;
 			children = (
-				B0F083A715753E0F00E57266 /* elementMixer.cpp */,
 				B0F083A815753E0F00E57266 /* elementMixer.h */,
+				B0F083A715753E0F00E57266 /* elementMixer.cpp */,
 			);
 			path = ELEMENT_MIXER;
 			sourceTree = "<group>";
@@ -1228,7 +1228,7 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.1.8" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.1.9" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1636,7 +1636,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.1.8" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.1.9" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
