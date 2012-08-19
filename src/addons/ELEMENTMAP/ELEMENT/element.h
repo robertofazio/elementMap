@@ -52,18 +52,17 @@ class element : public ofNode , public elementUIBase
 	bool			getIsShow();
 	bool			getIsActive();
 	float			getOpacity();
-    int			getRed();
-    int			getGreen();
-    int			getBlue();
+    int             getRed();
+    int             getGreen();
+    int             getBlue();
 	string			getElementName();
 	ofBlendMode		getBlendingMode();
     
     bool            isSelected;
     bool            isWarpable;
     
-    ofTrueTypeFont          georgiaitalic10;
-    ofTrueTypeFont          georgiaitalic8;
-	
+    ofTrueTypeFont  fontMedium;
+    
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
     
@@ -90,9 +89,9 @@ class element : public ofNode , public elementUIBase
 	int				internalFormat; //GL_RGB,GL_RGBA ...
 	bool			drawInStereo;
 	bool			swapLeftRight;
-    int           r;
-    int           g;
-    int           b;
+    int             r;
+    int             g;
+    int             b;
 	float			opacity;
 	string			elementName;
 	

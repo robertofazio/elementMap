@@ -199,15 +199,15 @@ void elementMixer::drawInfo()
     switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-			ofDrawBitmapString("OPENGL",ofGetWidth()-200,ofGetHeight()-145);
+			fontMedium.drawString("OPENGL",ofGetWidth()-200,ofGetHeight()-145);
 			break;
 			
 		case ELM_MONO:
-			ofDrawBitmapString("MONO",ofGetWidth()-200,ofGetHeight()-145);
+			fontMedium.drawString("MONO",ofGetWidth()-200,ofGetHeight()-145);
 			break;
             
 		case ELM_STEREO_ANAGLYPH:
-			ofDrawBitmapString("ANAGLYPH",ofGetWidth()-200,ofGetHeight()-145);
+			fontMedium.drawString("ANAGLYPH",ofGetWidth()-200,ofGetHeight()-145);
 			break;
 		
         default:
@@ -216,14 +216,14 @@ void elementMixer::drawInfo()
     
     //framerate
 	ofSetColor(255,255,255);
-	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-200,ofGetHeight()-130);
+    fontMedium.drawString(ofToString(ofGetFrameRate()),ofGetWidth()-200,ofGetHeight()-130);
     
     
     
     //glSterreo capability
     ofSetColor(0,255,206);
-    if ( ((testApp*)ofGetAppPtr())->isGLCapable==GL_TRUE) ofDrawBitmapString("GL_STEREO \nSUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
-    else ofDrawBitmapString("GL_STEREO \nNOT SUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
+    if ( ((testApp*)ofGetAppPtr())->isGLCapable==GL_TRUE) fontMedium.drawString("GL STEREO:\nSUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
+    else fontMedium.drawString("GL STEREO:\nNOT SUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
     
     ofPopStyle();
     

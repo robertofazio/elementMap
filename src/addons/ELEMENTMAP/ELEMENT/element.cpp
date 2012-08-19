@@ -57,14 +57,11 @@ void element::resetOutput(int newWidth, int newHeight)
 
 void element::initFont()
 {
-    georgiaitalic8.loadFont("georgiaz.ttf", 7);
-    georgiaitalic10.loadFont("georgiaz.ttf", 9);
-    
-	georgiaitalic8.setLineHeight(12.0f);
-	georgiaitalic8.setLetterSpacing(1.017);
-    
-	georgiaitalic10.setLineHeight(12.0f);
-	georgiaitalic10.setLetterSpacing(1.017);   
+//    fontMedium.loadFont("georgiaz.ttf", 9);        
+    fontMedium.loadFont("CODEBold.otf", 9);        
+	fontMedium.setLineHeight(12.0f);
+	fontMedium.setLetterSpacing(1.017);   
+
 }
 
 void element::drawGraphic(int x, int y, int w, int h)
@@ -75,16 +72,16 @@ void element::drawGraphic(int x, int y, int w, int h)
         case 0:
             break;
         case 1:
-            georgiaitalic10.drawString("element.video", x , y + 11);
+            fontMedium.drawString("element.video", x , y + 11);
             break;
         case 2:
-            georgiaitalic10.drawString("element.image", x , y + 11);
+            fontMedium.drawString("element.image", x , y + 11);
             break;
         case 3:
-            georgiaitalic10.drawString("element.syphon", x , y + 11);
+            fontMedium.drawString("element.syphon", x , y + 11);
             break;
         case 5:
-            georgiaitalic10.drawString("element.Map Main Preview", x , y);
+            fontMedium.drawString("element.Map Main Preview", x , y);
             break;
     }
     

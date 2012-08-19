@@ -61,8 +61,8 @@ public:
     string                  comandi;
     
     
-    ofTrueTypeFont          georgiaitalic14;
-    ofTrueTypeFont          georgiaitalic8;
+    ofTrueTypeFont          fontLarge;
+    ofTrueTypeFont          fontSmall;
     
     ofImage                 logo;
     

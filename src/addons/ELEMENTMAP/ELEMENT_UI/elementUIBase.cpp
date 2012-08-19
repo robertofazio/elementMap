@@ -72,9 +72,10 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(listBlendModes);
         
         //terza colonna: componenti r,g,b
-        UI->addWidget(new ofxUIRotarySlider(280, 10, 25, 0, 255, parentElement->getRed() ,"R"));
-        UI->addWidget(new ofxUIRotarySlider(280, 55, 25, 0, 255, parentElement->getGreen() ,"G"));
-        UI->addWidget(new ofxUIRotarySlider(280, 100, 25, 0, 255, parentElement->getBlue() ,"B"));
+        UI->addWidget(new ofxUISlider(280, 10, 100,10, 0, 255, parentElement->getRed() ,"R"));
+        UI->addWidget(new ofxUISlider(280, 40, 100,10, 0, 255, parentElement->getGreen() ,"G"));
+        UI->addWidget(new ofxUISlider(280, 70, 100,10, 0, 255, parentElement->getBlue() ,"B"));
+        UI->addWidget(new ofxUIButton(280, 110, 10, 10, false, "RGB reset"));
         
         
     }
@@ -150,18 +151,25 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	}
 	else if(e.widget->getName()=="R")
 	{
-		ofxUIRotarySlider *rotary = (ofxUIRotarySlider *) e.widget;
-		parentElement->setRed(int(rotary->getScaledValue()));
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+		parentElement->setRed(int(slider->getScaledValue()));
     }
     else if(e.widget->getName()=="G")
 	{
-		ofxUIRotarySlider *rotary = (ofxUIRotarySlider *) e.widget;
-		parentElement->setGreen(int(rotary->getScaledValue()));
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+		parentElement->setGreen(int(slider->getScaledValue()));
     }
     else if(e.widget->getName()=="B")
 	{
-		ofxUIRotarySlider *rotary = (ofxUIRotarySlider *) e.widget;
-		parentElement->setBlue(int(rotary->getScaledValue()));
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+		parentElement->setBlue(int(slider->getScaledValue()));
+    }
+    else if(e.widget->getName()=="RGB reset")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        parentElement->setRed(255);
+        parentElement->setGreen(255);
+        parentElement->setBlue(255);
     }
 	
     else if(e.widget->getName()=="isActive")

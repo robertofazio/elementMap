@@ -16,6 +16,7 @@ void MainWindow::setup()
 	drawUIs				= true;
 
 	ofEnableAlphaBlending();
+    ofEnableSmoothing();
     
 	numOfElements = 4;
 	
@@ -64,15 +65,18 @@ void MainWindow::setup()
     
     comandi ="element.map alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
-    georgiaitalic8.loadFont("georgiaz.ttf", 7);
-    georgiaitalic14.loadFont("georgiaz.ttf", 18);
+//    fontSmall.loadFont("georgiaz.ttf", 7);
+//    fontLarge.loadFont("georgiaz.ttf", 18);
+
+    fontSmall.loadFont("CODEBold.otf", 7);
+    fontLarge.loadFont("CODEBold.otf", 18);
     
-	georgiaitalic8.setLineHeight(12.0f);
-	georgiaitalic8.setLetterSpacing(1.017);
+	fontSmall.setLineHeight(12.0f);
+	fontSmall.setLetterSpacing(1.017);
     
-	georgiaitalic14.setLineHeight(12.0f);
-	georgiaitalic14.setLetterSpacing(1.017);    
-    
+	fontLarge.setLineHeight(12.0f);
+	fontLarge.setLetterSpacing(1.017);
+        
     
     logo.loadImage("./images/logo.png");
 
@@ -106,7 +110,7 @@ void MainWindow::draw()
         //preview window (non-fulscreen)
         ofPushStyle();
         ofSetColor(255, 255, 255);
-        georgiaitalic14.drawString("element.Map", margin , margin * 4);
+        fontLarge.drawString("element.Map", margin , margin * 4);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -116,7 +120,7 @@ void MainWindow::draw()
         
         ofPushStyle();
         ofSetColor(255, 255, 255);
-        georgiaitalic8.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
+        fontSmall.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
         // frame by frame
         ofDrawBitmapString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
