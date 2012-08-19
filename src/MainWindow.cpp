@@ -27,14 +27,12 @@ void MainWindow::setup()
 	elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, true, 120 , (margin * 9) - 8 + (190 * 1),"Movie", true);
 	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", outputResolutionX,outputResolutionY, true, 120 , (margin * 9) - 8 + (190 * 2),"Image", true);
 	elemSy.setup("","",outputResolutionX,outputResolutionY, 120 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
-	
-    bPaused=false;
-    
-    //video starts at frame number 0 and paused
+	    
+    //video starts at frame number 0, paused and no-looping
     elemV1.leftChannelPlayer.play();
     elemV1.rightChannelPlayer.play();
-    elemV1.leftChannelPlayer.setPosition(0.0);
-    elemV1.rightChannelPlayer.setPosition(0.0);
+    elemV1.leftChannelPlayer.firstFrame();
+    elemV1.rightChannelPlayer.firstFrame();    
     elemV1.leftChannelPlayer.stop();
     elemV1.rightChannelPlayer.stop();
     elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NONE);
@@ -220,10 +218,8 @@ void MainWindow::keyPressed(int key)
     {
         elemV1.leftChannelPlayer.play();
         elemV1.rightChannelPlayer.play();
-        cout << elemV1.rightChannelPlayer.getPosition() << endl;
         elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()+1);
-        elemV1.rightChannelPlayer.setFrame(elemV1.rightChannelPlayer.getCurrentFrame()+1);
-        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.rightChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame());
         elemV1.leftChannelPlayer.stop();
         elemV1.rightChannelPlayer.stop();
 
@@ -233,10 +229,8 @@ void MainWindow::keyPressed(int key)
     {
         elemV1.leftChannelPlayer.play();
         elemV1.rightChannelPlayer.play();
-        cout << elemV1.rightChannelPlayer.getPosition() << endl;
         elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()-1);
-        elemV1.rightChannelPlayer.setFrame(elemV1.rightChannelPlayer.getCurrentFrame()-1);
-        cout << elemV1.rightChannelPlayer.getPosition() << endl;
+        elemV1.rightChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame());
         elemV1.leftChannelPlayer.stop();
         elemV1.rightChannelPlayer.stop();
         

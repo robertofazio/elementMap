@@ -60,8 +60,6 @@ public:
     
     string                  comandi;
     
-    bool                    bPaused;
-    
     
     ofTrueTypeFont          georgiaitalic14;
     ofTrueTypeFont          georgiaitalic8;

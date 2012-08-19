@@ -58,12 +58,11 @@ void elementUIBase::setupUI(element* _parentElement)
         
     // prima colonna: isActive, Mono/Stereo
     UI->addWidget(new ofxUIToggle(5, posY, 10,10,parentElement->getIsActive(),"isActive"));
-    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,posY+=20, 10, 10,parentElement->getDrawInStereo(),"Mono/Stereo"));
-//    UI->addWidget(new ofxUIToggle(5,posY+=20, 10, 10,parentElement->getIsActive(),"Mask"));
+    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,30, 10, 10,parentElement->getDrawInStereo(),"Mono/Stereo"));
     
         //seconda colonna: opacità e blending mode
-        UI->addWidget(new ofxUISlider(150, 10, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
-        listBlendModes = new ofxUIDropDownList(150, 50, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        UI->addWidget(new ofxUISlider(150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
+        listBlendModes = new ofxUIDropDownList(150, posY+40, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
@@ -71,7 +70,16 @@ void elementUIBase::setupUI(element* _parentElement)
         listBlendModes->setDrawFill(true);
         listBlendModes->setAutoClose(true);
         UI->addWidget(listBlendModes);
+        
+        //terza colonna: componenti r,g,b
+        UI->addWidget(new ofxUIRotarySlider(280, 10, 25, 0, 255, parentElement->getRed() ,"R"));
+        UI->addWidget(new ofxUIRotarySlider(280, 55, 25, 0, 255, parentElement->getGreen() ,"G"));
+        UI->addWidget(new ofxUIRotarySlider(280, 100, 25, 0, 255, parentElement->getBlue() ,"B"));
+        
+        
     }
+    
+
     
     //but mixer needs output mode selection and many other things :) 
 	else if (type==5)
@@ -140,7 +148,23 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setOpacity(slider->getScaledValue());
 	}
-	else if(e.widget->getName()=="isActive")
+	else if(e.widget->getName()=="R")
+	{
+		ofxUIRotarySlider *rotary = (ofxUIRotarySlider *) e.widget;
+		parentElement->setRed(int(rotary->getScaledValue()));
+    }
+    else if(e.widget->getName()=="G")
+	{
+		ofxUIRotarySlider *rotary = (ofxUIRotarySlider *) e.widget;
+		parentElement->setGreen(int(rotary->getScaledValue()));
+    }
+    else if(e.widget->getName()=="B")
+	{
+		ofxUIRotarySlider *rotary = (ofxUIRotarySlider *) e.widget;
+		parentElement->setBlue(int(rotary->getScaledValue()));
+    }
+	
+    else if(e.widget->getName()=="isActive")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setIsActive(toggle->getValue());

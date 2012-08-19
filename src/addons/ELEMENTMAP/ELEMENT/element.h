@@ -34,6 +34,9 @@ class element : public ofNode , public elementUIBase
 	void			setInternalFormat(int _i);
 	void			setSwapLeftRight(bool b);
 	void			setOpacity(float f);
+	void			setRed(int red);
+	void			setGreen(int green);
+	void			setBlue(int blue);
 	void			setIsShow(bool b);
 	void			setIsActive(bool b);
 	void			setBlendingMode(ofBlendMode _bm);
@@ -49,6 +52,9 @@ class element : public ofNode , public elementUIBase
 	bool			getIsShow();
 	bool			getIsActive();
 	float			getOpacity();
+    int			getRed();
+    int			getGreen();
+    int			getBlue();
 	string			getElementName();
 	ofBlendMode		getBlendingMode();
     
@@ -81,10 +87,12 @@ class element : public ofNode , public elementUIBase
 	private :
 	
 	int				type;
-    //	bool			isStereo;           // I put in elementUIBase.h -> Mauro
 	int				internalFormat; //GL_RGB,GL_RGBA ...
 	bool			drawInStereo;
 	bool			swapLeftRight;
+    int           r;
+    int           g;
+    int           b;
 	float			opacity;
 	string			elementName;
 	

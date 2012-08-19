@@ -45,8 +45,7 @@ void elementVideo::drawLeft(int x, int y, int w, int h)
     fboLeft.end();
     
     ofPushStyle();
-    int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
-    ofSetColor(255, 255, 255,_opacity);
+    ofSetColor(getRed(), getGreen(), getBlue(),int(ofMap(getOpacity(), 0, 1, 0, 255)));
     fboLeft.draw(x,y,w,h);
     ofPopStyle();        
 }
@@ -60,8 +59,7 @@ void elementVideo::drawRight(int x, int y, int w, int h)
     fboRight.end();
     
     ofPushStyle();
-    int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
-    ofSetColor(255, 255, 255,_opacity);
+    ofSetColor(getRed(), getGreen(), getBlue(),int(ofMap(getOpacity(), 0, 1, 0, 255)));
     fboRight.draw(x,y,w,h);
     ofPopStyle();
 }

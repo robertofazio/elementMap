@@ -12,6 +12,9 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	type			= _type;
 	elementName		= _name;
 	opacity			= 1.0;
+    r               = 255;
+    g               = 255;    
+    b               = 255;
 	blendingMode	= OF_BLENDMODE_DISABLED;
 	swapLeftRight	= false;
 	isShow			= true;
@@ -144,6 +147,21 @@ void element::setOpacity(float f)
 	opacity = f;	
 }
 //-----------------------------------------------------------------------
+void element::setRed(int red)
+{
+	r = red;	
+}
+//-----------------------------------------------------------------------
+void element::setGreen(int green)
+{
+	g = green;	
+}
+//-----------------------------------------------------------------------
+void element::setBlue(int blue)
+{
+	b = blue;	
+}
+//-----------------------------------------------------------------------
 void element::setIsShow(bool b)
 {
 	isShow = b;	
@@ -211,6 +229,21 @@ bool element::getIsActive()
 float element::getOpacity()
 {
 	return (opacity);
+}
+//-----------------------------------------------------------------------
+int element::getRed()
+{
+	return (r);
+}
+//-----------------------------------------------------------------------
+int element::getGreen()
+{
+	return (g);
+}
+//-----------------------------------------------------------------------
+int element::getBlue()
+{
+	return (b);
 }
 //-----------------------------------------------------------------------
 string element::getElementName()
