@@ -32,8 +32,6 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
-- Disabilitare di default il testPattern e scrive sotto 'PREMERE 'i' PER LE INFO'
-- si potrebbe visualizzare sul lato interfaccia se sono disponibili le gl_stereo
 - Possibilità di inserire la risoluzione prima che si apri l'app.
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Progettazione di un'area inspector
