@@ -10,7 +10,7 @@ versione alpha 0.1.8 - 19/08/2012
 
 MAIN FEATURES:
 
-- Slider opacità sull'output finale
+- Slider opacità sull'output finale; slideor opacità e RGB su ogni element
 - Modalità stereoscopica anaglifo funzionante
 - Blending mode attivi su ogni livello (add, subtract, multiply, alpha, screen) e selezionabili da interfaccia
 - Quad warper and fine warper mesh fino a 17x17 suddivisioni
@@ -34,7 +34,6 @@ TO DO LIST:
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
-- Controlli R,G,B per ogni element
 - Possibilità di cambiare la priorità di ogni element
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
