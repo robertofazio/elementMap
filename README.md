@@ -4,10 +4,8 @@
 Sterescopic media server tool for video mapping.
 
 elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in OpenFrameworks e dedicato a video proiezioni stereoscopiche con tecnologia attiva sydebyside.
-elementMap attualmente è stato sviluppato per piattaforme basate su OS X 10.7 ma non è escluso lo sviluppo per Windows e Linux.
-
-E' possibile utilizzare più sorgenti esterne Syphon
-
+os : OSX 10.7.4 
+scheda grafica : nVidia min 512MB e GL_STEREO supportate
 versione alpha 0.1.8 - 19/08/2012
 
 MAIN FEATURES:
@@ -35,6 +33,7 @@ KNOWN ISSUES:
 TO DO LIST:
 
 - Disabilitare di default il testPattern e scrive sotto 'PREMERE 'i' PER LE INFO'
+- si potrebbe visualizzare sul lato interfaccia se sono disponibili le gl_stereo
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Implementare la funzione Rotate e Zoom per ogni warp.
