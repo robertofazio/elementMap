@@ -34,9 +34,10 @@ TO DO LIST:
 
 - Disabilitare di default il testPattern e scrive sotto 'PREMERE 'i' PER LE INFO'
 - si potrebbe visualizzare sul lato interfaccia se sono disponibili le gl_stereo
+- Possibilità di inserire la risoluzione prima che si apri l'app.
+- Implementare la funzione Rotate e Zoom per ogni warp.
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
-- Implementare la funzione Rotate e Zoom per ogni warp.
 - Controlli R,G,B per ogni element
 - Possibilità di cambiare la priorità di ogni element
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
