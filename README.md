@@ -8,10 +8,11 @@ elementMap attualmente è stato sviluppato per piattaforme basate su OS X 10.7 m
 
 E' possibile utilizzare più sorgenti esterne Syphon
 
-versione alpha 0.1.6 - 13/08/2012
+versione alpha 0.1.6 - 19/08/2012
 
 MAIN FEATURES:
 
+- Modalità stereoscopica anaglifo funzionante
 - Blending mode attivi su ogni livello (add, subtract, multiply, alpha, screen) e selezionabili da interfaccia
 - Quad warper and fine warper mesh fino a 17x17 suddivisioni
 - salva/carica di una sola configurazione.
@@ -38,14 +39,12 @@ TO DO LIST:
 - Controlli R,G,B per ogni element
 - Opacità generale per andare a nero nel mixer.
 - Possibilità di cambiare la priorità di ogni element
-- Eliminare la preview di destra per ottimizzare risorse e lasciare solo quella di sinistra.
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
 - Flipping options, per flippare l'immagine
 - Maschera per ogni element
 - Inserire uno slider opacità sul mixer finale , è utile in proiezione.
 - Interfaccia
-- Stereoscopia Anaglifo
 - Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
 - Edge Blending
 - Multiproiezioni
