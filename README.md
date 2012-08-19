@@ -34,6 +34,7 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
+- Disabilitare di default il testPattern e scrive sotto 'PREMERE 'i' PER LE INFO'
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Implementare la funzione Rotate e Zoom per ogni warp.
