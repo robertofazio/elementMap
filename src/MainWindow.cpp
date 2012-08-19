@@ -16,16 +16,7 @@ void MainWindow::setup()
 	drawUIs				= true;
 
 	ofEnableAlphaBlending();
-	
-	// test that GL_STEREO is working on this machine
-	GLboolean isStereoCapable = GL_FALSE;
-	glGetBooleanv(GL_STEREO,&isStereoCapable);
-    GLint maxVertexTextureImageUnits;
-	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
     
-    if (isStereoCapable==GL_TRUE) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
-	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
-	
 	numOfElements = 4;
 	
 	int previewWidth = (ofGetWidth()-(20*numOfElements))/4;
@@ -86,16 +77,15 @@ void MainWindow::setup()
     
     logo.loadImage("./images/logo.png");
 
-//    di default disattivo pattern e syphon per comodità di test ;)
-//    elemSy.setIsActive(false);
-//    elemImg.setIsActive(false);    
+    //di default il test pattern non è visibile:
+    elemImg.setIsActive(false);    
 }
 
 //--------------------------------------------------------------
 void MainWindow::update()
 {
 	elemMix.update();  
-    elemMix.drawIntoFbo(isStereoCapable);
+    elemMix.drawIntoFbo(true);
 }
 
 
@@ -127,7 +117,7 @@ void MainWindow::draw()
         
         ofPushStyle();
         ofSetColor(255, 255, 255);
-        georgiaitalic8.drawString("Press 'f' to enter in fullscreen mode and edit warp; when in fullscreen press 'i' for info", 10 , ofGetWindowHeight() - 10);
+        georgiaitalic8.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
         // frame by frame
         ofDrawBitmapString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
@@ -197,7 +187,6 @@ void MainWindow::keyPressed(int key)
 		}
         
         bFullscreen=!bFullscreen;
-        //ofToggleFullscreen();
 	}
     if(key == ' ')
     {

@@ -80,7 +80,7 @@ void elementUIBase::setupUI(element* _parentElement)
         int posY = 460;
 
         //parte superiore sinistra: test Pattern e Mixer Stereo toggle
-        UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,parentElement->getIsActive(),"Test Pattern"));
+        UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,false,"Test Pattern"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getDrawInStereo(),"Stereo"));
         ofxUISpacer* spacer = new ofxUISpacer(marginLeft, posY+=20, 400, 1);
         spacer->setColorFill(ofColor(0, 255, 206));
@@ -141,11 +141,11 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setOpacity(slider->getScaledValue());
 	}
-    else if(e.widget->getName()=="Test pattern")
-	{
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		parentElement->setIsActive(toggle->getValue());
-	}
+//    else if(e.widget->getName()=="Test pattern")
+//	{
+//		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+//		parentElement->setIsActive(toggle->getValue());
+//	}
 	else if(e.widget->getName()=="isActive")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;

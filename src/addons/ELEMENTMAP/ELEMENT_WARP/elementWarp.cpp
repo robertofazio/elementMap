@@ -860,7 +860,6 @@ void elementWarp::warpKeyPressedHandler(int _key)
             break;
     }
     
-//    updateCoordinates();
 }
 
 
@@ -882,7 +881,6 @@ void elementWarp::warpKeyReleasedHandler(int _key)
             break;
     }
  
-//        updateCoordinates();
 }
 
 
@@ -1037,7 +1035,6 @@ void elementWarp::load()
     quadWarp.setTopRightCornerPosition(ofPoint(mainVertici[1].x, mainVertici[1].y));        
     quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
     quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));   
-//    updateCoordinates();
 }
 
 
@@ -1046,7 +1043,7 @@ void elementWarp::drawElementOutline()
 {
     ofPushStyle();
     ofSetColor(ofColor :: red);
-    ofSetLineWidth(10);
+    ofSetLineWidth(8);
     ofLine(mainVertici[0], mainVertici[1]);
     ofLine(mainVertici[1], mainVertici[2]);
     ofLine(mainVertici[2], mainVertici[3]);

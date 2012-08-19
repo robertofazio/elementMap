@@ -44,9 +44,7 @@ public:
 	elementImage			elemImg2;
     
 	int						numOfElements;
-	
-	GLboolean				isStereoCapable;
-	
+		
 	int						outputResolutionX;
 	int						outputResolutionY;
 	

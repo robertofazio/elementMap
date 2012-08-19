@@ -37,5 +37,7 @@ public:
     int         outputSizeHeight;
     
     bool        outputFullScreen;
-    
+
+    GLboolean	isGLCapable;
+
 };

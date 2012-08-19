@@ -2,6 +2,17 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+    
+    // test that GL_STEREO is working on this machine
+	isGLCapable = GL_FALSE;
+	glGetBooleanv(GL_STEREO,&isGLCapable);
+    GLint maxVertexTextureImageUnits;
+	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
+    
+    if (isGLCapable==GL_TRUE) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+
+    
     ofxXmlSettings tempXML;
     tempXML.loadFile("outputRes.xml");
     

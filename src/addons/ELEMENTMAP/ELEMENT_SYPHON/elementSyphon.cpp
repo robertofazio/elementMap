@@ -116,7 +116,8 @@ void elementSyphon::drawRight(int x, int y, int w, int h)
     int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
     ofSetColor(255, 255, 255,_opacity);
     fboRight.draw(x,y,w,h);
-    ofPopStyle();        }
+    ofPopStyle();        
+}
 
 
 

@@ -192,29 +192,42 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 void elementMixer::drawInfo()
 {
     ofPushStyle();
-	ofSetColor(255,255,0);
-	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-100,ofGetHeight()-80);
+  
     
-	ofSetColor(0,255,0);
-    
-	switch (outputMode) 
+    //output mode
+	ofSetColor(0,255,206);
+    switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-			ofDrawBitmapString("OPENGL",ofGetWidth()-100,ofGetHeight()-100);
+			ofDrawBitmapString("OPENGL",ofGetWidth()-200,ofGetHeight()-145);
 			break;
 			
 		case ELM_MONO:
-			ofDrawBitmapString("MONO",ofGetWidth()-100,ofGetHeight()-100);
+			ofDrawBitmapString("MONO",ofGetWidth()-200,ofGetHeight()-145);
 			break;
             
 		case ELM_STEREO_ANAGLYPH:
-			ofDrawBitmapString("ANAGLYPH",ofGetWidth()-100,ofGetHeight()-100);
+			ofDrawBitmapString("ANAGLYPH",ofGetWidth()-200,ofGetHeight()-145);
 			break;
 		
         default:
 			break;
 	}
+    
+    //framerate
+	ofSetColor(255,255,255);
+	ofDrawBitmapString(ofToString(ofGetFrameRate()),ofGetWidth()-200,ofGetHeight()-130);
+    
+    
+    
+    //glSterreo capability
+    ofSetColor(0,255,206);
+    if ( ((testApp*)ofGetAppPtr())->isGLCapable==GL_TRUE) ofDrawBitmapString("GL_STEREO \nSUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
+    else ofDrawBitmapString("GL_STEREO \nNOT SUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
+    
     ofPopStyle();
+    
+    
     
 }
 
@@ -223,11 +236,6 @@ void elementMixer::drawInfo()
 void elementMixer::setOutputMode(int _mode)
 {
 	outputMode = _mode;
-    
-    if((outputMode == ELM_STEREO_ANAGLYPH) || (outputMode == ELM_MONO))
-		setIsStereo(false);
-	else
-		setIsStereo(true);
 }
 
 
@@ -244,8 +252,6 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
 	
-    for(int a = 0; a < 4; a++)
-    {
         if(e.widget->getName()=="Main Opacity")
         {
             ofxUISlider *slider = (ofxUISlider *) e.widget;
@@ -255,39 +261,8 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         if(e.widget->getName()=="Test Pattern")
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-            
-            if(a == 0)
-            {
-                if (toggle->getValue())
-                { 
-                    sceneElements[a]->setOpacity(1);
-                    sceneElements[a]->setIsShow(true);
-                    
-                }
-                else 
-                {
-                    sceneElements[a]->setOpacity(0);
-                    sceneElements[a]->setIsShow(false);
-                }
-                sceneElements[a]->UI->setVisible(false);
-            }
-            else
-            {
-                if (toggle->getValue())
-                { 
-                    sceneElements[a]->setOpacity(0);
-                    sceneElements[a]->setIsShow(false);
-                    
-                }
-                else 
-                {
-                    sceneElements[a]->setOpacity(1);
-                    sceneElements[a]->setIsShow(true);
-                }
-                sceneElements[a]->UI->setVisible(true);   
-            }
-        } 
-    }
+            sceneElements[0]->setIsActive(toggle->getValue());
+        }
     
     if(e.widget->getName()=="Stereo")
     {
@@ -373,6 +348,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
 //		}
 //        
 //	}
+    
     else if( name == "Sound on/off")
 	{
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
@@ -391,22 +367,6 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         mainWindow->elemV1.rightChannelPlayer.setVolume(actualVolume);
     }
     
-    
-    
-    /* 
-     
-     UI->addWidget(new ofxUIToggle(marginLeft + 150, posY+=30, 10, 10, parentElement->getIsActive(),"Sound on/off"));
-     UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0.0,1.0,parentElement->getOpacity() ,"Sound Volume"));
-     */
-
-    /*
-     enum ofLoopType{
-     OF_LOOP_NONE=0x01,
-     OF_LOOP_PALINDROME=0x02,
-     OF_LOOP_NORMAL=0x03
-     };
-
-     */
     elementUIBase::guiEvent(e);
 }
 
