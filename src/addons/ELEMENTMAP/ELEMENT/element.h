@@ -2,8 +2,10 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+
 #include "ofMain.h"
 #include "elementUIBase.h"
+
 #include "ElementFX.h"
 #include "ElementFXMask.h"
 

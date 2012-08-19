@@ -65,45 +65,31 @@ void elementVideo::update()
 void elementVideo::drawLeft(int x, int y, int w, int h)
 {
     
-    if (isWarpable)
-    {
-        
-        fboLeft.begin();
-        warper.draw(getLeftTexture());
-        fboLeft.end();
-        
-        ofPushStyle();
-        int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
-        ofSetColor(255, 255, 255,_opacity);
-        fboLeft.draw(x,y,w,h);
-        ofPopStyle();
-
-    }
-    else
-        leftChannelPlayer.draw(x,y,w,h);
+    fboLeft.begin();
+    if (isWarpable) warper.draw(getLeftTexture());
+    else leftChannelPlayer.draw(x,y,w,h);	
+    fboLeft.end();
     
-    this->applyFX();
+    ofPushStyle();
+    int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
+    ofSetColor(255, 255, 255,_opacity);
+    fboLeft.draw(x,y,w,h);
+    ofPopStyle();        
 }
 
 //-----------------------------------------------------------------
 void elementVideo::drawRight(int x, int y, int w, int h)
 {
-    if (isWarpable)
-    {
-        
-        fboRight.begin();
-        warper.draw(getRightTexture());
-        fboRight.end();
-        
-        int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
-        ofSetColor(255, 255, 255,_opacity);
-        fboRight.draw(x,y,w,h);
-        ofPopStyle();
-    }
-	else
-        rightChannelPlayer.draw(x,y,w,h);		
+    fboRight.begin();
+    if (isWarpable) warper.draw(getRightTexture());
+    else rightChannelPlayer.draw(x,y,w,h);	
+    fboRight.end();
     
-    this->applyFX();
+    ofPushStyle();
+    int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
+    ofSetColor(255, 255, 255,_opacity);
+    fboRight.draw(x,y,w,h);
+    ofPopStyle();
 }
 
 

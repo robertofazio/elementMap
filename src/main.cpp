@@ -17,6 +17,9 @@
 #include "ofxFensterManager.h"
 #include "ofAppGlutWindow.h"
 
+
+
+
 //========================================================================
 int main( ){
 	ofSetupOpenGL(ofxFensterManager::get(), 1280, 800, OF_WINDOW);			// <-------- setup the GL context

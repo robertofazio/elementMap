@@ -73,15 +73,12 @@ void element::drawGraphic(int x, int y, int w, int h)
             break;
         case 1:
             georgiaitalic10.drawString("element.video", x , y + 11);
-            georgiaitalic10.drawString("element.video Preview", x + 448, y + 11);
             break;
         case 2:
             georgiaitalic10.drawString("element.image", x , y + 11);
-            georgiaitalic10.drawString("element.image Preview", x + 448, y + 11);
             break;
         case 3:
             georgiaitalic10.drawString("element.syphon", x , y + 11);
-            georgiaitalic10.drawString("element.syphon Preview", x + 448, y + 11);
             break;
         case 5:
             georgiaitalic10.drawString("element.Map Main Preview", x , y);
@@ -89,27 +86,13 @@ void element::drawGraphic(int x, int y, int w, int h)
     }
     
     
-    if(type != 5)
+    if(type != 5)   //disegna la preview
     {
         ofPushMatrix();
         ofTranslate(0, 20);
-        
         ofTexture   leftTemp;
         leftTemp=this->getLeftTexture();
         leftTemp.draw(x, y, w, h);
-//        this->drawLeft(x, y, w, h);
-        if(this->isStereo)
-            this->drawRight(x + w + 4, y, w, h);
-        
-        georgiaitalic8.drawString("Left", x , y + h+ 14);
-        
-        if(this->isStereo)
-            georgiaitalic8.drawString("Right", x + w + 4 , y + h+ 14);
-        
-        ofPushMatrix();
-        ofTranslate(450, 0);
-        this->drawLeft(x, y, w, h);
-        ofPopMatrix();
         ofPopMatrix();
     }
 }

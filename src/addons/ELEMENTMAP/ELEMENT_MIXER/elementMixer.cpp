@@ -5,11 +5,11 @@
 #include "MainWindow.h"
 
 //-----------------------------------------------------------------
-void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _stereoMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable)
+void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _outputMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable)
 {
     mainWindow = _mainWindow;
-	setOutputStereoMode(_stereoMode);
-	if(outputStereoMode==0)
+	setOutputMode(_outputMode);
+	if(outputMode==0)
 	{	
 		this->setDrawInStereo(true);
 		this->setIsStereo(true);
@@ -26,13 +26,6 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
     sceneElements = _elements;
 	numOfElements = _numOfElements;
 	elementsOrder = _elementsOrder;
-	elementsBlendModes = new int[numOfElements];
-	elementsOpacity = new float[numOfElements];
-    blendMode = 0;	
-	shader.load("./shaders/pssh");
-	blacktexture.loadImage("./images/blackTexture.jpg");
-	
-	useNoShader = false;
     
     ofAddListener(UI->newGUIEvent,this,&elementMixer::guiEvent); 
     
@@ -42,6 +35,10 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
 
 
 //-----------------------------------------------------------------
+// mixer::update
+// esegue il metodo "update" di tutti gli element inseriti, che per ora si occupa solo di aggiornare le coordinate del warp;
+// se l'uscita principale (= mixer output) è warpable, aggiorna anche se stesso
+
 void elementMixer::update()
 {
 	for(int i=0;i<numOfElements;i++)
@@ -52,38 +49,18 @@ void elementMixer::update()
     if (isWarpable) warper.updateCoordinates();
 }
 
-//-----------------------------------------------------------------
-void elementMixer::applyFX()
-{
- for(int a = 0; a < effects.size(); a++)
-    {
-        if(effects[a]->getIsActive())
-            effects[a]->applyFX();
-    }
-}
-
 
 //-----------------------------------------------------------------
-void elementMixer::addFX(int type)       // Mauro
-{
-    switch(type)
-    {
-        case ELEMENT_FX_MASK:            
-            newEffect.init(ELEMENT_FX_MASK, fboLeft.getTextureReference());
-            effects.push_back(&newEffect);
-            break;
-    }    
-}
+// mixer::drawIntoFbo
+// somma tutte le uscite dei singoli element in ordine (secondo i blending modes definiti all'interno di ogni element)
+// e le prepara in due fbo nel caso di uscita stereoscopica, o soltanto nel sinistro per uscita mono
 
-//-----------------------------------------------------------------
 void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 {
-	if(isActive)
-	{
-		setDrawInStereo(_drawMonoOrStereo);
+		//setDrawInStereo(_drawMonoOrStereo);
 		
 		//////////////////////////
-		// here the left :
+		// LEFT FRAME:
 		//////////////////////////
         
 		fboLeft.begin();
@@ -92,16 +69,22 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
         for(int a = 0; a < numOfElements; a++)
             if(sceneElements[elementsOrder[a]]->getIsActive())
             {
-                float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
                 ofPushStyle();
-
+                
+                //legge l'opacità del livello e la applica
+                float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
                 ofSetColor(255, 255, 255, opacity);
                 
-                               
+                //legge il blending mode associato al livello e lo applica
                 ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
+                
+                //disegna l'uscita dell'element secondo le sue dimensioni proprie
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
-                if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
                 ofDisableBlendMode();
+                
+                //se è selezionato disegna l'outline rosso
+                if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
+                
                 
                 ofPopStyle();
             }
@@ -110,53 +93,62 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		fboLeft.end();
 		
         //////////////////////////
-		// here the right :
+		// RIGHT FRAME:
 		//////////////////////////
         
-		if(this->getIsStereo())
-            {
+    if (outputMode!=ELM_MONO)
+    {
                 fboRight.begin();
                 ofClear(0,0,0,0);
                 
                 for(int a = 0; a < numOfElements; a++)
                     if(sceneElements[elementsOrder[a]]->getIsActive())
-                        {
-                            float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
-                            ofPushStyle();
+                    {
+                        ofPushStyle();
+                        
+                        //legge l'opacità del livello e la applica
+                        float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
+                        ofSetColor(255, 255, 255, opacity);
+                        
+                        //legge il blending mode associato al livello e lo applica
+                        ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
+                        
+                        //disegna l'uscita dell'element secondo le sue dimensioni proprie
+                        if (sceneElements[elementsOrder[a]]->getDrawInStereo()==false || getDrawInStereo()==false)
+                            {
+                                sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());                                
+                            }
+                            else sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
 
-                            if(sceneElements[elementsOrder[a]]->getIsStereo())
-                                sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
-                            else
-                                sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
-                            
-                            ofPopStyle();
+                        ofDisableBlendMode();                        
+                        
+                        //se è selezionato disegna l'outline rosso
+                        if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
 
-                                }
-
+                        
+                        ofPopStyle();
+                    }
+                
+                
                 fboRight.end();
-            }
-	}
-    
-    if(outputStereoMode == ELM_STEREO_ANAGLYPH)
+    }
+	
+    //fbo dedicato per l'uscita anaglifo
+    //nuova versione 18/08/2012
+    if(outputMode == ELM_STEREO_ANAGLYPH)
     {
         fboAnagliph.begin();
-        //     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        // left
-        glColorMask(true, false, false, false);
-        ofSetColor(255, 255, 255);
-        fboLeft.draw(0,0);
-        
-        
-        // right
-        glColorMask(false, true, true, false);
-        ofSetColor(255, 255, 255);
-        fboRight.draw(0, 0);
-        
-        glColorMask(true, true, true, true);
-        
+    ofPushStyle();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glColorMask(true, false, false, true);
+    fboRight.draw(0, 0);
+    glColorMask(false, true, true, true);
+    fboLeft.draw(0,0);
+    glColorMask(true, true, true, true);
+    ofPopStyle();
         fboAnagliph.end();
     }
+
 }
 
 
@@ -165,56 +157,32 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 //-----------------------------------------------------------------
 void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 {
-	if(isActive)
-	{
-		switch (outputStereoMode) 
+		switch (outputMode) 
 		{
-			case ELM_STEREO_OPENGL:
-				
-				if(!getSwapLeftRight())
-                {
-                    // left
-					glDrawBuffer(GL_BACK_LEFT);	
-					setOpacityColor();
-					fboLeft.draw(_x,_y,_width,_height);
-					
-					// right
-					glDrawBuffer(GL_BACK_RIGHT);
-					setOpacityColor();
-					if(getDrawInStereo()) fboRight.draw(_x,_y,_width,_height);
-					else fboLeft.draw(_x,_y,_width,_height);
-				}
-				else 
-				{
-					// left
-					glDrawBuffer(GL_BACK_LEFT);	
-					setOpacityColor();
-					fboRight.draw(_x,_y,_width,_height);
-					
-					// right
-					glDrawBuffer(GL_BACK_RIGHT);
-					setOpacityColor();
-					if(getDrawInStereo()) fboLeft.draw(_x,_y,_width,_height);
-					else fboLeft.draw(_x,_y,_width,_height);
-				}
-                
-				break;
-				
-			case ELM_STEREO_MONO:
-                setOpacityColor();
+            
+			case ELM_MONO:
                 fboLeft.draw(_x,_y,_width,_height);
-				
+            break;
                 
+            case ELM_STEREO_ANAGLYPH:
+                fboAnagliph.draw(_x,_y,_width,_height);
 				break;
-			case ELM_STEREO_ANAGLYPH:
-                ofSetColor(255, 255, 255, ofMap(this->getOpacity(), 0, 1, 0, 255));
-                fboAnagliph.draw(_x, _y, _width, _height);
-				break;
+
+            case ELM_STEREO_OPENGL:
+                glDrawBuffer(GL_BACK_LEFT);	
+                fboLeft.draw(_x,_y,_width,_height);
+                glDrawBuffer(GL_BACK_RIGHT);
+                fboRight.draw(_x,_y,_width,_height);
+                break;
+
+                
 			default:
 				break;
 		}   
-		drawInfo();
-	}
+		
+    
+    drawInfo();
+
 }
 
 
@@ -228,37 +196,34 @@ void elementMixer::drawInfo()
     
 	ofSetColor(0,255,0);
     
-	switch (outputStereoMode) 
+	switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-			ofDrawBitmapString("GL_STEREO",ofGetWidth()-100,ofGetHeight()-100);
+			ofDrawBitmapString("OPENGL",ofGetWidth()-100,ofGetHeight()-100);
 			break;
 			
-		case ELM_STEREO_MONO:
+		case ELM_MONO:
 			ofDrawBitmapString("MONO",ofGetWidth()-100,ofGetHeight()-100);
 			break;
+            
 		case ELM_STEREO_ANAGLYPH:
 			ofDrawBitmapString("ANAGLYPH",ofGetWidth()-100,ofGetHeight()-100);
 			break;
-		default:
+		
+        default:
 			break;
 	}
     ofPopStyle();
     
 }
 
-//-----------------------------------------------------------------
-void elementMixer::drawQuadGeometry()
-{
-	blacktexture.draw(0,0,elementWidth,elementHeight);
-}
 
 //-----------------------------------------------------------------
-void elementMixer::setOutputStereoMode(int _stereoMode)
+void elementMixer::setOutputMode(int _mode)
 {
-	outputStereoMode = _stereoMode;
-	
-    if((outputStereoMode == ELM_STEREO_ANAGLYPH) || (outputStereoMode == ELM_STEREO_MONO))
+	outputMode = _mode;
+    
+    if((outputMode == ELM_STEREO_ANAGLYPH) || (outputMode == ELM_MONO))
 		setIsStereo(false);
 	else
 		setIsStereo(true);
@@ -266,16 +231,11 @@ void elementMixer::setOutputStereoMode(int _stereoMode)
 
 
 //-----------------------------------------------------------------
-int elementMixer::getOutputStereoMode()
+int elementMixer::getOutputMode()
 {
-    return outputStereoMode;
+    return outputMode;
 }
 
-
-//-----------------------------------------------------------------
-void elementMixer::updateOpacity()
-{	
-}
 
 //--------------------------------------------------------------
 void elementMixer::guiEvent(ofxUIEventArgs &e)
@@ -322,6 +282,14 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         } 
     }
     
+    if(e.widget->getName()=="Stereo")
+    {
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        setDrawInStereo(toggle->getValue());
+    }
+
+    
+    
     if(e.widget->getName()=="Play")
 	{
         mainWindow->elemV1.leftChannelPlayer.play();
@@ -357,27 +325,41 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         else
             mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NORMAL);
 	}
-    else if( e.widget->getParent()->getName()=="Resolution")
+    
+    
+    else if( e.widget->getParent()->getName()=="Output Mode")
 	{
-        ofxUIDropDownList* resolutions = (ofxUIDropDownList* )e.widget;
+        if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
+        else if(name=="MONO") setOutputMode(ELM_MONO);
+        else if(name=="OPENGL") setOutputMode(ELM_STEREO_OPENGL);
         
-        for(int i=0;i<resolutionName.size();i++)
-		{
-			if(name==resolutionName[i]) 
-			{
-                if(i == 0)   
-                    for(int a = 0; a < 4; a++)
-                        sceneElements[a]->resetOutput(1024, 768);
-                else if(i == 1)
-                    for(int a = 0; a < 4; a++)
-                        sceneElements[a]->resetOutput(1280, 1024);
-                else if(i == 2)   
-                    for(int a = 0; a < 4; a++)
-                        sceneElements[a]->resetOutput(1920, 1080);
-			}			
-		}
+        
         
 	}
+
+    
+    
+//    else if( e.widget->getParent()->getName()=="Resolution")
+//	{
+//        ofxUIDropDownList* resolutions = (ofxUIDropDownList* )e.widget;
+//        
+//        for(int i=0;i<resolutionName.size();i++)
+//		{
+//			if(name==resolutionName[i]) 
+//			{
+//                if(i == 0)   
+//                    for(int a = 0; a < 4; a++)
+//                        sceneElements[a]->resetOutput(1024, 768);
+//                else if(i == 1)
+//                    for(int a = 0; a < 4; a++)
+//                        sceneElements[a]->resetOutput(1280, 1024);
+//                else if(i == 2)   
+//                    for(int a = 0; a < 4; a++)
+//                        sceneElements[a]->resetOutput(1920, 1080);
+//			}			
+//		}
+//        
+//	}
     else if( name == "Sound on/off")
 	{
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
@@ -414,4 +396,5 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
      */
     elementUIBase::guiEvent(e);
 }
+
 

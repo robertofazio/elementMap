@@ -21,12 +21,12 @@ void MainWindow::setup()
 	ofEnableAlphaBlending();
 	
 	// test that GL_STEREO is working on this machine
-	GLboolean isStereoCapable = false;
+	GLboolean isStereoCapable = GL_FALSE;
 	glGetBooleanv(GL_STEREO,&isStereoCapable);
-	GLint maxVertexTextureImageUnits;
+    GLint maxVertexTextureImageUnits;
 	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
     
-	if (isStereoCapable) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+    if (isStereoCapable==GL_TRUE) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
 	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
 	
 	numOfElements = 4;
@@ -36,9 +36,9 @@ void MainWindow::setup()
     
 	// create & setup elements on this app 
 	elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"TestPattern", false);
-	elemV1.setup("./movies/left1024Audio.mov","", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 1),"Movie", true);
-	elemImg2.setup("./images/left1024.jpg", "", outputResolutionX,outputResolutionY, false, 215 , (margin * 9) - 8 + (190 * 2),"Image", true);
-	elemSy.setup("","",outputResolutionX,outputResolutionY, 215 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
+	elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, true, 120 , (margin * 9) - 8 + (190 * 1),"Movie", true);
+	elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", outputResolutionX,outputResolutionY, true, 120 , (margin * 9) - 8 + (190 * 2),"Image", true);
+	elemSy.setup("","",outputResolutionX,outputResolutionY, 120 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
 	
     bPaused=false;
     
@@ -69,7 +69,7 @@ void MainWindow::setup()
 	drawingOrder[2]=3;
 	drawingOrder[3]=0;
 	
-	elemMix.setup(this, outputResolutionX,outputResolutionY,ELM_STEREO_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
+	elemMix.setup(this, outputResolutionX,outputResolutionY,ELM_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
     
@@ -89,23 +89,26 @@ void MainWindow::setup()
     
     logo.loadImage("./images/logo.png");
     
+    //di default disattivo pattern e syphon per comodità di test ;)
+    elemSy.setIsActive(false);
+    elemImg.setIsActive(false);    
 }
 
 //--------------------------------------------------------------
 void MainWindow::update()
 {
-	elemMix.update();    
+	elemMix.update();  
+    elemMix.drawIntoFbo(isStereoCapable);
 }
 
 
 //--------------------------------------------------------------
 void MainWindow::draw()
+
 {	
+    
     ofBackground(35, 31, 32);
-    
-    ofSetColor(0,0);
-    elemMix.drawIntoFbo(isStereoCapable);
-    
+        
     if (bFullscreen) {
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
         ofDrawBitmapString(ofToString(ofGetFrameRate()), position);
@@ -115,21 +118,21 @@ void MainWindow::draw()
         
     {
         //preview window (non-fulscreen)
-        
+        ofPushStyle();
         ofSetColor(255, 255, 255);
-        
         georgiaitalic14.drawString("element.Map", margin , margin * 4);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
+        ofPopStyle();
+
         elemMix.drawOutput(650, margin * 8, 600, 450   );
         elemMix.UI->draw();
         
-        
+        ofPushStyle();
         ofSetColor(255, 255, 255);
         georgiaitalic8.drawString("Press 'f' to enter in fullscreen mode and edit warp; when in fullscreen press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
         // frame by frame
-        
         ofDrawBitmapString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
         ofDrawBitmapString("video frame Right " + ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 650, 710);
         if (elemV1.leftChannelPlayer.getCurrentFrame() == elemV1.rightChannelPlayer.getCurrentFrame()) {
@@ -143,9 +146,12 @@ void MainWindow::draw()
             ofDrawBitmapString("FRAME STERO NOT IN SYNC", 650,740);
         }
         
+        ofPopStyle();
+        
         if(drawPreviews)    
         {
             // just draw the preview inputs of mixer
+            ofPushStyle();
             ofSetColor(255,255);
             int previewWidth = (ofGetWidth()-(20*numOfElements))/numOfElements;
             int previewHeight = previewWidth / (4.0/3.0);
@@ -158,7 +164,7 @@ void MainWindow::draw()
                 myElements[drawingOrder[i]]->drawGraphic(margin ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
                 myElements[drawingOrder[i]]->UI->draw();
             }
-            
+            ofPopStyle();
         }
         
         logo.draw(1195, 2, 60, 60);

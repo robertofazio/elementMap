@@ -88,23 +88,18 @@ void elementSyphon::update()
 //-----------------------------------------------------------------
 void elementSyphon::drawLeft(int x, int y, int w, int h)
 {
-    if (isWarpable)
-    {
-        
+
+    fboLeft.begin();
+    if (isWarpable) warper.draw(getLeftTexture());
+    else syphonClient.draw(x,y,w,h);	
+    fboLeft.end();
     
-        fboLeft.begin();
-        warper.draw(getLeftTexture());
-        fboLeft.end();
-        
-        ofPushStyle();
-        int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
-        ofSetColor(255, 255, 255,_opacity);
-        fboLeft.draw(x,y,w,h);
-        ofPopStyle();
-    }
-    else
-        
-        syphonClient.draw(x,y,w,h);
+    ofPushStyle();
+    int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
+    ofSetColor(255, 255, 255,_opacity);
+    fboLeft.draw(x,y,w,h);
+    ofPopStyle();        
+
 }
 
 
@@ -112,19 +107,16 @@ void elementSyphon::drawLeft(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 void elementSyphon::drawRight(int x, int y, int w, int h)
 {
-    if (isWarpable)
-    {
-        fboRight.begin();
-        warper.draw(getRightTexture());
-        fboRight.end();
-        
-        int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
-        ofSetColor(255, 255, 255,_opacity);
-        fboRight.draw(x,y,w,h);
-        ofPopStyle();    }
-    else
-        syphonClient.draw(x,y,w,h);	
-}
+    fboRight.begin();
+    if (isWarpable) warper.draw(getLeftTexture());
+    else syphonClient.draw(x,y,w,h);	
+    fboRight.end();
+    
+    ofPushStyle();
+    int _opacity=int(ofMap(getOpacity(), 0, 1, 0, 255));
+    ofSetColor(255, 255, 255,_opacity);
+    fboRight.draw(x,y,w,h);
+    ofPopStyle();        }
 
 
 

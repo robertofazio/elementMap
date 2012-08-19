@@ -21,7 +21,7 @@ elementUIBase::elementUIBase()
 	
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
-//	  outputModesNames.push_back("OPENGL");
+    outputModesNames.push_back("OPENGL");    
 //    outputModesNames.push_back("LEFTRIGHT");
 //    outputModesNames.push_back("TOPBOTTOM");    
     
@@ -51,43 +51,36 @@ void elementUIBase::setupUI(element* _parentElement)
     UI->setFontSize(OFX_UI_FONT_SMALL, 6);
     UI->setPadding(2);
 	
-    int marginLeft = 5;
-    int posY = 9;
+    int posY=10;
+    
     if (type!=5)
-    { 
-    //  UI->addWidgetDown(new ofxUILabel(parentElement->getElementName(), OFX_UI_FONT_MEDIUM));
-    UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,parentElement->getIsActive(),"isActive"));
-    if(this->isStereo)
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Mono/Stereo"));
-    UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Mask"));
-    UI->addWidget(new ofxUISlider(marginLeft, 90, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
-    
-    posY = 9;
-    marginLeft = 110;
-    UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,parentElement->getIsActive(),"Quad Warping"));
-    UI->addWidget(new ofxUIToggle(marginLeft, posY += 20, 10,10,parentElement->getIsActive(),"Mesh Warping"));
-    
+    {
         
-    //all elements except for mixer need blend modes selection
-	  
-        marginLeft = 5;
-        listBlendModes = new ofxUIDropDownList(marginLeft, 120, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+    // prima colonna: isActive, Mono/Stereo
+    UI->addWidget(new ofxUIToggle(5, posY, 10,10,parentElement->getIsActive(),"isActive"));
+    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,posY+=20, 10, 10,parentElement->getIsActive(),"Mono/Stereo"));
+//    UI->addWidget(new ofxUIToggle(5,posY+=20, 10, 10,parentElement->getIsActive(),"Mask"));
+    
+        //seconda colonna: opacità e blending mode
+        UI->addWidget(new ofxUISlider(150, 10, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
+        listBlendModes = new ofxUIDropDownList(150, 50, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
         listBlendModes->setPadding(0);
-        listBlendModes->setDrawFill(false);
+        listBlendModes->setDrawFill(true);
         listBlendModes->setAutoClose(true);
         UI->addWidget(listBlendModes);
     }
+    
     //but mixer needs output mode selection and many other things :) 
-	if (type==5)
+	else if (type==5)
     {
-        marginLeft = 5;
-        posY = 450;
+        int marginLeft = 5;
+        int posY = 450;
         //UI->addWidget(new ofxUIFPS(marginLeft, posY, OFX_UI_FONT_SMALL));
         UI->addWidget(new ofxUIToggle(marginLeft, posY += 20, 10,10,parentElement->getIsActive(),"Test Pattern"));
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Visible"));
+        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getDrawInStereo(),"Stereo"));
         
         posY += 20;
         ofxUISpacer* spacer = new ofxUISpacer(marginLeft, posY, 400, 1);
@@ -98,7 +91,6 @@ void elementUIBase::setupUI(element* _parentElement)
         //prima colonna: video
         UI->addWidget(new ofxUIButton(marginLeft,posY += 10, 10, 10,false, "Play"));
         UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Pause"));
-//        UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Stop"));
         UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Rew"));
         UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getIsActive(),"Video loop"));
         
@@ -118,14 +110,14 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(listOutputModes);
         
         
-        listResolution = new ofxUIDropDownList(marginLeft + 350, posY, 130, "Resolution", resolutionName, OFX_UI_FONT_SMALL);
-        listResolution->setDrawBack(true);
-        listResolution->setDrawOutlineHighLight(false);
-        listResolution->setDrawPaddingOutline(false);
-        listResolution->setPadding( 0 );
-        listResolution->setDrawFill(true);
-        listResolution->setAutoClose(true);
-        UI->addWidget(listResolution);
+//        listResolution = new ofxUIDropDownList(marginLeft + 350, posY, 130, "Resolution", resolutionName, OFX_UI_FONT_SMALL);
+//        listResolution->setDrawBack(true);
+//        listResolution->setDrawOutlineHighLight(false);
+//        listResolution->setDrawPaddingOutline(false);
+//        listResolution->setPadding( 0 );
+//        listResolution->setDrawFill(true);
+//        listResolution->setAutoClose(true);
+//        UI->addWidget(listResolution);
     }
     
     if (type!=5) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 
@@ -177,16 +169,15 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             else if(name=="Screen")parentElement->setBlendingMode(OF_BLENDMODE_SCREEN);
                 
 	}
-    else if( e.widget->getParent()->getName()=="Output Mode")
-	{
-		for(int i=0;i<outputModesNames.size();i++)
-		{
-			if(name==outputModesNames[i]) 
-			{
-                ((testApp*)ofGetAppPtr())->mainWindow->elemMix.setOutputStereoMode(i);
-			}			
-		}
-	}
+//    else if( e.widget->getParent()->getName()=="Output Mode")
+//	{
+//        cout << "change mode to " << endl;
+//
+//        if(name=="ANAGLYPH") ((testApp*)ofGetAppPtr())->mainWindow->elemMix.setOutputMode(ELM_STEREO_ANAGLYPH);
+//        else if(name=="MONO") ((testApp*)ofGetAppPtr())->mainWindow->elemMix.setOutputMode(ELM_MONO);
+//        
+//
+//	}
 	
 }
 

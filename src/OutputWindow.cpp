@@ -67,20 +67,20 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
             mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
             mainScene->mainWindow->elemImg2.isSelected=false;
-
-            mainScene->mainWindow->elemSy.isSelected=true;
             
             mainScene->mainWindow->elemV1.isSelected=true;
             mainScene->mainWindow->elemV1.warper.bWarpActive=false;
             mainScene->mainWindow->elemV1.warper.bViewGrid=false;
             mainScene->mainWindow->elemV1.isSelected=false;
+            
+            mainScene->mainWindow->elemSy.isSelected=true;
             break;
             
         case 50: // '2' = select Video element
-            mainScene->mainWindow->elemV1.isSelected=true;
-            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
-            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
-            mainScene->mainWindow->elemV1.isSelected=false;
+            mainScene->mainWindow->elemImg2.isSelected=true;
+            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
+            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
+            mainScene->mainWindow->elemImg2.isSelected=false;
 
             mainScene->mainWindow->elemSy.isSelected=true;
             mainScene->mainWindow->elemSy.warper.bWarpActive=false;
@@ -91,8 +91,6 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             break;
             
         case 51: // '3' = select Image element
-            mainScene->mainWindow->elemImg2.isSelected=true;
-
             mainScene->mainWindow->elemSy.isSelected=true;
             mainScene->mainWindow->elemSy.warper.bWarpActive=false;
             mainScene->mainWindow->elemSy.warper.bViewGrid=false;
@@ -102,6 +100,9 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             mainScene->mainWindow->elemV1.warper.bWarpActive=false;
             mainScene->mainWindow->elemV1.warper.bViewGrid=false;
             mainScene->mainWindow->elemV1.isSelected=false;
+            
+            mainScene->mainWindow->elemImg2.isSelected=true;
+
             break;
             
         default:
@@ -145,14 +146,13 @@ void OutputWindow::draw()
     ofSetColor(255, 255, 255);
     
     //draw directly mixer fbo
-    if(mainScene->mainWindow->elemMix.getOutputStereoMode() == ELM_STEREO_ANAGLYPH)
+    if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_STEREO_ANAGLYPH)
+    {
         mainScene->mainWindow->elemMix.fboAnagliph.draw(0, 0);    
-    else
+    }
+    else if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_MONO)
         mainScene->mainWindow->elemMix.fboLeft.draw(0,0);
-    
-    
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 10,10);
-    
+
     
     if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
     else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
@@ -177,11 +177,6 @@ void OutputWindow::setup()
 
 void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
 {
-    cout << "MOUSE PRESSED OUTPUT" << endl;
-    //    cout << x << endl;
-    //    cout << y << endl;
-    //    cout << btn << endl;
-    
     //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
     if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.mousePressed(x, y, btn);
     else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.mousePressed(x, y, btn);

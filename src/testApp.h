@@ -28,12 +28,8 @@ public:
     
     ofxFenster* output;
     OutputWindow* outputWindow;
-    
-    //  OutputWindow* outputWin;
-    
-	ofxFenster* test;
-    
-    float eyeSeparation;
+
+    ofxFenster* test;
     
     MainWindow*  mainWindow;
     
