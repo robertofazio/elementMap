@@ -60,13 +60,11 @@ public:
     
     string                  comandi;
     
-    
     ofTrueTypeFont          fontLarge;
     ofTrueTypeFont          fontSmall;
     ofTrueTypeFont          fontMedium;
     
     ofImage                 logo;
-    
     
 	
 };

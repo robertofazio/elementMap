@@ -93,47 +93,11 @@ void elementWarp::draw(ofTexture _text)
     }
     
     glDisable(text.getTextureData().textureTarget);
-    if (bViewGrid) drawGrid();        
+//    if (bViewGrid) drawGrid();            
     glPopMatrix();
     
-    
-    
     //draw special markers for quad warp vertices
-    if (bWarpActive)
-    {
-        for (int corner=0; corner<4; corner++)
-        {
-            ofPushStyle();
-            ofSetColor(ofColor :: white);
-
-            ofNoFill();
-            
-            if (vertici[mainIndex[corner]].z==0 || bSposta) {
-                ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-120,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+120);   
-                ofLine(screenPos[mainIndex[corner]].x-120,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+120,screenPos[mainIndex[corner]].y);
-            }
-            else 
-            {
-                if (!bSposta)
-                {
-                    ofPushStyle();
-                    ofSetColor(ofColor :: green); 
-                    ofSetLineWidth(4);                        
-                    ofLine(0, screenPos[mainIndex[corner]].y,ofGetScreenWidth(),screenPos[mainIndex[corner]].y);
-                    ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,ofGetScreenHeight());
-                    
-                    ofPopStyle();
-
-                }
-                ofSetColor(255,0,0);
-            }
-            if (bSposta) ofSetColor(255,0,0);
-            
-            ofSetLineWidth(10);
-            ofRect(screenPos[mainIndex[corner]].x-40, screenPos[mainIndex[corner]].y-40, 80, 80);  
-            ofPopStyle();
-        }
-    }
+//    if (bWarpActive) drawMarkers();
 
 
     
@@ -213,14 +177,57 @@ void elementWarp::createGrid(int _xRes, int _yRes){
 
 
 //--------------------------------------------------------------
+void elementWarp::drawMarkers() {
+    for (int corner=0; corner<4; corner++)
+    {
+        ofPushStyle();
+        ofSetColor(ofColor :: white);
+        
+        ofNoFill();
+        
+        if (vertici[mainIndex[corner]].z==0 || bSposta) {
+            ofLine(screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y-120,screenPos[mainIndex[corner]].x,screenPos[mainIndex[corner]].y+120);   
+            ofLine(screenPos[mainIndex[corner]].x-120,screenPos[mainIndex[corner]].y,screenPos[mainIndex[corner]].x+120,screenPos[mainIndex[corner]].y);
+        }
+        else 
+        {
+            if (!bSposta)
+            {
+                ofPushStyle();
+                ofSetColor(0,255,206); 
+                ofSetLineWidth(4);                        
+                ofLine(0, screenPos[mainIndex[corner]].y,10000,screenPos[mainIndex[corner]].y);
+                ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,10000);
+                
+                ofPopStyle();
+                
+            }
+            ofSetColor(255,0,0);
+        }
+        if (bSposta) ofSetColor(255,0,0);
+        
+        ofSetLineWidth(10);
+        ofRect(screenPos[mainIndex[corner]].x-40, screenPos[mainIndex[corner]].y-40, 80, 80);  
+        ofPopStyle();
+    }
+}
+
+
+//--------------------------------------------------------------
 void elementWarp::drawGrid() {
+    
+    mat = quadWarp.getMatrix();
+    //dai vertici del warp ricavo la matrice per 
+    glPushMatrix();
+    glMultMatrixf(mat.getPtr());
+    
     
     //draw Grid Lines
     int quad=0;
     int index=0;
     
     ofPushStyle();
-    ofSetColor(0,255,0,150);
+    ofSetColor(0,255,206);
     ofFill();
     ofSetLineWidth(1);
     while (quad<nQuads) {
@@ -239,12 +246,15 @@ void elementWarp::drawGrid() {
     for (int point=0; point<nPoints; point++) {
         ofPushStyle();
         if (vertici[point].z==1) ofSetColor(255,0,0,255);
-        else ofSetColor(0,255,0,255);
+        else ofSetColor(255,255,255);
         ofFill();
-        ofCircle(vertici[point].x, vertici[point].y, 8);
+        if (vertici[point].z==1) ofCircle(vertici[point].x, vertici[point].y, 14);
+        else ofCircle(vertici[point].x, vertici[point].y, 8);
         ofPopStyle();
-//        }
+
    }
+    
+    glPopMatrix();
 }
 
 

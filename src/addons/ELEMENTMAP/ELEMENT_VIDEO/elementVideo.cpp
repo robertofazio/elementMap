@@ -22,7 +22,6 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo(), _isWarpable);
     
-    isPaused=false;
 }
 
 //-----------------------------------------------------------------
@@ -76,3 +75,54 @@ ofTexture& elementVideo::getRightTexture()
 {
 	return (rightChannelPlayer.getTextureReference());	
 }
+
+// PLAYER UTILITIES //
+
+//-----------------------------------------------------------------
+void elementVideo::element_videoPlay(int _speed)
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_videoPause()
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_videoStop()
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_frameAvanti()
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_frameIndietro()
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_setLoop(ofLoopType _loop)
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_toggleSound()
+{
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_soundVolume(float _volume)
+{
+    
+}
+

@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "elementsDEMO.app"
+               BuildableName = "elementMap.app"
                BlueprintName = "elementMap"
                ReferencedContainer = "container:element_a0.2.0.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "elementsDEMO.app"
+            BuildableName = "elementMap.app"
             BlueprintName = "elementMap"
             ReferencedContainer = "container:element_a0.2.0.xcodeproj">
          </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "elementsDEMO.app"
+            BuildableName = "elementMap.app"
             BlueprintName = "elementMap"
             ReferencedContainer = "container:element_a0.2.0.xcodeproj">
          </BuildableReference>

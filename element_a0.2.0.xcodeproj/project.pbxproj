@@ -97,6 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		273B157915E2A51A001A2D5A /* elementMapDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = elementMapDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2751BA2215C3F8A20069EF36 /* element.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = element.icns; sourceTree = "<group>"; };
 		276594EC15C6D40C0098EEE8 /* GHOST_DisplayManagerCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_DisplayManagerCocoa.h; sourceTree = "<group>"; };
 		276594ED15C6D40C0098EEE8 /* GHOST_SystemCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_SystemCocoa.h; sourceTree = "<group>"; };
@@ -356,7 +357,6 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* elementMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = elementMap.app; path = /Users/cinzio/Development/openFrameworks/apps/element.map/element/bin/elementMap.app; sourceTree = "<absolute>"; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
@@ -1183,6 +1183,7 @@
 				E45BE5980E8CC70C009D7055 /* frameworks */,
 				B0F084E71575521900E57266 /* QTKit.framework */,
 				B0F0852E1575527B00E57266 /* CoreVideo.framework */,
+				273B157915E2A51A001A2D5A /* elementMapDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1230,7 +1231,7 @@
 			);
 			name = elementMap;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* elementMap.app */;
+			productReference = 273B157915E2A51A001A2D5A /* elementMapDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

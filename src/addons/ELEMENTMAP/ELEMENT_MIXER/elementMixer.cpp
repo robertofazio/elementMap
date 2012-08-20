@@ -80,8 +80,17 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                 ofDisableBlendMode();
                 
-                //se è selezionato disegna l'outline rosso
-                if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
+                //se è selezionato disegna l'outline rosso, e i markers se il warp è attivo
+                if(sceneElements[elementsOrder[a]]->isSelected) 
+                {
+                    //outline se selezionato 
+                    sceneElements[elementsOrder[a]]->warper.drawElementOutline();
+                    
+                    //marker per il quad warping
+                    if (sceneElements[elementsOrder[a]]->warper.bWarpActive) sceneElements[elementsOrder[a]]->warper.drawMarkers();
+                    //griglia per il mesh warping
+                    if (sceneElements[elementsOrder[a]]->warper.bViewGrid) sceneElements[elementsOrder[a]]->warper.drawGrid();
+                }
                 
                 
                 ofPopStyle();
@@ -120,9 +129,17 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 
                         ofDisableBlendMode();                        
                         
-                        //se è selezionato disegna l'outline rosso
-                        if(sceneElements[elementsOrder[a]]->isSelected) sceneElements[elementsOrder[a]]->warper.drawElementOutline();
-
+                        //se è selezionato disegna l'outline rosso, e i markers se il warp è attivo
+                        if(sceneElements[elementsOrder[a]]->isSelected) 
+                        {
+                            //outline se selezionato 
+                            sceneElements[elementsOrder[a]]->warper.drawElementOutline();
+                            
+                            //marker per il quad warping
+                            if (sceneElements[elementsOrder[a]]->warper.bWarpActive) sceneElements[elementsOrder[a]]->warper.drawMarkers();
+                            //griglia per il mesh warping
+                            if (sceneElements[elementsOrder[a]]->warper.bViewGrid) sceneElements[elementsOrder[a]]->warper.drawGrid();
+                        }
                         
                         ofPopStyle();
                     }

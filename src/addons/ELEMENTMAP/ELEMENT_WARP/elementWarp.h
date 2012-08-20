@@ -27,6 +27,7 @@ class elementWarp
     
     void createGrid(int _xRes, int _yRes);
     void drawGrid();
+    void drawMarkers();
     
     //grid control:
     void increaseXgrid();

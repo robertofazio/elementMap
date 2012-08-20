@@ -1,7 +1,6 @@
 #ifndef ELEMENTVIDEO
 #define ELEMENTVIDEO
 
-
 #include "ofMain.h"
 #include "element.h"
 
@@ -21,11 +20,23 @@ class elementVideo : public element
 	void update();
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
+    
+    //textures
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
 
-	bool    isPaused;
+    //funzioni del player:
+    void element_videoPlay(int _speed);
+    void element_videoPause();
+    void element_videoStop();
+    void element_frameAvanti();
+    void element_frameIndietro();
+    void element_goToFrame(int _frame);
+    void element_setLoop(ofLoopType _loop);
+    void element_toggleSound();
+    void element_soundVolume(float _volume);
     
+    //video player
 	ofVideoPlayer leftChannelPlayer;
 	ofVideoPlayer rightChannelPlayer;
 
