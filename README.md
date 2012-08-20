@@ -32,6 +32,8 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
+- Opacità quad,grid da tenere fuori
+- blend mode senza quad!
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
