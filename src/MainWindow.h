@@ -63,6 +63,7 @@ public:
     
     ofTrueTypeFont          fontLarge;
     ofTrueTypeFont          fontSmall;
+    ofTrueTypeFont          fontMedium;
     
     ofImage                 logo;
     

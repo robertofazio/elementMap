@@ -50,15 +50,11 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
     this->initFont();
 }
 
-void element::resetOutput(int newWidth, int newHeight)
-{
-    if (isWarpable) warper.resetOutput(newWidth, newHeight);
-}
 
 void element::initFont()
 {
 //    fontMedium.loadFont("georgiaz.ttf", 9);        
-    fontMedium.loadFont("CODEBold.otf", 9);        
+    fontMedium.loadFont("CODEBold.otf", 10);        
 	fontMedium.setLineHeight(12.0f);
 	fontMedium.setLetterSpacing(1.017);   
 

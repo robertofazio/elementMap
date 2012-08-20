@@ -22,13 +22,7 @@ elementUIBase::elementUIBase()
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
     outputModesNames.push_back("OPENGL");    
-//    outputModesNames.push_back("LEFTRIGHT");
-//    outputModesNames.push_back("TOPBOTTOM");    
     
-    resolutionName.push_back("1024x768 (4/3)");
-    resolutionName.push_back("1280x1024 (4/3)");
-    resolutionName.push_back("1920x1080 (16/9)");
-
 	
 }
 //--------------------------------------------------------------
@@ -53,13 +47,15 @@ void elementUIBase::setupUI(element* _parentElement)
 	
     int posY=10;
     
-    if (type!=5)
+    if (type!=ELEMENT_MIXER)
     {
         
     // prima colonna: isActive, Mono/Stereo
     UI->addWidget(new ofxUIToggle(5, posY, 10,10,parentElement->getIsActive(),"isActive"));
-    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,30, 10, 10,parentElement->getDrawInStereo(),"Mono/Stereo"));
+    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,posY+=20, 10, 10,parentElement->getDrawInStereo(),"Mono/Stereo"));
     
+        posY=10;
+        
         //seconda colonna: opacità e blending mode
         UI->addWidget(new ofxUISlider(150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
         listBlendModes = new ofxUIDropDownList(150, posY+40, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
@@ -72,6 +68,7 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(listBlendModes);
         
         //terza colonna: componenti r,g,b
+        ofxUISlider *red = new ofxUISlider(280, 10, 100,10, 0, 255, parentElement->getRed() ,"R");
         UI->addWidget(new ofxUISlider(280, 10, 100,10, 0, 255, parentElement->getRed() ,"R"));
         UI->addWidget(new ofxUISlider(280, 40, 100,10, 0, 255, parentElement->getGreen() ,"G"));
         UI->addWidget(new ofxUISlider(280, 70, 100,10, 0, 255, parentElement->getBlue() ,"B"));
@@ -83,7 +80,7 @@ void elementUIBase::setupUI(element* _parentElement)
 
     
     //but mixer needs output mode selection and many other things :) 
-	else if (type==5)
+	else if (type==ELEMENT_MIXER)
     {
         int marginLeft = 5;
         int posY = 460;
@@ -121,17 +118,6 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUIToggle(marginLeft + 150, posY, 10, 10, true,"Sound on/off"));
         UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0,100,50 ,"Sound Volume"));
         
-        
-        
-        
-//        listResolution = new ofxUIDropDownList(marginLeft + 350, posY, 130, "Resolution", resolutionName, OFX_UI_FONT_SMALL);
-//        listResolution->setDrawBack(true);
-//        listResolution->setDrawOutlineHighLight(false);
-//        listResolution->setDrawPaddingOutline(false);
-//        listResolution->setPadding( 0 );
-//        listResolution->setDrawFill(true);
-//        listResolution->setAutoClose(true);
-//        UI->addWidget(listResolution);
     }
     
     if (type!=5) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 

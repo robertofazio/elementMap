@@ -15,19 +15,19 @@ void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
     width=_outputWidth;
     height=_outputHeight;
 
+    //allocate texture
+    text.allocate(width, height, GL_RGBA);
+    
     //file name for save/load settings
     xmlName=_name+".xml";
     cout << "XML FILE: " + xmlName << endl;
 
-    //prepare a texture 
-    text.allocate(width, height, GL_RGB);
-
     // QUAD WARPER INIT
     bWarpActive=true;
-    mainVertici[0]=ofPoint(0,0);            //top left
-    mainVertici[1]=ofPoint(text.getWidth(),0);        //top right
-    mainVertici[2]=ofPoint(text.getWidth(),text.getHeight());   //bottom right
-    mainVertici[3]=ofPoint(0,text.getHeight());       //bottom left
+    mainVertici[0]=ofPoint(0,0);                                    //top left
+    mainVertici[1]=ofPoint(text.getWidth(),0);                      //top right
+    mainVertici[2]=ofPoint(text.getWidth(),text.getHeight());       //bottom right
+    mainVertici[3]=ofPoint(0,text.getHeight());                     //bottom left
     quadWarp.setSourceRect( ofRectangle( 0, 0, text.getWidth(), text.getHeight() ) );              
     quadWarp.setTopLeftCornerPosition(ofPoint(mainVertici[0].x, mainVertici[0].y));            
     quadWarp.setTopRightCornerPosition(ofPoint(mainVertici[1].x, mainVertici[1].y));        
@@ -50,27 +50,18 @@ void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
     bMela=false;
     bSpeedUp=false;
 
-    
     //auto-load last warp settings on startup
     load();
     
     
 }
 
-//-----------------------------------------------------------------
-void elementWarp::resetOutput(int newOutputWidth, int newOutputHeight)
-{
-//    if(text.isAllocated())
-//        text.clear();
-//    
-//    this->setup(newOutputWidth, newOutputHeight, xmlName);
-}
 
 
 //-----------------------------------------------------------------
 void elementWarp::draw(ofTexture _text)
 {
-    
+
     text=_text;
     
     mat = quadWarp.getMatrix();
@@ -948,7 +939,8 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     XML.popTag();
     
     XML.popTag();
-    XML.saveFile(xmlName);
+    string XMLpath = "./XML/"+xmlName;
+    XML.saveFile(XMLpath);
 }
 
 
@@ -957,7 +949,8 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
 void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
 {
     ofxXmlSettings tempXML;
-    tempXML.loadFile(xmlName);
+    string XMLpath = "./XML/"+xmlName;
+    tempXML.loadFile(XMLpath);
     
     tempXML.pushTag("warp");
     resX = tempXML.getValue("xRes", 0);

@@ -25,6 +25,7 @@
 		27CCEB1F15A30B4800CBE171 /* ElementFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB1D15A30B4800CBE171 /* ElementFX.cpp */; };
 		27CCEB2315A30B5E00CBE171 /* ElementFxMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB2115A30B5E00CBE171 /* ElementFxMask.cpp */; };
 		27CCEB2815A30E2C00CBE171 /* ofxQuadWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB2615A30E2C00CBE171 /* ofxQuadWarp.cpp */; };
+		27FBF1AB15E2993F0011878A /* element.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2751BA2215C3F8A20069EF36 /* element.icns */; };
 		3499D82615B85786001F710D /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3499D82515B85786001F710D /* MainWindow.cpp */; };
 		3499D87F15B858A2001F710D /* OutputWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3499D87D15B858A2001F710D /* OutputWindow.cpp */; };
 		B01FA7E21574E035007335D9 /* element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B01FA7E11574E035007335D9 /* element.cpp */; };
@@ -355,7 +356,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* elementsDEMODebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = elementsDEMODebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* elementMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = elementMap.app; path = /Users/cinzio/Development/openFrameworks/apps/element.map/element/bin/elementMap.app; sourceTree = "<absolute>"; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
@@ -863,6 +864,14 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		27FBF1A915E298AC0011878A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2751BA2215C3F8A20069EF36 /* element.icns */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B01FA7DC1574DFE4007335D9 /* ELEMENTMAP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1116,6 +1125,7 @@
 				B01FA7DC1574DFE4007335D9 /* ELEMENTMAP */,
 			);
 			name = addons;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BBAB23C913894ECA00AA2426 /* system frameworks */ = {
@@ -1165,14 +1175,12 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				2751BA2215C3F8A20069EF36 /* element.icns */,
+				27FBF1A915E298AC0011878A /* Resources */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
-				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* elementsDEMODebug.app */,
 				B0F084E71575521900E57266 /* QTKit.framework */,
 				B0F0852E1575527B00E57266 /* CoreVideo.framework */,
 			);
@@ -1188,6 +1196,7 @@
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				3499D82515B85786001F710D /* MainWindow.cpp */,
 				3499D82715B857AD001F710D /* MainWindow.h */,
+				BB4B014C10F69532006C3DED /* addons */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1204,23 +1213,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* elementsDEMO */ = {
+		E4B69B5A0A3A1756003C02F2 /* elementMap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "elementsDEMO" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "elementMap" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
 				E4B6FFFD0C3F9AB9008CF71C /* ShellScript */,
 				E4C2427710CC5ABF004149E2 /* CopyFiles */,
+				27FBF1AA15E299390011878A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = elementsDEMO;
+			name = elementMap;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* elementsDEMODebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* elementMap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1228,7 +1238,7 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.1.9" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.2.0" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1249,7 +1259,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* elementsDEMO */,
+				E4B69B5A0A3A1756003C02F2 /* elementMap */,
 			);
 		};
 /* End PBXProject section */
@@ -1263,6 +1273,17 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27FBF1AA15E299390011878A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27FBF1AB15E2993F0011878A /* element.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		E4B6FFFD0C3F9AB9008CF71C /* ShellScript */ = {
@@ -1636,7 +1657,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.1.9" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.2.0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -1645,7 +1666,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "elementsDEMO" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "elementMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,

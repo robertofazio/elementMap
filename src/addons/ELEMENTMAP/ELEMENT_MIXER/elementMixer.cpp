@@ -220,11 +220,11 @@ void elementMixer::drawInfo()
     
     
     
-    //glSterreo capability
-    ofSetColor(0,255,206);
-    if ( ((testApp*)ofGetAppPtr())->isGLCapable==GL_TRUE) fontMedium.drawString("GL STEREO:\nSUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
-    else fontMedium.drawString("GL STEREO:\nNOT SUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
-    
+    //glStereo capability
+//    ofSetColor(0,255,206);
+//    if ( ((testApp*)ofGetAppPtr())->isGLCapable==GL_TRUE) fontMedium.drawString("GL STEREO:\nSUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
+//    else fontMedium.drawString("GL STEREO:\nNOT SUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
+//    
     ofPopStyle();
     
     
@@ -324,34 +324,8 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
         else if(name=="MONO") setOutputMode(ELM_MONO);
         else if(name=="OPENGL") setOutputMode(ELM_STEREO_OPENGL);
-        
-        
-        
 	}
 
-    
-    
-//    else if( e.widget->getParent()->getName()=="Resolution")
-//	{
-//        ofxUIDropDownList* resolutions = (ofxUIDropDownList* )e.widget;
-//        
-//        for(int i=0;i<resolutionName.size();i++)
-//		{
-//			if(name==resolutionName[i]) 
-//			{
-//                if(i == 0)   
-//                    for(int a = 0; a < 4; a++)
-//                        sceneElements[a]->resetOutput(1024, 768);
-//                else if(i == 1)
-//                    for(int a = 0; a < 4; a++)
-//                        sceneElements[a]->resetOutput(1280, 1024);
-//                else if(i == 2)   
-//                    for(int a = 0; a < 4; a++)
-//                        sceneElements[a]->resetOutput(1920, 1080);
-//			}			
-//		}
-//        
-//	}
     
     else if( name == "Sound on/off")
 	{

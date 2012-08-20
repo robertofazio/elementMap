@@ -29,14 +29,12 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             mainScene->mainWindow->elemSy.isSelected=false;
             mainScene->mainWindow->elemV1.isSelected=false;
 
-            ofToggleFullscreen();
+            ofxFensterManager::get()->getWindowById(1)->toggleFullscreen();
             
-            if (ofGetWindowMode() == OF_WINDOW)
+            if (ofxFensterManager::get()->getWindowById(1)->getWindowMode() == OF_WINDOW)
             {
-                ofSetWindowPosition(ofGetWindowPositionX(), 10);
-                ofToggleFullscreen();
-                ofSetWindowPosition(ofGetWindowPositionX(), 0);
-                ofToggleFullscreen();
+                ofxFensterManager::get()->getWindowById(1)->setWindowShape(400, 300);
+                ofxFensterManager::get()->getWindowById(1)->setWindowPosition(400, 200);
             }
             
             break;
@@ -137,23 +135,24 @@ void OutputWindow::draw()
 {
     ofBackground(0, 0, 0); 
     
-//    ofTexture   text;
     ofPushStyle();
     ofSetColor(255, 255, 255, ofMap(mainScene->mainWindow->elemMix.getOpacity(), 0, 1, 0, 255));
+        
+    ofPoint dimensioni = ofxFensterManager::get()->getWindowById(1)->getWindowSize();
     
     //draw directly mixer fbo
     if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_STEREO_ANAGLYPH)
     {
-        mainScene->mainWindow->elemMix.fboAnagliph.draw(0, 0);    
+        mainScene->mainWindow->elemMix.fboAnagliph.draw(0, 0, dimensioni.x, dimensioni.y);    
     }
     else if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_MONO)
-        mainScene->mainWindow->elemMix.fboLeft.draw(0,0);
+        mainScene->mainWindow->elemMix.fboLeft.draw(0,0, dimensioni.x, dimensioni.y);    
     ofPopStyle();
     
-    if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
-    else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
-    else if (mainScene->mainWindow->elemImg2.isSelected==true) ofDrawBitmapString("IMAGE ELEMENT SELECTED", 10,30);
-    else ofDrawBitmapString("NO ELEMENTs SELECTED", 10,30);
+//    if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
+//    else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
+//    else if (mainScene->mainWindow->elemImg2.isSelected==true) ofDrawBitmapString("IMAGE ELEMENT SELECTED", 10,30);
+//    else ofDrawBitmapString("NO ELEMENTs SELECTED", 10,30);
 
     
     

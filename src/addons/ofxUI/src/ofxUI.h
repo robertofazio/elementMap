@@ -40,7 +40,7 @@
 #define OFX_UI_COLOR_OUTLINE ofColor(255, 255, 255, 100)                //the rect's outline color 
 #define OFX_UI_COLOR_OUTLINE_HIGHLIGHT ofColor(255, 255, 255, 200)      //the rect's onMouseOver outline highlight color         
 #define OFX_UI_COLOR_FILL ofColor(255, 255, 255, 200)                   //the rect's fill color 
-#define OFX_UI_COLOR_FILL_HIGHLIGHT ofColor(255, 255, 255, 255)         //the rect's onMouseDown highlight color 
+#define OFX_UI_COLOR_FILL_HIGHLIGHT ofColor(255, 255, 255, 255)         //the rect's onMouseDown highlight color
 
 #define OFX_UI_COLOR_PADDED ofColor(0, 100)                             //the rect's padded color
 #define OFX_UI_COLOR_PADDED_OUTLINE ofColor(255, 200)         //the rect's padded outline color 
@@ -142,7 +142,7 @@ enum ofxWidgetColorType
 #define OFX_UI_FONT_NAME "GUI/CODEBold.otf"
 //#endif
 
-#define OFX_UI_FONT_RESOLUTION 135
+#define OFX_UI_FONT_RESOLUTION 150
 #define OFX_UI_FONT_LARGE_SIZE 12
 #define OFX_UI_FONT_MEDIUM_SIZE 8
 #define OFX_UI_FONT_SMALL_SIZE 6

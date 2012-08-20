@@ -38,6 +38,6 @@ public:
     
     bool        outputFullScreen;
 
-    GLboolean	isGLCapable;
+//    GLboolean	isGLCapable;
 
 };

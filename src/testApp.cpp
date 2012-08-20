@@ -4,22 +4,17 @@
 void testApp::setup(){
     
     // test that GL_STEREO is working on this machine
-	isGLCapable = GL_FALSE;
-	glGetBooleanv(GL_STEREO,&isGLCapable);
-    GLint maxVertexTextureImageUnits;
-	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
-    
-    if (isGLCapable==GL_TRUE) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
-	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+//	isGLCapable = GL_FALSE;
+//	glGetBooleanv(GL_STEREO,&isGLCapable);
+//    GLint maxVertexTextureImageUnits;
+//	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
+//
+//    if (isGLCapable==GL_TRUE) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+//	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
 
-    
-    ofxXmlSettings tempXML;
-    tempXML.loadFile("outputRes.xml");
-    
-    tempXML.pushTag("output");
-    outputSizeWidth = (int)tempXML.getValue("width", 0);
-    outputSizeHeight = (int)tempXML.getValue("height", 0);
-    
+    outputSizeWidth=1920;
+    outputSizeHeight=1080;
+
     mainWindow = new MainWindow();
     mainWindow->outputResolutionX = outputSizeWidth;
     mainWindow->outputResolutionY = outputSizeHeight;
@@ -31,12 +26,12 @@ void testApp::setup(){
         
     outputWindow = new OutputWindow(this);
     int firstScreenWidth = ofGetScreenWidth() - 1;      // Se posiziono esattamente alla fine del primo schermo, la finestra viene spostata indietro e posizionata totalmente all'interno del primo schermo. Cos“ invece si posiziona nel secondo schermo
-    output = ofxFensterManager::get()->createFenster(firstScreenWidth, 0, 1024, 768, OF_WINDOW);
+    output = ofxFensterManager::get()->createFenster(400, 200, 400, 300, OF_WINDOW);
     output->addListener(outputWindow);
     output->setWindowTitle("Output");
     
     outputFullScreen = false;
-    
+
 }
 
 void testApp::mouseMovedEvent(ofMouseEventArgs &args)
@@ -51,10 +46,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    ofPushStyle();
     ofBackground(0, 0, 0);  
     mainWindow->draw();
-    
-    
+    ofPopStyle();
 }
 
 //--------------------------------------------------------------
