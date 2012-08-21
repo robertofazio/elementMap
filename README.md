@@ -1,12 +1,14 @@
-##element.map##
+##element.Map##
 ********************
 
 Sterescopic media server tool for video mapping.
 
-elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in OpenFrameworks e dedicato a video proiezioni stereoscopiche con tecnologia attiva sydebyside.
+elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in C++ usando OpenFrameworks e dedicato a video proiezioni stereoscopiche con tecnologia attiva sydebyside.
 os : OSX 10.7.4 
 scheda grafica : nVidia min 512MB e GL_STEREO supportate
 
+(C) 2012 Roberto Fazio Studio - www.robertofazio.com
+Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
 versione alpha 0.2.0 - 20/08/2012
 
 MAIN FEATURES:
@@ -24,6 +26,8 @@ MAIN FEATURES:
 - Attualmente gestisce 3 elements , video , immagine e syphon
 - Possibilità di salvare e caricare una sola configurazione 
 - Controllo opacità e visibilità per ogni element
+- Syphon supportato correttamente
+- Risouluzione output si adatta correttamente a tutte le risoluzioni del secondo schermo.
 
 KNOWN ISSUES:
 
