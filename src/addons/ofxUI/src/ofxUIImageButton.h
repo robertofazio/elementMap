@@ -119,7 +119,7 @@ public:
         switch (state) {
             case OFX_UI_STATE_NORMAL:
             {            
-                draw_fill_highlight = false;             
+                draw_fill_highlight = true;             
                 draw_outline_highlight = false;  
             }
                 break;

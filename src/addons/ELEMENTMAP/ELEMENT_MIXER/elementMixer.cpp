@@ -291,42 +291,24 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
     
     if(e.widget->getName()=="Play")
 	{
-        mainWindow->elemV1.leftChannelPlayer.play();
-        mainWindow->elemV1.rightChannelPlayer.play();
-
-	}
-
+        mainWindow->elemV1.element_videoPlay(1);
+    }
 
     if(e.widget->getName()=="Pause")
 	{
-        mainWindow->elemV1.leftChannelPlayer.stop();
-        mainWindow->elemV1.rightChannelPlayer.stop();
+        mainWindow->elemV1.element_videoPause();
 	}
     
     if(e.widget->getName()=="Rew")
 	{
-        mainWindow->elemV1.leftChannelPlayer.play();
-        mainWindow->elemV1.rightChannelPlayer.play();
-        
-        
-        mainWindow->elemV1.leftChannelPlayer.setPosition(0.0);
-        mainWindow->elemV1.rightChannelPlayer.setPosition(0.0);
-        
-        mainWindow->elemV1.leftChannelPlayer.stop();
-        mainWindow->elemV1.rightChannelPlayer.stop();
+        mainWindow->elemV1.element_videoStop();
 	}
     
     if(e.widget->getName()=="Video loop")
 	{
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        if(toggle->getValue() == 0) {
-            mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NONE);
-            mainWindow->elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NONE);
-        }
-        else {
-            mainWindow->elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NORMAL);
-            mainWindow->elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NORMAL);
-        }
+        if(toggle->getValue() == 0) mainWindow->elemV1.element_setLoop(OF_LOOP_NONE);
+        else mainWindow->elemV1.element_setLoop(OF_LOOP_NORMAL);
 	}
     
     if(e.widget->getName()=="Opacity")
@@ -347,19 +329,15 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
     else if( name == "Sound on/off")
 	{
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        if(toggle->getValue() == 0)
-           mainWindow->elemV1.leftChannelPlayer.setVolume(0);
-        else 
-            mainWindow->elemV1.leftChannelPlayer.setVolume(actualVolume);
+        mainWindow->elemV1.element_toggleSound();
+
+        
     }
     else if( name == "Sound Volume")
 	{
         ofxUISlider *slider = (ofxUISlider *) e.widget;
         actualVolume = slider->getValue() * 1000;
-        cout << slider->getScaledValue() << endl;
-        cout << actualVolume << endl;
-        mainWindow->elemV1.leftChannelPlayer.setVolume(actualVolume);
-        mainWindow->elemV1.rightChannelPlayer.setVolume(actualVolume);
+        mainWindow->elemV1.element_soundVolume(actualVolume);
     }
     
     elementUIBase::guiEvent(e);

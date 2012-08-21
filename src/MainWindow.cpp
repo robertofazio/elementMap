@@ -90,6 +90,7 @@ void MainWindow::setup()
 	fontMedium.setLetterSpacing(1.017);
     
     logo.loadImage("./images/logo.png");
+    logoChristie.loadImage("./images/logoChristie.png");
 
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
@@ -175,8 +176,8 @@ void MainWindow::draw()
             ofPopStyle();
         }
         
-        logo.draw(1195, 2, 60, 60);
-        
+        logo.draw(1195, 12, 60, 60);
+        logoChristie.draw(950,20,235,35);
     }
     
 }

@@ -36,11 +36,14 @@ void elementUIBase::setupUI(element* _parentElement)
     UI = new ofxUICanvas(xPos,yPos, 1000, 1000);
     
     ofColor colorBack;
-    colorBack.r = 200;
+    colorBack.r = 0;
+    colorBack.g = 255;
+    colorBack.b = 206;
     
     UI->setColorBack(colorBack);
     UI->setDrawBack(false);
     UI->setDrawOutline(false);
+    UI->setDrawWidgetPadding(true);
     UI->setFontSize(OFX_UI_FONT_MEDIUM, 8);
     UI->setFontSize(OFX_UI_FONT_SMALL, 6);
     UI->setPadding(2);
@@ -51,14 +54,15 @@ void elementUIBase::setupUI(element* _parentElement)
     {
         
     // prima colonna: isActive, Mono/Stereo
-    UI->addWidget(new ofxUIToggle(5, posY, 10,10,parentElement->getIsActive(),"isActive"));
-    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,posY+=20, 10, 10,parentElement->getDrawInStereo(),"Mono/Stereo"));
-    
+    UI->addWidget(new ofxUIToggle(5, posY, 16,16,parentElement->getIsActive(),"isActive"));
+    if(this->isStereo) UI->addWidget(new ofxUIToggle(5,posY+=20, 16, 16,parentElement->getDrawInStereo(),"Mono/Stereo"));
+    UI->addWidget(new ofxUIButton(5, posY+=20, 16,16,false,"Select"));
+        
         posY=10;
         
         //seconda colonna: opacità e blending mode
-        UI->addWidget(new ofxUISlider(150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
-        listBlendModes = new ofxUIDropDownList(150, posY+40, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        UI->addWidget(new ofxUIMinimalSlider(150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
+        listBlendModes = new ofxUIDropDownList(150, posY+20, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
@@ -68,12 +72,10 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(listBlendModes);
         
         //terza colonna: componenti r,g,b
-        ofxUISlider *red = new ofxUISlider(280, 10, 100,10, 0, 255, parentElement->getRed() ,"R");
-        UI->addWidget(new ofxUISlider(280, 10, 100,10, 0, 255, parentElement->getRed() ,"R"));
-        UI->addWidget(new ofxUISlider(280, 40, 100,10, 0, 255, parentElement->getGreen() ,"G"));
-        UI->addWidget(new ofxUISlider(280, 70, 100,10, 0, 255, parentElement->getBlue() ,"B"));
-        UI->addWidget(new ofxUIButton(280, 110, 10, 10, false, "RGB reset"));
-        
+        UI->addWidget(new ofxUIMinimalSlider(280, 10, 100,10, 0, 255, parentElement->getRed() ,"RED"));
+        UI->addWidget(new ofxUIMinimalSlider(280, 30, 100,10, 0, 255, parentElement->getGreen() ,"GREEN"));
+        UI->addWidget(new ofxUIMinimalSlider(280, 50, 100,10, 0, 255, parentElement->getBlue() ,"BLUE"));
+        UI->addWidget(new ofxUIButton(280, 70, 16, 16, false, "RGB reset"));
         
     }
     
@@ -86,15 +88,15 @@ void elementUIBase::setupUI(element* _parentElement)
         int posY = 460;
 
         //parte superiore sinistra: test Pattern e Mixer Stereo toggle
-        UI->addWidget(new ofxUIToggle(marginLeft, posY, 10,10,false,"Test Pattern"));
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,parentElement->getDrawInStereo(),"Stereo"));
+        UI->addWidget(new ofxUIToggle(marginLeft, posY, 16,16,false,"Test Pattern"));
+        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 16, 16,parentElement->getDrawInStereo(),"Stereo"));
         ofxUISpacer* spacer = new ofxUISpacer(marginLeft, posY+=20, 400, 1);
         spacer->setColorFill(ofColor(0, 255, 206));
         UI->addWidget(spacer);
         
         //parte superiore centrale: opacità
         posY=460;
-        UI->addWidget(new ofxUISlider(marginLeft+150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Main Opacity"));
+        UI->addWidget(new ofxUISlider(marginLeft+150, posY, 100,16,0.0,1.0,parentElement->getOpacity() ,"Main Opacity"));
         
         //parte superiore destra: output mode
         listOutputModes = new ofxUIDropDownList(marginLeft + 300, posY, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
@@ -108,16 +110,13 @@ void elementUIBase::setupUI(element* _parentElement)
         
         //prima colonna: video
         posY=510;
-        UI->addWidget(new ofxUIButton(marginLeft,posY, 10, 10,false, "Play"));
-        UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Pause"));
-        UI->addWidget(new ofxUIButton(marginLeft,posY += 20, 10, 10,false,"Rew"));
-        UI->addWidget(new ofxUIToggle(marginLeft,posY += 20, 10, 10,false,"Video loop"));
-        
-        //seconda colonna: audio
-        posY = 510;
-        UI->addWidget(new ofxUIToggle(marginLeft + 150, posY, 10, 10, true,"Sound on/off"));
-        UI->addWidget(new ofxUISlider(marginLeft + 150, posY+=20, 100,10,0,100,50 ,"Sound Volume"));
-        
+        UI->addWidget(new ofxUIImageButton(marginLeft, posY, 40, 40, true, "./GUI/images/play.png", "Play"));
+        UI->addWidget(new ofxUIImageButton(marginLeft+=45, posY, 40, 40, true, "./GUI/images/pause.png", "Pause"));
+        UI->addWidget(new ofxUIImageButton(marginLeft+=45, posY, 40, 40, true, "./GUI/images/stop.png", "Rew"));
+        UI->addWidget(new ofxUIImageToggle(marginLeft+=45, posY, 40, 40, true, "./GUI/images/loop.png", "Loop"));
+        UI->addWidget(new ofxUIImageToggle(marginLeft+=45, posY, 40, 40, true, "./GUI/images/mute.png","Sound on/off"));
+        UI->addWidget(new ofxUISlider(marginLeft+=45, posY, 100,16,0,100,50 ,"Sound Volume"));
+
     }
     
     if (type!=5) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 
@@ -135,17 +134,17 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setOpacity(slider->getScaledValue());
 	}
-	else if(e.widget->getName()=="R")
+	else if(e.widget->getName()=="RED")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setRed(int(slider->getScaledValue()));
     }
-    else if(e.widget->getName()=="G")
+    else if(e.widget->getName()=="GREEN")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setGreen(int(slider->getScaledValue()));
     }
-    else if(e.widget->getName()=="B")
+    else if(e.widget->getName()=="BLUE")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setBlue(int(slider->getScaledValue()));
@@ -166,6 +165,11 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         else parentElement->setOpacity(0);
         
 	}
+    else if (e.widget->getName()=="Select")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+    }
+    
     else if(e.widget->getName()=="isDrawInStereo")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;

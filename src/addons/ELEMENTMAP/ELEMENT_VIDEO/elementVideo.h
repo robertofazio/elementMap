@@ -36,6 +36,10 @@ class elementVideo : public element
     void element_toggleSound();
     void element_soundVolume(float _volume);
     
+    bool    mute;
+    float   volume;
+    float   lastVolume;
+    
     //video player
 	ofVideoPlayer leftChannelPlayer;
 	ofVideoPlayer rightChannelPlayer;

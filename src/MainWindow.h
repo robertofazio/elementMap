@@ -65,6 +65,7 @@ public:
     ofTrueTypeFont          fontMedium;
     
     ofImage                 logo;
+    ofImage                 logoChristie;
     
 	
 };

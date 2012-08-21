@@ -22,6 +22,10 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo(), _isWarpable);
     
+    mute    =    false;
+    volume  =    100;
+    
+    
 }
 
 //-----------------------------------------------------------------
@@ -32,6 +36,10 @@ void elementVideo::update()
 
 	leftChannelPlayer.idleMovie();
 	rightChannelPlayer.idleMovie();
+    
+    if (mute) leftChannelPlayer.setVolume(0);
+    else leftChannelPlayer.setVolume(volume);
+    
 }
 
 //-----------------------------------------------------------------
@@ -81,48 +89,69 @@ ofTexture& elementVideo::getRightTexture()
 //-----------------------------------------------------------------
 void elementVideo::element_videoPlay(int _speed)
 {
-    
+    leftChannelPlayer.setSpeed(_speed);
+    rightChannelPlayer.setSpeed(_speed);
+    leftChannelPlayer.play();
+    rightChannelPlayer.play();
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_videoPause()
 {
-    
+    leftChannelPlayer.stop();
+    rightChannelPlayer.stop();   
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_videoStop()
 {
-    
+    leftChannelPlayer.play();
+    rightChannelPlayer.play();
+    leftChannelPlayer.setFrame(0);
+    rightChannelPlayer.setFrame(0);
+    leftChannelPlayer.stop();
+    rightChannelPlayer.stop();
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_frameAvanti()
 {
-    
+    leftChannelPlayer.play();
+    rightChannelPlayer.play();
+    leftChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame()+1);
+    rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
+    leftChannelPlayer.stop();
+    rightChannelPlayer.stop();    
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_frameIndietro()
 {
+    leftChannelPlayer.play();
+    rightChannelPlayer.play();
+    leftChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame()-1);
+    rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
+    leftChannelPlayer.stop();
+    rightChannelPlayer.stop();    
     
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_setLoop(ofLoopType _loop)
 {
-    
+    leftChannelPlayer.setLoopState(_loop);
+    rightChannelPlayer.setLoopState(_loop);
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_toggleSound()
 {
-    
+    mute=!mute;
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_soundVolume(float _volume)
 {
-    
+    volume=_volume;    
 }
 
