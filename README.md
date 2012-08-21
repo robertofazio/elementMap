@@ -32,15 +32,16 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
-- Implementare la funzione Rotate e Zoom per ogni warp.
 - Progettazione di un'area inspector
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Possibilità di cambiare la priorità di ogni element
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
-- Flipping options, per flippare l'immagine
+
+- Implementare la funzione Rotate e Zoom per ogni warp.
 - Maschera per ogni element
 - Interfaccia
+- Flipping options, per flippare l'immagine
 - Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
 - Edge Blending
 - Multiproiezioni
