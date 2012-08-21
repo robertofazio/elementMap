@@ -32,6 +32,7 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
+- il tasto S ha comportamenti anomali , non ci carica correttamente la configurazione con L.
 - Quando si salva con il tasto 's' si dovrebbero salvare tutte le impostazioni, di opacity, visibility,volume etc.. e non solo il warp
 
 TO DO LIST:
