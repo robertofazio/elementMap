@@ -32,12 +32,13 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
-- Progettazione di un'area inspector
+- Nella preview si devono vedere le info dei tasti premuti
+- Usare il primo frame per la preview video. ofxUI.
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Possibilità di cambiare la priorità di ogni element
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
-
+- Progettazione di un'area inspector
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Maschera per ogni element
 - Interfaccia
