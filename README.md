@@ -37,9 +37,9 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
-- Nella preview si devono vedere le info dei tasti premuti
+- Sotto la main previev si devono vedere le info di ogni cosa che si preme magari fare un text inspector tipo..
 - Usare il primo frame per la preview video. ofxUI.
-- Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
+- Sotto la preview nell'interfaccia mettere lo sfondo a quadretti che indica la trasparenza tipo photoshop.
 - Possibilità di cambiare la priorità di ogni element
 - possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
