@@ -142,17 +142,17 @@ void MainWindow::draw()
         fontSmall.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
         // frame by frame
-        ofDrawBitmapString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
-        ofDrawBitmapString("video frame Right " + ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 650, 710);
+        fontSmall.drawString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
+        fontSmall.drawString("video frame Right " + ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 650, 710);
         if (elemV1.leftChannelPlayer.getCurrentFrame() == elemV1.rightChannelPlayer.getCurrentFrame()) {
             ofSetHexColor(0x00FFFF);            
-            ofDrawBitmapString("FRAME STERO SYNC", 650,740);
+            fontSmall.drawString("FRAME STERO SYNC", 650,740);
             
         }
         
         else {
             ofSetHexColor(0xFF0000);
-            ofDrawBitmapString("FRAME STERO NOT IN SYNC", 650,740);
+            fontSmall.drawString("FRAME STERO NOT IN SYNC", 650,740);
         }
         
         ofPopStyle();
@@ -212,55 +212,17 @@ void MainWindow::keyPressed(int key)
 	}
     if(key == ' ')
     {
-        if (elemV1.leftChannelPlayer.isPlaying()) 
-        {
-            elemV1.leftChannelPlayer.stop();
-            elemV1.rightChannelPlayer.stop();
-            
-        } 
-        else
-        {
-            elemV1.leftChannelPlayer.play();
-            elemV1.rightChannelPlayer.play();
-        }
-        
+        if (elemV1.leftChannelPlayer.isPlaying()) elemV1.element_videoPause();
+        else elemV1.element_videoPlay(1);
     }
     
-    if (key== OF_KEY_BACKSPACE)
-    {
-        elemV1.leftChannelPlayer.play();
-        elemV1.rightChannelPlayer.play();
-        elemV1.leftChannelPlayer.setFrame(0);
-        elemV1.rightChannelPlayer.setFrame(0);
-        elemV1.leftChannelPlayer.stop();
-        elemV1.rightChannelPlayer.stop();
-    }
-
+    if (key== OF_KEY_BACKSPACE) elemV1.element_videoStop();
     
-    if(key == '.')
-    {
-        elemV1.leftChannelPlayer.play();
-        elemV1.rightChannelPlayer.play();
-        elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()+1);
-        elemV1.rightChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame());
-        elemV1.leftChannelPlayer.stop();
-        elemV1.rightChannelPlayer.stop();
-
-    }
-
-    if(key == ',')
-    {
-        elemV1.leftChannelPlayer.play();
-        elemV1.rightChannelPlayer.play();
-        elemV1.leftChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame()-1);
-        elemV1.rightChannelPlayer.setFrame(elemV1.leftChannelPlayer.getCurrentFrame());
-        elemV1.leftChannelPlayer.stop();
-        elemV1.rightChannelPlayer.stop();
-        
-    }
-
-    if(key == 'i')
-        ofSystemAlertDialog(comandi);
+    if(key == '.') elemV1.element_frameAvanti();
+    
+    if(key == ',') elemV1.element_frameIndietro();        
+    
+    if(key == 'i') ofSystemAlertDialog(comandi);
     
 }
 

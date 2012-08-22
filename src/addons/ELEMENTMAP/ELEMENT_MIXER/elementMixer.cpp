@@ -281,7 +281,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             sceneElements[0]->setIsActive(toggle->getValue());
         }
     
-    if(e.widget->getName()=="Stereo")
+    if(e.widget->getName()=="Stereoscopic")
     {
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         setDrawInStereo(toggle->getValue());
@@ -289,20 +289,16 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
 
     
     
-    if(e.widget->getName()=="Play")
-	{
-        mainWindow->elemV1.element_videoPlay(1);
-    }
+    if(e.widget->getName()=="Play")         mainWindow->elemV1.element_videoPlay(1);
 
-    if(e.widget->getName()=="Pause")
-	{
-        mainWindow->elemV1.element_videoPause();
-	}
+    if(e.widget->getName()=="Pause")        mainWindow->elemV1.element_videoPause();
     
-    if(e.widget->getName()=="Rew")
-	{
-        mainWindow->elemV1.element_videoStop();
-	}
+    if(e.widget->getName()=="Rew")          mainWindow->elemV1.element_videoStop();
+
+    if(e.widget->getName()=="prevFrame")    mainWindow->elemV1.element_frameIndietro();
+    
+    if(e.widget->getName()=="nextFrame")    mainWindow->elemV1.element_frameAvanti();
+
     
     if(e.widget->getName()=="Video loop")
 	{

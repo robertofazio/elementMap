@@ -37,7 +37,6 @@ class  elementUIBase
 	ofxUIDropDownList*		listResolution;
 	vector<string>			blendingNames; 
 	vector<string>          outputModesNames;
-	vector<string>          resolutionName;
     
     bool                    isStereo;
 
