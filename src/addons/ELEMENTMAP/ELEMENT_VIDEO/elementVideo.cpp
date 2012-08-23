@@ -15,7 +15,7 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	
 	if(getIsStereo()) rightChannelPlayer.loadMovie(_rightChannel);
     leftChannelPlayer.loadMovie(_leftChannel);
-	
+	    
 	// UI params
 	xPos = _xPos;
 	yPos = _yPos;
@@ -131,6 +131,18 @@ void elementVideo::element_frameIndietro()
     rightChannelPlayer.play();
     leftChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame()-1);
     rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
+    leftChannelPlayer.stop();
+    rightChannelPlayer.stop();    
+    
+}
+
+//-----------------------------------------------------------------
+void elementVideo::element_goToFrame(int _frame)
+{
+    leftChannelPlayer.play();
+    rightChannelPlayer.play();
+    leftChannelPlayer.setFrame(_frame);
+    rightChannelPlayer.setFrame(_frame);
     leftChannelPlayer.stop();
     rightChannelPlayer.stop();    
     

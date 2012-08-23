@@ -269,74 +269,88 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
 	
-        if(e.widget->getName()=="Main Opacity")
+        //STEREOSCOPIC
+        if(e.widget->getName()=="MAIN STEREO")
+        {
+            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+            setDrawInStereo(toggle->getValue());
+        }
+        //MAIN OPACITY
+        if(e.widget->getName()=="MAIN OPACITY")
         {
             ofxUISlider *slider = (ofxUISlider *) e.widget;
             setOpacity(slider->getScaledValue());
         }
-        
-        if(e.widget->getName()=="Test Pattern")
+        //TEST PATTERN
+        if(e.widget->getName()=="TEST PATTERN")
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
             sceneElements[0]->setIsActive(toggle->getValue());
         }
-    
-    if(e.widget->getName()=="Stereoscopic")
-    {
-        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        setDrawInStereo(toggle->getValue());
-    }
+        //SAVE PROJECT
+        if(e.widget->getName()=="SAVE PROJECT")
+        {
+            // TO-DO
+        }
+        //OPEN PROJECT
+        if(e.widget->getName()=="OPEN PROJECT")
+        {
+            // TO-DO
+        }
+        //OUTPUT MODE
+        if( e.widget->getParent()->getName()=="Output Mode")
+        {
+            if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
+            else if(name=="MONO") setOutputMode(ELM_MONO);
+            else if(name=="OPENGL") setOutputMode(ELM_STEREO_OPENGL);
+        }
 
-    
-    
-    if(e.widget->getName()=="Play")         mainWindow->elemV1.element_videoPlay(1);
-
-    if(e.widget->getName()=="Pause")        mainWindow->elemV1.element_videoPause();
-    
-    if(e.widget->getName()=="Rew")          mainWindow->elemV1.element_videoStop();
-
-    if(e.widget->getName()=="prevFrame")    mainWindow->elemV1.element_frameIndietro();
-    
-    if(e.widget->getName()=="nextFrame")    mainWindow->elemV1.element_frameAvanti();
-
-    
-    if(e.widget->getName()=="Video loop")
-	{
-        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        if(toggle->getValue() == 0) mainWindow->elemV1.element_setLoop(OF_LOOP_NONE);
-        else mainWindow->elemV1.element_setLoop(OF_LOOP_NORMAL);
-	}
-    
-    if(e.widget->getName()=="Opacity")
-	{
-		ofxUISlider *slider = (ofxUISlider *) e.widget;
-		parentElement->setOpacity(slider->getScaledValue());
-	}
-    
-    
-    else if( e.widget->getParent()->getName()=="Output Mode")
-	{
-        if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
-        else if(name=="MONO") setOutputMode(ELM_MONO);
-        else if(name=="OPENGL") setOutputMode(ELM_STEREO_OPENGL);
-	}
-
-    
-    else if( name == "Sound on/off")
-	{
-        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        mainWindow->elemV1.element_toggleSound();
-
+        // ++++ VIDEO PLAYER ++++ //
         
-    }
-    else if( name == "Sound Volume")
-	{
-        ofxUISlider *slider = (ofxUISlider *) e.widget;
-        actualVolume = slider->getValue() * 1000;
-        mainWindow->elemV1.element_soundVolume(actualVolume);
-    }
+        //NAVIGATOR
+        if(e.widget->getName()=="VIDEO NAVIGATOR")
+        {
+            ofxUISlider *slider = (ofxUISlider *) e.widget;
+            int _frame = int (slider->getValue()*mainWindow->elemV1.leftChannelPlayer.getTotalNumFrames());
+            mainWindow->elemV1.element_goToFrame(_frame);
+        }
+        //REW
+        if(e.widget->getName()=="REW 2x")       mainWindow->elemV1.element_videoPlay(-2);
+        //PLAY
+        if(e.widget->getName()=="PLAY")         mainWindow->elemV1.element_videoPlay(1);
+        //FFW
+        if(e.widget->getName()=="FFW 2x")       mainWindow->elemV1.element_videoPlay(2);
+        //PREV FRAME
+        if(e.widget->getName()=="PREV")         mainWindow->elemV1.element_frameIndietro();
+        //NEXT FRAME
+        if(e.widget->getName()=="NEXT")         mainWindow->elemV1.element_frameAvanti();
+        //PAUSE
+        if(e.widget->getName()=="PAUSE")        mainWindow->elemV1.element_videoPause();
+        //STOP
+        if(e.widget->getName()=="STOP")         mainWindow->elemV1.element_videoStop();
+        
+        //LOOP TOGGLE
+        if(e.widget->getName()=="LOOP")
+        {
+            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+            if(toggle->getValue() == 0) mainWindow->elemV1.element_setLoop(OF_LOOP_NONE);
+            else mainWindow->elemV1.element_setLoop(OF_LOOP_NORMAL);
+        }
+        //MUTE
+        if( name == "MUTE")
+        {
+            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+            mainWindow->elemV1.element_toggleSound();
+        }
+        //VOLUME
+        if( name == "SOUND VOLUME")
+        {
+            ofxUISlider *slider = (ofxUISlider *) e.widget;
+            actualVolume = slider->getValue() * 1000;
+            mainWindow->elemV1.element_soundVolume(actualVolume);
+        }
     
-    elementUIBase::guiEvent(e);
+        elementUIBase::guiEvent(e);
 }
 
 

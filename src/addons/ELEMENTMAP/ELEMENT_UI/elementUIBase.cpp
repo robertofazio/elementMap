@@ -64,12 +64,12 @@ void elementUIBase::setupUI(element* _parentElement)
             UI->addWidget(new ofxUIToggle(5, posY+=20, 16,16,false,"Quad Warping"));
             UI->addWidget(new ofxUIToggle(5, posY+=20, 16,16,false,"Fine Warping"));
             
-            UI->addWidget(new ofxUIImageButton(25, posY+=20, 16, 16, true, "./GUI/images/meno.png", "xGridDecrease"));
-            UI->addWidget(new ofxUIImageButton(46, posY, 16, 16, true, "./GUI/images/piu.png", "xGridIncrease"));
+            UI->addWidget(new ofxUIImageButton(25, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease"));
+            UI->addWidget(new ofxUIImageButton(46, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease"));
             UI->addWidget(new ofxUILabel(68, posY+4, "xGrid", "xGrid", OFX_UI_FONT_SMALL));
             
-            UI->addWidget(new ofxUIImageButton(25, posY+=20, 16, 16, true, "./GUI/images/meno.png", "yGridDecrease"));
-            UI->addWidget(new ofxUIImageButton(46, posY, 16, 16, true, "./GUI/images/piu.png", "yGridIncrease"));
+            UI->addWidget(new ofxUIImageButton(25, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease"));
+            UI->addWidget(new ofxUIImageButton(46, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease"));
             UI->addWidget(new ofxUILabel(68, posY+4, "yGrid", "yGrid", OFX_UI_FONT_SMALL));
             
             UI->addWidget(new ofxUILabelButton(5, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL));
@@ -129,12 +129,9 @@ void elementUIBase::setupUI(element* _parentElement)
         ofColor(0);
         UI->addWidget(new ofxUILabel(5, 10, "ELEMENT MAIN CONTROL", 1));
         
-        // TEST PATTERN
-        UI->addWidget(new ofxUILabelToggle(490,40,100,40,false,"Test Pattern", OFX_UI_FONT_SMALL));
         
         // STEREOSCOPIC
-//        UI->addWidget(new ofxUILabelToggle(350,40, 110, 40,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
-        UI->addWidget(new ofxUIButton(300, 60, 16, 16, false, "MAIN STEREO"));
+        UI->addWidget(new ofxUIToggle(300, 60, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO"));
 
         
         ofxUISpacer* spacer = new ofxUISpacer(5, 30, 590, 1);
@@ -149,16 +146,19 @@ void elementUIBase::setupUI(element* _parentElement)
 
         
         //MAIN OPACITY
-        UI->addWidget(new ofxUIMinimalSlider(150, 60, 120,20,0.0,1.0,parentElement->getOpacity() ,"Main Opacity"));
-        
+        UI->addWidget(new ofxUIMinimalSlider(490, 40, 100,20,0.0,1.0,parentElement->getOpacity() ,"MAIN OPACITY"));
+
+        // TEST PATTERN
+        UI->addWidget(new ofxUILabelToggle(490,70,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL));
+
         // FULL SCREEN
-        UI->addWidget(new ofxUILabelToggle(490, 85, 100,40,false, "Full Screen", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL));
         
         // SAVE PROJECT
-        UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "Save Project", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
         
         // OPEN PROJECT
-        UI->addWidget(new ofxUILabelButton(490, 150, 100, false, "Open Project", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelButton(490, 150, 100, false, "OPEN PROJECT", OFX_UI_FONT_SMALL));
       
 
         // OUTPUT MODE
@@ -171,26 +171,31 @@ void elementUIBase::setupUI(element* _parentElement)
         listOutputModes->setAutoClose(true);
         UI->addWidget(listOutputModes);
         
-        
-        //parte inferiore: video player
-        
-//        UI->addWidget(new ofxUIImageButton(marginLeft, posY, 30, 30, true, "./GUI/images/play.png", "Play"));
-//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/pause.png", "Pause"));
-//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/stop.png", "Rew"));
-//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/play.png", "prevFrame"));
-//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/play.png", "nextFrame"));
-//        UI->addWidget(new ofxUIImageToggle(marginLeft+=35, posY, 30, 30, true, "./GUI/images/loop.png", "Loop"));
-//        UI->addWidget(new ofxUIImageToggle(marginLeft+=35, posY, 30, 30, true, "./GUI/images/mute.png","Sound on/off"));
-//        UI->addWidget(new ofxUISlider(marginLeft+=35, posY, 100,16,0,100,50 ,"Sound Volume"));
-        
+
         // ALTERNATIVE PLAYER
         posY=60;
-        UI->addWidget(new ofxUIToggle(marginLeft, posY, 40,40,false,"PLAY"));
-        UI->addWidget(new ofxUIButton(marginLeft, posY+= 45, 40,40,false, "STOP"));
-        UI->addWidget(new ofxUIToggle(marginLeft, posY+= 45, 40,40,false,"LOOP"));
+        UI->addWidget(new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 0 ,"VIDEO NAVIGATOR"));        
+        
+        posY=80;
+        UI->addWidget(new ofxUILabelButton(marginLeft, posY, 60,false,"REW 2x", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelButton(marginLeft+65, posY, 80,false,"PLAY", OFX_UI_FONT_LARGE));
+        UI->addWidget(new ofxUILabelButton(marginLeft+150, posY, 60,false,"FFW 2x", OFX_UI_FONT_SMALL));
+        posY=110;    
+        UI->addWidget(new ofxUILabelButton(marginLeft, posY, 60,false,"PREV", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelButton(marginLeft+150, posY, 60,false,"NEXT", OFX_UI_FONT_SMALL));
+        
+        posY=140;
+        UI->addWidget(new ofxUILabelButton(marginLeft, posY, 60,false, "PAUSE", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelButton(marginLeft+65, posY-22, 80,false, "STOP", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelToggle(marginLeft+150, posY, 60,false,"LOOP", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelToggle(marginLeft+65, posY+8, 80,16,false, "MUTE", OFX_UI_FONT_SMALL));
+
+        posY=170;
+        UI->addWidget(new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 100 ,"SOUND VOLUME"));
 
         
-        UI->addWidget(new ofxUILabel(marginLeft, posY+= 45, "FRAME LEFT", 2));
+        posY=196;
+        UI->addWidget(new ofxUILabel(marginLeft, posY, "FRAME LEFT", 2));
         UI->addWidget(new ofxUILabel(marginLeft, posY+= 12, "FRAME RIGHT", 2));
 
 
@@ -270,7 +275,19 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             else if(name=="Screen")parentElement->setBlendingMode(OF_BLENDMODE_SCREEN);
                 
 	}
- 
+
+    //FULL SCREEN
+    if(e.widget->getName()=="FULL SCREEN")
+    {
+        ofxFensterManager::get()->getWindowById(1)->toggleFullscreen();
+        
+        if (ofxFensterManager::get()->getWindowById(1)->getWindowMode() == OF_WINDOW)
+        {
+            ofxFensterManager::get()->getWindowById(1)->setWindowShape(400, 300);
+            ofxFensterManager::get()->getWindowById(1)->setWindowPosition(400, 200);
+        }
+    }
+
 	
 }
 
