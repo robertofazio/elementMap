@@ -29,7 +29,7 @@ void testApp::setup(){
     output = ofxFensterManager::get()->createFenster(400, 200, 400, 300, OF_WINDOW);
     output->addListener(outputWindow);
     output->setWindowTitle("Output");
-    
+
     outputFullScreen = false;
 
 }

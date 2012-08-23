@@ -5,7 +5,7 @@
 // in james words :
 #include "element.h"
 
-//same thing for testSpp, because we point to the mixer element:
+//same thing for testApp, because we point to the mixer element:
 #include "testApp.h"
 
 //--------------------------------------------------------------
@@ -162,7 +162,7 @@ void elementUIBase::setupUI(element* _parentElement)
       
 
         // OUTPUT MODE
-    listOutputModes = new ofxUIDropDownList(300, 80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes = new ofxUIDropDownList(300, 80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
         listOutputModes->setDrawPaddingOutline(false);
@@ -241,30 +241,109 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         parentElement->setGreen(255);
         parentElement->setBlue(255);
     }
-	
+    //IS ACTIVE
     else if(e.widget->getName()=="isActive")
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setIsActive(toggle->getValue());
+
 		if (toggle->getValue()) parentElement->setOpacity(1);
         else parentElement->setOpacity(0);
         
 	}
-    else if (e.widget->getName()=="Select")
+    //QUAD WARPING
+    else if (e.widget->getName()=="Quad Warping")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive()) {
+            parentElement->isSelected=true;
+            if (button->getValue())
+            {
+                parentElement->warper.bWarpActive=true;
+            }
+            else 
+            {
+                parentElement->warper.bWarpActive=false;   
+                parentElement->isSelected=false;
+            }
+        }
     }
-    
-    else if(e.widget->getName()=="isDrawInStereo")
-	{
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		parentElement->setDrawInStereo(toggle->getValue());
-	}
+    //FINE WARPING
+    else if (e.widget->getName()=="Fine Warping")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive()) {
+            parentElement->isSelected=true;
+            if (button->getValue()) parentElement->warper.bViewGrid=true;
+            else {
+             parentElement->warper.bViewGrid=false;
+             parentElement->isSelected=false;
+            }
+        }
+    }
+    //X GRID DECREASE
+    else if (e.widget->getName()=="xGridDecrease")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive() && parentElement->isSelected && parentElement->warper.bViewGrid)
+        {
+            parentElement->warper.decreaseXgrid();
+        }        
+    }
+    //X GRID INCREASE
+    else if (e.widget->getName()=="xGridIncrease")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive() && parentElement->isSelected)
+        {
+            parentElement->warper.increaseXgrid();
+        }
+    }
+    //Y GRID DECREASE
+    else if (e.widget->getName()=="yGridDecrease")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive() && parentElement->isSelected)
+        {
+            parentElement->warper.decreaseYgrid();
+        }
+    }
+    //Y GRID INCREASE
+    else if (e.widget->getName()=="yGridIncrease")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive() && parentElement->isSelected)
+        {
+            parentElement->warper.increaseYgrid();
+        }
+    }
+    //RESET WARP
+    else if (e.widget->getName()=="reset warp")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive() && parentElement->isSelected)
+        {
+            parentElement->warper.resetCorners();
+        }
+    }
+    //RESET GRID
+    else if (e.widget->getName()=="reset grid")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+		if(parentElement->getIsActive() && parentElement->isSelected)
+        {
+            parentElement->warper.decreaseXgrid();
+            parentElement->warper.increaseXgrid();
+
+        }
+    }
+    //IS DRAW IN STEREO
     else if(e.widget->getName()=="Stereoscopic")
         {
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         parentElement->setDrawInStereo(toggle->getValue());
         }
+    //BLENDING MODE
     else if( e.widget->getParent()->getName()=="Blending Mode")
 	{
             if(name=="Disabled") parentElement->setBlendingMode(OF_BLENDMODE_DISABLED);
@@ -273,10 +352,9 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             else if(name=="Subtract")parentElement->setBlendingMode(OF_BLENDMODE_SUBTRACT);
             else if(name=="Multiply")parentElement->setBlendingMode(OF_BLENDMODE_MULTIPLY);
             else if(name=="Screen")parentElement->setBlendingMode(OF_BLENDMODE_SCREEN);
-                
+        
 	}
-
-    //FULL SCREEN
+    //FULL SCREEN (seconda finestra)
     if(e.widget->getName()=="FULL SCREEN")
     {
         ofxFensterManager::get()->getWindowById(1)->toggleFullscreen();

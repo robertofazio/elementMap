@@ -32,6 +32,8 @@ public:
     testApp*    mainScene;
 
     void        windowResized(int &w, int &h);
+    
+    void        deselectAllElements();
 };
 
 

@@ -3,7 +3,6 @@
 #define ELEMENT_UI_BASE
 
 #include "ofxUI.h"
-//#include "element.h"
 
 
 // class is declared here as a forward declaration

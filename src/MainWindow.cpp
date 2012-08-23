@@ -214,20 +214,19 @@ void MainWindow::keyPressed(int key)
         
         bFullscreen=!bFullscreen;
 	}
-    if(key == ' ')
+    else if(key == ' ')
     {
         if (elemV1.leftChannelPlayer.isPlaying()) elemV1.element_videoPause();
         else elemV1.element_videoPlay(1);
     }
     
-    if (key== OF_KEY_BACKSPACE) elemV1.element_videoStop();
+    else if (key== OF_KEY_BACKSPACE) elemV1.element_videoStop();
     
-    if(key == '.') elemV1.element_frameAvanti();
+    else if(key == '.') elemV1.element_frameAvanti();
     
-    if(key == ',') elemV1.element_frameIndietro();        
+    else if(key == ',') elemV1.element_frameIndietro();        
     
-    if(key == 'i') ofSystemAlertDialog(comandi);
-    
+    else if(key == 'i') ofSystemAlertDialog(comandi);
 }
 
 //--------------------------------------------------------------

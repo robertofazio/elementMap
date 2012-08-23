@@ -25,9 +25,7 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
     switch (key) {
          
         case 102: //'f'
-            mainScene->mainWindow->elemImg2.isSelected=false;
-            mainScene->mainWindow->elemSy.isSelected=false;
-            mainScene->mainWindow->elemV1.isSelected=false;
+            deselectAllElements();
 
             ofxFensterManager::get()->getWindowById(1)->toggleFullscreen();
             
@@ -40,63 +38,22 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             break;
             
         case 48: // '0' = deselect all layers
-            mainScene->mainWindow->elemImg2.isSelected=true;
-            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
-            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
-            mainScene->mainWindow->elemImg2.isSelected=false;
-
-            mainScene->mainWindow->elemSy.isSelected=true;
-            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
-            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
-            mainScene->mainWindow->elemSy.isSelected=false;
-
-            mainScene->mainWindow->elemV1.isSelected=true;
-            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
-            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
-            mainScene->mainWindow->elemV1.isSelected=false;
+            deselectAllElements();
             break;
             
         case 49: // '1' = select Syphon element
-            mainScene->mainWindow->elemImg2.isSelected=true;
-            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
-            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
-            mainScene->mainWindow->elemImg2.isSelected=false;
-            
-            mainScene->mainWindow->elemV1.isSelected=true;
-            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
-            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
-            mainScene->mainWindow->elemV1.isSelected=false;
-            
+            deselectAllElements();
             mainScene->mainWindow->elemSy.isSelected=true;
             break;
             
         case 50: // '2' = select Video element
-            mainScene->mainWindow->elemImg2.isSelected=true;
-            mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
-            mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
-            mainScene->mainWindow->elemImg2.isSelected=false;
-
-            mainScene->mainWindow->elemSy.isSelected=true;
-            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
-            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
-            mainScene->mainWindow->elemSy.isSelected=false;
-
+            deselectAllElements();
             mainScene->mainWindow->elemV1.isSelected=true;  
             break;
             
         case 51: // '3' = select Image element
-            mainScene->mainWindow->elemSy.isSelected=true;
-            mainScene->mainWindow->elemSy.warper.bWarpActive=false;
-            mainScene->mainWindow->elemSy.warper.bViewGrid=false;
-            mainScene->mainWindow->elemSy.isSelected=false;
-            
-            mainScene->mainWindow->elemV1.isSelected=true;
-            mainScene->mainWindow->elemV1.warper.bWarpActive=false;
-            mainScene->mainWindow->elemV1.warper.bViewGrid=false;
-            mainScene->mainWindow->elemV1.isSelected=false;
-            
+            deselectAllElements();
             mainScene->mainWindow->elemImg2.isSelected=true;
-
             break;
             
         default:
@@ -149,13 +106,6 @@ void OutputWindow::draw()
         mainScene->mainWindow->elemMix.fboLeft.draw(0,0, dimensioni.x, dimensioni.y);    
     ofPopStyle();
     
-//    if (mainScene->mainWindow->elemSy.isSelected==true) ofDrawBitmapString("SYHPON ELEMENT SELECTED", 10,30);
-//    else if (mainScene->mainWindow->elemV1.isSelected==true) ofDrawBitmapString("VIDEO ELEMENT SELECTED", 10,30);
-//    else if (mainScene->mainWindow->elemImg2.isSelected==true) ofDrawBitmapString("IMAGE ELEMENT SELECTED", 10,30);
-//    else ofDrawBitmapString("NO ELEMENTs SELECTED", 10,30);
-
-    
-    
 }
 void OutputWindow::mouseDragged(int x, int y, int button,  ofxFenster* f)
 {
@@ -177,4 +127,22 @@ void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
     else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.mousePressed(x, y, btn);
     else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.mousePressed(x, y, btn);
     
+}
+
+void OutputWindow::deselectAllElements()
+{
+    mainScene->mainWindow->elemImg2.isSelected=true;
+    mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
+    mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
+    mainScene->mainWindow->elemImg2.isSelected=false;
+    
+    mainScene->mainWindow->elemSy.isSelected=true;
+    mainScene->mainWindow->elemSy.warper.bWarpActive=false;
+    mainScene->mainWindow->elemSy.warper.bViewGrid=false;
+    mainScene->mainWindow->elemSy.isSelected=false;
+    
+    mainScene->mainWindow->elemV1.isSelected=true;
+    mainScene->mainWindow->elemV1.warper.bWarpActive=false;
+    mainScene->mainWindow->elemV1.warper.bViewGrid=false;
+    mainScene->mainWindow->elemV1.isSelected=false;
 }

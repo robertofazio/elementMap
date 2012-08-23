@@ -93,6 +93,7 @@ void element::drawGraphic(int x, int y, int w, int h)
     }
 }
 
+
 //-----------------------------------------------------------------
 void element::setOpacityColor()
 {

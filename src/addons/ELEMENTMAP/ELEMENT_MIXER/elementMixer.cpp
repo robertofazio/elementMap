@@ -268,7 +268,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
 {	
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
-	
+    
         //STEREOSCOPIC
         if(e.widget->getName()=="MAIN STEREO")
         {
