@@ -212,19 +212,19 @@ void elementMixer::drawInfo()
   
     
     //output mode
-	ofSetColor(0,255,206);
+	ofSetColor(255,0,206);
     switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-			fontMedium.drawString("OPENGL",ofGetWidth()-200,ofGetHeight()-145);
+			fontMedium.drawString("STEREO OPENGL",950,645);
 			break;
 			
 		case ELM_MONO:
-			fontMedium.drawString("MONO",ofGetWidth()-200,ofGetHeight()-145);
+			fontMedium.drawString("SINGLE LEFT CHANNEL",950,645);
 			break;
             
 		case ELM_STEREO_ANAGLYPH:
-			fontMedium.drawString("ANAGLYPH",ofGetWidth()-200,ofGetHeight()-145);
+			fontMedium.drawString("STEREO ANAGLYPH",950,645);
 			break;
 		
         default:
@@ -233,7 +233,7 @@ void elementMixer::drawInfo()
     
     //framerate
 	ofSetColor(255,255,255);
-    fontMedium.drawString(ofToString(ofGetFrameRate()),ofGetWidth()-200,ofGetHeight()-130);
+    fontMedium.drawString(ofToString(ofGetFrameRate()),950,660);
     
     
     

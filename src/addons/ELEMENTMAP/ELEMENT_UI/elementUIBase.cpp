@@ -21,8 +21,8 @@ elementUIBase::elementUIBase()
 	
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
-    outputModesNames.push_back("OPENGL");    
-    
+    outputModesNames.push_back("OPENGL");
+    outputModesNames.push_back("SIDEBYSIDE");
 	
 }
 //--------------------------------------------------------------
@@ -106,7 +106,7 @@ void elementUIBase::setupUI(element* _parentElement)
     //but mixer needs output mode selection and many other things :) 
 	else if (type==ELEMENT_MIXER)
     {
-        UI = new ofxUICanvas(xPos,yPos+450, 600, 140);
+        UI = new ofxUICanvas(xPos,yPos+450, 600, 240);
         
         ofColor colorBack;
         colorBack.r = 0;
@@ -124,21 +124,45 @@ void elementUIBase::setupUI(element* _parentElement)
         
         int marginLeft = 5;
         int posY = 10;
+        
+        // ELEMENT MAIN CONTROL
+        ofColor(0);
+        UI->addWidget(new ofxUILabel(5, 10, "ELEMENT MAIN CONTROL", 1));
+        
+        // TEST PATTERN
+        UI->addWidget(new ofxUILabelToggle(490,40,100,40,false,"Test Pattern", OFX_UI_FONT_SMALL));
+        
+        // STEREOSCOPIC
+//        UI->addWidget(new ofxUILabelToggle(350,40, 110, 40,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUIButton(300, 60, 16, 16, false, "MAIN STEREO"));
 
         
-        //parte superiore sinistra: test Pattern e Mixer Stereo toggle
-        UI->addWidget(new ofxUILabelToggle(marginLeft, posY, 120,16,false,"Test Pattern", OFX_UI_FONT_SMALL));
-        UI->addWidget(new ofxUILabelToggle(marginLeft,posY += 20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
-        ofxUISpacer* spacer = new ofxUISpacer(marginLeft, posY+=20, 400, 1);
+        ofxUISpacer* spacer = new ofxUISpacer(5, 30, 590, 1);
         spacer->setColorFill(ofColor(0, 255, 206));
         UI->addWidget(spacer);
         
-        //parte superiore centrale: opacità
-        posY=10;
-        UI->addWidget(new ofxUIMinimalSlider(marginLeft+150, posY, 100,16,0.0,1.0,parentElement->getOpacity() ,"Main Opacity"));
+        // STEREOSCOPIC PLAYER
+        UI->addWidget(new ofxUILabel(5, 40, "STEREOSCOPIC PLAYER",2));
         
-        //parte superiore destra: output mode
-        listOutputModes = new ofxUIDropDownList(marginLeft + 300, posY, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        // STEREOSCOPIC SETTING
+        UI->addWidget(new ofxUILabel(300, 40, "STEREOSCOPIC SETTING",2));
+
+        
+        //MAIN OPACITY
+        UI->addWidget(new ofxUIMinimalSlider(150, 60, 120,20,0.0,1.0,parentElement->getOpacity() ,"Main Opacity"));
+        
+        // FULL SCREEN
+        UI->addWidget(new ofxUILabelToggle(490, 85, 100,40,false, "Full Screen", OFX_UI_FONT_SMALL));
+        
+        // SAVE PROJECT
+        UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "Save Project", OFX_UI_FONT_SMALL));
+        
+        // OPEN PROJECT
+        UI->addWidget(new ofxUILabelButton(490, 150, 100, false, "Open Project", OFX_UI_FONT_SMALL));
+      
+
+        // OUTPUT MODE
+    listOutputModes = new ofxUIDropDownList(300, 80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
         listOutputModes->setDrawPaddingOutline(false);
@@ -147,17 +171,31 @@ void elementUIBase::setupUI(element* _parentElement)
         listOutputModes->setAutoClose(true);
         UI->addWidget(listOutputModes);
         
-        //parte inferiore: video player
-        posY=60;
-        UI->addWidget(new ofxUIImageButton(marginLeft, posY, 30, 30, true, "./GUI/images/play.png", "Play"));
-        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/pause.png", "Pause"));
-        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/stop.png", "Rew"));
-        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/play.png", "prevFrame"));
-        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/play.png", "nextFrame"));
-        UI->addWidget(new ofxUIImageToggle(marginLeft+=35, posY, 30, 30, true, "./GUI/images/loop.png", "Loop"));
-        UI->addWidget(new ofxUIImageToggle(marginLeft+=35, posY, 30, 30, true, "./GUI/images/mute.png","Sound on/off"));
-        UI->addWidget(new ofxUISlider(marginLeft+=35, posY, 100,16,0,100,50 ,"Sound Volume"));
         
+        //parte inferiore: video player
+        
+//        UI->addWidget(new ofxUIImageButton(marginLeft, posY, 30, 30, true, "./GUI/images/play.png", "Play"));
+//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/pause.png", "Pause"));
+//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/stop.png", "Rew"));
+//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/play.png", "prevFrame"));
+//        UI->addWidget(new ofxUIImageButton(marginLeft+=35, posY, 30, 30, true, "./GUI/images/play.png", "nextFrame"));
+//        UI->addWidget(new ofxUIImageToggle(marginLeft+=35, posY, 30, 30, true, "./GUI/images/loop.png", "Loop"));
+//        UI->addWidget(new ofxUIImageToggle(marginLeft+=35, posY, 30, 30, true, "./GUI/images/mute.png","Sound on/off"));
+//        UI->addWidget(new ofxUISlider(marginLeft+=35, posY, 100,16,0,100,50 ,"Sound Volume"));
+        
+        // ALTERNATIVE PLAYER
+        posY=60;
+        UI->addWidget(new ofxUIToggle(marginLeft, posY, 40,40,false,"PLAY"));
+        UI->addWidget(new ofxUIButton(marginLeft, posY+= 45, 40,40,false, "STOP"));
+        UI->addWidget(new ofxUIToggle(marginLeft, posY+= 45, 40,40,false,"LOOP"));
+
+        
+        UI->addWidget(new ofxUILabel(marginLeft, posY+= 45, "FRAME LEFT", 2));
+        UI->addWidget(new ofxUILabel(marginLeft, posY+= 12, "FRAME RIGHT", 2));
+
+
+
+              
     }
 
 
@@ -232,6 +270,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             else if(name=="Screen")parentElement->setBlendingMode(OF_BLENDMODE_SCREEN);
                 
 	}
+ 
 	
 }
 

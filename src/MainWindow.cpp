@@ -74,7 +74,7 @@ void MainWindow::setup()
     
     bFullscreen=false;
     
-    comandi ="element.map alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
+    comandi ="element.map v0.2.0 alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
     fontSmall.loadFont("CODEBold.otf", 7);
     fontMedium.loadFont("CODEBold.otf", 10);
@@ -122,7 +122,7 @@ void MainWindow::draw()
         //preview window (non-fulscreen)
         ofPushStyle();
         ofSetColor(255, 255, 255);
-        fontLarge.drawString("element.Map", margin , margin * 4);
+        fontLarge.drawString("element.Map v0.2.0 ", margin , margin * 4);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -139,20 +139,24 @@ void MainWindow::draw()
         
         ofPushStyle();
         ofSetColor(255, 255, 255);
-        fontSmall.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
+        fontMedium.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
-        // frame by frame
-        fontSmall.drawString("video frame Left " + ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 650, 700);
-        fontSmall.drawString("video frame Right " + ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 650, 710);
+        // DYSPLAY STEREOSCOPIC VIDEO SYNCHRONIZE
+        
+        ofSetColor(255, 255, 255);
+        fontSmall.drawString(ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 735, 737);
+        fontSmall.drawString(ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 735, 749);
+        
         if (elemV1.leftChannelPlayer.getCurrentFrame() == elemV1.rightChannelPlayer.getCurrentFrame()) {
-            ofSetHexColor(0x00FFFF);            
-            fontSmall.drawString("FRAME STERO SYNC", 650,740);
+            ofSetColor(255, 206, 0);
+            fontMedium.drawString("STEROSCOPIC SYNC", 655,765);
             
         }
         
         else {
             ofSetHexColor(0xFF0000);
-            fontSmall.drawString("FRAME STERO NOT IN SYNC", 650,740);
+            fontMedium.drawString("STEROSCOPIC NOT IN SYNC", 655, 765);
+            
         }
         
         ofPopStyle();
