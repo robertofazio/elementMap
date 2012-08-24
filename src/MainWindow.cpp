@@ -128,7 +128,15 @@ void MainWindow::draw()
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
 
-        elemMix.drawOutput(650, margin * 8, 600, 450   );
+        if (elemMix.wideScreenPreview) 
+        {
+            ofPushStyle();
+            ofSetColor(ofColor :: black);
+            ofRect(650, margin*8, 600, 450);
+            elemMix.drawOutput(650, (margin * 8)+56, 600, 338   );
+            ofPopStyle();
+        }
+        else elemMix.drawOutput(650, margin * 8, 600, 450   );
 
         if (elemSy.isSelected==true) fontMedium.drawString("SYHPON ELEMENT SELECTED", 660,100);
         else if (elemV1.isSelected==true) fontMedium.drawString("VIDEO ELEMENT SELECTED", 660,100);
@@ -247,6 +255,11 @@ void MainWindow::keyPressed(int key)
             myElements[i]->loadSettings();
         }
         
+    }
+    
+    else if (key == 'y')
+    {
+        elemMix.wideScreenPreview=!elemMix.wideScreenPreview;
     }
 
 }

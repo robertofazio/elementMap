@@ -145,6 +145,10 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUILabel(300, 40, "STEREOSCOPIC SETTING",2));
 
         
+        // WIDESCREEN PREVIEW
+        UI->addWidget(new ofxUILabelToggle(490, 6, 100, 20, false, "WIDESCREEN", OFX_UI_FONT_SMALL));
+        
+        
         //MAIN OPACITY
         UI->addWidget(new ofxUIMinimalSlider(490, 40, 100,20,0.0,1.0,parentElement->getOpacity() ,"MAIN OPACITY"));
 

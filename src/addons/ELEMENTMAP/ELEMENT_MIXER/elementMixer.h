@@ -41,10 +41,11 @@ class elementMixer : public element
     
     void guiEvent(ofxUIEventArgs &e);
     
+    bool      wideScreenPreview;
+    
     //utilities:
     int  getOutputMode();
 	void setOutputMode(int _mode);
-	
     
     ofTexture& getLeftTexture(){};
 	ofTexture& getRightTexture(){};

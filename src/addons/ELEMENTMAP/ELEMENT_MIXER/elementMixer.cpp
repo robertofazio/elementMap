@@ -29,6 +29,7 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
     
     actualVolume = 50;
 	
+    wideScreenPreview=false;
 }
 
 
@@ -274,6 +275,12 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
             setDrawInStereo(toggle->getValue());
+        }
+        //WIDESCREEN PREVIEW
+        if(e.widget->getName()=="WIDESCREEN")
+        {
+            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+            wideScreenPreview=!wideScreenPreview;
         }
         //MAIN OPACITY
         if(e.widget->getName()=="MAIN OPACITY")
