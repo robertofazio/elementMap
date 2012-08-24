@@ -40,7 +40,7 @@ class element : public ofNode , public elementUIBase
 	void			setIsActive(bool b);
 	void			setBlendingMode(ofBlendMode _bm);
     void            initFont();
-	
+    
 	bool			getIsStereo();
 	bool			getDrawInStereo();
 	int				getWidth();
@@ -67,6 +67,11 @@ class element : public ofNode , public elementUIBase
     
     elementWarp     warper;
     
+    //SAVE-LOAD SETTINGS
+    void            saveSettings();
+    void            loadSettings();    
+    ofxXmlSettings	XML;
+    
     
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	
@@ -87,12 +92,12 @@ class element : public ofNode , public elementUIBase
 	int				type;
 	int				internalFormat; //GL_RGB,GL_RGBA ...
 	bool			drawInStereo;
-	bool			swapLeftRight;
     int             r;
     int             g;
     int             b;
 	float			opacity;
 	string			elementName;
+    bool			swapLeftRight;
 	
 	
 };

@@ -290,12 +290,20 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         //SAVE PROJECT
         if(e.widget->getName()=="SAVE PROJECT")
         {
-            // TO-DO
+            for (int i=0; i<numOfElements; i++)
+            {
+                sceneElements[i]->warper.save();
+                sceneElements[i]->saveSettings();
+            }
         }
         //OPEN PROJECT
         if(e.widget->getName()=="OPEN PROJECT")
         {
-            // TO-DO
+            for (int i=0; i<numOfElements; i++)
+            {
+                sceneElements[i]->warper.load();
+                sceneElements[i]->loadSettings();
+            }
         }
         //OUTPUT MODE
         if( e.widget->getParent()->getName()=="Output Mode")

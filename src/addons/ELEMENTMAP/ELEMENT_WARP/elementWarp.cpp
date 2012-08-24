@@ -947,7 +947,7 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     for(int a = 0; a < totMainIndex; a++)
         XML.addValue("values_" + ofToString(a), mainIndex[a]);
     XML.popTag();
-    
+        
     XML.popTag();
     string XMLpath = "./XML/"+xmlName;
     XML.saveFile(XMLpath);
@@ -1023,7 +1023,6 @@ void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertic
 void elementWarp::save()
 {
     saveXML(xRes, yRes, &vertici[0], nPoints, &texVert[0], nPoints, &screenPos[0], nPoints, &mainVertici[0], 4, &mainIndex[0], 4);
-
 }
 
 

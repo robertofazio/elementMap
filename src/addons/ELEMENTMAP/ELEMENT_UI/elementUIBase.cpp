@@ -203,7 +203,6 @@ void elementUIBase::setupUI(element* _parentElement)
               
     }
 
-
     if (type!=ELEMENT_MIXER) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 
 
 }
@@ -365,8 +364,6 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             ofxFensterManager::get()->getWindowById(1)->setWindowPosition(400, 200);
         }
     }
-
-	
 }
 
 

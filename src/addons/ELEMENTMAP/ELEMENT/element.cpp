@@ -1,5 +1,6 @@
 #include "element.h"
 
+//#include "ofConstants.h"
 
 void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo, bool _isWarpable)
 {
@@ -249,3 +250,77 @@ ofBlendMode element::getBlendingMode()
 {
 	return (blendingMode);	
 }
+
+
+
+//SAVE
+//-----------------------------------------------------------------------
+void element::saveSettings()
+{
+    XML.addTag("SETTINGS");
+    XML.pushTag("SETTINGS");
+    
+    XML.addValue("drawInStereo", drawInStereo);
+    
+    XML.addValue("r", r);
+    XML.addValue("g", g);
+    XML.addValue("b", b);
+    
+    XML.addValue("opacity", opacity);
+    
+    XML.addValue("blendingMode", blendingMode);
+    
+    XML.addValue("isActive", isActive);
+    
+    XML.popTag();
+    
+    string XMLpath = "./XML/"+elementName+"_settings.xml";
+    XML.saveFile(XMLpath);
+}
+
+//-----------------------------------------------------------------------
+void element::loadSettings()
+{
+    ofxXmlSettings tempXML;
+    string XMLpath = "./XML/"+elementName+"_settings.xml";
+    tempXML.loadFile(XMLpath);
+    
+    tempXML.pushTag("SETTINGS");
+    drawInStereo = tempXML.getValue("dawInStereo", true);
+    
+    r = tempXML.getValue("r", 255);
+    g = tempXML.getValue("g", 255);
+    b = tempXML.getValue("b", 255);
+    
+    
+    opacity = tempXML.getValue("opacity", 1);
+    
+    int blendingModeInt = tempXML.getValue("blendingMode", 0);
+    switch (blendingModeInt) {
+        case 0:
+            blendingMode=OF_BLENDMODE_DISABLED;
+            break;
+        case 1:
+            blendingMode=OF_BLENDMODE_ALPHA;
+            break;
+        case 2:
+            blendingMode=OF_BLENDMODE_ADD;
+            break;
+        case 3:
+            blendingMode=OF_BLENDMODE_SUBTRACT;
+            break;
+        case 4:
+            blendingMode=OF_BLENDMODE_MULTIPLY;
+            break;
+        case 5:
+            blendingMode=OF_BLENDMODE_SCREEN;
+            break;
+        default:
+            break;
+    }
+    
+    isActive = tempXML.getValue("isActive", true);
+    
+    tempXML.popTag();
+}
+

@@ -94,6 +94,7 @@ void MainWindow::setup()
 
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
+    
 }
 
 //--------------------------------------------------------------
@@ -227,6 +228,27 @@ void MainWindow::keyPressed(int key)
     else if(key == ',') elemV1.element_frameIndietro();        
     
     else if(key == 'i') ofSystemAlertDialog(comandi);
+    
+    else if(key == 's') 
+    {
+        for (int i=0; i<numOfElements; i++)
+        {
+            myElements[i]->warper.save();
+            myElements[i]->saveSettings();
+        }
+        
+    }
+    
+    else if(key == 'l') 
+    {
+        for (int i=0; i<numOfElements; i++)
+        {
+            myElements[i]->warper.load();
+            myElements[i]->loadSettings();
+        }
+        
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -278,4 +300,6 @@ void MainWindow::gotMessage(ofMessage msg){
 void MainWindow::dragEvent(ofDragInfo dragInfo){ 
     
 }
+
+
 
