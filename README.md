@@ -13,6 +13,7 @@ versione alpha 0.2.0 - 20/08/2012
 
 MAIN FEATURES:
 
+- Preview in formato 16:9 o 4:3
 - Fullscreen funzionante anche in output: all'uscita torna in prima finestra
 - Slider opacità sull'output finale; slideor opacità e RGB su ogni element
 - Modalità stereoscopica anaglifo funzionante
@@ -40,7 +41,6 @@ TO DO LIST:
 - Usare il primo frame per la preview video. ofxUI.
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Possibilità di cambiare la priorità di ogni element
-- possibilità di settare la preview da 4/3 a 16/9 per una questione di eleganza. Non output esterna ma preview!
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
 - Progettazione di un'area inspector
 - Implementare la funzione Rotate e Zoom per ogni warp.
