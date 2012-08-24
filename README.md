@@ -18,7 +18,7 @@ MAIN FEATURES:
 - Modalità stereoscopica anaglifo funzionante
 - Blending mode attivi su ogni livello (add, subtract, multiply, alpha, screen) e selezionabili da interfaccia
 - Quad warper and fine warper mesh fino a 17x17 suddivisioni
-- salva/carica di una sola configurazione.
+- salva/carica (sia warp che global settings) di una sola configurazione.
 - aggiunto un bordo rosso per evidenziare il livello selezionato
 - l'opacità è tornata in funzione, e ora è gestita dal warper (che ha preso alcune funzioni del mixer..)
 - frame by frame ripristinato correttamente: ',' e '.' per avanzare/retrocedere di un frame nel video
@@ -32,8 +32,7 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
-- il tasto S ha comportamenti anomali , non ci carica correttamente la configurazione con L.
-- Quando si salva con il tasto 's' si dovrebbero salvare tutte le impostazioni, di opacity, visibility,volume etc.. e non solo il warp
+- ofxUI non risponde a modifiche non dirette ( == non si aggiorna la visualizzazione di bottoni e slider)
 
 TO DO LIST:
 
