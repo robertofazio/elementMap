@@ -245,9 +245,12 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     else if(e.widget->getName()=="RGB reset")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
         parentElement->setRed(255);
         parentElement->setGreen(255);
         parentElement->setBlue(255);
+        cout << "RGB RESET" << cout;
+        }
     }
     //IS ACTIVE
     else if(e.widget->getName()=="isActive")
@@ -262,13 +265,13 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //QUAD WARPING
     else if (e.widget->getName()=="Quad Warping")
     {
-        ofxUIButton *button = (ofxUIButton *) e.widget;
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		if(parentElement->getIsActive()) {
             
 //            ((testApp*)ofGetAppPtr())->mainWindow->deselectAllElements();
             
             parentElement->isSelected=true;
-            if (button->getValue())
+            if (toggle->getValue())
             {
                 parentElement->warper.bWarpActive=true;
             }
@@ -282,13 +285,13 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //FINE WARPING
     else if (e.widget->getName()=="Fine Warping")
     {
-        ofxUIButton *button = (ofxUIButton *) e.widget;
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		if(parentElement->getIsActive()) {
             
 //            ((testApp*)ofGetAppPtr())->mainWindow->deselectAllElements();
 
             parentElement->isSelected=true;
-            if (button->getValue()) parentElement->warper.bViewGrid=true;
+            if (toggle->getValue()) parentElement->warper.bViewGrid=true;
             else {
              parentElement->warper.bViewGrid=false;
              parentElement->isSelected=false;
@@ -299,56 +302,75 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     else if (e.widget->getName()=="xGridDecrease")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+
 		if(parentElement->getIsActive() && parentElement->isSelected && parentElement->warper.bViewGrid)
         {
+            cout << "X grid decrease" << endl;
             parentElement->warper.decreaseXgrid();
         }        
+        }
     }
     //X GRID INCREASE
     else if (e.widget->getName()=="xGridIncrease")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
-		if(parentElement->getIsActive() && parentElement->isSelected)
+        if (button->getValue()) {
+
+		if(parentElement->getIsActive() && parentElement->isSelected && parentElement->warper.bViewGrid)
         {
             parentElement->warper.increaseXgrid();
+        }
         }
     }
     //Y GRID DECREASE
     else if (e.widget->getName()=="yGridDecrease")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
-		if(parentElement->getIsActive() && parentElement->isSelected)
+        if (button->getValue()) {
+
+		if(parentElement->getIsActive() && parentElement->isSelected && parentElement->warper.bViewGrid)
         {
             parentElement->warper.decreaseYgrid();
+        }
         }
     }
     //Y GRID INCREASE
     else if (e.widget->getName()=="yGridIncrease")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
-		if(parentElement->getIsActive() && parentElement->isSelected)
+        if (button->getValue()) {
+
+		if(parentElement->getIsActive() && parentElement->isSelected && parentElement->warper.bViewGrid)
         {
             parentElement->warper.increaseYgrid();
+        }
         }
     }
     //RESET WARP
     else if (e.widget->getName()=="reset warp")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+
 		if(parentElement->getIsActive() && parentElement->isSelected)
         {
             parentElement->warper.resetCorners();
+        }
         }
     }
     //RESET GRID
     else if (e.widget->getName()=="reset grid")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+
 		if(parentElement->getIsActive() && parentElement->isSelected)
         {
             parentElement->warper.decreaseXgrid();
             parentElement->warper.increaseXgrid();
 
+        }
         }
     }
     //IS DRAW IN STEREO

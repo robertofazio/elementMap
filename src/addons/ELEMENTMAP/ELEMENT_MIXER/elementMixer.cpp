@@ -317,19 +317,27 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         //SAVE PROJECT
         if(e.widget->getName()=="SAVE PROJECT")
         {
+            ofxUIButton *button = (ofxUIButton *) e.widget;
+            if (button->getValue()) {
+
             for (int i=1; i<numOfElements; i++)
             {
                 sceneElements[i]->warper.save();
                 sceneElements[i]->saveSettings();
             }
+            }
         }
         //OPEN PROJECT
         if(e.widget->getName()=="OPEN PROJECT")
         {
+            ofxUIButton *button = (ofxUIButton *) e.widget;
+            if (button->getValue()) {
+
             for (int i=1; i<numOfElements; i++)
             {
                 sceneElements[i]->warper.load();
                 sceneElements[i]->loadSettings();
+            }
             }
         }
         //OUTPUT MODE
@@ -350,19 +358,45 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             mainWindow->elemV1.element_goToFrame(_frame);
         }
         //REW
-        if(e.widget->getName()=="REW 2x")       mainWindow->elemV1.element_videoPlay(-2);
+    if(e.widget->getName()=="REW 2x")   {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) mainWindow->elemV1.element_videoPlay(-2);
+    }
         //PLAY
-        if(e.widget->getName()=="PLAY")         mainWindow->elemV1.element_videoPlay(1);
+    if(e.widget->getName()=="PLAY")  {
+            ofxUIButton *button = (ofxUIButton *) e.widget;
+    if (button->getValue()) mainWindow->elemV1.element_videoPlay(1);
+    }
+    
         //FFW
-        if(e.widget->getName()=="FFW 2x")       mainWindow->elemV1.element_videoPlay(2);
+    if(e.widget->getName()=="FFW 2x")  {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) mainWindow->elemV1.element_videoPlay(2);
+    }
+    
         //PREV FRAME
-        if(e.widget->getName()=="PREV")         mainWindow->elemV1.element_frameIndietro();
+    if(e.widget->getName()=="PREV")  {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) mainWindow->elemV1.element_frameIndietro();
+    }
+    
         //NEXT FRAME
-        if(e.widget->getName()=="NEXT")         mainWindow->elemV1.element_frameAvanti();
+    if(e.widget->getName()=="NEXT")  {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) mainWindow->elemV1.element_frameAvanti();
+    }
+    
         //PAUSE
-        if(e.widget->getName()=="PAUSE")        mainWindow->elemV1.element_videoPause();
+    if(e.widget->getName()=="PAUSE")  {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) mainWindow->elemV1.element_videoPause();
+    }
+    
         //STOP
-        if(e.widget->getName()=="STOP")         mainWindow->elemV1.element_videoStop();
+    if(e.widget->getName()=="STOP")  {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) mainWindow->elemV1.element_videoStop();
+    }
         
         //LOOP TOGGLE
         if(e.widget->getName()=="LOOP")
