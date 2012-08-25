@@ -56,7 +56,7 @@ class element : public ofNode , public elementUIBase
     int             getBlue();
 	string			getElementName();
 	ofBlendMode		getBlendingMode();
-    
+        
     bool            isSelected;
     bool            isWarpable;
     

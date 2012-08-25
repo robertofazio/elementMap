@@ -87,9 +87,7 @@ void element::drawGraphic(int x, int y, int w, int h)
     {
         ofPushMatrix();
         ofTranslate(0, 20);
-        ofTexture   leftTemp;
-        leftTemp=this->getLeftTexture();
-        leftTemp.draw(x, y, w, h);
+        getLeftTexture().draw(x, y, w, h);
         ofPopMatrix();
     }
 }

@@ -126,28 +126,35 @@ void MainWindow::draw()
         ofPushStyle();
         ofSetColor(255, 255, 255);
         
-        if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
-        else {
-            ofPushStyle();
-            ofSetColor(ofColor :: black);
-            ofRect(650, margin*8, 600, 450);
-            ofPopStyle();
-        }
-        
         fontLarge.drawString("element.Map v0.2.1 ", 70 , 44);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
 
+        if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
+        else 
+        {
+            ofPushStyle();
+            ofSetColor(ofColor :: black);
+            ofRect(650, margin*8, 600, 450);   
+            ofPopStyle();
+        }
+
         if (elemMix.wideScreenPreview) 
         {
             ofPushStyle();
             ofSetColor(ofColor :: black);
-            ofRect(650, margin*8, 600, 450);
+//            if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
+//            else ofRect(650, margin*8, 600, 450);
             elemMix.drawOutput(650, (margin * 8)+56, 600, 338   );
             ofPopStyle();
         }
-        else elemMix.drawOutput(650, margin * 8, 600, 450   );
+        else 
+        {
+//            if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
+//            else ofRect(650, margin*8, 600, 450);
+            elemMix.drawOutput(650, margin * 8, 600, 450   );
+        }
 
         if (elemSy.isSelected==true) fontMedium.drawString("SYHPON ELEMENT SELECTED", 660,100);
         else if (elemV1.isSelected==true) fontMedium.drawString("VIDEO ELEMENT SELECTED", 660,100);
@@ -186,8 +193,6 @@ void MainWindow::draw()
             // just draw the preview inputs of mixer
             ofPushStyle();
             ofSetColor(255,255);
-//            int previewWidth = (ofGetWidth()-(20*numOfElements))/numOfElements;
-//            int previewHeight = previewWidth / (4.0/3.0);
             glDrawBuffer(GL_BACK);
             for(int i = 0;i<numOfElements - 1;i++)
             {
