@@ -22,10 +22,12 @@ void OutputWindow::windowResized(int &w, int &h)
 
 void OutputWindow::keyPressed(int key, ofxFenster* window) 
 {              
+    cout << "OUTPUT WINDOW KEY" << endl;
+    
     switch (key) {
          
         case 102: //'f'
-            deselectAllElements();
+            mainScene->mainWindow->deselectAllElements();
 
             ofxFensterManager::get()->getWindowById(1)->toggleFullscreen();
             
@@ -38,21 +40,21 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
             break;
             
         case 48: // '0' = deselect all layers
-            deselectAllElements();
+            mainScene->mainWindow->deselectAllElements();
             break;
             
         case 49: // '1' = select Syphon element
-            deselectAllElements();
+            mainScene->mainWindow->deselectAllElements();
             mainScene->mainWindow->elemSy.isSelected=true;
             break;
             
         case 50: // '2' = select Video element
-            deselectAllElements();
+            mainScene->mainWindow->deselectAllElements();
             mainScene->mainWindow->elemV1.isSelected=true;  
             break;
             
         case 51: // '3' = select Image element
-            deselectAllElements();
+            mainScene->mainWindow->deselectAllElements();
             mainScene->mainWindow->elemImg2.isSelected=true;
             break;
             
@@ -129,20 +131,3 @@ void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
     
 }
 
-void OutputWindow::deselectAllElements()
-{
-    mainScene->mainWindow->elemImg2.isSelected=true;
-    mainScene->mainWindow->elemImg2.warper.bWarpActive=false;
-    mainScene->mainWindow->elemImg2.warper.bViewGrid=false;
-    mainScene->mainWindow->elemImg2.isSelected=false;
-    
-    mainScene->mainWindow->elemSy.isSelected=true;
-    mainScene->mainWindow->elemSy.warper.bWarpActive=false;
-    mainScene->mainWindow->elemSy.warper.bViewGrid=false;
-    mainScene->mainWindow->elemSy.isSelected=false;
-    
-    mainScene->mainWindow->elemV1.isSelected=true;
-    mainScene->mainWindow->elemV1.warper.bWarpActive=false;
-    mainScene->mainWindow->elemV1.warper.bViewGrid=false;
-    mainScene->mainWindow->elemV1.isSelected=false;
-}

@@ -220,6 +220,8 @@ void MainWindow::draw()
 //--------------------------------------------------------------
 void MainWindow::keyPressed(int key)
 {
+    
+        cout << "MAIN WINDOW KEY" << endl;
 	if(key == OF_KEY_RETURN)
 	{
         drawUIs=!drawUIs;
@@ -277,16 +279,39 @@ void MainWindow::keyPressed(int key)
         
     }
     
-    else if (key == 'y')
-    {
-        elemMix.wideScreenPreview=!elemMix.wideScreenPreview;
+    else if(key == '0') {
+    deselectAllElements();
+    }
+    
+    else if(key == '1') {
+    deselectAllElements();
+    elemSy.isSelected=true;
+    }
+    
+    else if(key == '2') {
+    deselectAllElements();
+    elemV1.isSelected=true;  
+    }
+    
+    else if(key == '3') {
+    deselectAllElements();
+    elemImg2.isSelected=true;
     }
 
+    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.warpKeyPressedHandler(key);
+    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyPressedHandler(key);
+    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyPressedHandler(key);
+    
 }
 
 //--------------------------------------------------------------
 void MainWindow::keyReleased(int key)
 {
+    
+    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.warpKeyReleasedHandler(key);
+    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyReleasedHandler(key);
+    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyReleasedHandler(key);
+
 }
 
 
@@ -334,5 +359,17 @@ void MainWindow::dragEvent(ofDragInfo dragInfo){
     
 }
 
+
+//--------------------------------------------------------------
+void MainWindow::deselectAllElements()
+{
+    for (int i=1; i<numOfElements; i++)
+    {
+        myElements[i]->isSelected=true;
+        myElements[i]->warper.bWarpActive=false;
+        myElements[i]->warper.bViewGrid=false;
+        myElements[i]->isSelected=false;
+    }
+}
 
 

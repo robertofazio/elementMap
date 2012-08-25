@@ -732,21 +732,21 @@ void elementWarp::deselectAll()
 //--------------------------------------------------------------
 void elementWarp::warpKeyPressedHandler(int _key)
 {
-    cout << "Warp key" << _key << endl;
+//    cout << "Warp key" << _key << endl;
     switch (_key) {
             
-        case 115: //'s':
-            save();
-            break;
-            
-        case 108: //'l':
-            cout << "Load" << endl;
-            load();
-            break;
-            
+//        case 115: //'s':
+//            save();
+//            break;
+//            
+//        case 108: //'l':
+//            cout << "Load" << endl;
+//            load();
+//            break;
+//            
+
         case 102:
             ofToggleFullscreen();
-            
             
             if(ofGetWindowMode() == OF_WINDOW)
             {

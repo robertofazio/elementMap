@@ -54,13 +54,12 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    cout << "Key Pressed" << key << endl;
     mainWindow->keyPressed(key);    
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-    
+    mainWindow->keyReleased(key);       
 }
 
 //--------------------------------------------------------------

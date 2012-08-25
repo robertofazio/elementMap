@@ -264,6 +264,9 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
 		if(parentElement->getIsActive()) {
+            
+//            ((testApp*)ofGetAppPtr())->mainWindow->deselectAllElements();
+            
             parentElement->isSelected=true;
             if (button->getValue())
             {
@@ -281,6 +284,9 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
 		if(parentElement->getIsActive()) {
+            
+//            ((testApp*)ofGetAppPtr())->mainWindow->deselectAllElements();
+
             parentElement->isSelected=true;
             if (button->getValue()) parentElement->warper.bViewGrid=true;
             else {

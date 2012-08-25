@@ -21,6 +21,7 @@ class  elementUIBase
     void setupUI(element* parentElement);
     //void setupUI(void* parentElement);
     void guiEvent(ofxUIEventArgs &e);   
+
 	
 	ofxUICanvas*			UI;
 	element*				parentElement;
@@ -38,6 +39,8 @@ class  elementUIBase
 	vector<string>          outputModesNames;
     
     bool                    isStereo;
+    
+    
 
 
 };
