@@ -37,7 +37,8 @@ TO DO LIST:
 - Possibilità di cambiare la priorità di ogni element
 - Tasto Swap L/R
 - Menù a tendina o drag&drop per inserire i video ??
-- Nella preview si devono vedere le info dei tasti premuti
+- Nella preview si devono vedere le info dei tasti premuti, va bene dove è ora non modifichiamola.
+- Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Usare il primo frame per la preview video. ofxUI.
 e poi inserisci quelli che hai scritto nella tua agenda :P
 
