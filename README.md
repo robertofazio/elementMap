@@ -35,6 +35,7 @@ TO DO LIST:
 - Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
 - Sfondo Trasparente come Photoshop
 - Possibilità di cambiare la priorità di ogni element
+- Tasto Swap L/R
 - Nella preview si devono vedere le info dei tasti premuti
 - Usare il primo frame per la preview video. ofxUI.
 e poi inserisci quelli che hai scritto nella tua agenda :P
