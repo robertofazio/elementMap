@@ -9,13 +9,14 @@ scheda grafica : nVidia min 512MB e GL_STEREO supportate
 
 (C) 2012 Roberto Fazio Studio - www.robertofazio.com
 Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
-versione alpha 0.2.0 - 20/08/2012
+versione alpha 0.2.1 - 25/08/2012
 
 MAIN FEATURES:
 
+- Swap left/right frame nelle visualizzazioni stereo
 - Preview in formato 16:9 o 4:3
-- Fullscreen funzionante anche in output: all'uscita torna in prima finestra
-- Blending mode su ogni livello (add, subtract, multiply, alpha)
+- Fullscreen funzionante sulla finestra di output
+- Blending mode su ogni livello (add, subtract, multiply)
 - Quad warper and fine warper mesh fino a 17x17 suddivisioni
 - salva/carica (sia warp che global settings) di una sola configurazione.
 - Controllo audio
@@ -33,9 +34,7 @@ TO DO LIST:
 
 - Interfaccia e usabilità
 - Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
-- Sfondo Trasparente come Photoshop
 - Possibilità di cambiare la priorità di ogni element
-- Tasto Swap L/R
 - Tasto per modificare lo ZERO PARALLAX in main preview
 - Menù a tendina o drag&drop per inserire i video ??
 - Nell'input mode predisporre come metodi di visualizzazione, MONO 2D only left e/o right, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
