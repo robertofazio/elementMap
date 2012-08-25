@@ -36,6 +36,7 @@ TO DO LIST:
 - Sfondo Trasparente come Photoshop
 - Possibilità di cambiare la priorità di ogni element
 - Tasto Swap L/R
+- Menù a tendina o drag&drop per inserire i video ??
 - Nella preview si devono vedere le info dei tasti premuti
 - Usare il primo frame per la preview video. ofxUI.
 e poi inserisci quelli che hai scritto nella tua agenda :P
