@@ -42,6 +42,7 @@ TO DO LIST:
 - Nell'output mode predisporre come metodi di visualizzazione, LEFT VIEW, RIGHT VIEW, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
 - Nella preview si devono vedere le info dei tasti premuti, va bene dove è ora non modifichiamola.
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
+- Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
 e poi inserisci quelli che hai scritto nella tua agenda :P
 
