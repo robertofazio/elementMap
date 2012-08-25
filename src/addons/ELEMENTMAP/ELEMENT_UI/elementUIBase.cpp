@@ -37,7 +37,7 @@ void elementUIBase::setupUI(element* _parentElement)
     if (type!=ELEMENT_MIXER)
     {
      
-        UI = new ofxUICanvas(xPos,yPos, 520, 160);
+        UI = new ofxUICanvas(xPos,yPos, 630, 160);
         
         ofColor colorBack;
         colorBack.r = 0;
@@ -57,23 +57,23 @@ void elementUIBase::setupUI(element* _parentElement)
 
         
         // prima colonna: isActive, Mono/Stereo
-        UI->addWidget(new ofxUILabelToggle(5, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL));
-        if(this->isStereo) UI->addWidget(new ofxUILabelToggle(5,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL));
+        if(this->isStereo) UI->addWidget(new ofxUILabelToggle(115,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
         if(parentElement->isWarpable)
         {
-            UI->addWidget(new ofxUIToggle(5, posY+=20, 16,16,false,"Quad Warping"));
-            UI->addWidget(new ofxUIToggle(5, posY+=20, 16,16,false,"Fine Warping"));
+            UI->addWidget(new ofxUIToggle(115, posY+=20, 16,16,false,"Quad Warping"));
+            UI->addWidget(new ofxUIToggle(115, posY+=20, 16,16,false,"Fine Warping"));
             
-            UI->addWidget(new ofxUIImageButton(25, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease"));
-            UI->addWidget(new ofxUIImageButton(46, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease"));
-            UI->addWidget(new ofxUILabel(68, posY+4, "xGrid", "xGrid", OFX_UI_FONT_SMALL));
+            UI->addWidget(new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease"));
+            UI->addWidget(new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease"));
+            UI->addWidget(new ofxUILabel(178, posY+4, "xGrid", "xGrid", OFX_UI_FONT_SMALL));
             
-            UI->addWidget(new ofxUIImageButton(25, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease"));
-            UI->addWidget(new ofxUIImageButton(46, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease"));
-            UI->addWidget(new ofxUILabel(68, posY+4, "yGrid", "yGrid", OFX_UI_FONT_SMALL));
+            UI->addWidget(new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease"));
+            UI->addWidget(new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease"));
+            UI->addWidget(new ofxUILabel(178, posY+4, "yGrid", "yGrid", OFX_UI_FONT_SMALL));
             
-            UI->addWidget(new ofxUILabelButton(5, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL));
-            UI->addWidget(new ofxUILabelButton(65, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL));
+            UI->addWidget(new ofxUILabelButton(115, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL));
+            UI->addWidget(new ofxUILabelButton(175, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL));
             
             
         }
@@ -82,16 +82,16 @@ void elementUIBase::setupUI(element* _parentElement)
         posY=10;
         
         //seconda colonna: opacità e componenti r,g,b
-        UI->addWidget(new ofxUIMinimalSlider(150, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
-        UI->addWidget(new ofxUIMinimalSlider(150, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED"));
-        UI->addWidget(new ofxUIMinimalSlider(150, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN"));
-        UI->addWidget(new ofxUIMinimalSlider(150, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE"));
-        UI->addWidget(new ofxUIButton(150, posY+=20, 16, 16, false, "RGB reset"));
+        UI->addWidget(new ofxUIMinimalSlider(260, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
+        UI->addWidget(new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED"));
+        UI->addWidget(new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN"));
+        UI->addWidget(new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE"));
+        UI->addWidget(new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset"));
         
         posY=10;
         
         //terza colonna: blending mode
-        listBlendModes = new ofxUIDropDownList(280, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes = new ofxUIDropDownList(390, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);

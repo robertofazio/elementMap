@@ -317,7 +317,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         //SAVE PROJECT
         if(e.widget->getName()=="SAVE PROJECT")
         {
-            for (int i=0; i<numOfElements; i++)
+            for (int i=1; i<numOfElements; i++)
             {
                 sceneElements[i]->warper.save();
                 sceneElements[i]->saveSettings();
@@ -326,7 +326,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         //OPEN PROJECT
         if(e.widget->getName()=="OPEN PROJECT")
         {
-            for (int i=0; i<numOfElements; i++)
+            for (int i=1; i<numOfElements; i++)
             {
                 sceneElements[i]->warper.load();
                 sceneElements[i]->loadSettings();

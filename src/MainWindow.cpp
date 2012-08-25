@@ -6,8 +6,12 @@ int num=0;
 
 int margin = 10;
 
-#define PREVIEW_WIDTH 100
-#define PREVIEW_HEIGHT 75
+#define LEFT_MARGIN_X       10
+#define UPPER_MARGIN_Y      82
+#define STRIP_HEIGHT        190
+
+#define PREVIEW_WIDTH       100
+#define PREVIEW_HEIGHT      75
 
 //--------------------------------------------------------------
 void MainWindow::setup()
@@ -26,19 +30,19 @@ void MainWindow::setup()
 	// create & setup elements on this app 
 	
     //pattern image
-    elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , (margin * 9) - 8 ,"TestPattern", false);
+    elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, false, -50000 , -50000 ,"TestPattern", false);
     elemImg.UI->toggleVisible();
     
     
     //syphon
-    elemSy.setup("","",outputResolutionX,outputResolutionY, 120 , (margin * 9) - 8 + (190 * 0),"Syphon", true);
+    elemSy.setup("","",outputResolutionX,outputResolutionY, LEFT_MARGIN_X , UPPER_MARGIN_Y,"Syphon", true);
 	
     
     //video
-	elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, true, 120 , (margin * 9) - 8 + (190 * 1),"Movie", true);
+	elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, true, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 	
     //image
-    elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", outputResolutionX,outputResolutionY, true, 120 , (margin * 9) - 8 + (190 * 2),"Image", true);
+    elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", outputResolutionX,outputResolutionY, true, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);
 	
     
     
@@ -97,6 +101,12 @@ void MainWindow::setup()
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
     
+    for (int i=1; i<numOfElements; i++)
+    {
+        myElements[i]->warper.load();
+        myElements[i]->loadSettings();
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -142,17 +152,10 @@ void MainWindow::draw()
 
         if (elemMix.wideScreenPreview) 
         {
-            ofPushStyle();
-            ofSetColor(ofColor :: black);
-//            if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
-//            else ofRect(650, margin*8, 600, 450);
             elemMix.drawOutput(650, (margin * 8)+56, 600, 338   );
-            ofPopStyle();
         }
         else 
         {
-//            if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
-//            else ofRect(650, margin*8, 600, 450);
             elemMix.drawOutput(650, margin * 8, 600, 450   );
         }
 
@@ -199,8 +202,8 @@ void MainWindow::draw()
                 ofSetColor(0, 255, 206);
                 ofLine(margin, (margin * 6) + ((i) * 190), 645, (margin * 6) + ((i) * 190));
                 ofSetColor(255, 255, 255);
-                myElements[drawingOrder[i]]->drawGraphic(margin ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
                 myElements[drawingOrder[i]]->UI->draw();
+                myElements[drawingOrder[i]]->drawGraphic(LEFT_MARGIN_X+5 ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
             }
             ofPopStyle();
         }
@@ -223,7 +226,7 @@ void MainWindow::keyPressed(int key)
         
         if(drawUIs)
 		{	
-			myElements[0]->UI->setVisible(true);
+//			myElements[0]->UI->setVisible(true);
 			myElements[1]->UI->setVisible(true);
 			myElements[2]->UI->setVisible(true);
 			myElements[3]->UI->setVisible(true);
@@ -231,7 +234,7 @@ void MainWindow::keyPressed(int key)
 		}
 		else 
 		{
-			myElements[0]->UI->setVisible(false);
+//			myElements[0]->UI->setVisible(false);
 			myElements[1]->UI->setVisible(false);
 			myElements[2]->UI->setVisible(false);
 			myElements[3]->UI->setVisible(false);
@@ -256,7 +259,7 @@ void MainWindow::keyPressed(int key)
     
     else if(key == 's') 
     {
-        for (int i=0; i<numOfElements; i++)
+        for (int i=1; i<numOfElements; i++)
         {
             myElements[i]->warper.save();
             myElements[i]->saveSettings();
@@ -266,7 +269,7 @@ void MainWindow::keyPressed(int key)
     
     else if(key == 'l') 
     {
-        for (int i=0; i<numOfElements; i++)
+        for (int i=1; i<numOfElements; i++)
         {
             myElements[i]->warper.load();
             myElements[i]->loadSettings();
