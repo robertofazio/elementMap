@@ -29,9 +29,10 @@ KNOWN ISSUES:
 - ofxUI non risponde a modifiche non dirette ( == non si aggiorna la visualizzazione di bottoni e slider)
 
 TO DO LIST:
-************ MOST IMPORTANT
+
 - Interfaccia e usabilità
 - Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
+- Sfondo Trasparente come Photoshop
 - Possibilità di cambiare la priorità di ogni element
 - Nella preview si devono vedere le info dei tasti premuti
 - Usare il primo frame per la preview video. ofxUI.
