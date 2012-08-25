@@ -34,7 +34,7 @@
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "elementMap.app"
             BlueprintName = "elementMap"
-            ReferencedContainer = "container:element_a0.2.0.xcodeproj">
+            ReferencedContainer = "container:element_a0.2.1.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,7 +53,7 @@
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "elementMap.app"
             BlueprintName = "elementMap"
-            ReferencedContainer = "container:element_a0.2.0.xcodeproj">
+            ReferencedContainer = "container:element_a0.2.1.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

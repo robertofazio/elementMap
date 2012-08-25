@@ -66,6 +66,8 @@ public:
     
     ofImage                 logo;
     ofImage                 logoChristie;
+    ofImage                 logoDigitalNetwork;
+    ofImage                 previewGrid;
     
 	
 };

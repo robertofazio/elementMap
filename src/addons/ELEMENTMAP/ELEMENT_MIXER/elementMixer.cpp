@@ -30,6 +30,7 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
     actualVolume = 50;
 	
     wideScreenPreview=false;
+    showGrid=true;
 }
 
 
@@ -157,9 +158,12 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
     ofPushStyle();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColorMask(true, false, false, true);
-    fboRight.draw(0, 0);
+        if (getSwapLeftRight()) fboRight.draw(0, 0);
+        else fboLeft.draw(0, 0);
+        
     glColorMask(false, true, true, true);
-    fboLeft.draw(0,0);
+        if (getSwapLeftRight()) fboLeft.draw(0,0);
+        else fboRight.draw(0,0);
     glColorMask(true, true, true, true);
     ofPopStyle();
         fboAnagliph.end();
@@ -189,10 +193,14 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 				break;
 
             case ELM_STEREO_OPENGL:
+                
                 glDrawBuffer(GL_BACK_LEFT);	
-                fboLeft.draw(_x,_y,_width,_height);
+                if (getSwapLeftRight()) fboRight.draw(_x,_y,_width,_height);
+                    else fboLeft.draw(_x,_y,_width,_height);
+
                 glDrawBuffer(GL_BACK_RIGHT);
-                fboRight.draw(_x,_y,_width,_height);
+                if (getSwapLeftRight()) fboLeft.draw(_x,_y,_width,_height);
+                    else fboRight.draw(_x,_y,_width,_height);
                 break;
 
 			default:
@@ -217,15 +225,15 @@ void elementMixer::drawInfo()
     switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-			fontMedium.drawString("STEREO OPENGL",950,645);
+			fontMedium.drawString("STEREO OPENGL",950,665);
 			break;
 			
 		case ELM_MONO:
-			fontMedium.drawString("SINGLE LEFT CHANNEL",950,645);
+			fontMedium.drawString("SINGLE LEFT CHANNEL",950,665);
 			break;
             
 		case ELM_STEREO_ANAGLYPH:
-			fontMedium.drawString("STEREO ANAGLYPH",950,645);
+			fontMedium.drawString("STEREO ANAGLYPH",950,665);
 			break;
 		
         default:
@@ -234,7 +242,7 @@ void elementMixer::drawInfo()
     
     //framerate
 	ofSetColor(255,255,255);
-    fontMedium.drawString(ofToString(ofGetFrameRate()),950,660);
+    fontMedium.drawString(ofToString(ofGetFrameRate()),950,680);
     
     
     
@@ -276,8 +284,20 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
             setDrawInStereo(toggle->getValue());
         }
+        //SWAP LEFT RIGHT
+        if(e.widget->getName()=="SWAP LEFT RIGHT")
+        {
+            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+            setSwapLeftRight(toggle->getValue());
+        }
+        //VIEW GRID
+        if(e.widget->getName()=="GRID")
+        {
+            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+            showGrid=!showGrid;
+        }
         //WIDESCREEN PREVIEW
-        if(e.widget->getName()=="WIDESCREEN")
+        if(e.widget->getName()=="PREVIEW 16:9")
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
             wideScreenPreview=!wideScreenPreview;
@@ -317,7 +337,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         {
             if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
             else if(name=="MONO") setOutputMode(ELM_MONO);
-            else if(name=="OPENGL") setOutputMode(ELM_STEREO_OPENGL);
+            else if(name=="ACTIVE STEREO") setOutputMode(ELM_STEREO_OPENGL);
         }
 
         // ++++ VIDEO PLAYER ++++ //

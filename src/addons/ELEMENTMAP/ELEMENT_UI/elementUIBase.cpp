@@ -21,8 +21,8 @@ elementUIBase::elementUIBase()
 	
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
-    outputModesNames.push_back("OPENGL");
-    outputModesNames.push_back("SIDEBYSIDE");
+    outputModesNames.push_back("ACTIVE STEREO");
+//    outputModesNames.push_back("SIDEBYSIDE");
 	
 }
 //--------------------------------------------------------------
@@ -129,11 +129,6 @@ void elementUIBase::setupUI(element* _parentElement)
         ofColor(0);
         UI->addWidget(new ofxUILabel(5, 10, "ELEMENT MAIN CONTROL", 1));
         
-        
-        // STEREOSCOPIC
-        UI->addWidget(new ofxUIToggle(300, 60, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO"));
-
-        
         ofxUISpacer* spacer = new ofxUISpacer(5, 30, 590, 1);
         spacer->setColorFill(ofColor(0, 255, 206));
         UI->addWidget(spacer);
@@ -145,28 +140,24 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUILabel(300, 40, "STEREOSCOPIC SETTING",2));
 
         
+        // VIEW GRID
+        UI->addWidget(new ofxUILabelToggle(430, 6, 50, 20, true, "GRID", OFX_UI_FONT_SMALL));
         // WIDESCREEN PREVIEW
-        UI->addWidget(new ofxUILabelToggle(490, 6, 100, 20, false, "WIDESCREEN", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelToggle(490, 6, 100, 20, false, "PREVIEW 16:9", OFX_UI_FONT_SMALL));
         
         
         //MAIN OPACITY
         UI->addWidget(new ofxUIMinimalSlider(490, 40, 100,20,0.0,1.0,parentElement->getOpacity() ,"MAIN OPACITY"));
 
-        // TEST PATTERN
-        UI->addWidget(new ofxUILabelToggle(490,70,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL));
-
-        // FULL SCREEN
-        UI->addWidget(new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL));
-        
-        // SAVE PROJECT
-        UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
-        
-        // OPEN PROJECT
-        UI->addWidget(new ofxUILabelButton(490, 150, 100, false, "OPEN PROJECT", OFX_UI_FONT_SMALL));
       
+        // STEREOSCOPIC
+        UI->addWidget(new ofxUIToggle(300, 60, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO"));
+        
+        // SWAP LEFT RIGHT
+        UI->addWidget(new ofxUIToggle(300, 80, 16, 16, parentElement->getSwapLeftRight(), "SWAP LEFT RIGHT"));
 
         // OUTPUT MODE
-        listOutputModes = new ofxUIDropDownList(300, 80, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes = new ofxUIDropDownList(300, 100, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
         listOutputModes->setDrawPaddingOutline(false);
@@ -176,6 +167,20 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(listOutputModes);
         
 
+        // TEST PATTERN
+        UI->addWidget(new ofxUILabelToggle(490,70,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL));
+        
+        // FULL SCREEN
+        UI->addWidget(new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL));
+        
+        // SAVE PROJECT
+        UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
+        
+        // OPEN PROJECT
+        UI->addWidget(new ofxUILabelButton(490, 150, 100, false, "OPEN PROJECT", OFX_UI_FONT_SMALL));
+
+        
+        
         // ALTERNATIVE PLAYER
         posY=60;
         UI->addWidget(new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 0 ,"VIDEO NAVIGATOR"));        

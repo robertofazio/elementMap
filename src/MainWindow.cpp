@@ -91,6 +91,8 @@ void MainWindow::setup()
     
     logo.loadImage("./images/logo.png");
     logoChristie.loadImage("./images/logoChristie.png");
+    logoDigitalNetwork.loadImage("./images/logoDigitalNetwork.png");
+    previewGrid.loadImage("./images/previewGrid.png");
 
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
@@ -123,7 +125,16 @@ void MainWindow::draw()
         //preview window (non-fulscreen)
         ofPushStyle();
         ofSetColor(255, 255, 255);
-        fontLarge.drawString("element.Map v0.2.0 ", margin , margin * 4);
+        
+        if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
+        else {
+            ofPushStyle();
+            ofSetColor(ofColor :: black);
+            ofRect(650, margin*8, 600, 450);
+            ofPopStyle();
+        }
+        
+        fontLarge.drawString("element.Map v0.2.1 ", 70 , 44);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -175,8 +186,8 @@ void MainWindow::draw()
             // just draw the preview inputs of mixer
             ofPushStyle();
             ofSetColor(255,255);
-            int previewWidth = (ofGetWidth()-(20*numOfElements))/numOfElements;
-            int previewHeight = previewWidth / (4.0/3.0);
+//            int previewWidth = (ofGetWidth()-(20*numOfElements))/numOfElements;
+//            int previewHeight = previewWidth / (4.0/3.0);
             glDrawBuffer(GL_BACK);
             for(int i = 0;i<numOfElements - 1;i++)
             {
@@ -189,8 +200,9 @@ void MainWindow::draw()
             ofPopStyle();
         }
         
-        logo.draw(1195, 12, 60, 60);
-        logoChristie.draw(950,20,235,35);
+        logo.draw(10, 9, 60, 60);
+        logoDigitalNetwork.draw(1150, 12, 110, 40);
+//        logoChristie.draw(950,20,235,35);
     }
     
 }
