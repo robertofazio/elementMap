@@ -26,6 +26,7 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
+- SAVE e OPEN PROJECT non funzionano correttamente ( possibilità di aprire e salvare più progetti )
 - ofxUI non risponde a modifiche non dirette ( == non si aggiorna la visualizzazione di bottoni e slider)
 
 TO DO LIST:
