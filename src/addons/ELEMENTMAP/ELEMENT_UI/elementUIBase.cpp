@@ -142,6 +142,7 @@ void elementUIBase::setupUI(element* _parentElement)
         
         // VIEW GRID
         UI->addWidget(new ofxUILabelToggle(430, 6, 50, 20, true, "GRID", OFX_UI_FONT_SMALL));
+        
         // WIDESCREEN PREVIEW
         UI->addWidget(new ofxUILabelToggle(490, 6, 100, 20, false, "PREVIEW 16:9", OFX_UI_FONT_SMALL));
         

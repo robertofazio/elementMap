@@ -204,6 +204,12 @@ void MainWindow::draw()
                 ofSetColor(255, 255, 255);
                 myElements[drawingOrder[i]]->UI->draw();
                 myElements[drawingOrder[i]]->drawGraphic(LEFT_MARGIN_X+5 ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
+
+                int yGridLabel = 95;
+                if(myElements[drawingOrder[i]]->getIsStereo()) yGridLabel+=20;
+                
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel+20);
             }
             ofPopStyle();
         }
