@@ -40,11 +40,9 @@ TO DO LIST:
 - Nell'input mode predisporre come metodi di visualizzazione, MONO 2D only left e/o right, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
 - Nell'output mode predisporre come metodi di visualizzazione, LEFT VIEW, RIGHT VIEW, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
 - Nella preview si devono vedere le info dei tasti premuti, va bene dove è ora non modifichiamola.
-- Di fianco a Xgrid e YGrid mettere una label con le info della risoluzione della griglia. Facciamo 16x16 o 20x20 
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
-e poi inserisci quelli che hai scritto nella tua agenda :P
 - Splah image appena si apre elementMap per i crediti,immagini etc..
 
 WISH LIST:
