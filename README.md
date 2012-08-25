@@ -46,6 +46,7 @@ TO DO LIST:
 - Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
 e poi inserisci quelli che hai scritto nella tua agenda :P
+- Splah image appena si apre elementMap per i crediti,immagini etc..
 
 WISH LIST:
 
