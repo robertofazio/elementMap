@@ -15,18 +15,11 @@ MAIN FEATURES:
 
 - Preview in formato 16:9 o 4:3
 - Fullscreen funzionante anche in output: all'uscita torna in prima finestra
-- Slider opacità sull'output finale; slideor opacità e RGB su ogni element
-- Modalità stereoscopica anaglifo funzionante
-- Blending mode attivi su ogni livello (add, subtract, multiply, alpha, screen) e selezionabili da interfaccia
+- Blending mode su ogni livello (add, subtract, multiply, alpha)
 - Quad warper and fine warper mesh fino a 17x17 suddivisioni
 - salva/carica (sia warp che global settings) di una sola configurazione.
-- aggiunto un bordo rosso per evidenziare il livello selezionato
-- l'opacità è tornata in funzione, e ora è gestita dal warper (che ha preso alcune funzioni del mixer..)
-- frame by frame ripristinato correttamente: ',' e '.' per avanzare/retrocedere di un frame nel video
 - Controllo audio
 - Attualmente gestisce 3 elements , video , immagine e syphon
-- Possibilità di salvare e caricare una sola configurazione 
-- Controllo opacità e visibilità per ogni element
 - Syphon supportato correttamente
 - Risouluzione output si adatta correttamente a tutte le risoluzioni del secondo schermo.
 
@@ -36,18 +29,22 @@ KNOWN ISSUES:
 - ofxUI non risponde a modifiche non dirette ( == non si aggiorna la visualizzazione di bottoni e slider)
 
 TO DO LIST:
-
+************ MOST IMPORTANT
+- Interfaccia e usabilità
+- Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
+- Possibilità di cambiare la priorità di ogni element
 - Nella preview si devono vedere le info dei tasti premuti
 - Usare il primo frame per la preview video. ofxUI.
-- Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
-- Possibilità di cambiare la priorità di ogni element
+e poi inserisci quelli che hai scritto nella tua agenda :P
+
+WISH LIST:
+
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
-- Progettazione di un'area inspector
 - Implementare la funzione Rotate e Zoom per ogni warp.
+- Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Maschera per ogni element
-- Interfaccia
 - Flipping options, per flippare l'immagine
-- Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
+- Progettazione di una main area inspector
 - Edge Blending
 - Multiproiezioni
 - Export as SVG / PNG / PDF - MAD MAPPER
