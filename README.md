@@ -36,6 +36,7 @@ TO DO LIST:
 - Sfondo Trasparente come Photoshop
 - Possibilità di cambiare la priorità di ogni element
 - Tasto Swap L/R
+- Tasto per modificare lo ZERO PARALLAX in main preview
 - Menù a tendina o drag&drop per inserire i video ??
 - Nell'input mode predisporre come metodi di visualizzazione, MONO 2D only left e/o right, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
 - Nell'output mode predisporre come metodi di visualizzazione, LEFT VIEW, RIGHT VIEW, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
