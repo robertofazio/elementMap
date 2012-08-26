@@ -9,10 +9,11 @@ scheda grafica : nVidia min 512MB e GL_STEREO supportate
 
 (C) 2012 Roberto Fazio Studio - www.robertofazio.com
 Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
-versione alpha 0.2.1 - 25/08/2012
+versione alpha 0.2.1 - 26/08/2012
 
 MAIN FEATURES:
 
+- Controllo del warp direttamente da interfaccia
 - Swap left/right frame nelle visualizzazioni stereo
 - Preview in formato 16:9 o 4:3
 - Fullscreen funzionante sulla finestra di output
@@ -27,7 +28,6 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
-- SAVE e OPEN PROJECT non funzionano correttamente ( possibilità di aprire e salvare più progetti )
 - ofxUI non risponde a modifiche non dirette ( == non si aggiorna la visualizzazione di bottoni e slider)
 
 TO DO LIST:
@@ -39,7 +39,6 @@ TO DO LIST:
 - Menù a tendina o drag&drop per inserire i video ??
 - Nell'input mode predisporre come metodi di visualizzazione, MONO 2D only left e/o right, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
 - Nell'output mode predisporre come metodi di visualizzazione, LEFT VIEW, RIGHT VIEW, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
-- Nella preview si devono vedere le info dei tasti premuti, va bene dove è ora non modifichiamola.
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
