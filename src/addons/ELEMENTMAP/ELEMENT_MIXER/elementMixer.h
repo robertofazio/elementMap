@@ -40,10 +40,7 @@ class elementMixer : public element
     void drawInfo();
     
     void guiEvent(ofxUIEventArgs &e);
-    
-    bool      wideScreenPreview;
-    bool      showGrid;
-    
+        
     //utilities:
     int  getOutputMode();
 	void setOutputMode(int _mode);

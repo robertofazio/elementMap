@@ -22,6 +22,7 @@ class  elementUIBase
     //void setupUI(void* parentElement);
     void guiEvent(ofxUIEventArgs &e);   
 
+    void aggiornaGUI();
 	
 	ofxUICanvas*			UI;
 	element*				parentElement;
@@ -32,15 +33,46 @@ class  elementUIBase
 	int						xPos;
 	int						yPos;
 	
+    //widgets per gli element:
+    ofxUIToggle*            GUI_isActive;
+    ofxUILabelToggle*       GUI_stereoscopic;
+    ofxUIButton*            GUI_QuadWarping;
+    ofxUIButton*            GUI_GridWarping; 
+    ofxUIImageButton*       GUI_xGridDecrease;
+    ofxUIImageButton*       GUI_xGridIncrease;    
+    ofxUIImageButton*       GUI_yGridDecrease;
+    ofxUIImageButton*       GUI_yGridIncrease;  
+    ofxUILabelButton*       GUI_resetWarp;
+    ofxUILabelButton*       GUI_resetGrid;
+    ofxUIMinimalSlider*     GUI_opacity;
+    ofxUIMinimalSlider*     GUI_red;
+    ofxUIMinimalSlider*     GUI_green;
+    ofxUIMinimalSlider*     GUI_blue;
+    ofxUIButton*            GUI_resetRGB;
+	ofxUIDropDownList*		listBlendModes;
+
+    
+    //widgets del mixer:
+    ofxUILabelToggle*       GUI_viewGridPreview;
+    ofxUILabelToggle*       GUI_widescreenPreview;
+    ofxUIMinimalSlider*     GUI_mainOpacity;    
+    ofxUIToggle*            GUI_mainStereo;
+    ofxUIToggle*            GUI_swapLeftRight;
+    ofxUIDropDownList*		listOutputModes;
+    ofxUILabelToggle*       GUI_testPattern;
+    ofxUILabelToggle*       GUI_fullscreen;
+    
+    //quelli del player sono quasi tutti superflui, almeno per adesso...
+    ofxUIMinimalSlider*     GUI_videoNavigator;
+    ofxUIMinimalSlider*     GUI_volume;
+    
 	protected :
 	
-	ofxUIDropDownList*		listBlendModes;
-	ofxUIDropDownList*		listOutputModes;
-	ofxUIDropDownList*		listResolution;
 	vector<string>			blendingNames; 
 	vector<string>          outputModesNames;
-    
+    int                     type;
     bool                    isStereo;
+    
     
     
 

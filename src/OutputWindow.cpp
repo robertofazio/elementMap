@@ -70,6 +70,7 @@ void OutputWindow::keyPressed(int key, ofxFenster* window)
     else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.warpKeyPressedHandler(key);
     
     
+    
 }
 
 void OutputWindow::keyReleased(int key, ofxFenster *window)

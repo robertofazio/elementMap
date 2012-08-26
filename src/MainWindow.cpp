@@ -114,6 +114,7 @@ void MainWindow::setup()
     {
         myElements[i]->warper.load();
         myElements[i]->loadSettings();
+        myElements[i]->elementUIBase::aggiornaGUI();
     }
 }
 
@@ -122,6 +123,8 @@ void MainWindow::update()
 {
 	elemMix.update();  
     elemMix.drawIntoFbo(true);
+    
+    elemMix.elementUIBase::GUI_videoNavigator->setValue(elemV1.leftChannelPlayer.getPosition());
 }
 
 
@@ -325,7 +328,8 @@ void MainWindow::keyPressed(int key)
     
     else if(key == '2') {
     deselectAllElements();
-    elemV1.isSelected=true;  
+    elemV1.isSelected=true;
+
     }
     
     else if(key == '3') {
@@ -336,6 +340,13 @@ void MainWindow::keyPressed(int key)
     if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.warpKeyPressedHandler(key);
     else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyPressedHandler(key);
     else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyPressedHandler(key);
+
+    //aggiorna GUI
+    for (int i=1; i<numOfElements; i++)
+    {
+        myElements[i]->elementUIBase::aggiornaGUI();
+    }
+
     
 }
 

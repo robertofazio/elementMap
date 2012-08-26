@@ -74,6 +74,12 @@ class element : public ofNode , public elementUIBase
     
     string			elementName;
 
+    //variabili per il mixer:
+    bool            wideScreenPreview;
+    bool            showGrid;
+    
+    
+    
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	
 	protected :

@@ -31,7 +31,7 @@ void elementUIBase::setupUI(element* _parentElement)
 	printf("setupUI %d %d\n",xPos,yPos);
 	parentElement =  _parentElement;
 	
-    int type = parentElement->getElementType();    
+    type = parentElement->getElementType();    
     
     //interfaccia per gli element "generici" (tutti tranne il mixer)
     if (type!=ELEMENT_MIXER)
@@ -55,28 +55,42 @@ void elementUIBase::setupUI(element* _parentElement)
                 
         int posY=10;
 
-        //colonna "ZERO": esperimenti... :)
-        UI->addWidget(new ofxUIButton(10, 90, 10, 10, false, "UP"));
-        UI->addWidget(new ofxUIButton(10, 105, 10, 10, false, "DOWN"));        
+//        //colonna "ZERO": esperimenti... :)
+//        UI->addWidget(new ofxUIButton(10, 90, 10, 10, false, "UP"));
+//        UI->addWidget(new ofxUIButton(10, 105, 10, 10, false, "DOWN"));        
         
         // prima colonna: isActive, Mono/Stereo
-        UI->addWidget(new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL));
-        if(this->isStereo) UI->addWidget(new ofxUILabelToggle(115,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
+        GUI_isActive = new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL); 
+        UI->addWidget(GUI_isActive);
+        
+        if(this->isStereo) {
+            GUI_stereoscopic = new ofxUILabelToggle(115,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL);
+            UI->addWidget(GUI_stereoscopic);
+        }
+        
         if(parentElement->isWarpable)
         {
-            UI->addWidget(new ofxUIButton(115, posY+=20, 16,16,false,"Quad Warping"));
-            UI->addWidget(new ofxUIButton(115, posY+=20, 16,16,false,"Fine Warping"));
+            GUI_QuadWarping = new ofxUIToggle(115, posY+=20, 16,16,false,"Quad Warping"); 
+            UI->addWidget(GUI_QuadWarping);
+            GUI_GridWarping = new ofxUIToggle(115, posY+=20, 16,16,false,"Fine Warping");
+            UI->addWidget(GUI_GridWarping);
             
-            UI->addWidget(new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease"));
-            UI->addWidget(new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease"));
+            GUI_xGridDecrease = new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease");
+            UI->addWidget(GUI_xGridDecrease);
+            GUI_xGridIncrease = new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease");
+            UI->addWidget(GUI_xGridIncrease);
             UI->addWidget(new ofxUILabel(178, posY+4, "xGrid", "xGrid", OFX_UI_FONT_SMALL));
             
-            UI->addWidget(new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease"));
-            UI->addWidget(new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease"));
+            GUI_yGridDecrease = new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease");
+            UI->addWidget(GUI_yGridDecrease);
+            GUI_yGridIncrease = new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease");
+            UI->addWidget(GUI_yGridIncrease);
             UI->addWidget(new ofxUILabel(178, posY+4, "yGrid", "yGrid", OFX_UI_FONT_SMALL));
             
-            UI->addWidget(new ofxUILabelButton(115, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL));
-            UI->addWidget(new ofxUILabelButton(175, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL));
+            GUI_resetWarp = new ofxUILabelButton(115, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL);
+            UI->addWidget(GUI_resetWarp);
+            GUI_resetGrid = new ofxUILabelButton(175, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL);
+            UI->addWidget(GUI_resetGrid);
             
             
         }
@@ -85,11 +99,16 @@ void elementUIBase::setupUI(element* _parentElement)
         posY=10;
         
         //seconda colonna: opacità e componenti r,g,b
-        UI->addWidget(new ofxUIMinimalSlider(260, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity"));
-        UI->addWidget(new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED"));
-        UI->addWidget(new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN"));
-        UI->addWidget(new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE"));
-        UI->addWidget(new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset"));
+        GUI_opacity = new ofxUIMinimalSlider(260, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity");
+        UI->addWidget(GUI_opacity);
+        GUI_red = new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED");
+        UI->addWidget(GUI_red);
+        GUI_green = new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN");
+        UI->addWidget(GUI_green);
+        GUI_blue = new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE");
+        UI->addWidget(GUI_blue);
+        GUI_resetRGB = new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset");
+        UI->addWidget(GUI_resetRGB);
         
         posY=10;
         
@@ -109,6 +128,7 @@ void elementUIBase::setupUI(element* _parentElement)
     //but mixer needs output mode selection and many other things :) 
 	else if (type==ELEMENT_MIXER)
     {
+        
         UI = new ofxUICanvas(xPos,yPos+450, 600, 240);
         
         ofColor colorBack;
@@ -144,21 +164,24 @@ void elementUIBase::setupUI(element* _parentElement)
 
         
         // VIEW GRID
-        UI->addWidget(new ofxUILabelToggle(430, 6, 50, 20, true, "GRID", OFX_UI_FONT_SMALL));
+        GUI_viewGridPreview = new ofxUILabelToggle(430, 6, 50, 20, true, "GRID", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_viewGridPreview);
         
         // WIDESCREEN PREVIEW
-        UI->addWidget(new ofxUILabelToggle(490, 6, 100, 20, false, "PREVIEW 16:9", OFX_UI_FONT_SMALL));
-        
-        
+        GUI_widescreenPreview = new ofxUILabelToggle(490, 6, 100, 20, false, "PREVIEW 16:9", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_widescreenPreview);
+                
         //MAIN OPACITY
-        UI->addWidget(new ofxUIMinimalSlider(490, 40, 100,20,0.0,1.0,parentElement->getOpacity() ,"MAIN OPACITY"));
+        GUI_mainOpacity = new ofxUIMinimalSlider(490, 40, 100,20,0.0,1.0,parentElement->getOpacity() ,"MAIN OPACITY");
+        UI->addWidget(GUI_mainOpacity);
 
-      
         // STEREOSCOPIC
-        UI->addWidget(new ofxUIToggle(300, 60, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO"));
+        GUI_mainStereo = new ofxUIToggle(300, 60, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO");
+        UI->addWidget(GUI_mainStereo);
         
         // SWAP LEFT RIGHT
-        UI->addWidget(new ofxUIToggle(300, 80, 16, 16, parentElement->getSwapLeftRight(), "SWAP LEFT RIGHT"));
+        GUI_swapLeftRight = new ofxUIToggle(300, 80, 16, 16, parentElement->getSwapLeftRight(), "SWAP LEFT RIGHT");
+        UI->addWidget(GUI_swapLeftRight);
 
         // OUTPUT MODE
         listOutputModes = new ofxUIDropDownList(300, 100, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
@@ -170,12 +193,13 @@ void elementUIBase::setupUI(element* _parentElement)
         listOutputModes->setAutoClose(true);
         UI->addWidget(listOutputModes);
         
-
         // TEST PATTERN
-        UI->addWidget(new ofxUILabelToggle(490,70,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL));
+        GUI_testPattern = new ofxUILabelToggle(490,70,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_testPattern);
         
         // FULL SCREEN
-        UI->addWidget(new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL));
+        GUI_fullscreen = new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_fullscreen);
         
         // SAVE PROJECT
         UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
@@ -187,7 +211,8 @@ void elementUIBase::setupUI(element* _parentElement)
         
         // ALTERNATIVE PLAYER
         posY=60;
-        UI->addWidget(new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 0 ,"VIDEO NAVIGATOR"));        
+        GUI_videoNavigator = new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 0 ,"VIDEO NAVIGATOR");
+        UI->addWidget(GUI_videoNavigator);        
         
         posY=80;
         UI->addWidget(new ofxUILabelButton(marginLeft, posY, 60,false,"REW 2x", OFX_UI_FONT_SMALL));
@@ -204,7 +229,8 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUILabelToggle(marginLeft+65, posY+8, 80,16,false, "MUTE", OFX_UI_FONT_SMALL));
 
         posY=170;
-        UI->addWidget(new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 100 ,"SOUND VOLUME"));
+        GUI_volume = new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 100 ,"SOUND VOLUME");
+        UI->addWidget(GUI_volume);
 
         
         posY=196;
@@ -268,7 +294,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //QUAD WARPING
     else if (e.widget->getName()=="Quad Warping")
     {
-		ofxUIToggle *button = (ofxUIToggle *) e.widget;
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		if(parentElement->getIsActive()) {
             
             for (int i=1; i<4; i++) 
@@ -280,17 +306,14 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             }
             
             parentElement->isSelected=true;
-//            if (button->getValue())
-//            {
-                parentElement->warper.bWarpActive=!parentElement->warper.bWarpActive;
-                parentElement->isSelected=parentElement->warper.bWarpActive;
-//            }
+                parentElement->warper.bWarpActive=toggle->getValue();
+                parentElement->isSelected=toggle->getValue();
         }
     }
     //FINE WARPING
     else if (e.widget->getName()=="Fine Warping")
     {
-		ofxUIToggle *button = (ofxUIToggle *) e.widget;
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		if(parentElement->getIsActive()) {
             
             for (int i=1; i<4; i++) 
@@ -302,14 +325,9 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             }
 
             parentElement->isSelected=true;
-            parentElement->warper.bViewGrid=!parentElement->warper.bViewGrid;
-            parentElement->isSelected=parentElement->warper.bViewGrid;
+            parentElement->warper.bViewGrid=toggle->getValue();
+            parentElement->isSelected=toggle->getValue();
 
-//            if (toggle->getValue()) parentElement->warper.bViewGrid=true;
-//            else {
-//             parentElement->warper.bViewGrid=false;
-//             parentElement->isSelected=false;
-//            }
         }
     }
     //X GRID DECREASE
@@ -415,6 +433,23 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
             ofxFensterManager::get()->getWindowById(1)->setWindowPosition(400, 200);
         }
     }
+
+    aggiornaGUI();
 }
 
 
+//--------------------------------------------------------------
+void elementUIBase::aggiornaGUI()
+{
+    if (type!=ELEMENT_MIXER)
+    {
+        GUI_isActive->setValue(parentElement->getIsActive());
+//        GUI_stereoscopic->setValue(parentElement->getDrawInStereo());
+        GUI_QuadWarping->setValue(parentElement->warper.bWarpActive);
+        GUI_GridWarping->setValue(parentElement->warper.bViewGrid);
+        GUI_opacity->setValue(parentElement->getOpacity());
+        GUI_red->setValue(parentElement->getRed());
+        GUI_green->setValue(parentElement->getGreen());
+        GUI_blue->setValue(parentElement->getBlue());
+    }
+}

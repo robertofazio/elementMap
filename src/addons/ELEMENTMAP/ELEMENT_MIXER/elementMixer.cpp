@@ -340,7 +340,10 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             {
                 sceneElements[i]->warper.load();
                 sceneElements[i]->loadSettings();
+                sceneElements[i]->elementUIBase::aggiornaGUI();
             }
+            
+                
             }
         }
         //OUTPUT MODE
