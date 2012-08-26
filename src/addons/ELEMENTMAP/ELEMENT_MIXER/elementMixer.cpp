@@ -325,7 +325,9 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
                 sceneElements[i]->warper.save();
                 sceneElements[i]->saveSettings();
             }
+                ofSystemAlertDialog("Project Saved");
             }
+            
 //            UI->saveSettings("./XML/MixerGUI.xml");
         }
         //OPEN PROJECT
@@ -342,9 +344,11 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
                 sceneElements[i]->loadSettings();
                 sceneElements[i]->elementUIBase::aggiornaGUI();
             }
-            
-                
+            ofSystemAlertDialog("Project Loaded");
             }
+            
+            
+
         }
         //OUTPUT MODE
         if( e.widget->getParent()->getName()=="Output Mode")
