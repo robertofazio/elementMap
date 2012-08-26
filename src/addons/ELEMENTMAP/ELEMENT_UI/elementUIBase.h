@@ -4,13 +4,13 @@
 
 #include "ofxUI.h"
 
-
 // class is declared here as a forward declaration
 // in james words :
 // basically what that does is tell  elementUIBase 
 // "I promise that when you compile there will be a class called element"
 // but you don't get to see what it is until compilation
 class element;
+//class elementMixer;
 
 
 class  elementUIBase
@@ -25,6 +25,8 @@ class  elementUIBase
 	
 	ofxUICanvas*			UI;
 	element*				parentElement;
+    
+    element**               allElementsPointer;
 	
 	//void setGUIOrigin(int _x,int _y);
 	int						xPos;

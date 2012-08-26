@@ -71,10 +71,17 @@ void MainWindow::setup()
 	drawingOrder[1]=1;  
 	drawingOrder[2]=3;
 	drawingOrder[3]=0;
-	
+	    
 	elemMix.setup(this, outputResolutionX,outputResolutionY,ELM_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
+    
+    //comunico il puntatore al mixer a tutti gli element
+    for (int i=1; i<numOfElements; i++)
+    {
+        myElements[i]->elementUIBase::allElementsPointer=myElements;
+    }
+
     
     bFullscreen=false;
     
@@ -100,13 +107,14 @@ void MainWindow::setup()
 
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
-    
+
+    //auto-load last saved data on startup
+//    elemMix.UI->loadSettings("./XML/MixerGUI.xml");
     for (int i=1; i<numOfElements; i++)
     {
         myElements[i]->warper.load();
         myElements[i]->loadSettings();
     }
-
 }
 
 //--------------------------------------------------------------
@@ -159,9 +167,26 @@ void MainWindow::draw()
             elemMix.drawOutput(650, margin * 8, 600, 450   );
         }
 
-        if (elemSy.isSelected==true) fontMedium.drawString("SYHPON ELEMENT SELECTED", 660,100);
-        else if (elemV1.isSelected==true) fontMedium.drawString("VIDEO ELEMENT SELECTED", 660,100);
-        else if (elemImg2.isSelected==true) fontMedium.drawString("IMAGE ELEMENT SELECTED", 660,100);
+        //testo in alto nella preview:
+        if (elemSy.isSelected==true)
+        {
+            if (elemSy.warper.bWarpActive) fontMedium.drawString("SYHPON ELEMENT SELECTED - QUAD WARP", 660,100);
+            else if (elemSy.warper.bViewGrid) fontMedium.drawString("SYHPON ELEMENT SELECTED - GRID WARP", 660,100);
+            else fontMedium.drawString("SYHPON ELEMENT SELECTED", 660,100);
+        }
+        else if (elemV1.isSelected==true) 
+        {
+            if (elemV1.warper.bWarpActive) fontMedium.drawString("VIDEO ELEMENT SELECTED - QUAD WARP", 660,100);
+            else if (elemV1.warper.bViewGrid) fontMedium.drawString("VIDEO ELEMENT SELECTED - GRID WARP", 660,100);
+            else fontMedium.drawString("VIDEO ELEMENT SELECTED", 660,100);
+        }
+        else if (elemImg2.isSelected==true) 
+        {
+            if (elemImg2.warper.bWarpActive) fontMedium.drawString("IMAGE ELEMENT SELECTED - QUAD WARP", 660,100);
+            else if (elemImg2.warper.bViewGrid) fontMedium.drawString("IMAGE ELEMENT SELECTED - GRID WARP", 660,100);
+            else fontMedium.drawString("IMAGE ELEMENT SELECTED", 660,100);
+        }
+
         else fontMedium.drawString("NO ELEMENTs SELECTED", 660,100);
 
         
@@ -208,8 +233,8 @@ void MainWindow::draw()
                 int yGridLabel = 95;
                 if(myElements[drawingOrder[i]]->getIsStereo()) yGridLabel+=20;
                 
-                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel);
-                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel+20);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes-1), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes-1), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel+20);
             }
             ofPopStyle();
         }
@@ -267,22 +292,26 @@ void MainWindow::keyPressed(int key)
     
     else if(key == 's') 
     {
+        //save elements settings
         for (int i=1; i<numOfElements; i++)
         {
             myElements[i]->warper.save();
             myElements[i]->saveSettings();
         }
-        
+        //save mixer settings
+//        elemMix.UI->saveSettings("./XML/MixerGUI.xml");
     }
     
     else if(key == 'l') 
     {
+        //load elements settings
         for (int i=1; i<numOfElements; i++)
         {
             myElements[i]->warper.load();
             myElements[i]->loadSettings();
         }
-        
+        //load mixer settings
+//        elemMix.UI->loadSettings("./XML/MixerGUI.xml");        
     }
     
     else if(key == '0') {
@@ -330,19 +359,19 @@ void MainWindow::mouseMoved(int x, int y )
 //--------------------------------------------------------------
 void MainWindow::mouseDragged(int x, int y, int button)
 {
-    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
-    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mouseDragged(x, y, button);
-    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mouseDragged(x, y, button);
-    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mouseDragged(x, y, button);
+//    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+//    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mouseDragged(x, y, button);
+//    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mouseDragged(x, y, button);
+//    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mouseDragged(x, y, button);
     
 }
 //--------------------------------------------------------------
 void MainWindow::mousePressed(int x, int y, int button)
 {
-    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
-    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mousePressed(x, y, button);
-    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mousePressed(x, y, button);
-    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mousePressed(x, y, button);
+//    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
+//    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mousePressed(x, y, button);
+//    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mousePressed(x, y, button);
+//    else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------

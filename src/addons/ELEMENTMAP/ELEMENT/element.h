@@ -72,13 +72,13 @@ class element : public ofNode , public elementUIBase
     void            loadSettings();    
     ofxXmlSettings	XML;
     
-    
+    string			elementName;
+
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	
 	protected :
     
 	void			setOpacityColor();
-    
 	bool			isActive;	// indicates that we don't want this element to loose any time of cpu, so doesn't draw in preview or in draw
 	bool			isShow;		// indicates we want to keep the element to preview but not draw it on the output
 	bool			isClear;	// indicates if the fbo's have been cleared to black to avoid clearing on every draw
@@ -96,7 +96,6 @@ class element : public ofNode , public elementUIBase
     int             g;
     int             b;
 	float			opacity;
-	string			elementName;
     bool			swapLeftRight;
 	
 	

@@ -6,4 +6,12 @@
     <opacity>1</opacity>
     <blendingMode>0</blendingMode>
     <isActive>1</isActive>
+    <drawInStereo>1</drawInStereo>
+    <r>255</r>
+    <g>255</g>
+    <b>255</b>
+    <opacity>1</opacity>
+    <blendingMode>0</blendingMode>
+    <isActive>1</isActive>
 </SETTINGS>
+<SETTINGS></SETTINGS>

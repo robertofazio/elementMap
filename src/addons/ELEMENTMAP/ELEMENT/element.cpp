@@ -45,6 +45,8 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 
 		
 	setupUI(this);
+    
+    
 	
 	printf("································································\n");
     

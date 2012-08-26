@@ -52,17 +52,20 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->setFontSize(OFX_UI_FONT_MEDIUM, 8);
         UI->setFontSize(OFX_UI_FONT_SMALL, 6);
         UI->setPadding(2);
-        
+                
         int posY=10;
 
+        //colonna "ZERO": esperimenti... :)
+        UI->addWidget(new ofxUIButton(10, 90, 10, 10, false, "UP"));
+        UI->addWidget(new ofxUIButton(10, 105, 10, 10, false, "DOWN"));        
         
         // prima colonna: isActive, Mono/Stereo
         UI->addWidget(new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL));
         if(this->isStereo) UI->addWidget(new ofxUILabelToggle(115,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL));
         if(parentElement->isWarpable)
         {
-            UI->addWidget(new ofxUIToggle(115, posY+=20, 16,16,false,"Quad Warping"));
-            UI->addWidget(new ofxUIToggle(115, posY+=20, 16,16,false,"Fine Warping"));
+            UI->addWidget(new ofxUIButton(115, posY+=20, 16,16,false,"Quad Warping"));
+            UI->addWidget(new ofxUIButton(115, posY+=20, 16,16,false,"Fine Warping"));
             
             UI->addWidget(new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease"));
             UI->addWidget(new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease"));
@@ -113,7 +116,7 @@ void elementUIBase::setupUI(element* _parentElement)
         colorBack.g = 255;
         colorBack.b = 206;
         colorBack.a = 10;
-        
+                
         UI->setColorBack(colorBack);
         UI->setDrawBack(true);
         UI->setDrawOutline(false);
@@ -208,12 +211,11 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUILabel(marginLeft, posY, "FRAME LEFT", 2));
         UI->addWidget(new ofxUILabel(marginLeft, posY+= 12, "FRAME RIGHT", 2));
 
-
-
               
     }
 
     if (type!=ELEMENT_MIXER) ofAddListener(UI->newGUIEvent,this,&elementUIBase::guiEvent); 
+    
 
 }
 
@@ -266,37 +268,48 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //QUAD WARPING
     else if (e.widget->getName()=="Quad Warping")
     {
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		ofxUIToggle *button = (ofxUIToggle *) e.widget;
 		if(parentElement->getIsActive()) {
             
-//            ((testApp*)ofGetAppPtr())->mainWindow->deselectAllElements();
+            for (int i=1; i<4; i++) 
+            {
+                allElementsPointer[i]->isSelected=true;
+                allElementsPointer[i]->warper.bWarpActive=false;
+                allElementsPointer[i]->warper.bViewGrid=false;
+                allElementsPointer[i]->isSelected=false;
+            }
             
             parentElement->isSelected=true;
-            if (toggle->getValue())
-            {
-                parentElement->warper.bWarpActive=true;
-            }
-            else 
-            {
-                parentElement->warper.bWarpActive=false;   
-                parentElement->isSelected=false;
-            }
+//            if (button->getValue())
+//            {
+                parentElement->warper.bWarpActive=!parentElement->warper.bWarpActive;
+                parentElement->isSelected=parentElement->warper.bWarpActive;
+//            }
         }
     }
     //FINE WARPING
     else if (e.widget->getName()=="Fine Warping")
     {
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		ofxUIToggle *button = (ofxUIToggle *) e.widget;
 		if(parentElement->getIsActive()) {
             
-//            ((testApp*)ofGetAppPtr())->mainWindow->deselectAllElements();
+            for (int i=1; i<4; i++) 
+            {
+                allElementsPointer[i]->isSelected=true;
+                allElementsPointer[i]->warper.bWarpActive=false;
+                allElementsPointer[i]->warper.bViewGrid=false;
+                allElementsPointer[i]->isSelected=false;
+            }
 
             parentElement->isSelected=true;
-            if (toggle->getValue()) parentElement->warper.bViewGrid=true;
-            else {
-             parentElement->warper.bViewGrid=false;
-             parentElement->isSelected=false;
-            }
+            parentElement->warper.bViewGrid=!parentElement->warper.bViewGrid;
+            parentElement->isSelected=parentElement->warper.bViewGrid;
+
+//            if (toggle->getValue()) parentElement->warper.bViewGrid=true;
+//            else {
+//             parentElement->warper.bViewGrid=false;
+//             parentElement->isSelected=false;
+//            }
         }
     }
     //X GRID DECREASE

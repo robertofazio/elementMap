@@ -326,6 +326,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
                 sceneElements[i]->saveSettings();
             }
             }
+//            UI->saveSettings("./XML/MixerGUI.xml");
         }
         //OPEN PROJECT
         if(e.widget->getName()=="OPEN PROJECT")
@@ -333,6 +334,8 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             ofxUIButton *button = (ofxUIButton *) e.widget;
             if (button->getValue()) {
 
+//            UI->loadSettings("./XML/MixerGUI.xml");
+            
             for (int i=1; i<numOfElements; i++)
             {
                 sceneElements[i]->warper.load();
