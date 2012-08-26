@@ -28,7 +28,6 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
-- ofxUI non risponde a modifiche non dirette ( == non si aggiorna la visualizzazione di bottoni e slider)
 
 TO DO LIST:
 
