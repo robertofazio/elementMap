@@ -18,7 +18,7 @@ MAIN FEATURES:
 - Preview in formato 16:9 o 4:3
 - Fullscreen funzionante sulla finestra di output
 - Blending mode su ogni livello (add, subtract, multiply)
-- Quad warper and fine warper mesh fino a 17x17 suddivisioni
+- Quad warper and fine warper mesh fino a 16x16 suddivisioni
 - salva/carica (sia warp che global settings) di una sola configurazione.
 - Controllo audio
 - Attualmente gestisce 3 elements , video , immagine e syphon
