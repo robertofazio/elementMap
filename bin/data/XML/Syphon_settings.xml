@@ -2,16 +2,8 @@
     <drawInStereo>1</drawInStereo>
     <r>255</r>
     <g>255</g>
-    <b>239</b>
-    <opacity>0</opacity>
-    <blendingMode>0</blendingMode>
-    <isActive>0</isActive>
-    <drawInStereo>1</drawInStereo>
-    <r>255</r>
-    <g>255</g>
-    <b>239</b>
+    <b>255</b>
     <opacity>0</opacity>
     <blendingMode>0</blendingMode>
     <isActive>0</isActive>
 </SETTINGS>
-<SETTINGS></SETTINGS>

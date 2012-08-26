@@ -54,10 +54,6 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->setPadding(2);
                 
         int posY=10;
-
-//        //colonna "ZERO": esperimenti... :)
-//        UI->addWidget(new ofxUIButton(10, 90, 10, 10, false, "UP"));
-//        UI->addWidget(new ofxUIButton(10, 105, 10, 10, false, "DOWN"));        
         
         // prima colonna: isActive, Mono/Stereo
         GUI_isActive = new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL); 
@@ -229,7 +225,7 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUILabelToggle(marginLeft+65, posY+8, 80,16,false, "MUTE", OFX_UI_FONT_SMALL));
 
         posY=170;
-        GUI_volume = new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 100 ,"SOUND VOLUME");
+        GUI_volume = new ofxUIMinimalSlider(marginLeft, posY, 210,16,0.0,1.0, 1 ,"SOUND VOLUME");
         UI->addWidget(GUI_volume);
 
         
