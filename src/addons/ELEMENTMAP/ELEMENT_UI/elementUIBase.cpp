@@ -301,7 +301,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
                 allElementsPointer[i]->isSelected=false;
             }
             
-            parentElement->isSelected=true;
+                parentElement->isSelected=true;
                 parentElement->warper.bWarpActive=toggle->getValue();
                 parentElement->isSelected=toggle->getValue();
         }
@@ -430,7 +430,10 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         }
     }
 
-    aggiornaGUI();
+//    for (int i=1; i<4; i++) 
+//    {
+//        allElementsPointer[i]->elementUIBase::aggiornaGUI();
+//    };
 }
 
 

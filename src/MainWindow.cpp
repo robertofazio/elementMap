@@ -123,7 +123,10 @@ void MainWindow::update()
 {
 	elemMix.update();  
     elemMix.drawIntoFbo(true);
-    
+    for (int i=1; i<numOfElements; i++)
+    {
+        myElements[i]->elementUIBase::aggiornaGUI();
+    }
     elemMix.elementUIBase::GUI_videoNavigator->setValue(elemV1.leftChannelPlayer.getPosition());
 }
 
@@ -152,21 +155,15 @@ void MainWindow::draw()
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
 
-        if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
-        else 
-        {
-            ofPushStyle();
-            ofSetColor(ofColor :: black);
-            ofRect(650, margin*8, 600, 450);   
-            ofPopStyle();
-        }
 
         if (elemMix.wideScreenPreview) 
         {
+            if (elemMix.showGrid) previewGrid.draw(650, margin*8+56, 600, 338);
             elemMix.drawOutput(650, (margin * 8)+56, 600, 338   );
         }
         else 
         {
+            if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
             elemMix.drawOutput(650, margin * 8, 600, 450   );
         }
 
@@ -342,10 +339,10 @@ void MainWindow::keyPressed(int key)
     else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyPressedHandler(key);
 
     //aggiorna GUI
-    for (int i=1; i<numOfElements; i++)
-    {
-        myElements[i]->elementUIBase::aggiornaGUI();
-    }
+//    for (int i=1; i<numOfElements; i++)
+//    {
+//        myElements[i]->elementUIBase::aggiornaGUI();
+//    }
 
     
 }
@@ -387,7 +384,12 @@ void MainWindow::mousePressed(int x, int y, int button)
 
 //--------------------------------------------------------------
 void MainWindow::mouseReleased(int x, int y, int button){
-    
+    //aggiorna GUI
+//    for (int i=1; i<numOfElements; i++)
+//    {
+//        myElements[i]->elementUIBase::aggiornaGUI();
+//    }
+
 }
 
 //--------------------------------------------------------------
