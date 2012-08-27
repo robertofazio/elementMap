@@ -9,10 +9,11 @@ scheda grafica : nVidia min 512MB e GL_STEREO supportate
 
 (C) 2012 Roberto Fazio Studio - www.robertofazio.com
 Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
-versione alpha 0.2.1 - 26/08/2012
+versione alpha 0.2.3 - 27/08/2012
 
 MAIN FEATURES:
 
+- QuadBuffer stereoscopic mode funzionante
 - Controllo del warp direttamente da interfaccia
 - Swap left/right frame nelle visualizzazioni stereo
 - Preview in formato 16:9 o 4:3
@@ -32,16 +33,15 @@ KNOWN ISSUES:
 TO DO LIST:
 
 - Interfaccia e usabilità
-- Stereoscopia Attiva sydebyside Bottom/Top e Left/Right
 - Possibilità di cambiare la priorità di ogni element
 - Tasto per modificare lo ZERO PARALLAX in main preview
 - Menù a tendina o drag&drop per inserire i video ??
-- Nell'input mode predisporre come metodi di visualizzazione, MONO 2D only left e/o right, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
-- Nell'output mode predisporre come metodi di visualizzazione, LEFT VIEW, RIGHT VIEW, ANAGLIPH, TOP BOTTOM, LEFT RIGHT..
+- Selezione INPUT mode: SINGLE CHANNEL MONO, TWO CHANNLES STEREO, TOP BOTTOM, LEFT RIGHT
+- Selezione OUTPUT mode: MONO LEFT VIEW, MONO RIGHT VIEW, ANAGLIPH, QUADBUFFER OPENGL
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
-- Splah image appena si apre elementMap per i crediti,immagini etc..
+- Splash image appena si apre elementMap per i crediti,immagini etc..
 
 WISH LIST:
 
