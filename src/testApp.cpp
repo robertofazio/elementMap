@@ -4,13 +4,20 @@
 void testApp::setup(){
     
     // test that GL_STEREO is working on this machine
-//	isGLCapable = GL_FALSE;
-//	glGetBooleanv(GL_STEREO,&isGLCapable);
-//    GLint maxVertexTextureImageUnits;
-//	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
-//
-//    if (isGLCapable==GL_TRUE) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
-//	else printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+    GLboolean	isGLCapable = GL_FALSE;
+	glGetBooleanv(GL_STEREO,&isGLCapable);
+    QuadBufferCapable=isGLCapable;
+    
+    GLint maxVertexTextureImageUnits;
+	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
+
+    if (QuadBufferCapable) printf(">> GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+	else {
+        
+        glDrawBuffer(GL_BACK);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        printf(">> GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+    }
 
     outputSizeWidth=1920;
     outputSizeHeight=1080;

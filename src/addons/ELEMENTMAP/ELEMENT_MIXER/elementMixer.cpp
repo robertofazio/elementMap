@@ -194,11 +194,13 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 
             case ELM_STEREO_OPENGL:
                 
-                glDrawBuffer(GL_BACK_LEFT);	
+                glDrawBuffer(GL_BACK_LEFT);
+//                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 if (getSwapLeftRight()) fboRight.draw(_x,_y,_width,_height);
                     else fboLeft.draw(_x,_y,_width,_height);
 
                 glDrawBuffer(GL_BACK_RIGHT);
+//                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 if (getSwapLeftRight()) fboLeft.draw(_x,_y,_width,_height);
                     else fboRight.draw(_x,_y,_width,_height);
                 break;
@@ -208,8 +210,8 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 		}   
 		
     ofPopStyle();
-    drawInfo();
-
+    
+    
 }
 
 

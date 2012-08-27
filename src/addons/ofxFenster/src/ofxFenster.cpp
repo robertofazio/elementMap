@@ -42,7 +42,8 @@ bool ofxFenster::setupOpenGL(int l, int t, int w, int h, int screenMode) {
 		state=GHOST_kWindowStateFullScreen;
 	}
 
-	win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, false, false);
+//	win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, false, false);
+	win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, true, false);
 
 	if (!win) {
 		ofLog(OF_LOG_ERROR, "HOUSTON WE GOT A PROBLEM! could not create window");

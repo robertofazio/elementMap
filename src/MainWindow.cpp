@@ -135,7 +135,9 @@ void MainWindow::update()
 void MainWindow::draw()
 
 {	
-    
+    glDrawBuffer(GL_BACK);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     ofBackground(35, 31, 32);
         
     if (bFullscreen) {
@@ -146,11 +148,13 @@ void MainWindow::draw()
     else 
         
     {
+
+        
         //preview window (non-fulscreen)
         ofPushStyle();
         ofSetColor(255, 255, 255);
         
-        fontLarge.drawString("element.Map v0.2.1 ", 70 , 44);
+        fontLarge.drawString("element.Map v0.2.3 ", 70 , 44);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -167,6 +171,8 @@ void MainWindow::draw()
             elemMix.drawOutput(650, margin * 8, 600, 450   );
         }
 
+        glDrawBuffer(GL_BACK);
+        
         //testo in alto nella preview:
         if (elemSy.isSelected==true)
         {
@@ -214,6 +220,9 @@ void MainWindow::draw()
             
         }
         
+        elemMix.drawInfo();
+
+        
         ofPopStyle();
         
         if(drawPreviews)    
@@ -222,6 +231,7 @@ void MainWindow::draw()
             ofPushStyle();
             ofSetColor(255,255);
             glDrawBuffer(GL_BACK);
+            
             for(int i = 0;i<numOfElements - 1;i++)
             {
                 ofSetColor(0, 255, 206);
@@ -338,12 +348,6 @@ void MainWindow::keyPressed(int key)
     else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyPressedHandler(key);
     else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyPressedHandler(key);
 
-    //aggiorna GUI
-//    for (int i=1; i<numOfElements; i++)
-//    {
-//        myElements[i]->elementUIBase::aggiornaGUI();
-//    }
-
     
 }
 
@@ -384,12 +388,6 @@ void MainWindow::mousePressed(int x, int y, int button)
 
 //--------------------------------------------------------------
 void MainWindow::mouseReleased(int x, int y, int button){
-    //aggiorna GUI
-//    for (int i=1; i<numOfElements; i++)
-//    {
-//        myElements[i]->elementUIBase::aggiornaGUI();
-//    }
-
 }
 
 //--------------------------------------------------------------

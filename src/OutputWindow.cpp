@@ -99,14 +99,10 @@ void OutputWindow::draw()
     ofSetColor(255, 255, 255, ofMap(mainScene->mainWindow->elemMix.getOpacity(), 0, 1, 0, 255));
         
     ofPoint dimensioni = ofxFensterManager::get()->getWindowById(1)->getWindowSize();
-    
-    //draw directly mixer fbo
-    if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_STEREO_ANAGLYPH)
-    {
-        mainScene->mainWindow->elemMix.fboAnagliph.draw(0, 0, dimensioni.x, dimensioni.y);    
-    }
-    else if(mainScene->mainWindow->elemMix.getOutputMode() == ELM_MONO)
-        mainScene->mainWindow->elemMix.fboLeft.draw(0,0, dimensioni.x, dimensioni.y);    
+   
+    if(mainScene->mainWindow->elemMix.getOutputMode() != ELM_STEREO_OPENGL) glDrawBuffer(GL_BACK);
+    mainScene->mainWindow->elemMix.drawOutput(0, 0, dimensioni.x, dimensioni.y);
+        
     ofPopStyle();
     
 }
