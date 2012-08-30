@@ -227,7 +227,15 @@ void elementMixer::drawInfo()
     switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-			fontMedium.drawString("STEREO OPENGL",950,665);
+            fontMedium.drawString("STEREO OPENGL",950,665);
+//            if (((testApp*)ofGetAppPtr())->QuadBufferCapable) fontMedium.drawString("STEREO OPENGL",950,665);
+//            else 
+//            {
+//                ofPushStyle();
+//                ofSetColor(255,0,0,255);
+//                fontMedium.drawString("NOT SUPPORTED",950,665);
+//                ofPopStyle();
+//            }
 			break;
 			
 		case ELM_MONO:

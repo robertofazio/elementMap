@@ -42,8 +42,20 @@ bool ofxFenster::setupOpenGL(int l, int t, int w, int h, int screenMode) {
 		state=GHOST_kWindowStateFullScreen;
 	}
 
-//	win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, false, false);
-	win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, true, false);
+    //hacked for elementMap by Eloi&Cinzio:
+    win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, true, false);        
+    
+    GLboolean isStereoCapable = false;
+    glGetBooleanv(GL_STEREO,&isStereoCapable);
+    cout << isStereoCapable << endl;
+    if (!isStereoCapable) 
+    {     
+        GHOST_ISystem::getSystem()->disposeWindow(win);
+        win = GHOST_ISystem::getSystem()->createWindow(title, l, t, w, h, state, GHOST_kDrawingContextTypeOpenGL, false, false);
+     
+    }
+    //end of hack
+
 
 	if (!win) {
 		ofLog(OF_LOG_ERROR, "HOUSTON WE GOT A PROBLEM! could not create window");
