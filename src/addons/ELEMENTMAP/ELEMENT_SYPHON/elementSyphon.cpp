@@ -23,7 +23,7 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
 	xPos = _posX;
 	yPos = _posY;
 
-	this->init(3,_width,_height,GL_RGBA,_name,false, _isWarpable);	
+	this->init(3,_width,_height,GL_RGBA,_name,0, _isWarpable);	
 
 }
 

@@ -17,7 +17,7 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
 	xPos = _posX;
 	yPos = _posY;
 
-	this->init(5,_width,_height,GL_RGBA,_name,this->getIsStereo(), _isWarpable);
+	this->init(5,_width,_height,GL_RGBA,_name,1, _isWarpable);
 	
     fboAnagliph.allocate(_width ,_height, GL_RGBA);
         

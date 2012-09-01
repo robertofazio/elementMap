@@ -9,22 +9,21 @@ elementImage::elementImage()
 }
 
 //-----------------------------------------------------------------
-void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, bool _isStereo,int _posX, int _posY,string _name, bool _isWarpable)
+//void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, bool _isStereo,int _posX, int _posY,string _name, bool _isWarpable)
+void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, int inputType, int _posX, int _posY,string _name, bool _isWarpable)
 {
-	setIsStereo(_isStereo);
-	setDrawInStereo(_isStereo);
-	
+	// UI params
+	xPos = _posX;
+	yPos = _posY;
+
+    this->init(2,int(_width),int(_height),GL_RGBA,_name,inputType, _isWarpable);	
+
 	if(getIsStereo())
 	{
 		rightImage.loadImage(_rightImage);
 	}
 	leftImage.loadImage(_leftImage);
-	
-	// UI params
-	xPos = _posX;
-	yPos = _posY;
-    
-    this->init(2,int(_width),int(_height),GL_RGBA,_name,this->getIsStereo(), _isWarpable);	
+
 }
 
 //-----------------------------------------------------------------

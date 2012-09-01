@@ -2,7 +2,10 @@
 
 //#include "ofConstants.h"
 
-void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo, bool _isWarpable)
+
+void element::init(int _type,int _width, int _height, int _internalFormat, string _name,int _inputType, bool _isWarpable)
+
+//void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo, bool _isWarpable)
 {
 	printf("\n································································\n");
 	printf(">> element init :: %s :: w:%d - h:%d \n",_name.c_str(),_width,_height);
@@ -11,6 +14,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	elementHeight	= _height;
 	internalFormat	= _internalFormat;
 	type			= _type;
+    inputType       = _inputType;
 	elementName		= _name;
 	opacity			= 1.0;
     r               = 255;
@@ -21,8 +25,11 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	isShow			= true;
 	isActive		= true;
 	isClear			= false;
-	isStereo		= _isStereo;
-	drawInStereo	= _isStereo;
+        
+      if(inputType==0) isStereo=false;
+      else isStereo=true;
+	
+    drawInStereo	= isStereo;
 	blendingMode	= OF_BLENDMODE_DISABLED;
     isWarpable      = _isWarpable;
     isSelected      = false;
@@ -132,6 +139,11 @@ void element::setInternalFormat(int _i)
 	internalFormat = _i;
 }
 //-----------------------------------------------------------------------
+void element::setElementInputType(int _inType)
+{
+	inputType = _inType;
+}
+//-----------------------------------------------------------------------
 void element::setSwapLeftRight(bool b)
 {
 	swapLeftRight = b;	
@@ -205,6 +217,11 @@ int element::getInternalFormat()
 int element::getElementType()
 {
 	return (type);
+}
+//-----------------------------------------------------------------------
+int element::getElementInputType()
+{
+	return (inputType);
 }
 //-----------------------------------------------------------------------
 bool element::getSwapLeftRight()

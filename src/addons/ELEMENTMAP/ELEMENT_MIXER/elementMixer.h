@@ -7,10 +7,6 @@
 #define ELM_MONO                1
 #define ELM_STEREO_OPENGL		2
 
-// forse queste vanno all'interno degli element, non nel mixer.....????
-#define ELM_STEREO_LEFTRIGHT	3
-#define ELM_STEREO_TOPBOTTOM	4
-
 #include "ofMain.h"
 #include "element.h"
 

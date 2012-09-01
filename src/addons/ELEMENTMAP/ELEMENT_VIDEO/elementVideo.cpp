@@ -8,19 +8,17 @@ elementVideo::elementVideo()
 }
 
 //-----------------------------------------------------------------
-void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, int _height, bool _isStereo,int _xPos, int _yPos,string _name, bool _isWarpable)
+void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, int _height, int inputType,int _xPos, int _yPos,string _name, bool _isWarpable)
 {
-	setIsStereo(_isStereo);
-	setDrawInStereo(_isStereo);
-	
-	if(getIsStereo()) rightChannelPlayer.loadMovie(_rightChannel);
-    leftChannelPlayer.loadMovie(_leftChannel);
-	    
+    
 	// UI params
 	xPos = _xPos;
 	yPos = _yPos;
+    
+	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,inputType, _isWarpable);
 	
-	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,this->getIsStereo(), _isWarpable);
+	if(getIsStereo()) rightChannelPlayer.loadMovie(_rightChannel);
+    leftChannelPlayer.loadMovie(_leftChannel);
     
     mute    =    false;
     volume  =    100;
