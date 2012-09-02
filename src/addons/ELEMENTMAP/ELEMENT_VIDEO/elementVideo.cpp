@@ -16,9 +16,12 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	yPos = _yPos;
     
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,inputType, _isWarpable);
-	
-	if(getIsStereo()) rightChannelPlayer.loadMovie(_rightChannel);
-    leftChannelPlayer.loadMovie(_leftChannel);
+
+    if(getElementInputType()==ELM_INPUT_STEREO_TWO_CHANNEL)
+    {
+        rightChannelPlayer.loadMovie(_rightChannel);   
+    }
+        leftChannelPlayer.loadMovie(_leftChannel);
     
     mute    =    false;
     volume  =    100;

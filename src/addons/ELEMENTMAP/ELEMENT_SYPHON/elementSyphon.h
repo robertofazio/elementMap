@@ -21,7 +21,8 @@ class elementSyphon : public element
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
 
-	
+	void setElementInputType(int _inType){};
+    
 	ofxSyphonClient	syphonClient;
 	
 	string	serverName;

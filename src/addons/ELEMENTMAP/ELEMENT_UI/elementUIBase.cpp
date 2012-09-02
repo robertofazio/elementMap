@@ -22,7 +22,11 @@ elementUIBase::elementUIBase()
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
     outputModesNames.push_back("ACTIVE STEREO");
-//    outputModesNames.push_back("SIDEBYSIDE");
+    
+    inputTypeNames.push_back("MONO");
+    inputTypeNames.push_back("2CHANNEL");
+    inputTypeNames.push_back("LEFTRIGHT");
+    inputTypeNames.push_back("TOPBOTTOM");
 	
 }
 //--------------------------------------------------------------
@@ -52,9 +56,10 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->setFontSize(OFX_UI_FONT_MEDIUM, 8);
         UI->setFontSize(OFX_UI_FONT_SMALL, 6);
         UI->setPadding(2);
-                
-        int posY=10;
         
+        int posY=10;
+    
+    
         // prima colonna: isActive, Mono/Stereo
         GUI_isActive = new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL); 
         UI->addWidget(GUI_isActive);
@@ -117,6 +122,17 @@ void elementUIBase::setupUI(element* _parentElement)
         listBlendModes->setDrawFill(true);
         listBlendModes->setAutoClose(true);
         UI->addWidget(listBlendModes);
+        
+        //quarta colonna : input type (mono, two channel, left/right, top/bottom)
+        GUI_inputType = new ofxUIDropDownList(500, posY, 100, "input", inputTypeNames, OFX_UI_FONT_SMALL);
+        GUI_inputType->setDrawBack(true);
+        GUI_inputType->setDrawOutlineHighLight(false);
+        GUI_inputType->setDrawPaddingOutline(false);
+        GUI_inputType->setPadding(0);
+        GUI_inputType->setDrawFill(true);
+        GUI_inputType->setAutoClose(true);
+        UI->addWidget(GUI_inputType);
+
         
         
     }
@@ -247,26 +263,39 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
 	
+    //INPUT MODE
+    if( e.widget->getParent()->getName()=="input")
+	{
+        if(name=="MONO") parentElement->setElementInputType(ELM_INPUT_MONO);
+        else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
+        else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
+        else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
+	}    
+    //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setOpacity(slider->getScaledValue());
 	}
+    //RED CHANNEL
 	else if(e.widget->getName()=="RED")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setRed(int(slider->getScaledValue()));
     }
+    //GREEN CHANNEL
     else if(e.widget->getName()=="GREEN")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setGreen(int(slider->getScaledValue()));
     }
+    //BLUE CHANNEL
     else if(e.widget->getName()=="BLUE")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setBlue(int(slider->getScaledValue()));
     }
+    //RESET COLOR CHANNEL
     else if(e.widget->getName()=="RGB reset")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;

@@ -30,7 +30,7 @@ void MainWindow::setup()
 	// create & setup elements on this app 
 	
     //pattern image
-    elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, 0, -50000 , -50000 ,"TestPattern", false);
+    elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_MONO, -50000 , -50000 ,"TestPattern", false);
     elemImg.UI->toggleVisible();
     
     
@@ -39,10 +39,10 @@ void MainWindow::setup()
 	
     
     //video
-	elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, 1, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
+	elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 	
     //image
-    elemImg2.setup("./images/left1024.jpg", "./images/right1024.jpg", outputResolutionX,outputResolutionY, 1, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);
+    elemImg2.setup("./images/leftRightHD.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);
 	
     
     

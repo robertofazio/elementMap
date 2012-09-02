@@ -25,6 +25,8 @@ class elementVideo : public element
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
 
+	void setElementInputType(int _inType){};
+    
     //funzioni del player:
     void element_videoPlay(int _speed);
     void element_videoPause();

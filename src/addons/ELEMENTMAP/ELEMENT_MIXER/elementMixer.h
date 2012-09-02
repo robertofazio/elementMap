@@ -40,6 +40,8 @@ class elementMixer : public element
     //utilities:
     int  getOutputMode();
 	void setOutputMode(int _mode);
+
+    void setElementInputType(int _inType){};
     
     ofTexture& getLeftTexture(){};
 	ofTexture& getRightTexture(){};

@@ -4,8 +4,6 @@
 
 
 void element::init(int _type,int _width, int _height, int _internalFormat, string _name,int _inputType, bool _isWarpable)
-
-//void element::init(int _type,int _width, int _height, int _internalFormat, string _name,bool _isStereo, bool _isWarpable)
 {
 	printf("\n································································\n");
 	printf(">> element init :: %s :: w:%d - h:%d \n",_name.c_str(),_width,_height);
@@ -139,10 +137,10 @@ void element::setInternalFormat(int _i)
 	internalFormat = _i;
 }
 //-----------------------------------------------------------------------
-void element::setElementInputType(int _inType)
-{
-	inputType = _inType;
-}
+//void element::setElementInputType(int _inType)
+//{
+//	inputType = _inType; 
+//}
 //-----------------------------------------------------------------------
 void element::setSwapLeftRight(bool b)
 {

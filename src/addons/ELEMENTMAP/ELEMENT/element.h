@@ -22,7 +22,6 @@ class element : public ofNode , public elementUIBase
 	element(){};
 
     void init(int _type,int _width, int _height,int internalformat,string _name,int _inputType, bool _isWarpable);
-//	void init(int _type,int _width, int _height,int internalformat,string _name,bool _isStereo, bool _isWarpable);
 	virtual void update() =0;
 	virtual void drawIntoFbo(bool _drawMonoOrStereo) =0;
 	virtual void drawGraphic(int x, int y, int w, int h);
@@ -36,7 +35,7 @@ class element : public ofNode , public elementUIBase
 	void			setWidth(int _i);
 	void			setHeight(int i_);
 	void			setInternalFormat(int _i);
-    void            setElementInputType(int _inType);
+    virtual void    setElementInputType(int _inType) =0;
 	void			setSwapLeftRight(bool b);
 	void			setOpacity(float f);
 	void			setRed(int red);
@@ -72,6 +71,8 @@ class element : public ofNode , public elementUIBase
 	ofFbo			fboLeft;
 	ofFbo			fboRight;
     
+    int             inputType; //MONO, TWO CHANNEL STEREO, LEFT/RIGHT, TOP/BOTTOM
+    
     elementWarp     warper;
     
     //SAVE-LOAD SETTINGS
@@ -104,7 +105,6 @@ class element : public ofNode , public elementUIBase
 	
 	int				type;
 	int				internalFormat; //GL_RGB,GL_RGBA ...
-    int             inputType; //MONO, TWO CHANNEL STEREO, LEFT/RIGHT, TOP/BOTTOM
 	bool			drawInStereo;
     int             r;
     int             g;

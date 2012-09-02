@@ -19,11 +19,23 @@ class elementImage : public element
     //	void drawGraphic(int x, int y, int w, int h);
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
+    
+    void setElementInputType(int _inType);
+    
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
     
 	ofImage leftImage;
 	ofImage rightImage;
+    
+    string  leftImagePath;
+    string  rightImagePath;
+    
+    //left-right and top-bottom utilities:
+    int     LRw;
+    int     LRh;
+    int     TBw;
+    int     TBh;
     
 };
 

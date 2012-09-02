@@ -34,6 +34,7 @@ class  elementUIBase
 	int						yPos;
 	
     //widgets per gli element:
+    ofxUIDropDownList*      GUI_inputType;
     ofxUIToggle*            GUI_isActive;
     ofxUILabelToggle*       GUI_stereoscopic;
     ofxUIButton*            GUI_QuadWarping;
@@ -70,6 +71,8 @@ class  elementUIBase
 	
 	vector<string>			blendingNames; 
 	vector<string>          outputModesNames;
+    vector<string>          inputTypeNames;
+    
     int                     type;
     bool                    isStereo;
     
