@@ -81,6 +81,10 @@ class element : public ofNode , public elementUIBase
     ofxXmlSettings	XML;
     
     string			elementName;
+    
+    // mirror utilities
+    bool            bHorizontalMirror;
+    bool            bVerticalMirror;
 
     //variabili per il mixer:
     bool            wideScreenPreview;

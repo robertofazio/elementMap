@@ -92,8 +92,6 @@ void elementUIBase::setupUI(element* _parentElement)
             UI->addWidget(GUI_resetWarp);
             GUI_resetGrid = new ofxUILabelButton(175, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL);
             UI->addWidget(GUI_resetGrid);
-            
-            
         }
         
         
@@ -111,6 +109,11 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_resetRGB = new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset");
         UI->addWidget(GUI_resetRGB);
         
+        GUI_orizMirror = new ofxUILabelToggle(260, posY+=20, 55, false, "flipH", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_orizMirror);
+        GUI_vertMirror = new ofxUILabelToggle(320, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_vertMirror);
+
         posY=10;
         
         //terza colonna: blending mode
@@ -306,6 +309,22 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         cout << "RGB RESET" << cout;
         }
     }
+    
+    //HORIZONTAL MIRROR
+    else if(e.widget->getName()=="flipH")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		parentElement->bHorizontalMirror=toggle->getValue();
+    }
+    //VERTICAL MIRROR
+    else if(e.widget->getName()=="flipV")
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		parentElement->bVerticalMirror=toggle->getValue();
+    }
+
+    
+    
     //IS ACTIVE
     else if(e.widget->getName()=="isActive")
 	{

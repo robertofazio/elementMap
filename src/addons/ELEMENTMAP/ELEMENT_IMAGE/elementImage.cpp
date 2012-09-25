@@ -83,13 +83,14 @@ void elementImage::drawRight(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 ofTexture& elementImage::getLeftTexture()
 {
-
+    leftImage.mirror(bHorizontalMirror, bVerticalMirror);
     return (leftImage.getTextureReference());	
 }
 
 //-----------------------------------------------------------------
 ofTexture& elementImage::getRightTexture()
 {
+    rightImage.mirror(bHorizontalMirror, bVerticalMirror);
 	return (rightImage.getTextureReference());	
 }
 
