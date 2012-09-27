@@ -27,8 +27,6 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
       if(inputType==0) isStereo=false;
       else isStereo=true;
 
-    bHorizontalMirror = false;
-    bVerticalMirror = false;
 
     drawInStereo	= isStereo;
 	blendingMode	= OF_BLENDMODE_DISABLED;

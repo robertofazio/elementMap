@@ -82,10 +82,6 @@ class element : public ofNode , public elementUIBase
     
     string			elementName;
     
-    // mirror utilities
-    bool            bHorizontalMirror;
-    bool            bVerticalMirror;
-
     //variabili per il mixer:
     bool            wideScreenPreview;
     bool            showGrid;

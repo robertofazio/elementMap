@@ -343,6 +343,10 @@ void MainWindow::keyPressed(int key)
     deselectAllElements();
     elemImg2.isSelected=true;
     }
+    
+    else if(key == '9') {
+        elemV1.warper.setLeftRightInput();
+    }
 
     if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.warpKeyPressedHandler(key);
     else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyPressedHandler(key);

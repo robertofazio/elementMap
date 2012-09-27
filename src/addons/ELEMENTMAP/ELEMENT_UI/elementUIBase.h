@@ -51,8 +51,8 @@ class  elementUIBase
     ofxUIMinimalSlider*     GUI_blue;
     ofxUIButton*            GUI_resetRGB;
 	ofxUIDropDownList*		listBlendModes;
-    ofxUILabelToggle*       GUI_orizMirror;
-    ofxUILabelToggle*       GUI_vertMirror;
+    ofxUILabelButton*       GUI_orizMirror;
+    ofxUILabelButton*       GUI_vertMirror;
 
     
     //widgets del mixer:

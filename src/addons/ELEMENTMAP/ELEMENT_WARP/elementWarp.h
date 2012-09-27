@@ -25,6 +25,8 @@ class elementWarp
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
     
+    void setLeftRightInput();
+    
     void createGrid(int _xRes, int _yRes);
     void drawGrid();
     void drawMarkers();
@@ -51,7 +53,9 @@ class elementWarp
     void selectNextPoint();
     void selectPrevPoint();
     
-    // Save/load xml /thanks to Mauro!)
+    void mirror(bool _horizontal, bool _vertical);
+    
+    // Save/load xml (thanks to Mauro!)
 	ofxXmlSettings		XML;
     void                saveXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex);
     void                loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex);

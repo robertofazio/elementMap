@@ -109,9 +109,9 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_resetRGB = new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset");
         UI->addWidget(GUI_resetRGB);
         
-        GUI_orizMirror = new ofxUILabelToggle(260, posY+=20, 55, false, "flipH", OFX_UI_FONT_SMALL);
+        GUI_orizMirror = new ofxUILabelButton(260, posY+=20, 55, false, "flipH", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_orizMirror);
-        GUI_vertMirror = new ofxUILabelToggle(320, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
+        GUI_vertMirror = new ofxUILabelButton(320, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_vertMirror);
 
         posY=10;
@@ -313,14 +313,19 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //HORIZONTAL MIRROR
     else if(e.widget->getName()=="flipH")
 	{
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		parentElement->bHorizontalMirror=toggle->getValue();
+		ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+        parentElement->warper.mirror(true, false);
+        }
+
     }
     //VERTICAL MIRROR
     else if(e.widget->getName()=="flipV")
 	{
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		parentElement->bVerticalMirror=toggle->getValue();
+		ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+        parentElement->warper.mirror(false, true);
+        }
     }
 
     
