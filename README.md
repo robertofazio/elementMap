@@ -9,10 +9,13 @@ scheda grafica : nVidia min 512MB e GL_STEREO supportate
 
 (C) 2012 Roberto Fazio Studio - www.robertofazio.com
 Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
-versione alpha 0.2.3 - 27/08/2012
+versione alpha 0.2.4 - 10/10/2012
 
 MAIN FEATURES:
 
+- Selezione INPUT mode: MONO, STEREO_TWO_CHANNLES, STEREO_TOP_BOTTOM, STEREO_LEFT_RIGHT
+- Selezione OUTPUT mode: MONO, ANAGLIPH, STEREO_OPENGL
+- Horizontal e vertical flip
 - QuadBuffer stereoscopic mode funzionante
 - Controllo del warp direttamente da interfaccia
 - Swap left/right frame nelle visualizzazioni stereo
@@ -29,6 +32,8 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna
+- TEMP: cambiando input si deve resettare la warp grid per evitare errori di texturizzazione
+- TEMP: coordinate seconda finestra sbagliate
 
 TO DO LIST:
 
@@ -36,8 +41,6 @@ TO DO LIST:
 - Possibilità di cambiare la priorità di ogni element
 - Tasto per modificare lo ZERO PARALLAX in main preview
 - Menù a tendina o drag&drop per inserire i video ??
-- Selezione INPUT mode: SINGLE CHANNEL MONO, TWO CHANNLES STEREO, TOP BOTTOM, LEFT RIGHT
-- Selezione OUTPUT mode: MONO LEFT VIEW, MONO RIGHT VIEW, ANAGLIPH, QUADBUFFER OPENGL
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
@@ -49,7 +52,6 @@ WISH LIST:
 - Implementare la funzione Rotate e Zoom per ogni warp.
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Maschera per ogni element
-- Flipping options, per flippare l'immagine
 - Progettazione di una main area inspector
 - Edge Blending
 - Multiproiezioni
