@@ -29,7 +29,7 @@ class element : public ofNode , public elementUIBase
 	virtual void drawRight(int x, int y, int w, int h) =0;
     virtual ofTexture& getLeftTexture() =0;
 	virtual ofTexture& getRightTexture() =0;
-	
+    	
 	void			setIsStereo(bool _b);
 	void			setDrawInStereo(bool _b);
 	void			setWidth(int _i);

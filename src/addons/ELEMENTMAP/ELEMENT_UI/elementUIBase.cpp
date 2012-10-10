@@ -273,6 +273,14 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
         else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
         else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
+        
+        parentElement->isSelected=true;
+		parentElement->warper.bViewGrid=true;
+        parentElement->warper.decreaseXgrid();
+        parentElement->warper.increaseXgrid();
+        parentElement->warper.bViewGrid=false;
+        parentElement->isSelected=false;
+        
 	}    
     //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")

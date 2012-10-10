@@ -30,15 +30,15 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
 
     if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
     {
-        leftImage.resize(3840, 1080);
-        rightImage.cropFrom(leftImage, 1920, 0, 1920, 1080);
-        leftImage.crop(0, 0, 1920, 1080);
+        leftImage.resize(leftImage.getWidth()*2, leftImage.getHeight());
+        rightImage.cropFrom(leftImage, leftImage.getWidth(), 0, leftImage.getWidth(), leftImage.getHeight());
+        leftImage.crop(0, 0, leftImage.getWidth(), leftImage.getHeight());
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
     {
-        leftImage.resize(1920, 2160);
-        rightImage.cropFrom(leftImage, 0, 1080, 1920, 1080);
-        leftImage.crop(0, 0, 1920, 1080);
+        leftImage.resize(leftImage.getWidth(), leftImage.getHeight()*2);
+        rightImage.cropFrom(leftImage, 0, leftImage.getHeight(), leftImage.getWidth(), leftImage.getHeight());
+        leftImage.crop(0, 0, leftImage.getWidth(), leftImage.getHeight());
     }
 
 
@@ -103,14 +103,14 @@ void elementImage::setElementInputType(int _inType)
     {
         leftImage.clear();
         leftImage.loadImage(leftImagePath);
-        leftImage.resize(1920, 1080);
+        leftImage.resize(leftImage.getWidth(), leftImage.getHeight());
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {
         leftImage.clear();
         rightImage.clear();
         leftImage.loadImage(leftImagePath);
-        leftImage.resize(1920, 1080);
+        leftImage.resize(leftImage.getWidth(), leftImage.getHeight());
         rightImage.loadImage(rightImagePath);        
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
@@ -118,18 +118,18 @@ void elementImage::setElementInputType(int _inType)
         leftImage.clear();
         rightImage.clear();
         leftImage.loadImage(leftImagePath);
-        leftImage.resize(3840, 1080);
-        rightImage.cropFrom(leftImage, 1920, 0, 1920, 1080);
-        leftImage.crop(0, 0, 1920, 1080);
+        leftImage.resize(leftImage.getWidth()*2, leftImage.getHeight());
+        rightImage.cropFrom(leftImage, leftImage.getWidth()*.5, 0, leftImage.getWidth()*.5, leftImage.getHeight());
+        leftImage.crop(0, 0, leftImage.getWidth()*.5, leftImage.getHeight());
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
     {
         leftImage.clear();
         rightImage.clear();
         leftImage.loadImage(leftImagePath);
-        leftImage.resize(1920, 2160);
-        rightImage.cropFrom(leftImage, 0, 1080, 1920, 1080);
-        leftImage.crop(0, 0, 1920, 1080);
+        leftImage.resize(leftImage.getWidth(), leftImage.getHeight()*2);
+        rightImage.cropFrom(leftImage, 0, leftImage.getHeight()*.5, leftImage.getWidth(), leftImage.getHeight()*.5);
+        leftImage.crop(0, 0, leftImage.getWidth(), leftImage.getHeight()*.5);
     }
 
 }

@@ -9,6 +9,12 @@ elementWarp::elementWarp()
 
 
 //-----------------------------------------------------------------
+void elementWarp::setLeftRightInput()
+{
+    
+}
+
+//-----------------------------------------------------------------
 void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
 {
     //set texture w & h
@@ -94,11 +100,6 @@ void elementWarp::draw(ofTexture _text)
     glDisable(text.getTextureData().textureTarget);
 //    if (bViewGrid) drawGrid();            
     glPopMatrix();
-    
-    //draw special markers for quad warp vertices
-//    if (bWarpActive) drawMarkers();
-
-
     
 }
 

@@ -157,11 +157,11 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
         fboAnagliph.begin();
     ofPushStyle();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColorMask(true, false, false, true);
+        glColorMask(false, true, true, true);
         if (getSwapLeftRight()) fboRight.draw(0, 0);
         else fboLeft.draw(0, 0);
         
-    glColorMask(false, true, true, true);
+    glColorMask(true, false, false, true);
         if (getSwapLeftRight()) fboLeft.draw(0,0);
         else fboRight.draw(0,0);
     glColorMask(true, true, true, true);

@@ -15,18 +15,38 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
 	xPos = _xPos;
 	yPos = _yPos;
     
+    //file ref
+    leftChannelPath=_leftChannel;
+    rightChannelPath=_rightChannel;
+    
+    
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,inputType, _isWarpable);
 
     if(getElementInputType()==ELM_INPUT_STEREO_TWO_CHANNEL)
     {
-        rightChannelPlayer.loadMovie(_rightChannel);   
+        if (rightChannelPath!="") rightChannelPlayer.loadMovie(rightChannelPath);   
+        else rightChannelPlayer.loadMovie(leftChannelPath);
     }
-        leftChannelPlayer.loadMovie(_leftChannel);
+        leftChannelPlayer.loadMovie(leftChannelPath);
     
+    if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
+    {
+        tempLeft.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight());
+        lT.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight(), GL_RGBA);
+        tempRight.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight());
+        rT.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight(), GL_RGBA);
+    }
+    else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
+    {
+        tempLeft.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5);
+        lT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);
+        tempRight.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5);
+        rT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);
+    }
+
     mute    =    false;
     volume  =    100;
-    
-    
+        
 }
 
 //-----------------------------------------------------------------
@@ -36,7 +56,7 @@ void elementVideo::update()
     if (isWarpable) warper.updateCoordinates();
 
 	leftChannelPlayer.idleMovie();
-	rightChannelPlayer.idleMovie();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.idleMovie();
     
     if (mute) leftChannelPlayer.setVolume(0);
     else leftChannelPlayer.setVolume(volume);
@@ -76,13 +96,78 @@ void elementVideo::drawRight(int x, int y, int w, int h)
 //-----------------------------------------------------------------
 ofTexture& elementVideo::getLeftTexture()
 {
-	return (leftChannelPlayer.getTextureReference());	
+    
+    // se sono in mono o con due canali separati, prendo semplicemente la texture dallo stream video:
+    if (getElementInputType() == ELM_INPUT_MONO || getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
+    {
+        return (leftChannelPlayer.getTextureReference());	
+    }
+    //invece se il video è in formato left/right estraggo la parte sinistra:
+    else if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
+    {
+        tempLeft.begin();
+        ofClear(0,0,0,0);
+        leftChannelPlayer.draw(0,0,leftChannelPlayer.getWidth(),leftChannelPlayer.getHeight());
+        tempLeft.end();
+    
+        lT.clear();
+        lT=tempLeft.getTextureReference();
+    
+        return (lT);
+    }
+    //infine, se il video è in formato top/bottom estraggo la parte superiore:
+    else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
+    {
+        tempLeft.begin();
+        ofClear(0,0,0,0);
+        leftChannelPlayer.draw(0,0,leftChannelPlayer.getWidth(),leftChannelPlayer.getHeight());
+        tempLeft.end();
+        
+        lT.clear();
+        lT=tempLeft.getTextureReference();
+        
+        return (lT);
+    }
+        
+
+    
 }
 
 //-----------------------------------------------------------------
 ofTexture& elementVideo::getRightTexture()
 {
-	return (rightChannelPlayer.getTextureReference());	
+    
+    // se sono in mono o con due canali separati, prendo semplicemente la texture dallo stream video:
+    if (getElementInputType() == ELM_INPUT_MONO || getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
+    {
+        return (rightChannelPlayer.getTextureReference());	
+    }
+    //invece se il video è in formato left/right estraggo la parte destra:
+    else if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
+    {
+        tempRight.begin();
+        ofClear(0,0,0,0);
+        leftChannelPlayer.draw(-leftChannelPlayer.getWidth()*.5,0,leftChannelPlayer.getWidth(),leftChannelPlayer.getHeight());
+        tempRight.end();
+        
+        rT.clear();
+        rT=tempRight.getTextureReference();
+        
+        return (rT);
+    }
+    //infine, se il video è in formato top/bottom estraggo la parte inferiore:
+    else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
+    {
+        tempRight.begin();
+        ofClear(0,0,0,0);
+        leftChannelPlayer.draw(0, -leftChannelPlayer.getHeight(),leftChannelPlayer.getWidth(),leftChannelPlayer.getHeight());
+        tempRight.end();
+        
+        rT.clear();
+        rT=tempRight.getTextureReference();
+        
+        return (rT);
+    }
 }
 
 // PLAYER UTILITIES //
@@ -91,49 +176,49 @@ ofTexture& elementVideo::getRightTexture()
 void elementVideo::element_videoPlay(int _speed)
 {
     leftChannelPlayer.setSpeed(_speed);
-    rightChannelPlayer.setSpeed(_speed);
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.setSpeed(_speed);
     leftChannelPlayer.play();
-    rightChannelPlayer.play();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.play();
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_videoPause()
 {
     leftChannelPlayer.stop();
-    rightChannelPlayer.stop();   
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.stop();   
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_videoStop()
 {
     leftChannelPlayer.play();
-    rightChannelPlayer.play();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.play();
     leftChannelPlayer.setFrame(0);
-    rightChannelPlayer.setFrame(0);
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.setFrame(0);
     leftChannelPlayer.stop();
-    rightChannelPlayer.stop();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.stop();
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_frameAvanti()
 {
     leftChannelPlayer.play();
-    rightChannelPlayer.play();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.play();
     leftChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame()+1);
-    rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
     leftChannelPlayer.stop();
-    rightChannelPlayer.stop();    
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.stop();    
 }
 
 //-----------------------------------------------------------------
 void elementVideo::element_frameIndietro()
 {
     leftChannelPlayer.play();
-    rightChannelPlayer.play();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.play();
     leftChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame()-1);
-    rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.setFrame(leftChannelPlayer.getCurrentFrame());
     leftChannelPlayer.stop();
-    rightChannelPlayer.stop();    
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.stop();    
     
 }
 
@@ -141,11 +226,11 @@ void elementVideo::element_frameIndietro()
 void elementVideo::element_goToFrame(int _frame)
 {
     leftChannelPlayer.play();
-    rightChannelPlayer.play();
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.play();
     leftChannelPlayer.setFrame(_frame);
-    rightChannelPlayer.setFrame(_frame);
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.setFrame(_frame);
     leftChannelPlayer.stop();
-    rightChannelPlayer.stop();    
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.stop();    
     
 }
 
@@ -153,7 +238,7 @@ void elementVideo::element_goToFrame(int _frame)
 void elementVideo::element_setLoop(ofLoopType _loop)
 {
     leftChannelPlayer.setLoopState(_loop);
-    rightChannelPlayer.setLoopState(_loop);
+    if (getElementType() == ELM_INPUT_STEREO_TWO_CHANNEL) rightChannelPlayer.setLoopState(_loop);
 }
 
 //-----------------------------------------------------------------
@@ -167,4 +252,56 @@ void elementVideo::element_soundVolume(float _volume)
 {
     volume=_volume;    
 }
+
+
+
+//-----------------------------------------------------------------
+void elementVideo::setElementInputType(int _inType)
+{
+    inputType=_inType;
+    
+    if (getElementInputType() == ELM_INPUT_MONO)
+    {
+        rightChannelPlayer.close();
+    }
+    else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
+    {
+        if (rightChannelPath!="") rightChannelPlayer.loadMovie(rightChannelPath);   
+        //else rightChannelPlayer.loadMovie(leftChannelPath);
+    }
+    if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
+    {
+        
+        rightChannelPlayer.close();
+        //prepare left:
+        tempLeft.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight());
+        lT.clear();
+        lT.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight(), GL_RGBA);
+        
+        //prepare right:
+        tempRight.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight());
+        rT.clear();
+        rT.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight(), GL_RGBA);
+        
+        
+    }
+    else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
+    {
+        rightChannelPlayer.close();
+        //prepare left:
+        tempLeft.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5);
+        lT.clear();
+        lT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);
+        
+        //prepare right:
+        tempRight.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5);
+        rT.clear();
+        rT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);
+        
+    }
+    
+}
+
+
+
 

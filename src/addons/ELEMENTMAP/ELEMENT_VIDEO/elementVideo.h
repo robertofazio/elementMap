@@ -20,13 +20,21 @@ class elementVideo : public element
 	void update();
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
+
+    void setElementInputType(int _inType);
     
     //textures
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
-
-	void setElementInputType(int _inType){};
     
+    //stereo input utilities:
+    string  leftChannelPath;
+    string  rightChannelPath;
+    ofTexture lT;
+    ofTexture rT;
+    ofFbo tempLeft;
+    ofFbo tempRight;
+
     //funzioni del player:
     void element_videoPlay(int _speed);
     void element_videoPause();
