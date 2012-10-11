@@ -775,6 +775,75 @@ void elementWarp::mirror(bool _horizontal, bool _vertical)
 }
 
 
+//--------------------------------------------------------------
+void elementWarp::rotateCW()
+{
+    
+    //memorizzo le posizioni attuali dei vertici
+    ofPoint actualVerticiPos[4];
+    for (int i=0; i<4; i++)
+    {
+        actualVerticiPos[i]=mainVertici[i];
+        actualVerticiPos[i].z=0;
+    }
+    
+    //riassegno le posizioni ruotando in senso orario:
+    
+    // START:           END:
+    // 0 -->--- 1       3 -->--- 0     
+    // |        |       |        |     
+    // |        |       |        |     
+    // 3 --<--- 2       2 --<--- 1     
+    
+    mainVertici[0]=actualVerticiPos[3];
+    mainVertici[1]=actualVerticiPos[0];
+    mainVertici[2]=actualVerticiPos[1];
+    mainVertici[3]=actualVerticiPos[2];  
+
+    //reset dei vertici del quad principale
+    quadWarp.setTopLeftCornerPosition(mainVertici[0]);
+    quadWarp.setTopRightCornerPosition(mainVertici[1]);
+    quadWarp.setBottomRightCornerPosition(mainVertici[2]);
+    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+    
+    
+}
+
+
+//--------------------------------------------------------------
+void elementWarp::rotateCCW()
+{
+    
+    //memorizzo le posizioni attuali dei vertici
+    ofPoint actualVerticiPos[4];
+    for (int i=0; i<4; i++)
+    {
+        actualVerticiPos[i]=mainVertici[i];
+        actualVerticiPos[i].z=0;
+    }
+    
+    //riassegno le posizioni ruotando in senso anti-orario:
+    
+    // START:           END:
+    // 0 -->--- 1       1 -->--- 2     
+    // |        |       |        |     
+    // |        |       |        |     
+    // 3 --<--- 2       0 --<--- 3     
+    
+    mainVertici[0]=actualVerticiPos[1];
+    mainVertici[1]=actualVerticiPos[2];
+    mainVertici[2]=actualVerticiPos[3];
+    mainVertici[3]=actualVerticiPos[0];  
+    
+    //reset dei vertici del quad principale
+    quadWarp.setTopLeftCornerPosition(mainVertici[0]);
+    quadWarp.setTopRightCornerPosition(mainVertici[1]);
+    quadWarp.setBottomRightCornerPosition(mainVertici[2]);
+    quadWarp.setBottomLeftCornerPosition(mainVertici[3]);
+    
+    
+}
+
 
 //--------------------------------------------------------------
 void elementWarp::warpKeyPressedHandler(int _key)

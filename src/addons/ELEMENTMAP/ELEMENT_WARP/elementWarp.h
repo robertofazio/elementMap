@@ -54,6 +54,8 @@ class elementWarp
     void selectPrevPoint();
     
     void mirror(bool _horizontal, bool _vertical);
+    void rotateCW();
+    void rotateCCW();
     
     // Save/load xml (thanks to Mauro!)
 	ofxXmlSettings		XML;

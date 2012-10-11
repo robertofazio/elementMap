@@ -53,7 +53,9 @@ class  elementUIBase
 	ofxUIDropDownList*		listBlendModes;
     ofxUILabelButton*       GUI_orizMirror;
     ofxUILabelButton*       GUI_vertMirror;
-
+    ofxUILabelButton*       GUI_rotCW;
+    ofxUILabelButton*       GUI_rotCCW;
+    ofxUILabelButton*       GUI_openFile;
     
     //widgets del mixer:
     ofxUILabelToggle*       GUI_viewGridPreview;

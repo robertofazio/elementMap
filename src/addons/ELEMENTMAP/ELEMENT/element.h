@@ -30,6 +30,8 @@ class element : public ofNode , public elementUIBase
     virtual ofTexture& getLeftTexture() =0;
 	virtual ofTexture& getRightTexture() =0;
     	
+    virtual void openFile(string _path) =0;
+                          
 	void			setIsStereo(bool _b);
 	void			setDrawInStereo(bool _b);
 	void			setWidth(int _i);

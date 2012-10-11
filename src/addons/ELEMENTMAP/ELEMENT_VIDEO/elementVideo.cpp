@@ -19,6 +19,7 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     leftChannelPath=_leftChannel;
     rightChannelPath=_rightChannel;
     
+    leftChannelPlayer.loadMovie(leftChannelPath);
     
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,inputType, _isWarpable);
 
@@ -267,7 +268,7 @@ void elementVideo::setElementInputType(int _inType)
     else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {
         if (rightChannelPath!="") rightChannelPlayer.loadMovie(rightChannelPath);   
-        //else rightChannelPlayer.loadMovie(leftChannelPath);
+        else ofSystemAlertDialog("ERROR: this mode requires TWO separate videos!");        
     }
     if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
     {

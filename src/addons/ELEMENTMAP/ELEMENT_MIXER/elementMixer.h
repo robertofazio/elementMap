@@ -36,6 +36,9 @@ class elementMixer : public element
     void drawInfo();
     
     void guiEvent(ofxUIEventArgs &e);
+    
+    void openFile(string _path){};
+
         
     //utilities:
     int  getOutputMode();

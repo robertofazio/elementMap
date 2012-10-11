@@ -8,6 +8,8 @@ elementImage::elementImage()
 	this->setPosition(0,0,0);
 }
 
+
+
 //-----------------------------------------------------------------
 void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, int inputType, int _posX, int _posY,string _name, bool _isWarpable)
 {

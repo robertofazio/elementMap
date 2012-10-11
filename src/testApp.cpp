@@ -105,4 +105,19 @@ void testApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
+    
+    ofPoint dragPt;
+    
+    if( dragInfo.files.size() > 0 ){
+        dragPt = dragInfo.position;
+        cout << dragPt.x << " ; " << dragPt.y << endl;
+        
+        //            draggedImages.assign( dragInfo.files.size(), ofImage() );
+        //            for(int k = 0; k < dragInfo.files.size(); k++){
+        //            draggedImages[k].loadImage(dragInfo.files[k]);
+        //            }
+    }
+    
+
+    
 }

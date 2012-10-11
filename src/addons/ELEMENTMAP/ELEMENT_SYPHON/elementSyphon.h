@@ -18,13 +18,23 @@ class elementSyphon : public element
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);
 
+	void setElementInputType(int _inType);
+
+    void openFile(string _path){};
+
+    //textures
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
-
-	void setElementInputType(int _inType){};
     
+
+    //stereo input utilities:
+    ofTexture lT;
+    ofTexture rT;
+    ofFbo tempLeft;
+    ofFbo tempRight;    
+
+    //Syhpon:
 	ofxSyphonClient	syphonClient;
-	
 	string	serverName;
 	string  applicationName;
 	

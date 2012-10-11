@@ -60,6 +60,13 @@ void elementUIBase::setupUI(element* _parentElement)
         int posY=10;
     
     
+        //sotto la preview: carica un file
+        if (type!=ELEMENT_SYPHON)
+        {
+        GUI_openFile = new ofxUILabelButton(5, 90, 100, false, "LOAD CONTENT", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_openFile);
+        }
+        
         // prima colonna: isActive, Mono/Stereo
         GUI_isActive = new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL); 
         UI->addWidget(GUI_isActive);
@@ -109,10 +116,19 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_resetRGB = new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset");
         UI->addWidget(GUI_resetRGB);
         
-        GUI_orizMirror = new ofxUILabelButton(260, posY+=20, 55, false, "flipH", OFX_UI_FONT_SMALL);
+        if(parentElement->isWarpable)
+        {
+        //mirror
+        GUI_orizMirror = new ofxUILabelButton(260, posY+=18, 55, false, "flipH", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_orizMirror);
         GUI_vertMirror = new ofxUILabelButton(320, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_vertMirror);
+        //rotate
+        GUI_rotCW = new ofxUILabelButton(260, posY+=22, 55, false, "rotCW", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_rotCW);
+        GUI_rotCCW = new ofxUILabelButton(320, posY, 55, false, "rotCCW", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_rotCCW);
+        }
 
         posY=10;
         
@@ -126,7 +142,8 @@ void elementUIBase::setupUI(element* _parentElement)
         listBlendModes->setAutoClose(true);
         UI->addWidget(listBlendModes);
         
-        //quarta colonna : input type (mono, two channel, left/right, top/bottom)
+        //input type (mono, two channel, left/right, top/bottom)
+        //NOTA: serve solo per debug, lo sceglierò al momento del caricamento del file!!
         GUI_inputType = new ofxUIDropDownList(500, posY, 100, "input", inputTypeNames, OFX_UI_FONT_SMALL);
         GUI_inputType->setDrawBack(true);
         GUI_inputType->setDrawOutlineHighLight(false);
@@ -266,6 +283,18 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
 	
+    //LOAD CONTENT
+    if(e.widget->getName()=="LOAD CONTENT")
+    {
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+            ofFileDialogResult result;
+            result=ofSystemLoadDialog();
+            parentElement->openFile(result.getPath());
+        }
+    }
+
+    
     //INPUT MODE
     if( e.widget->getParent()->getName()=="input")
 	{
@@ -273,15 +302,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
         else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
         else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
-        
-        parentElement->isSelected=true;
-		parentElement->warper.bViewGrid=true;
-        parentElement->warper.decreaseXgrid();
-        parentElement->warper.increaseXgrid();
-        parentElement->warper.bViewGrid=false;
-        parentElement->isSelected=false;
-        
-	}    
+    }    
     //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")
 	{
@@ -336,7 +357,24 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         }
     }
 
-    
+
+    //ROTAZIONE ORARIA
+    else if(e.widget->getName()=="rotCW")
+	{
+		ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+            parentElement->warper.rotateCW();
+        }        
+    }
+    //ROTAZIONE ANTIORARIA
+    else if(e.widget->getName()=="rotCCW")
+	{
+		ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+            parentElement->warper.rotateCCW();
+        }        
+    }
+
     
     //IS ACTIVE
     else if(e.widget->getName()=="isActive")
