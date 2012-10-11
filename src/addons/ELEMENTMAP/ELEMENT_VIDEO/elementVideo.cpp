@@ -7,6 +7,27 @@ elementVideo::elementVideo()
 	this->setPosition(0,0,0);
 }
 
+
+//-----------------------------------------------------------------
+void elementVideo::openLeft(string _path) {
+    
+    leftChannelPlayer.close();
+    leftChannelPath=_path;
+    leftChannelPlayer.loadMovie(leftChannelPath);
+    leftChannelPlayer.play();
+    leftChannelPlayer.stop();
+}
+
+
+//-----------------------------------------------------------------
+void elementVideo::openRight(string _path) {
+    
+    rightChannelPlayer.close();
+    rightChannelPath=_path;
+    rightChannelPlayer.loadMovie(rightChannelPath);
+}
+
+
 //-----------------------------------------------------------------
 void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, int _height, int inputType,int _xPos, int _yPos,string _name, bool _isWarpable)
 {
@@ -20,7 +41,7 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     rightChannelPath=_rightChannel;
     
     leftChannelPlayer.loadMovie(leftChannelPath);
-    
+        
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,inputType, _isWarpable);
 
     if(getElementInputType()==ELM_INPUT_STEREO_TWO_CHANNEL)

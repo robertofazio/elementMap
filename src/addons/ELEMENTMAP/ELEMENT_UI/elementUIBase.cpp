@@ -63,7 +63,9 @@ void elementUIBase::setupUI(element* _parentElement)
         //sotto la preview: carica un file
         if (type!=ELEMENT_SYPHON)
         {
-        GUI_openFile = new ofxUILabelButton(5, 90, 100, false, "LOAD CONTENT", OFX_UI_FONT_SMALL);
+        GUI_openFile = new ofxUILabelButton(5, 88, 48, false, "LEFT", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_openFile);
+        GUI_openFile = new ofxUILabelButton(57, 88, 48, false, "RIGHT", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_openFile);
         }
         
@@ -284,13 +286,25 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	int kind = e.widget->getKind(); 
 	
     //LOAD CONTENT
-    if(e.widget->getName()=="LOAD CONTENT")
+    if(e.widget->getName()=="LEFT")
+    {
+        cout << "left file loading" << endl;
+        ofxUIButton *button = (ofxUIButton *) e.widget;
+        if (button->getValue()) {
+            cout << "true" << endl;
+            ofFileDialogResult result;
+            result=ofSystemLoadDialog();
+            cout << "done" << endl;
+            parentElement->openLeft(result.getPath());
+        }
+    }
+    if(e.widget->getName()=="RIGHT")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
         if (button->getValue()) {
             ofFileDialogResult result;
             result=ofSystemLoadDialog();
-            parentElement->openFile(result.getPath());
+            parentElement->openRight(result.getPath());
         }
     }
 

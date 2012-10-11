@@ -30,7 +30,8 @@ class element : public ofNode , public elementUIBase
     virtual ofTexture& getLeftTexture() =0;
 	virtual ofTexture& getRightTexture() =0;
     	
-    virtual void openFile(string _path) =0;
+    virtual void openLeft(string _path) =0;
+    virtual void openRight(string _path) =0;
                           
 	void			setIsStereo(bool _b);
 	void			setDrawInStereo(bool _b);
@@ -88,7 +89,9 @@ class element : public ofNode , public elementUIBase
     bool            wideScreenPreview;
     bool            showGrid;
     
-    
+    //dimensioni dichiarate:
+	int				elementWidth;
+	int				elementHeight;
     
 	// set protected member to be just accesible from their derived classes (as private members are not accessible)
 	
@@ -98,8 +101,6 @@ class element : public ofNode , public elementUIBase
 	bool			isActive;	// indicates that we don't want this element to loose any time of cpu, so doesn't draw in preview or in draw
 	bool			isShow;		// indicates we want to keep the element to preview but not draw it on the output
 	bool			isClear;	// indicates if the fbo's have been cleared to black to avoid clearing on every draw
-	int				elementWidth;
-	int				elementHeight;
 	ofBlendMode		blendingMode;
     
 	

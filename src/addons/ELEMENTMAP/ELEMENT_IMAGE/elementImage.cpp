@@ -11,6 +11,24 @@ elementImage::elementImage()
 
 
 //-----------------------------------------------------------------
+void elementImage::openLeft(string _path) {
+
+    leftImage.clear();
+    leftImagePath=_path;
+    leftImage.loadImage(leftImagePath);
+}
+
+
+//-----------------------------------------------------------------
+void elementImage::openRight(string _path) {
+    
+    rightImage.clear();
+    rightImagePath=_path;
+    rightImage.loadImage(rightImagePath);
+}
+
+
+//-----------------------------------------------------------------
 void elementImage::setup(string _leftImage, string _rightImage, int _width, int _height, int inputType, int _posX, int _posY,string _name, bool _isWarpable)
 {
 
@@ -18,17 +36,21 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
     leftImagePath= _leftImage;
     rightImagePath= _rightImage;
 	
+    //load the first file - maybe the onyl one ;) 
+    leftImage.loadImage(leftImagePath);
+
     // UI params
 	xPos = _posX;
 	yPos = _posY;
 
-    this->init(2,int(_width),int(_height),GL_RGBA,_name,inputType, _isWarpable);	
+    //initialize:
+    this->init(2,leftImage.getWidth(),leftImage.getHeight(),GL_RGBA,_name,inputType, _isWarpable);	
 
 	if(getElementInputType()==ELM_INPUT_STEREO_TWO_CHANNEL)
 	{
-		rightImage.loadImage(rightImagePath);
+		if (rightImagePath!="") rightImage.loadImage(rightImagePath);
+        else ofSystemAlertDialog("ERROR: this mode requires TWO separate images!");        
 	}
-        leftImage.loadImage(leftImagePath);
 
     if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
     {
@@ -109,11 +131,16 @@ void elementImage::setElementInputType(int _inType)
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {
-        leftImage.clear();
-        rightImage.clear();
-        leftImage.loadImage(leftImagePath);
-        leftImage.resize(leftImage.getWidth(), leftImage.getHeight());
-        rightImage.loadImage(rightImagePath);        
+
+        if (rightImagePath!="") 
+        {
+            leftImage.clear();
+            rightImage.clear();
+            leftImage.loadImage(leftImagePath);
+            leftImage.resize(leftImage.getWidth(), leftImage.getHeight());
+            rightImage.loadImage(rightImagePath);                    
+        }
+        else ofSystemAlertDialog("ERROR: this mode requires TWO separate images!");        
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
     {

@@ -22,7 +22,8 @@ class elementVideo : public element
 	void drawRight(int x, int y, int w, int h);
 
     void setElementInputType(int _inType);
-    void openFile(string _path){};
+    void openLeft(string _path);
+    void openRight(string _path);
     
     //textures
 	ofTexture& getLeftTexture();

@@ -37,7 +37,8 @@ class elementMixer : public element
     
     void guiEvent(ofxUIEventArgs &e);
     
-    void openFile(string _path){};
+    void openLeft(string _path){};
+    void openRight(string _path){};
 
         
     //utilities:
