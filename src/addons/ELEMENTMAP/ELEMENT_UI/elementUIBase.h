@@ -66,6 +66,7 @@ class  elementUIBase
     ofxUIDropDownList*		listOutputModes;
     ofxUILabelToggle*       GUI_testPattern;
     ofxUILabelToggle*       GUI_fullscreen;
+    ofxUIMinimalSlider*     GUI_parallax;
     
     //quelli del player sono quasi tutti superflui, almeno per adesso...
     ofxUIMinimalSlider*     GUI_videoNavigator;

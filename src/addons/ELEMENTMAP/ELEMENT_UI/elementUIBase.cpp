@@ -217,8 +217,12 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_swapLeftRight = new ofxUIToggle(300, 80, 16, 16, parentElement->getSwapLeftRight(), "SWAP LEFT RIGHT");
         UI->addWidget(GUI_swapLeftRight);
 
+        //SET PARALLAX
+        GUI_parallax = new ofxUIMinimalSlider(300, 100, 100, 20, -20.0, 20.0, parentElement->parallax, "PARALLAX");
+        UI->addWidget(GUI_parallax);
+        
         // OUTPUT MODE
-        listOutputModes = new ofxUIDropDownList(300, 100, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes = new ofxUIDropDownList(300, 125, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
         listOutputModes->setDrawPaddingOutline(false);

@@ -88,6 +88,7 @@ class element : public ofNode , public elementUIBase
     //variabili per il mixer:
     bool            wideScreenPreview;
     bool            showGrid;
+    int             parallax;
     
     //dimensioni dichiarate:
 	int				elementWidth;

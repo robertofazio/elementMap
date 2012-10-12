@@ -31,6 +31,8 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
 	
     wideScreenPreview=false;
     showGrid=true;
+    
+    parallax=0;
 }
 
 
@@ -66,6 +68,10 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 		fboLeft.begin();
         ofClear(0,0,0,0);
         
+    ofPushMatrix();
+        
+    ofTranslate(parallax, 0);
+    
         for(int a = 0; a < numOfElements; a++)
             if(sceneElements[elementsOrder[a]]->getIsActive())
             {
@@ -98,6 +104,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                 ofPopStyle();
             }
 		
+    ofPopMatrix();
 
 		fboLeft.end();
 		
@@ -110,6 +117,10 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                 fboRight.begin();
                 ofClear(0,0,0,0);
                 
+        ofPushMatrix();
+        
+        ofTranslate(-parallax, 0);
+
                 for(int a = 0; a < numOfElements; a++)
                     if(sceneElements[elementsOrder[a]]->getIsActive())
                     {
@@ -146,6 +157,7 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                         ofPopStyle();
                     }
                 
+        ofPopMatrix();
                 
                 fboRight.end();
     }
@@ -227,7 +239,7 @@ void elementMixer::drawInfo()
     switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
-            fontMedium.drawString("STEREO OPENGL",950,665);
+            fontMedium.drawString("STEREO OPENGL",950,690);
 //            if (((testApp*)ofGetAppPtr())->QuadBufferCapable) fontMedium.drawString("STEREO OPENGL",950,665);
 //            else 
 //            {
@@ -239,11 +251,11 @@ void elementMixer::drawInfo()
 			break;
 			
 		case ELM_MONO:
-			fontMedium.drawString("SINGLE LEFT CHANNEL",950,665);
+			fontMedium.drawString("SINGLE LEFT CHANNEL",950,690);
 			break;
             
 		case ELM_STEREO_ANAGLYPH:
-			fontMedium.drawString("STEREO ANAGLYPH",950,665);
+			fontMedium.drawString("STEREO ANAGLYPH",950,690);
 			break;
 		
         default:
@@ -252,7 +264,7 @@ void elementMixer::drawInfo()
     
     //framerate
 	ofSetColor(255,255,255);
-    fontMedium.drawString(ofToString(ofGetFrameRate()),950,680);
+    fontMedium.drawString(ofToString(ofGetFrameRate()),950,705);
     
     
     
@@ -299,6 +311,13 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
             setSwapLeftRight(toggle->getValue());
+        }
+        //PARALLAX
+        if(e.widget->getName()=="PARALLAX")
+        {
+            ofxUISlider *slider = (ofxUISlider *) e.widget;
+            parallax=(slider->getScaledValue());
+            cout << parallax << endl;
         }
         //VIEW GRID
         if(e.widget->getName()=="GRID")
