@@ -15,6 +15,7 @@ MAIN FEATURES:
 
 - Selezione INPUT mode: MONO, STEREO_TWO_CHANNLES, STEREO_TOP_BOTTOM, STEREO_LEFT_RIGHT
 - Selezione OUTPUT mode: MONO, ANAGLIPH, STEREO_OPENGL
+- zero-parallax adjustment for stereo vision
 - Horizontal e vertical flip
 - QuadBuffer stereoscopic mode funzionante
 - Controllo del warp direttamente da interfaccia
@@ -39,7 +40,6 @@ TO DO LIST:
 
 - Interfaccia e usabilità
 - Possibilità di cambiare la priorità di ogni element
-- Tasto per modificare lo ZERO PARALLAX in main preview
 - Menù a tendina o drag&drop per inserire i video ??
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Tasto Crop left/right top/bottom su ogni element
@@ -49,7 +49,6 @@ TO DO LIST:
 WISH LIST:
 
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
-- Implementare la funzione Rotate e Zoom per ogni warp.
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Maschera per ogni element
 - Progettazione di una main area inspector
