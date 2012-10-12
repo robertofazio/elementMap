@@ -288,24 +288,13 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //LOAD CONTENT
     if(e.widget->getName()=="LEFT")
     {
-        cout << "left file loading" << endl;
         ofxUIButton *button = (ofxUIButton *) e.widget;
-        if (button->getValue()) {
-            cout << "true" << endl;
-            ofFileDialogResult result;
-            result=ofSystemLoadDialog();
-            cout << "done" << endl;
-            parentElement->openLeft(result.getPath());
-        }
+        parentElement->openLeft(ofSystemLoadDialog().getPath());        
     }
     if(e.widget->getName()=="RIGHT")
     {
-        ofxUIButton *button = (ofxUIButton *) e.widget;
-        if (button->getValue()) {
-            ofFileDialogResult result;
-            result=ofSystemLoadDialog();
-            parentElement->openRight(result.getPath());
-        }
+        //ofxUIButton *button = (ofxUIButton *) e.widget;
+        parentElement->openRight(ofSystemLoadDialog().getPath());        
     }
 
     

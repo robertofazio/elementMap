@@ -156,7 +156,7 @@ void MainWindow::draw()
         ofPushStyle();
         ofSetColor(255, 255, 255);
         
-        fontLarge.drawString("element.Map v0.2.3 ", 70 , 44);
+        fontLarge.drawString("element.Map v0.2.4 ", 70 , 44);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -345,11 +345,7 @@ void MainWindow::keyPressed(int key)
     deselectAllElements();
     elemImg2.isSelected=true;
     }
-    
-    else if(key == '9') {
-        elemV1.warper.setLeftRightInput();
-    }
-
+        
     if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.warpKeyPressedHandler(key);
     else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyPressedHandler(key);
     else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyPressedHandler(key);
