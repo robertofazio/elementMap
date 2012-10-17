@@ -313,7 +313,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             setSwapLeftRight(toggle->getValue());
         }
         //PARALLAX
-        if(e.widget->getName()=="PARALLAX")
+        if(e.widget->getName()=="ZERO PARALLAX")
         {
             ofxUISlider *slider = (ofxUISlider *) e.widget;
             parallax=(slider->getScaledValue());

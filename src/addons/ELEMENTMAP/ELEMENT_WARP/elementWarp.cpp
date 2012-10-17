@@ -306,7 +306,7 @@ void elementWarp::mousePressed(int x, int y, int button){
     {
         
         for (int c=0; c<4; c++) {
-            if (abs(x-screenPos[mainIndex[c]].x)<45 && abs(y-screenPos[mainIndex[c]].y)<45) 
+            if (abs(x-screenPos[mainIndex[c]].x)<50 && abs(y-screenPos[mainIndex[c]].y)<50) 
             {
                 if (vertici[mainIndex[c]].z==0) vertici[mainIndex[c]].z=1;
             }
@@ -320,7 +320,7 @@ void elementWarp::mousePressed(int x, int y, int button){
         {
         
         for (int i=0; i<nPoints; i++) {
-                if (abs(x-screenPos[i].x)<10 && abs(y-screenPos[i].y)<10) 
+                if (abs(x-screenPos[i].x)<15 && abs(y-screenPos[i].y)<15) 
                 {
                     if (vertici[i].z==0) vertici[i].z=1;
                 }

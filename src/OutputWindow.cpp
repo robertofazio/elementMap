@@ -111,8 +111,7 @@ void OutputWindow::mouseDragged(int x, int y, int button,  ofxFenster* f)
     //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
     if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.mouseDragged(x, y, button);
     else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.mouseDragged(x, y, button);
-    else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.mouseDragged(x, y, button);
-    
+    else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.mouseDragged(x, y, button);    
 }
 
 void OutputWindow::setup()
@@ -121,10 +120,18 @@ void OutputWindow::setup()
 
 void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
 {
+    cout << "mouse pressed sentito da OutputWindow" << endl;
+
+    ofPoint dimensioni = ofxFensterManager::get()->getWindowById(1)->getWindowSize();
+    cout << "finestra output: " << dimensioni.x << "x" << dimensioni.y << endl;
+    cout << x << ";" << y << endl;
+    x*=ofGetScreenWidth()/dimensioni.x;
+    y*=ofGetScreenHeight()/dimensioni.y;
+    cout << x << ";" << y << endl;
+    
     //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
     if (mainScene->mainWindow->elemSy.isSelected==true && mainScene->mainWindow->elemSy.isWarpable==true) mainScene->mainWindow->elemSy.warper.mousePressed(x, y, btn);
     else if (mainScene->mainWindow->elemV1.isSelected==true && mainScene->mainWindow->elemV1.isWarpable==true) mainScene->mainWindow->elemV1.warper.mousePressed(x, y, btn);
     else if (mainScene->mainWindow->elemImg2.isSelected==true && mainScene->mainWindow->elemImg2.isWarpable==true) mainScene->mainWindow->elemImg2.warper.mousePressed(x, y, btn);
-    
 }
 

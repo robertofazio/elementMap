@@ -345,7 +345,7 @@ void MainWindow::keyPressed(int key)
     deselectAllElements();
     elemImg2.isSelected=true;
     }
-        
+    
     if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.warpKeyPressedHandler(key);
     else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.warpKeyPressedHandler(key);
     else if (elemImg2.isSelected==true && elemImg2.isWarpable==true) elemImg2.warper.warpKeyPressedHandler(key);
@@ -382,6 +382,8 @@ void MainWindow::mouseDragged(int x, int y, int button)
 //--------------------------------------------------------------
 void MainWindow::mousePressed(int x, int y, int button)
 {
+    
+        cout << "mouse pressed sentito da MainWindow" << endl;
 //    //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO: come sopra...
 //    if (elemSy.isSelected==true && elemSy.isWarpable==true) elemSy.warper.mousePressed(x, y, button);
 //    else if (elemV1.isSelected==true && elemV1.isWarpable==true) elemV1.warper.mousePressed(x, y, button);

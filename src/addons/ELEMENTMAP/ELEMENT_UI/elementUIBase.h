@@ -55,7 +55,8 @@ class  elementUIBase
     ofxUILabelButton*       GUI_vertMirror;
     ofxUILabelButton*       GUI_rotCW;
     ofxUILabelButton*       GUI_rotCCW;
-    ofxUILabelButton*       GUI_openFile;
+    ofxUILabelButton*       GUI_openLeftFile;
+    ofxUILabelButton*       GUI_openRightFile;
     
     //widgets del mixer:
     ofxUILabelToggle*       GUI_viewGridPreview;

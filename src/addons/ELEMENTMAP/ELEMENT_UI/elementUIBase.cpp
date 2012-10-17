@@ -63,10 +63,10 @@ void elementUIBase::setupUI(element* _parentElement)
         //sotto la preview: carica un file
         if (type!=ELEMENT_SYPHON)
         {
-        GUI_openFile = new ofxUILabelButton(5, 88, 48, false, "LEFT", OFX_UI_FONT_SMALL);
-        UI->addWidget(GUI_openFile);
-        GUI_openFile = new ofxUILabelButton(57, 88, 48, false, "RIGHT", OFX_UI_FONT_SMALL);
-        UI->addWidget(GUI_openFile);
+        GUI_openLeftFile = new ofxUILabelButton(5, 88, 48, false, "LEFT", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_openLeftFile);
+        GUI_openRightFile = new ofxUILabelButton(57, 88, 48, false, "RIGHT", OFX_UI_FONT_SMALL);
+        UI->addWidget(GUI_openRightFile);
         }
         
         // prima colonna: isActive, Mono/Stereo
@@ -218,7 +218,7 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_swapLeftRight);
 
         //SET PARALLAX
-        GUI_parallax = new ofxUIMinimalSlider(300, 100, 100, 20, -20.0, 20.0, parentElement->parallax, "PARALLAX");
+        GUI_parallax = new ofxUIMinimalSlider(300, 100, 100, 20, -20.0, 20.0, parentElement->parallax, "ZERO PARALLAX");
         UI->addWidget(GUI_parallax);
         
         // OUTPUT MODE
@@ -292,12 +292,10 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     //LOAD CONTENT
     if(e.widget->getName()=="LEFT")
     {
-        ofxUIButton *button = (ofxUIButton *) e.widget;
-        parentElement->openLeft(ofSystemLoadDialog().getPath());        
+        parentElement->openLeft(ofSystemLoadDialog().getPath()); 
     }
     if(e.widget->getName()=="RIGHT")
     {
-        //ofxUIButton *button = (ofxUIButton *) e.widget;
         parentElement->openRight(ofSystemLoadDialog().getPath());        
     }
 
@@ -309,6 +307,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
         else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
         else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
+        
     }    
     //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")
@@ -487,9 +486,12 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         ofxUIButton *button = (ofxUIButton *) e.widget;
         if (button->getValue()) {
 
-		if(parentElement->getIsActive() && parentElement->isSelected)
+		if(parentElement->getIsActive())
         {
+            bool warpState = parentElement->warper.bWarpActive;
+            parentElement->warper.bWarpActive=true;
             parentElement->warper.resetCorners();
+            parentElement->warper.bWarpActive = warpState;
         }
         }
     }
@@ -499,10 +501,14 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         ofxUIButton *button = (ofxUIButton *) e.widget;
         if (button->getValue()) {
 
-		if(parentElement->getIsActive() && parentElement->isSelected)
+		if(parentElement->getIsActive() )
         {
+            bool gridState = parentElement->warper.bViewGrid;
+            parentElement->warper.bViewGrid=true;
             parentElement->warper.decreaseXgrid();
             parentElement->warper.increaseXgrid();
+            parentElement->warper.bViewGrid = gridState;
+
 
         }
         }
