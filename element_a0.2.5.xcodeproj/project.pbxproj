@@ -21,6 +21,11 @@
 		276595B615C6D40C0098EEE8 /* ofxCvHaarFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276595A315C6D40C0098EEE8 /* ofxCvHaarFinder.cpp */; };
 		276595B715C6D40C0098EEE8 /* ofxCvImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276595A515C6D40C0098EEE8 /* ofxCvImage.cpp */; };
 		276595B815C6D40C0098EEE8 /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276595A815C6D40C0098EEE8 /* ofxCvShortImage.cpp */; };
+		277398C11630CDD500F2431D /* .cproject in Resources */ = {isa = PBXBuildFile; fileRef = 277398B91630CDD500F2431D /* .cproject */; };
+		277398C21630CDD500F2431D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 277398BA1630CDD500F2431D /* .gitignore */; };
+		277398C31630CDD500F2431D /* .project in Resources */ = {isa = PBXBuildFile; fileRef = 277398BB1630CDD500F2431D /* .project */; };
+		277398C41630CDD500F2431D /* ofxDir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277398BD1630CDD500F2431D /* ofxDir.cpp */; };
+		277398C51630CDD500F2431D /* ofxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277398BF1630CDD500F2431D /* ofxFile.cpp */; };
 		27C14C1115AB0E8F0013C8FC /* elementWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C14C0F15AB0E8F0013C8FC /* elementWarp.cpp */; };
 		27CCEB1F15A30B4800CBE171 /* ElementFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB1D15A30B4800CBE171 /* ElementFX.cpp */; };
 		27CCEB2315A30B5E00CBE171 /* ElementFxMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEB2115A30B5E00CBE171 /* ElementFxMask.cpp */; };
@@ -263,6 +268,13 @@
 		276595A815C6D40C0098EEE8 /* ofxCvShortImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvShortImage.cpp; sourceTree = "<group>"; };
 		276595A915C6D40C0098EEE8 /* ofxCvShortImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvShortImage.h; sourceTree = "<group>"; };
 		276595AA15C6D40C0098EEE8 /* ofxOpenCv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenCv.h; sourceTree = "<group>"; };
+		277398B91630CDD500F2431D /* .cproject */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = .cproject; sourceTree = "<group>"; };
+		277398BA1630CDD500F2431D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		277398BB1630CDD500F2431D /* .project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = .project; sourceTree = "<group>"; };
+		277398BD1630CDD500F2431D /* ofxDir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDir.cpp; sourceTree = "<group>"; };
+		277398BE1630CDD500F2431D /* ofxDir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDir.h; sourceTree = "<group>"; };
+		277398BF1630CDD500F2431D /* ofxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFile.cpp; sourceTree = "<group>"; };
+		277398C01630CDD500F2431D /* ofxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFile.h; sourceTree = "<group>"; };
 		27C14C0F15AB0E8F0013C8FC /* elementWarp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = elementWarp.cpp; sourceTree = "<group>"; };
 		27C14C1015AB0E8F0013C8FC /* elementWarp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elementWarp.h; sourceTree = "<group>"; };
 		27CCEB1D15A30B4800CBE171 /* ElementFX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementFX.cpp; path = ELEMENT_FX/ElementFX.cpp; sourceTree = "<group>"; };
@@ -819,6 +831,29 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		277398B81630CDD400F2431D /* ofxFileSystem */ = {
+			isa = PBXGroup;
+			children = (
+				277398B91630CDD500F2431D /* .cproject */,
+				277398BA1630CDD500F2431D /* .gitignore */,
+				277398BB1630CDD500F2431D /* .project */,
+				277398BC1630CDD500F2431D /* src */,
+			);
+			name = ofxFileSystem;
+			path = src/addons/ofxFileSystem;
+			sourceTree = "<group>";
+		};
+		277398BC1630CDD500F2431D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				277398BD1630CDD500F2431D /* ofxDir.cpp */,
+				277398BE1630CDD500F2431D /* ofxDir.h */,
+				277398BF1630CDD500F2431D /* ofxFile.cpp */,
+				277398C01630CDD500F2431D /* ofxFile.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		27C14C0E15AB0E8F0013C8FC /* ELEMENT_WARP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1114,6 +1149,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				277398B81630CDD400F2431D /* ofxFileSystem */,
 				276594E715C6D40C0098EEE8 /* ofxFenster */,
 				2765952F15C6D40C0098EEE8 /* ofxOpenCv */,
 				27CCEB2415A30E2C00CBE171 /* ofxQuadWarp */,
@@ -1239,7 +1275,7 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.2.4" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.2.5" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1281,6 +1317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FBF1AB15E2993F0011878A /* element.icns in Resources */,
+				277398C11630CDD500F2431D /* .cproject in Resources */,
+				277398C21630CDD500F2431D /* .gitignore in Resources */,
+				277398C31630CDD500F2431D /* .project in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1340,6 +1379,8 @@
 				276595B615C6D40C0098EEE8 /* ofxCvHaarFinder.cpp in Sources */,
 				276595B715C6D40C0098EEE8 /* ofxCvImage.cpp in Sources */,
 				276595B815C6D40C0098EEE8 /* ofxCvShortImage.cpp in Sources */,
+				277398C41630CDD500F2431D /* ofxDir.cpp in Sources */,
+				277398C51630CDD500F2431D /* ofxFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1658,7 +1699,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.2.4" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "element_a0.2.5" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,

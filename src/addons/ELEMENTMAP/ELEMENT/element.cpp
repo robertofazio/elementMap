@@ -94,9 +94,17 @@ void element::drawGraphic(int x, int y, int w, int h)
     if(type != 5)   //disegna la preview
     {
         ofPushMatrix();
-        ofTranslate(0, 20);
+        
+        ofTranslate(0, 40);
         getLeftTexture().draw(x, y, w, h);
+        
+        if (type!= 3) {
+        ofTranslate(105, 0);
+        getRightTexture().draw(x, y, w, h);
+        }
+        
         ofPopMatrix();
+        
     }
 }
 

@@ -17,7 +17,7 @@ void testApp::setup(){
         glDrawBuffer(GL_BACK);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         printf(">> testApp: GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
-        ofSystemAlertDialog("OPGN_GL quad buffered Stereo mode NOT supported on this machine");
+        ofSystemAlertDialog("OPEN_GL quad buffered Stereo mode NOT supported on this machine");
 
     }
 

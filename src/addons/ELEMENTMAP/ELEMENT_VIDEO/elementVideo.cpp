@@ -11,6 +11,7 @@ elementVideo::elementVideo()
 //-----------------------------------------------------------------
 void elementVideo::openLeft(string _path) {
     
+
     leftChannelPlayer.close();
     leftChannelPath=_path;
     leftChannelPlayer.loadMovie(leftChannelPath);

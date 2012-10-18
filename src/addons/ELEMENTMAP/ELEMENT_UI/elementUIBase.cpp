@@ -8,6 +8,9 @@
 //same thing for testApp, because we point to the mixer element:
 #include "testApp.h"
 
+
+#include "ofxDir.h"
+
 //--------------------------------------------------------------
 elementUIBase::elementUIBase()
 {
@@ -41,13 +44,14 @@ void elementUIBase::setupUI(element* _parentElement)
     if (type!=ELEMENT_MIXER)
     {
      
-        UI = new ofxUICanvas(xPos,yPos, 630, 160);
+//        UI = new ofxUICanvas(xPos,yPos, 630, 160);
+        UI = new ofxUICanvas(xPos,yPos, 630, 500);
         
         ofColor colorBack;
         colorBack.r = 0;
         colorBack.g = 255;
         colorBack.b = 206;
-        colorBack.a = 10;
+        colorBack.a = 0;
         
         UI->setColorBack(colorBack);
         UI->setDrawBack(true);
@@ -63,43 +67,73 @@ void elementUIBase::setupUI(element* _parentElement)
         //sotto la preview: carica un file
         if (type!=ELEMENT_SYPHON)
         {
-        GUI_openLeftFile = new ofxUILabelButton(5, 88, 48, false, "LEFT", OFX_UI_FONT_SMALL);
-        UI->addWidget(GUI_openLeftFile);
-        GUI_openRightFile = new ofxUILabelButton(57, 88, 48, false, "RIGHT", OFX_UI_FONT_SMALL);
-        UI->addWidget(GUI_openRightFile);
+        
+        //GUI_openLeftFile = new ofxUILabelButton(5, 88, 48, false, "LEFT", OFX_UI_FONT_SMALL);
+
+            ofxDir  dir;
+            if (type==ELEMENT_IMG) dir.open("./images");
+            else if (type==ELEMENT_VIDEO) dir.open("./movies");
+            
+            vector<string> fileNames;
+            int numFiles = dir.getNumFiles();
+            for (int i=0; i<numFiles; i++)
+            {
+                fileNames.push_back(dir.getFileName(i));
+                cout << dir.getFileName(i) << endl;
+            }
+            
+            GUI_openLeftFile = new ofxUIDropDownList(5, posY, 100, "LOAD LEFT", fileNames, OFX_UI_FONT_SMALL);
+            GUI_openLeftFile->setDrawBack(true);
+            GUI_openLeftFile->setDrawOutlineHighLight(false);
+            GUI_openLeftFile->setDrawPaddingOutline(false);
+            GUI_openLeftFile->setPadding(0);
+            GUI_openLeftFile->setDrawFill(true);
+            GUI_openLeftFile->setAutoClose(true);
+            UI->addWidget(GUI_openLeftFile);
+
+            
+            GUI_openRightFile = new ofxUIDropDownList(110, posY, 100, "LOAD RIGHT", fileNames, OFX_UI_FONT_SMALL);
+            GUI_openRightFile->setDrawBack(true);
+            GUI_openRightFile->setDrawOutlineHighLight(false);
+            GUI_openRightFile->setDrawPaddingOutline(false);
+            GUI_openRightFile->setPadding(0);
+            GUI_openRightFile->setDrawFill(true);
+            GUI_openRightFile->setAutoClose(true);
+            UI->addWidget(GUI_openRightFile);
+
         }
         
         // prima colonna: isActive, Mono/Stereo
-        GUI_isActive = new ofxUILabelToggle(115, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL); 
+        GUI_isActive = new ofxUILabelToggle(220, posY, 120,16,parentElement->getIsActive(),"isActive", OFX_UI_FONT_SMALL); 
         UI->addWidget(GUI_isActive);
         
         if(this->isStereo) {
-            GUI_stereoscopic = new ofxUILabelToggle(115,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL);
+            GUI_stereoscopic = new ofxUILabelToggle(220,posY+=20, 120, 16,parentElement->getDrawInStereo(),"Stereoscopic", OFX_UI_FONT_SMALL);
             UI->addWidget(GUI_stereoscopic);
         }
         
         if(parentElement->isWarpable)
         {
-            GUI_QuadWarping = new ofxUIToggle(115, posY+=20, 16,16,false,"Quad Warping"); 
+            GUI_QuadWarping = new ofxUIToggle(220, posY+=20, 16,16,false,"Quad Warping"); 
             UI->addWidget(GUI_QuadWarping);
-            GUI_GridWarping = new ofxUIToggle(115, posY+=20, 16,16,false,"Fine Warping");
+            GUI_GridWarping = new ofxUIToggle(220, posY+=20, 16,16,false,"Fine Warping");
             UI->addWidget(GUI_GridWarping);
             
-            GUI_xGridDecrease = new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease");
+            GUI_xGridDecrease = new ofxUIImageButton(240, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "xGridDecrease");
             UI->addWidget(GUI_xGridDecrease);
-            GUI_xGridIncrease = new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease");
+            GUI_xGridIncrease = new ofxUIImageButton(261, posY, 16, 16, true, "./GUI/images/increase.png", "xGridIncrease");
             UI->addWidget(GUI_xGridIncrease);
-            UI->addWidget(new ofxUILabel(178, posY+4, "xGrid", "xGrid", OFX_UI_FONT_SMALL));
+            UI->addWidget(new ofxUILabel(280, posY+4, "xGrid", "xGrid", OFX_UI_FONT_SMALL));
             
-            GUI_yGridDecrease = new ofxUIImageButton(135, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease");
+            GUI_yGridDecrease = new ofxUIImageButton(240, posY+=20, 16, 16, true, "./GUI/images/decrease.png", "yGridDecrease");
             UI->addWidget(GUI_yGridDecrease);
-            GUI_yGridIncrease = new ofxUIImageButton(156, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease");
+            GUI_yGridIncrease = new ofxUIImageButton(261, posY, 16, 16, true, "./GUI/images/increase.png", "yGridIncrease");
             UI->addWidget(GUI_yGridIncrease);
-            UI->addWidget(new ofxUILabel(178, posY+4, "yGrid", "yGrid", OFX_UI_FONT_SMALL));
+            UI->addWidget(new ofxUILabel(280, posY+4, "yGrid", "yGrid", OFX_UI_FONT_SMALL));
             
-            GUI_resetWarp = new ofxUILabelButton(115, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL);
+            GUI_resetWarp = new ofxUILabelButton(220, posY+=20, 55, false, "reset warp", OFX_UI_FONT_SMALL);
             UI->addWidget(GUI_resetWarp);
-            GUI_resetGrid = new ofxUILabelButton(175, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL);
+            GUI_resetGrid = new ofxUILabelButton(280, posY, 55, false, "reset grid", OFX_UI_FONT_SMALL);
             UI->addWidget(GUI_resetGrid);
         }
         
@@ -107,35 +141,35 @@ void elementUIBase::setupUI(element* _parentElement)
         posY=10;
         
         //seconda colonna: opacità e componenti r,g,b
-        GUI_opacity = new ofxUIMinimalSlider(260, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity");
+        GUI_opacity = new ofxUIMinimalSlider(350, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity");
         UI->addWidget(GUI_opacity);
-        GUI_red = new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED");
+        GUI_red = new ofxUIMinimalSlider(350, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED");
         UI->addWidget(GUI_red);
-        GUI_green = new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN");
+        GUI_green = new ofxUIMinimalSlider(350, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN");
         UI->addWidget(GUI_green);
-        GUI_blue = new ofxUIMinimalSlider(260, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE");
+        GUI_blue = new ofxUIMinimalSlider(350, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE");
         UI->addWidget(GUI_blue);
-        GUI_resetRGB = new ofxUIButton(260, posY+=20, 16, 16, false, "RGB reset");
+        GUI_resetRGB = new ofxUIButton(350, posY+=20, 16, 16, false, "RGB reset");
         UI->addWidget(GUI_resetRGB);
         
         if(parentElement->isWarpable)
         {
         //mirror
-        GUI_orizMirror = new ofxUILabelButton(260, posY+=18, 55, false, "flipH", OFX_UI_FONT_SMALL);
+        GUI_orizMirror = new ofxUILabelButton(350, posY+=18, 55, false, "flipH", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_orizMirror);
-        GUI_vertMirror = new ofxUILabelButton(320, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
+        GUI_vertMirror = new ofxUILabelButton(410, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_vertMirror);
         //rotate
-        GUI_rotCW = new ofxUILabelButton(260, posY+=22, 55, false, "rotCW", OFX_UI_FONT_SMALL);
+        GUI_rotCW = new ofxUILabelButton(350, posY+=22, 55, false, "rotCW", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_rotCW);
-        GUI_rotCCW = new ofxUILabelButton(320, posY, 55, false, "rotCCW", OFX_UI_FONT_SMALL);
+        GUI_rotCCW = new ofxUILabelButton(410, posY, 55, false, "rotCCW", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_rotCCW);
         }
 
         posY=10;
         
         //terza colonna: blending mode
-        listBlendModes = new ofxUIDropDownList(390, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes = new ofxUIDropDownList(500, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
@@ -146,7 +180,7 @@ void elementUIBase::setupUI(element* _parentElement)
         
         //input type (mono, two channel, left/right, top/bottom)
         //NOTA: serve solo per debug, lo sceglierò al momento del caricamento del file!!
-        GUI_inputType = new ofxUIDropDownList(500, posY, 100, "input", inputTypeNames, OFX_UI_FONT_SMALL);
+        GUI_inputType = new ofxUIDropDownList(500, posY+22, 100, "input", inputTypeNames, OFX_UI_FONT_SMALL);
         GUI_inputType->setDrawBack(true);
         GUI_inputType->setDrawOutlineHighLight(false);
         GUI_inputType->setDrawPaddingOutline(false);
@@ -290,13 +324,22 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	int kind = e.widget->getKind(); 
 	
     //LOAD CONTENT
-    if(e.widget->getName()=="LEFT")
+    if( e.widget->getParent()->getName()=="LOAD LEFT")
     {
-        parentElement->openLeft(ofSystemLoadDialog().getPath()); 
+        string path;
+        if (parentElement->getElementType()==ELEMENT_IMG) path = "./images/";
+        else if (parentElement->getElementType()==ELEMENT_VIDEO) path = "./movies/";
+        path+=name;
+        parentElement->openLeft(path);
     }
-    if(e.widget->getName()=="RIGHT")
+    
+    if( e.widget->getParent()->getName()=="LOAD RIGHT" )
     {
-        parentElement->openRight(ofSystemLoadDialog().getPath());        
+        string path;
+        if (parentElement->getElementType()==ELEMENT_IMG) path = "./images/";
+        else if (parentElement->getElementType()==ELEMENT_VIDEO) path = "./movies/";
+        path+=name;
+        parentElement->openRight(path);
     }
 
     

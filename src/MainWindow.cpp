@@ -30,7 +30,7 @@ void MainWindow::setup()
 	// create & setup elements on this app 
 	
     //pattern image
-    elemImg.setup("./images/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_MONO, -50000 , -50000 ,"TestPattern", false);
+    elemImg.setup("./utils/testPattern1024.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_MONO, -50000 , -50000 ,"TestPattern", false);
     elemImg.UI->toggleVisible();
     
     
@@ -39,9 +39,9 @@ void MainWindow::setup()
 	
     
     //video
-    elemV1.setup("./movies/leftright.mov","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
+//    elemV1.setup("./movies/leftright.mov","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 
-//    elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
+    elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 	
     //image
     elemImg2.setup("./images/leftRightHD.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);
@@ -102,10 +102,10 @@ void MainWindow::setup()
 	fontMedium.setLineHeight(12.0f);
 	fontMedium.setLetterSpacing(1.017);
     
-    logo.loadImage("./images/logo.png");
-    logoChristie.loadImage("./images/logoChristie.png");
-    logoDigitalNetwork.loadImage("./images/logoDigitalNetwork.png");
-    previewGrid.loadImage("./images/previewGrid.png");
+    logo.loadImage("./utils/logo.png");
+    logoChristie.loadImage("./utils/logoChristie.png");
+    logoDigitalNetwork.loadImage("./utils/logoDigitalNetwork.png");
+    previewGrid.loadImage("./utils/previewGrid.png");
 
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
@@ -156,7 +156,7 @@ void MainWindow::draw()
         ofPushStyle();
         ofSetColor(255, 255, 255);
         
-        fontLarge.drawString("element.Map v0.2.4 ", 70 , 44);
+        fontLarge.drawString("element.Map v0.2.5 ", 70 , 44);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -197,7 +197,6 @@ void MainWindow::draw()
 
         else fontMedium.drawString("NO ELEMENTs SELECTED", 660,100);
 
-        
         elemMix.UI->draw();
         
         ofPushStyle();
@@ -239,18 +238,20 @@ void MainWindow::draw()
                 ofSetColor(0, 255, 206);
                 ofLine(margin, (margin * 6) + ((i) * 190), 645, (margin * 6) + ((i) * 190));
                 ofSetColor(255, 255, 255);
-                myElements[drawingOrder[i]]->UI->draw();
                 myElements[drawingOrder[i]]->drawGraphic(LEFT_MARGIN_X+5 ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
-
+                myElements[drawingOrder[i]]->UI->draw();
+                
                 int yGridLabel = 95;
                 if(myElements[drawingOrder[i]]->getIsStereo()) yGridLabel+=20;
                 
-                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes-1), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel);
-                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes-1), 230, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel+20);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes-1), 235, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes-1), 235, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel+20);
             }
             ofPopStyle();
         }
         
+
+                
         logo.draw(10, 9, 60, 60);
         logoDigitalNetwork.draw(1150, 12, 110, 40);
 //        logoChristie.draw(950,20,235,35);
