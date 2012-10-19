@@ -7,18 +7,19 @@ elementMap è il primo strumento destinato alla gestione di videoproiezioni ster
 os : OSX 10.7.4 
 scheda grafica : nVidia min 512MB e GL_STEREO supportate
 
-(C) 2012 Roberto Fazio Studio - www.robertofazio.com
-Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
-versione alpha 0.2.4 - 10/10/2012
+(C) 2012 Roberto Fazio Studio - www.robertofazio.com 
+Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario 
+versione alpha 0.2.5 - 19/10/2012
 
 MAIN FEATURES:
 
+- LOAD con menu a tendina per caricare file contenuti nelle cartelle "images" e "movies"
 - Selezione INPUT mode: MONO, STEREO_TWO_CHANNLES, STEREO_TOP_BOTTOM, STEREO_LEFT_RIGHT
 - Selezione OUTPUT mode: MONO, ANAGLIPH, STEREO_OPENGL
 - zero-parallax adjustment for stereo vision
-- Horizontal e vertical flip
+- Horizontal e vertical flip; clockwise e counter-clockwise rotation
 - QuadBuffer stereoscopic mode funzionante
-- Controllo del warp direttamente da interfaccia
+- Controllo del warp tramite tastiera e con mouse in seconda finestra (quando è in FULLSCREEN)
 - Swap left/right frame nelle visualizzazioni stereo
 - Preview in formato 16:9 o 4:3
 - Fullscreen funzionante sulla finestra di output
@@ -32,15 +33,13 @@ MAIN FEATURES:
 
 KNOWN ISSUES:
 
-- il livello video non ha trasparenza esterna
-- TEMP: cambiando input si deve resettare la warp grid per evitare errori di texturizzazione
-- TEMP: coordinate seconda finestra sbagliate
+- il livello video non ha trasparenza esterna -> impostare BLENDING MODE = ADD
+- per visualizzare correttamente un file caricato la sequenza è: LOAD -> INPUT TYPE -> RESET GRID
 
 TO DO LIST:
 
 - Interfaccia e usabilità
 - Possibilità di cambiare la priorità di ogni element
-- Menù a tendina o drag&drop per inserire i video ??
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - Tasto Crop left/right top/bottom su ogni element
 - Usare il primo frame per la preview video. ofxUI.
