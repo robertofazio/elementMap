@@ -2028,17 +2028,17 @@
     </screenPos>
     <mainVertici>
         <totMainVertici>4</totMainVertici>
-        <values_0_x>3</values_0_x>
-        <values_0_y>1089</values_0_y>
+        <values_0_x>1920</values_0_x>
+        <values_0_y>1078</values_0_y>
         <values_0_z>0</values_0_z>
-        <values_1_x>1920</values_1_x>
-        <values_1_y>1078</values_1_y>
+        <values_1_x>3</values_1_x>
+        <values_1_y>1089</values_1_y>
         <values_1_z>0</values_1_z>
-        <values_2_x>1917</values_2_x>
-        <values_2_y>3</values_2_y>
+        <values_2_x>-1</values_2_x>
+        <values_2_y>2</values_2_y>
         <values_2_z>0</values_2_z>
-        <values_3_x>-1</values_3_x>
-        <values_3_y>2</values_3_y>
+        <values_3_x>1917</values_3_x>
+        <values_3_y>3</values_3_y>
         <values_3_z>0</values_3_z>
     </mainVertici>
     <mainIndex>

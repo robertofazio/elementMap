@@ -11,7 +11,6 @@ elementVideo::elementVideo()
 //-----------------------------------------------------------------
 void elementVideo::openLeft(string _path) {
     
-
     leftChannelPlayer.close();
     leftChannelPath=_path;
     leftChannelPlayer.loadMovie(leftChannelPath);
@@ -26,6 +25,9 @@ void elementVideo::openRight(string _path) {
     rightChannelPlayer.close();
     rightChannelPath=_path;
     rightChannelPlayer.loadMovie(rightChannelPath);
+    rightChannelPlayer.play();
+    rightChannelPlayer.stop();
+
 }
 
 
@@ -160,8 +162,27 @@ ofTexture& elementVideo::getLeftTexture()
 ofTexture& elementVideo::getRightTexture()
 {
     
-    // se sono in mono o con due canali separati, prendo semplicemente la texture dallo stream video:
-    if (getElementInputType() == ELM_INPUT_MONO || getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
+    // se sono in mono questo non dovrebbe esistere, ma lascio la preview se è caricato qualcosa:
+    if (getElementInputType() == ELM_INPUT_MONO)
+    {
+        if (rightChannelPath!="") return (rightChannelPlayer.getTextureReference());	
+        // sennò "svuoto" l'fbo relativo e lascio tutto nero
+        else 
+        {
+            tempRight.begin();
+//            ofClear(0,0,0,0);
+            ofPushStyle();
+            ofSetColor(ofColor :: black);
+            ofRect(0, 0, tempRight.getWidth(), tempRight.getHeight());
+            ofPopStyle();
+            tempRight.end();
+
+            rT.clear();
+            return (rT);
+        }
+    }
+    // se sono con due canali separati, prendo semplicemente la texture dallo stream video:
+    else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {
         return (rightChannelPlayer.getTextureReference());	
     }

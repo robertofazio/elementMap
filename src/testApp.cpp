@@ -20,16 +20,16 @@ void testApp::setup(){
         ofSystemAlertDialog("OPEN_GL quad buffered Stereo mode NOT supported on this machine");
 
     }
-
+    
+    
     outputSizeWidth=1920;
     outputSizeHeight=1080;
-
+    
     mainWindow = new MainWindow();
     mainWindow->outputResolutionX = outputSizeWidth;
     mainWindow->outputResolutionY = outputSizeHeight;
     mainWindow->setup();
-    
-    // ofSetFrameRate(60);
+
     
 	ofBackground(0,0,0);
         
@@ -40,6 +40,8 @@ void testApp::setup(){
     output->setWindowTitle("Output");
 
     outputFullScreen = false;
+    
+    
 
 }
 
