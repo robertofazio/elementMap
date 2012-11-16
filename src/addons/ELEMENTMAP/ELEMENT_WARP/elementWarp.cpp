@@ -117,6 +117,7 @@ for (int index=0; index<nPoints; index++) {
     screenPos[index].x = screen.x;
     screenPos[index].y = screen.y;
 }
+    
 }
 
 
@@ -323,6 +324,10 @@ void elementWarp::mousePressed(int x, int y, int button){
                 if (abs(x-screenPos[i].x)<15 && abs(y-screenPos[i].y)<15) 
                 {
                     if (vertici[i].z==0) vertici[i].z=1;
+//                    cout << "vertici: " << vertici[i].x << "," << vertici[i].y << endl;
+//                    cout << "texvert: " << texVert[i].x << "," << texVert[i].y << endl;
+//                    cout << "gridvert: " << gridVert[i].x << "," << gridVert[i].y << endl;
+//                    cout << "screenpos: " << screenPos[i].x << "," << screenPos[i].y << endl;
                 }
                 else 
                 {
@@ -662,6 +667,22 @@ void elementWarp::pointRIGHT(int _delta)
 //--------------------------------------------------------------
 void elementWarp::selectNextPoint()
 {
+    
+    /*
+    NOTA: numerazione dei vertici sui sotto-quad:
+     
+     1--------------2,5--------------6,9--------------10,13--------------14
+     |               |                |                 |                 |       
+     |               |                |                 |                 |       
+     |               |                |                 |                 |       
+    4,17--------- 3,8,18,21-------7,12,22,25-------11,16,26,29----------15,30
+     |               |                |                 |                 |       
+     |               |                |                 |                 |       
+     |               |                |                 |                 |       
+     20------------19,24------------23,28-------------27,32--------------31
+    
+     */
+    
     if (bViewGrid)
     {
         int nuovaX,nuovaY;
@@ -671,11 +692,11 @@ void elementWarp::selectNextPoint()
             
             if (vertici[i].z==1)
             {
-                nuovaX=texVert[i].x+(width/(xRes-1));
+                nuovaX=texVert[i].x+(text.getWidth()/(xRes-1));
                 nuovaY=texVert[i].y;
-                if (nuovaX>=width) { 
+                if (nuovaX>(width+10)) { 
                     nuovaX=0;
-                    nuovaY+=height/(yRes-1);    
+                    nuovaY+=text.getHeight()/(yRes-1);    
                 }
                 vertici[i].z=0;
             }
@@ -701,11 +722,11 @@ void elementWarp::selectPrevPoint()
             
             if (vertici[i].z==1)
             {
-                nuovaX=texVert[i].x-(width/(xRes-1));
+                nuovaX=texVert[i].x-(text.getWidth()/(xRes-1));
                 nuovaY=texVert[i].y;
                 if (nuovaX<0) { 
                     nuovaX=width;
-                    nuovaY-=height/(yRes-1);    
+                    nuovaY-=text.getHeight()/(yRes-1);    
                 }
                 vertici[i].z=0;
             }

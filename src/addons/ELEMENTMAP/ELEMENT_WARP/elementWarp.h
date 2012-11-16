@@ -95,7 +95,7 @@ class elementWarp
     bool bViewGrid;
     bool bMela;
     bool bSpeedUp;
-    
+        
     //ofxQuadWarp
     ofxQuadWarp quadWarp;
     ofFbo       qwFbo;

@@ -349,8 +349,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         if(name=="MONO") parentElement->setElementInputType(ELM_INPUT_MONO);
         else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
         else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
-        else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
-        
+        else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);        
     }    
     //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")

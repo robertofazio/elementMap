@@ -128,6 +128,8 @@ void elementImage::setElementInputType(int _inType)
         leftImage.clear();
         leftImage.loadImage(leftImagePath);
         leftImage.resize(leftImage.getWidth(), leftImage.getHeight());
+        rightImage.clear();
+        
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {

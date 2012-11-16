@@ -343,7 +343,7 @@ void elementVideo::setElementInputType(int _inType)
         rT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);
         
     }
-    
+        
 }
 
 

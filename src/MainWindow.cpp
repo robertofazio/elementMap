@@ -57,7 +57,15 @@ void MainWindow::setup()
     elemV1.rightChannelPlayer.stop();
     elemV1.leftChannelPlayer.setLoopState(OF_LOOP_NONE);
     elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NONE);
-    
+    if (elemV1.rightChannelPath=="") {
+        elemV1.rightChannelPlayer.closeMovie();
+    }
+    else {
+    elemV1.rightChannelPlayer.play();
+    elemV1.rightChannelPlayer.firstFrame();    
+    elemV1.rightChannelPlayer.stop();
+    elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NONE);
+    }
     elemImg.UI->toggleVisible();
     
 	// add elements to the vector
