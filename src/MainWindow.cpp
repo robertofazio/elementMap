@@ -37,9 +37,8 @@ void MainWindow::setup()
     //syphon
     elemSy.setup("","",outputResolutionX,outputResolutionY, LEFT_MARGIN_X , UPPER_MARGIN_Y,"Syphon", true);
 	
-    
     //video
-    elemV1.setup("./movies/leftright.mov","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
+    elemV1.setup("./movies/leftright.mov","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 
 //    elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 	
@@ -164,7 +163,7 @@ void MainWindow::draw()
         ofPushStyle();
         ofSetColor(255, 255, 255);
         
-        fontLarge.drawString("element.Map v0.2.5 ", 70 , 44);
+        fontLarge.drawString("element.Map v0.2.6 ", 70 , 44);
         ofSetColor(0, 255, 206);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -218,20 +217,22 @@ void MainWindow::draw()
         fontSmall.drawString(ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 735, 749);
         
         if (elemV1.leftChannelPlayer.getCurrentFrame() == elemV1.rightChannelPlayer.getCurrentFrame()) {
+            ofPushStyle();
             ofSetColor(255, 206, 0);
             fontMedium.drawString("STEROSCOPIC SYNC", 655,765);
+            ofPopStyle();
             
         }
         
         else {
+            ofPushStyle();
             ofSetHexColor(0xFF0000);
             fontMedium.drawString("STEROSCOPIC NOT IN SYNC", 655, 765);
-            
+            ofPopStyle();
         }
         
         elemMix.drawInfo();
 
-        
         ofPopStyle();
         
         if(drawPreviews)    

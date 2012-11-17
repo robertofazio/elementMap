@@ -10,8 +10,8 @@
         <values_1_y>0</values_1_y>
         <values_1_z>0</values_1_z>
         <values_2_x>384</values_2_x>
-        <values_2_y>498</values_2_y>
-        <values_2_z>1</values_2_z>
+        <values_2_y>540</values_2_y>
+        <values_2_z>0</values_2_z>
         <values_3_x>0</values_3_x>
         <values_3_y>540</values_3_y>
         <values_3_z>0</values_3_z>
@@ -22,11 +22,11 @@
         <values_5_y>0</values_5_y>
         <values_5_z>0</values_5_z>
         <values_6_x>768</values_6_x>
-        <values_6_y>594</values_6_y>
+        <values_6_y>540</values_6_y>
         <values_6_z>0</values_6_z>
         <values_7_x>384</values_7_x>
-        <values_7_y>498</values_7_y>
-        <values_7_z>1</values_7_z>
+        <values_7_y>540</values_7_y>
+        <values_7_z>0</values_7_z>
         <values_8_x>768</values_8_x>
         <values_8_y>0</values_8_y>
         <values_8_z>0</values_8_z>
@@ -37,7 +37,7 @@
         <values_10_y>540</values_10_y>
         <values_10_z>0</values_10_z>
         <values_11_x>768</values_11_x>
-        <values_11_y>594</values_11_y>
+        <values_11_y>540</values_11_y>
         <values_11_z>0</values_11_z>
         <values_12_x>1152</values_12_x>
         <values_12_y>0</values_12_y>
@@ -46,7 +46,7 @@
         <values_13_y>0</values_13_y>
         <values_13_z>0</values_13_z>
         <values_14_x>1536</values_14_x>
-        <values_14_y>476</values_14_y>
+        <values_14_y>540</values_14_y>
         <values_14_z>0</values_14_z>
         <values_15_x>1152</values_15_x>
         <values_15_y>540</values_15_y>
@@ -61,14 +61,14 @@
         <values_18_y>540</values_18_y>
         <values_18_z>0</values_18_z>
         <values_19_x>1536</values_19_x>
-        <values_19_y>476</values_19_y>
+        <values_19_y>540</values_19_y>
         <values_19_z>0</values_19_z>
         <values_20_x>0</values_20_x>
         <values_20_y>540</values_20_y>
         <values_20_z>0</values_20_z>
         <values_21_x>384</values_21_x>
-        <values_21_y>498</values_21_y>
-        <values_21_z>1</values_21_z>
+        <values_21_y>540</values_21_y>
+        <values_21_z>0</values_21_z>
         <values_22_x>384</values_22_x>
         <values_22_y>1080</values_22_y>
         <values_22_z>0</values_22_z>
@@ -76,10 +76,10 @@
         <values_23_y>1080</values_23_y>
         <values_23_z>0</values_23_z>
         <values_24_x>384</values_24_x>
-        <values_24_y>498</values_24_y>
-        <values_24_z>1</values_24_z>
+        <values_24_y>540</values_24_y>
+        <values_24_z>0</values_24_z>
         <values_25_x>768</values_25_x>
-        <values_25_y>594</values_25_y>
+        <values_25_y>540</values_25_y>
         <values_25_z>0</values_25_z>
         <values_26_x>768</values_26_x>
         <values_26_y>1080</values_26_y>
@@ -88,7 +88,7 @@
         <values_27_y>1080</values_27_y>
         <values_27_z>0</values_27_z>
         <values_28_x>768</values_28_x>
-        <values_28_y>594</values_28_y>
+        <values_28_y>540</values_28_y>
         <values_28_z>0</values_28_z>
         <values_29_x>1152</values_29_x>
         <values_29_y>540</values_29_y>
@@ -103,7 +103,7 @@
         <values_32_y>540</values_32_y>
         <values_32_z>0</values_32_z>
         <values_33_x>1536</values_33_x>
-        <values_33_y>476</values_33_y>
+        <values_33_y>540</values_33_y>
         <values_33_z>0</values_33_z>
         <values_34_x>1536</values_34_x>
         <values_34_y>1080</values_34_y>
@@ -112,7 +112,7 @@
         <values_35_y>1080</values_35_y>
         <values_35_z>0</values_35_z>
         <values_36_x>1536</values_36_x>
-        <values_36_y>476</values_36_y>
+        <values_36_y>540</values_36_y>
         <values_36_z>0</values_36_z>
         <values_37_x>1920</values_37_x>
         <values_37_y>540</values_37_y>
@@ -256,7 +256,7 @@
         <values_1_y>-1.6</values_1_y>
         <values_1_z>0</values_1_z>
         <values_2_x>1145.6</values_2_x>
-        <values_2_y>496.4</values_2_y>
+        <values_2_y>538.4</values_2_y>
         <values_2_z>0</values_2_z>
         <values_3_x>952</values_3_x>
         <values_3_y>538</values_3_y>
@@ -268,10 +268,10 @@
         <values_5_y>-1.2</values_5_y>
         <values_5_z>0</values_5_z>
         <values_6_x>1339.2</values_6_x>
-        <values_6_y>592.8</values_6_y>
+        <values_6_y>538.8</values_6_y>
         <values_6_z>0</values_6_z>
         <values_7_x>1145.6</values_7_x>
-        <values_7_y>496.4</values_7_y>
+        <values_7_y>538.4</values_7_y>
         <values_7_z>0</values_7_z>
         <values_8_x>1339.2</values_8_x>
         <values_8_y>-1.2</values_8_y>
@@ -283,7 +283,7 @@
         <values_10_y>539.2</values_10_y>
         <values_10_z>0</values_10_z>
         <values_11_x>1339.2</values_11_x>
-        <values_11_y>592.8</values_11_y>
+        <values_11_y>538.8</values_11_y>
         <values_11_z>0</values_11_z>
         <values_12_x>1532.8</values_12_x>
         <values_12_y>-0.8</values_12_y>
@@ -292,7 +292,7 @@
         <values_13_y>-0.4</values_13_y>
         <values_13_z>0</values_13_z>
         <values_14_x>1726.4</values_14_x>
-        <values_14_y>475.6</values_14_y>
+        <values_14_y>539.6</values_14_y>
         <values_14_z>0</values_14_z>
         <values_15_x>1532.8</values_15_x>
         <values_15_y>539.2</values_15_y>
@@ -307,13 +307,13 @@
         <values_18_y>540</values_18_y>
         <values_18_z>0</values_18_z>
         <values_19_x>1726.4</values_19_x>
-        <values_19_y>475.6</values_19_y>
+        <values_19_y>539.6</values_19_y>
         <values_19_z>0</values_19_z>
         <values_20_x>952</values_20_x>
         <values_20_y>538</values_20_y>
         <values_20_z>0</values_20_z>
         <values_21_x>1145.6</values_21_x>
-        <values_21_y>496.4</values_21_y>
+        <values_21_y>538.4</values_21_y>
         <values_21_z>0</values_21_z>
         <values_22_x>1145.6</values_22_x>
         <values_22_y>1078.4</values_22_y>
@@ -322,10 +322,10 @@
         <values_23_y>1078</values_23_y>
         <values_23_z>0</values_23_z>
         <values_24_x>1145.6</values_24_x>
-        <values_24_y>496.4</values_24_y>
+        <values_24_y>538.4</values_24_y>
         <values_24_z>0</values_24_z>
         <values_25_x>1339.2</values_25_x>
-        <values_25_y>592.8</values_25_y>
+        <values_25_y>538.8</values_25_y>
         <values_25_z>0</values_25_z>
         <values_26_x>1339.2</values_26_x>
         <values_26_y>1078.8</values_26_y>
@@ -334,7 +334,7 @@
         <values_27_y>1078.4</values_27_y>
         <values_27_z>0</values_27_z>
         <values_28_x>1339.2</values_28_x>
-        <values_28_y>592.8</values_28_y>
+        <values_28_y>538.8</values_28_y>
         <values_28_z>0</values_28_z>
         <values_29_x>1532.8</values_29_x>
         <values_29_y>539.2</values_29_y>
@@ -349,7 +349,7 @@
         <values_32_y>539.2</values_32_y>
         <values_32_z>0</values_32_z>
         <values_33_x>1726.4</values_33_x>
-        <values_33_y>475.6</values_33_y>
+        <values_33_y>539.6</values_33_y>
         <values_33_z>0</values_33_z>
         <values_34_x>1726.4</values_34_x>
         <values_34_y>1079.6</values_34_y>
@@ -358,7 +358,7 @@
         <values_35_y>1079.2</values_35_y>
         <values_35_z>0</values_35_z>
         <values_36_x>1726.4</values_36_x>
-        <values_36_y>475.6</values_36_y>
+        <values_36_y>539.6</values_36_y>
         <values_36_z>0</values_36_z>
         <values_37_x>1920</values_37_x>
         <values_37_y>540</values_37_y>

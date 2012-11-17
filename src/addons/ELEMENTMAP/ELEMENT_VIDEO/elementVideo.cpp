@@ -304,30 +304,34 @@ void elementVideo::setElementInputType(int _inType)
 {
     inputType=_inType;
     
+
     if (getElementInputType() == ELM_INPUT_MONO)
     {
         rightChannelPlayer.close();
+
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {
         if (rightChannelPath!="") rightChannelPlayer.loadMovie(rightChannelPath);   
         else ofSystemAlertDialog("ERROR: this mode requires TWO separate videos!");        
+        
+
     }
     if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
     {
         
         rightChannelPlayer.close();
+
         //prepare left:
         tempLeft.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight());
         lT.clear();
         lT.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight(), GL_RGBA);
-        
+
         //prepare right:
         tempRight.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight());
         rT.clear();
         rT.allocate(leftChannelPlayer.getWidth()*.5, leftChannelPlayer.getHeight(), GL_RGBA);
-        
-        
+
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
     {
@@ -340,10 +344,17 @@ void elementVideo::setElementInputType(int _inType)
         //prepare right:
         tempRight.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5);
         rT.clear();
-        rT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);
-        
+        rT.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5, GL_RGBA);        
     }
-        
+    
+//    cout << "width: " << parentElement->warper.width<< endl;
+//    cout << "text.getWidth: " << parentElement->warper.text.getWidth() << endl;
+
+//    parentElement->warper.createGrid(parentElement->warper.xRes, parentElement->warper.yRes);
+//    parentElement->warper.updateCoordinates();
+//    parentElement->warper.createGrid(parentElement->warper.xRes, parentElement->warper.yRes);
+    
+    
 }
 
 

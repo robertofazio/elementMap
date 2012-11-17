@@ -547,8 +547,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         {
             bool gridState = parentElement->warper.bViewGrid;
             parentElement->warper.bViewGrid=true;
-            parentElement->warper.decreaseXgrid();
-            parentElement->warper.increaseXgrid();
+            parentElement->warper.createGrid(parentElement->warper.xRes, parentElement->warper.yRes);
             parentElement->warper.bViewGrid = gridState;
 
 

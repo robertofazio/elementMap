@@ -17,10 +17,14 @@ void elementWarp::setLeftRightInput()
 //-----------------------------------------------------------------
 void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
 {
+    
+    gridFactorW=1;
+    gridFactorH=1;
+    
     //set texture w & h
     width=_outputWidth;
     height=_outputHeight;
-
+    
     //allocate texture
     text.allocate(width, height, GL_RGBA);
     
@@ -68,6 +72,8 @@ void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
 void elementWarp::draw(ofTexture _text)
 {
 
+//    _text.draw(0,0,width, height);
+    
     text=_text;
     
     mat = quadWarp.getMatrix();
@@ -98,7 +104,6 @@ void elementWarp::draw(ofTexture _text)
     }
     
     glDisable(text.getTextureData().textureTarget);
-//    if (bViewGrid) drawGrid();            
     glPopMatrix();
     
 }
@@ -110,6 +115,8 @@ void elementWarp::draw(ofTexture _text)
 //-----------------------------------------------------------------
 void elementWarp::updateCoordinates()
 {
+    
+
 //converte le coordinate "interne" all'fbo (griglia) in coordinate dello schermo
 for (int index=0; index<nPoints; index++) {
     
@@ -137,7 +144,7 @@ void elementWarp::createGrid(int _xRes, int _yRes){
     
     while (row<(_yRes-1)) {
         for (int ind=0; ind<4; ind++) {
-            
+
             if (ind==0 || ind==3) gridVert[index].x=col*(width/(_xRes-1));
             if (ind==1 || ind==2) gridVert[index].x=(col+1)*(width/(_xRes-1));
             
@@ -147,10 +154,8 @@ void elementWarp::createGrid(int _xRes, int _yRes){
             vertici[index]=gridVert[index];
             screenPos[index]=gridVert[index];
 
-            //            texVert[index]=vertici[index];
-            
-            if (ind==0 || ind==3) texVert[index].x=col*(text.getWidth()/(_xRes-1));
-            if (ind==1 || ind==2) texVert[index].x=(col+1)*(text.getWidth()/(_xRes-1));
+            if (ind==0 || ind==3) texVert[index].x=col*(text.getWidth()/(_xRes-1))*gridFactorW;
+            if (ind==1 || ind==2) texVert[index].x=(col+1)*(text.getWidth()/(_xRes-1))*gridFactorW;
             
             if (ind==0 || ind==1) texVert[index].y=row*(text.getHeight()/(_yRes-1)); 
             if (ind==2 || ind==3) texVert[index].y=(row+1)*(text.getHeight()/(_yRes-1)); 
@@ -324,10 +329,8 @@ void elementWarp::mousePressed(int x, int y, int button){
                 if (abs(x-screenPos[i].x)<15 && abs(y-screenPos[i].y)<15) 
                 {
                     if (vertici[i].z==0) vertici[i].z=1;
-//                    cout << "vertici: " << vertici[i].x << "," << vertici[i].y << endl;
-//                    cout << "texvert: " << texVert[i].x << "," << texVert[i].y << endl;
-//                    cout << "gridvert: " << gridVert[i].x << "," << gridVert[i].y << endl;
-//                    cout << "screenpos: " << screenPos[i].x << "," << screenPos[i].y << endl;
+                    
+                    cout << vertici[i].x << "," << gridVert[i].x << "," << texVert[i].x << "," << screenPos[i].x << endl;
                 }
                 else 
                 {
@@ -694,7 +697,7 @@ void elementWarp::selectNextPoint()
             {
                 nuovaX=texVert[i].x+(text.getWidth()/(xRes-1));
                 nuovaY=texVert[i].y;
-                if (nuovaX>(width+10)) { 
+                if (nuovaX>(text.getWidth()+10)) { 
                     nuovaX=0;
                     nuovaY+=text.getHeight()/(yRes-1);    
                 }
@@ -725,7 +728,7 @@ void elementWarp::selectPrevPoint()
                 nuovaX=texVert[i].x-(text.getWidth()/(xRes-1));
                 nuovaY=texVert[i].y;
                 if (nuovaX<0) { 
-                    nuovaX=width;
+                    nuovaX=text.getWidth();
                     nuovaY-=text.getHeight()/(yRes-1);    
                 }
                 vertici[i].z=0;

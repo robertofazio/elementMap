@@ -81,6 +81,9 @@ class elementWarp
     int width;
     int height;
     
+    float gridFactorW;
+    float gridFactorH;
+    
     ofPoint vertici[MAX_POINTS];
     ofPoint texVert[MAX_POINTS];
     ofPoint screenPos[MAX_POINTS];

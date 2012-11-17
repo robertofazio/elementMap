@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    
+    ofSetLogLevel(OF_LOG_SILENT);
+    
     // test that GL_STEREO is working on this machine
     GLboolean	isGLCapable = GL_FALSE;
 	glGetBooleanv(GL_STEREO,&isGLCapable);
