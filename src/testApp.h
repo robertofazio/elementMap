@@ -26,12 +26,24 @@ public:
 	void PlaceSceneElements();
     void mouseMovedEvent(ofMouseEventArgs &args);
     
+    void selectOutputResolution();
+    void firstSetup();
+    
     ofxFenster* output;
     OutputWindow* outputWindow;
 
     ofxFenster* test;
     
     MainWindow*  mainWindow;
+    
+    ofxUICanvas*    selectResolutionGUI;
+    ofxUILabelButton*   doneButton;
+    void guiEvent(ofxUIEventArgs &e);   
+    bool            bOptionsDone;
+    vector <string> resolutionsList;
+    ofxUIDropDownList* resGUI;
+    
+    ofImage     logoNew;
     
     int         outputSizeWidth;
     int         outputSizeHeight;

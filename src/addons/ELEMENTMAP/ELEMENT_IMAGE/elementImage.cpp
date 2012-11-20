@@ -44,7 +44,6 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
 	yPos = _posY;
 
     //initialize:
-//    this->init(2,leftImage.getWidth(),leftImage.getHeight(),GL_RGBA,_name,inputType, _isWarpable);	
     this->init(2,int(_width),int(_height),GL_RGBA,_name,inputType, _isWarpable);	
 
 	if(getElementInputType()==ELM_INPUT_STEREO_TWO_CHANNEL)

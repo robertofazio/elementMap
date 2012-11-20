@@ -269,12 +269,6 @@ void elementMixer::drawInfo()
     fontMedium.drawString(ofToString(ofGetFrameRate()),950,705);
     
     
-    
-    //glStereo capability
-//    ofSetColor(0,255,206);
-//    if ( ((testApp*)ofGetAppPtr())->isGLCapable==GL_TRUE) fontMedium.drawString("GL STEREO:\nSUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
-//    else fontMedium.drawString("GL STEREO:\nNOT SUPPORTED",ofGetWidth()-200,ofGetHeight()-115);
-//    
     ofPopStyle();
     
     
