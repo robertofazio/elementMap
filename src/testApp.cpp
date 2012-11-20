@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
-    
+        
     ofSetLogLevel(OF_LOG_SILENT);
     
     // test that GL_STEREO is working on this machine
@@ -14,14 +14,21 @@ void testApp::setup(){
     GLint maxVertexTextureImageUnits;
 	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
 
-    if (QuadBufferCapable) printf(">> testApp: GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+    if (QuadBufferCapable) 
+    {
+        glDrawBuffer(GL_BACK);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glDrawBuffer(GL_BACK_LEFT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glDrawBuffer(GL_BACK_RIGHT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        printf(">> testApp: GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+    }
 	else {
         
         glDrawBuffer(GL_BACK);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         printf(">> testApp: GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
- //       ofSystemAlertDialog("OPEN_GL quad buffered Stereo mode NOT supported on this machine");
-
     }
 
     logoNew.loadImage("./utils/elementLogoNew.png");
@@ -30,13 +37,14 @@ void testApp::setup(){
     outputSizeHeight=0;
     bOptionsDone= false;
     selectOutputResolution();
+    
+    
       
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMovedEvent(ofMouseEventArgs &args)
 {
-	cout << "MOUSE WAS MOVED" << endl;
 }
 
 //--------------------------------------------------------------
@@ -53,9 +61,10 @@ void testApp::draw(){
         mainWindow->draw();
         ofPopStyle();
     } 
-    else {
+    else 
+    {
         logoNew.draw(ofGetScreenWidth()*.5+100,ofGetScreenHeight()*.5-120, 150, 96);
-     selectResolutionGUI->draw();
+        selectResolutionGUI->draw();
         ofPushStyle();
         ofSetColor(ofColor :: white);
         string message = "";
@@ -144,16 +153,7 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    
-    
     if (bOptionsDone) mainWindow->keyPressed(key);    
-    if (key=='1') 
-    {
-        bOptionsDone=true;
-        firstSetup();
-    }
-
-
 }
 
 //--------------------------------------------------------------
@@ -195,16 +195,6 @@ void testApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
-    
-    ofPoint dragPt;
-    
-    if( dragInfo.files.size() > 0 ){
-        dragPt = dragInfo.position;
-        cout << dragPt.x << " ; " << dragPt.y << endl;
-    }
-    
-
-    
 }
 
 
@@ -219,6 +209,7 @@ void testApp::firstSetup() {
 	ofBackground(0,0,0);
     
     outputWindow = new OutputWindow(this);
+    cout << "outputwindow created" << endl;
     output = ofxFensterManager::get()->createFenster(400, 200, 400, 300, OF_WINDOW);
     output->addListener(outputWindow);
     output->setWindowTitle("Output");

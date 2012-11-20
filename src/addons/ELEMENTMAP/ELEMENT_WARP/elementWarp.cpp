@@ -329,8 +329,6 @@ void elementWarp::mousePressed(int x, int y, int button){
                 if (abs(x-screenPos[i].x)<15 && abs(y-screenPos[i].y)<15) 
                 {
                     if (vertici[i].z==0) vertici[i].z=1;
-                    
-                    cout << vertici[i].x << "," << gridVert[i].x << "," << texVert[i].x << "," << screenPos[i].x << endl;
                 }
                 else 
                 {

@@ -94,7 +94,7 @@ void MainWindow::setup()
     
     bFullscreen=false;
     
-    comandi ="element.map v0.2.0 alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\n\nall working with arrow keys;\nquad warping support mouse drag too\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
+    comandi ="element.map v0.2.7 alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
     fontSmall.loadFont("CODEBold.otf", 7);
     fontMedium.loadFont("CODEBold.otf", 10);
@@ -130,12 +130,16 @@ void MainWindow::setup()
 //--------------------------------------------------------------
 void MainWindow::update()
 {
+    //disegno negli fbo
 	elemMix.update();  
     elemMix.drawIntoFbo(true);
+    
+    //aggiorno i valori sull'interfaccia
     for (int i=1; i<numOfElements; i++)
     {
         myElements[i]->elementUIBase::aggiornaGUI();
     }
+    //aggiorna la barra di scorrimento del video
     elemMix.elementUIBase::GUI_videoNavigator->setValue(elemV1.leftChannelPlayer.getPosition());
 }
 
@@ -157,8 +161,6 @@ void MainWindow::draw()
     else 
         
     {
-
-        
         //preview window (non-fulscreen)
         ofPushStyle();
         ofSetColor(255, 255, 255);
