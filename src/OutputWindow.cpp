@@ -121,7 +121,6 @@ void OutputWindow::setup()
 void OutputWindow::mousePressed(int x, int y, int btn, ofxFenster* f)
 {
     cout << "mouse pressed sentito da OutputWindow" << endl;
-
     ofPoint dimensioni = ofxFensterManager::get()->getWindowById(1)->getWindowSize();
     cout << "finestra output: " << dimensioni.x << "x" << dimensioni.y << endl;
     cout << x << ";" << y << endl;

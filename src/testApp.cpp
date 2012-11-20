@@ -24,7 +24,6 @@ void testApp::setup(){
 
     }
     
-    
     outputSizeWidth=1920;
     outputSizeHeight=1080;
     
@@ -32,12 +31,10 @@ void testApp::setup(){
     mainWindow->outputResolutionX = outputSizeWidth;
     mainWindow->outputResolutionY = outputSizeHeight;
     mainWindow->setup();
-
     
 	ofBackground(0,0,0);
         
     outputWindow = new OutputWindow(this);
-    int firstScreenWidth = ofGetScreenWidth() - 1;      // Se posiziono esattamente alla fine del primo schermo, la finestra viene spostata indietro e posizionata totalmente all'interno del primo schermo. Cos“ invece si posiziona nel secondo schermo
     output = ofxFensterManager::get()->createFenster(400, 200, 400, 300, OF_WINDOW);
     output->addListener(outputWindow);
     output->setWindowTitle("Output");
@@ -88,6 +85,7 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
+    cout << "mouse Pressed sentito da TestApp" << endl;
 }
 
 //--------------------------------------------------------------

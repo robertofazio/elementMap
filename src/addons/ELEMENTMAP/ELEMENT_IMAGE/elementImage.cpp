@@ -44,7 +44,8 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
 	yPos = _posY;
 
     //initialize:
-    this->init(2,leftImage.getWidth(),leftImage.getHeight(),GL_RGBA,_name,inputType, _isWarpable);	
+//    this->init(2,leftImage.getWidth(),leftImage.getHeight(),GL_RGBA,_name,inputType, _isWarpable);	
+    this->init(2,int(_width),int(_height),GL_RGBA,_name,inputType, _isWarpable);	
 
 	if(getElementInputType()==ELM_INPUT_STEREO_TWO_CHANNEL)
 	{
@@ -80,7 +81,7 @@ void elementImage::drawLeft(int x, int y, int w, int h)
 {
         fboLeft.begin();
         if (isWarpable) warper.draw(getLeftTexture());
-        else leftImage.draw(x,y,w,h);	
+        else leftImage.draw(0,0,fboLeft.getWidth(),fboLeft.getHeight());	
         fboLeft.end();
 
         ofPushStyle();
@@ -95,7 +96,7 @@ void elementImage::drawRight(int x, int y, int w, int h)
 {
         fboRight.begin();
         if (isWarpable) warper.draw(getRightTexture());
-        else rightImage.draw(x,y,w,h);	
+        else rightImage.draw(0,0,fboRight.getWidth(),fboRight.getHeight());	
         fboRight.end();
         
         ofPushStyle();

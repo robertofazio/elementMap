@@ -575,7 +575,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     if(e.widget->getName()=="FULL SCREEN")
     {
         ofxFensterManager::get()->getWindowById(1)->toggleFullscreen();
-        
+                
         if (ofxFensterManager::get()->getWindowById(1)->getWindowMode() == OF_WINDOW)
         {
             ofxFensterManager::get()->getWindowById(1)->setWindowShape(400, 300);
