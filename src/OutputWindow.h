@@ -21,12 +21,10 @@ public:
     void        draw();
     void        setup();
     void        update();
-    //  void        dragEvent(ofDragInfo &dragInfo);
     void        keyPressed(int key, ofxFenster* window);
     void        keyReleased(int key, ofxFenster* window);
     void        mouseDragged(int x, int y, int button,  ofxFenster* f);
     void        mousePressed(int x, int y, int btn, ofxFenster* f);
-  //  void        dragEvent(ofDragInfo dragInfo,  ofxFenster* window);
     void        setWindowShape(int w, int h);  
     
     testApp*    mainScene;

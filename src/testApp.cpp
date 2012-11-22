@@ -17,7 +17,6 @@ void testApp::setup(){
     if (QuadBufferCapable) 
     {
         glDrawBuffer(GL_BACK);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         printf(">> testApp: GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
     }
 	else {
@@ -52,6 +51,7 @@ void testApp::update(){
 void testApp::draw(){
     
     if (bOptionsDone) {
+        if (QuadBufferCapable) glDrawBuffer(GL_BACK_LEFT);
         ofPushStyle();
         ofBackground(0, 0, 0);  
         mainWindow->draw();
@@ -59,14 +59,14 @@ void testApp::draw(){
     } 
     else 
     {
-        logoNew.draw(ofGetScreenWidth()*.5+100,ofGetScreenHeight()*.5-120, 150, 96);
+        logoNew.draw(ofGetWindowWidth()*.5+100,ofGetWindowHeight()*.5-120, 150, 96);
         selectResolutionGUI->draw();
         ofPushStyle();
         ofSetColor(ofColor :: white);
         string message = "";
         if (QuadBufferCapable) message = "OPEN_GL quad buffered Stereo mode SUPPORTED on this machine";
         else message = "OPEN_GL quad buffered Stereo mode NOT SUPPORTED on this machine";
-        ofDrawBitmapString(message, (ofGetScreenWidth()-600)*.5+10,(ofGetScreenHeight()-400)*.5+380);
+        ofDrawBitmapString(message, (ofGetWindowWidth()-600)*.5+10,(ofGetWindowHeight()-400)*.5+380);
         ofPopStyle();
     }
 
@@ -76,7 +76,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::selectOutputResolution(){
 
-    selectResolutionGUI = new ofxUICanvas((ofGetScreenWidth()-600)*.5,(ofGetScreenHeight()-400)*.5, 600, 400);
+    selectResolutionGUI = new ofxUICanvas((ofGetWindowWidth()-600)*.5,(ofGetWindowHeight()-400)*.5, 600, 400);
     selectResolutionGUI->setDrawOutline(true);
     selectResolutionGUI->setDrawBack(false);
     
