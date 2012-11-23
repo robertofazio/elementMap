@@ -58,6 +58,8 @@ public:
     
     bool                    frameByframe;
     
+    bool                    bGLStereoCapable;
+    
     ofFbo                   fboAnaglyph;
     
     string                  comandi;

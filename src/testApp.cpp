@@ -53,6 +53,7 @@ void testApp::draw(){
         if (bSetIniziale) {
             selectResolutionGUI->disable();
             bSetIniziale=false;
+            mainWindow->bGLStereoCapable=QuadBufferCapable;
         }
         if (QuadBufferCapable) glDrawBuffer(GL_BACK_LEFT);
         ofPushStyle();
@@ -171,16 +172,20 @@ void testApp::mouseDragged(int x, int y, int button){
         //imposto dimensioni e posizione della preview:
         int altezza, larghezza, posizioneX, posizioneY;
         
-        larghezza = 600;
+        if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_LEFTRIGHT) larghezza = 300;
+        else larghezza = 600;
         posizioneX = 650;
+        
         if (mainWindow->elemMix.wideScreenPreview) 
         {
-            altezza = 338;
+            if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 169;
+            else altezza = 338;
             posizioneY = 136;
         }
         else
         {
-            altezza = 450;
+            if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 225;
+            else altezza = 450;
             posizioneY = 80;        
         }
         
@@ -211,19 +216,24 @@ void testApp::mousePressed(int x, int y, int button){
     //imposto dimensioni e posizione della preview:
     int altezza, larghezza, posizioneX, posizioneY;
     
-    larghezza = 600;
+         if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_LEFTRIGHT) larghezza = 300;
+         else larghezza = 600;
+
     posizioneX = 650;
-    if (mainWindow->elemMix.wideScreenPreview) 
-    {
-        altezza = 338;
-        posizioneY = 136;
-    }
-    else
-    {
-        altezza = 450;
-        posizioneY = 80;        
-    }
-    
+   
+         if (mainWindow->elemMix.wideScreenPreview) 
+         {
+             if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 169;
+             else altezza = 338;
+             posizioneY = 136;
+         }
+         else
+         {
+             if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 225;
+             else altezza = 450;
+             posizioneY = 80;        
+         }
+        
     //controllo se ho premuto dentro l'area della preview:
     if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza) 
     {

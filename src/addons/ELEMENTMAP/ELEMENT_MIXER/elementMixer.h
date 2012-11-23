@@ -6,6 +6,8 @@
 #define ELM_STEREO_ANAGLYPH		0
 #define ELM_MONO                1
 #define ELM_STEREO_OPENGL		2
+#define ELM_STEREO_LEFTRIGHT    3
+#define ELM_STEREO_TOPBOTTOM     4
 
 #include "ofMain.h"
 #include "element.h"
@@ -53,7 +55,8 @@ class elementMixer : public element
     MainWindow*  mainWindow;
         
     ofFbo        fboAnagliph;
-	
+    ofFbo        fboLeftRight;
+    ofFbo        fboTopBottom;
     
     private :
 

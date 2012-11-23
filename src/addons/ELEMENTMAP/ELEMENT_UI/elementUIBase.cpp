@@ -25,6 +25,8 @@ elementUIBase::elementUIBase()
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
     outputModesNames.push_back("ACTIVE STEREO");
+    outputModesNames.push_back("LEFT-RIGHT");
+    outputModesNames.push_back("TOP-BOTTOM");
     
     inputTypeNames.push_back("MONO");
     inputTypeNames.push_back("2CHANNEL");
@@ -244,19 +246,19 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_mainOpacity);
 
         // STEREOSCOPIC
-        GUI_mainStereo = new ofxUIToggle(300, 60, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO");
+        GUI_mainStereo = new ofxUIToggle(300, 10, 16, 16, parentElement->getDrawInStereo(), "MAIN STEREO");
         UI->addWidget(GUI_mainStereo);
         
         // SWAP LEFT RIGHT
-        GUI_swapLeftRight = new ofxUIToggle(300, 80, 16, 16, parentElement->getSwapLeftRight(), "SWAP LEFT RIGHT");
+        GUI_swapLeftRight = new ofxUIToggle(300, 60, 16, 16, parentElement->getSwapLeftRight(), "SWAP LEFT RIGHT");
         UI->addWidget(GUI_swapLeftRight);
 
         //SET PARALLAX
-        GUI_parallax = new ofxUIMinimalSlider(300, 100, 100, 20, -20.0, 20.0, parentElement->parallax, "ZERO PARALLAX");
+        GUI_parallax = new ofxUIMinimalSlider(300, 80, 100, 20, -20.0, 20.0, parentElement->parallax, "ZERO PARALLAX");
         UI->addWidget(GUI_parallax);
         
         // OUTPUT MODE
-        listOutputModes = new ofxUIDropDownList(300, 125, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes = new ofxUIDropDownList(300, 105, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
         listOutputModes->setDrawPaddingOutline(false);

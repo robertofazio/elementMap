@@ -20,6 +20,8 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
 	this->init(5,_width,_height,GL_RGBA,_name,1, _isWarpable);
 	
     fboAnagliph.allocate(_width ,_height, GL_RGBA);
+    fboLeftRight.allocate(_width ,_height, GL_RGBA);
+    fboTopBottom.allocate(_width ,_height, GL_RGBA);
         
     sceneElements = _elements;
 	numOfElements = _numOfElements;
@@ -88,6 +90,8 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                 ofDisableBlendMode();
                 
+                //NOTA: gli "special" sono solo sul canale sinistro, per non sdoppiarsi!
+                
                 //se è selezionato disegna l'outline rosso, e i markers se il warp è attivo
                 if(sceneElements[elementsOrder[a]]->isSelected) 
                 {
@@ -142,20 +146,6 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
 
                         ofDisableBlendMode();                        
                         
-                        
-//non ridisegno i controlli oppure mi si sdoppiano cambiando la zero-parallax:                        
-//                        //se è selezionato disegna l'outline rosso, e i markers se il warp è attivo
-//                        if(sceneElements[elementsOrder[a]]->isSelected) 
-//                        {
-//                            //outline se selezionato 
-//                            sceneElements[elementsOrder[a]]->warper.drawElementOutline();
-//                            
-//                            //marker per il quad warping
-//                            if (sceneElements[elementsOrder[a]]->warper.bWarpActive) sceneElements[elementsOrder[a]]->warper.drawMarkers();
-//                            //griglia per il mesh warping
-//                            if (sceneElements[elementsOrder[a]]->warper.bViewGrid) sceneElements[elementsOrder[a]]->warper.drawGrid();
-//                        }
-                        
                         ofPopStyle();
                     }
                 
@@ -181,6 +171,38 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
     glColorMask(true, true, true, true);
     ofPopStyle();
         fboAnagliph.end();
+    }
+    //fbo dedicato per l'uscita leftright, utile per i 3Dtv che la supportano
+    else if (outputMode == ELM_STEREO_LEFTRIGHT)
+    {
+        fboLeftRight.begin();
+        ofPushStyle();
+        ofClear(0,0,0,0);
+        if (getSwapLeftRight()) {
+            fboRight.draw(0, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());
+            fboLeft.draw(fboLeftRight.getWidth()*.5, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());            
+        } else {
+            fboLeft.draw(0, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());
+            fboRight.draw(fboLeftRight.getWidth()*.5, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());
+        }
+        ofPopStyle();
+        fboLeftRight.end();
+    }
+    //fbo dedicato per l'uscita topbottom, utile per i 3Dtv che la supportano
+    else if (outputMode == ELM_STEREO_TOPBOTTOM)
+    {
+        fboTopBottom.begin();
+        ofPushStyle();
+        ofClear(0,0,0,0);
+        if (getSwapLeftRight()) {
+            fboRight.draw(0, 0, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);
+            fboLeft.draw(0, fboTopBottom.getHeight()*.5, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);            
+        } else {
+            fboLeft.draw(0, 0, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);
+            fboRight.draw(0, fboTopBottom.getHeight()*.5, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);            
+        }
+        ofPopStyle();
+        fboTopBottom.end();
     }
 
 }
@@ -217,6 +239,14 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 //                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 if (getSwapLeftRight()) fboLeft.draw(_x,_y,_width,_height);
                     else fboRight.draw(_x,_y,_width,_height);
+                break;
+
+            case ELM_STEREO_LEFTRIGHT:
+                fboLeftRight.draw(_x,_y,_width,_height);
+                break;
+
+            case ELM_STEREO_TOPBOTTOM:
+                fboTopBottom.draw(_x,_y,_width,_height);
                 break;
 
 			default:
@@ -260,6 +290,10 @@ void elementMixer::drawInfo()
 			fontMedium.drawString("STEREO ANAGLYPH",950,690);
 			break;
 		
+		case ELM_STEREO_LEFTRIGHT:
+			fontMedium.drawString("STEREO LEFTRIGHT",950,690);
+			break;
+
         default:
 			break;
 	}
@@ -381,7 +415,12 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         {
             if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
             else if(name=="MONO") setOutputMode(ELM_MONO);
-            else if(name=="ACTIVE STEREO") setOutputMode(ELM_STEREO_OPENGL);
+            else if(name=="ACTIVE STEREO") {
+                if (mainWindow->bGLStereoCapable) setOutputMode(ELM_STEREO_OPENGL);   
+                else ofSystemAlertDialog("GL STEREO MODE NOT SUPPORTED ON THIS MACHINE!");
+            }
+            else if(name=="LEFT-RIGHT") setOutputMode(ELM_STEREO_LEFTRIGHT);
+            else if(name=="TOP-BOTTOM") setOutputMode(ELM_STEREO_TOPBOTTOM);
         }
 
         // ++++ VIDEO PLAYER ++++ //
