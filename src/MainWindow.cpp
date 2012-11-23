@@ -45,8 +45,6 @@ void MainWindow::setup()
     //image
     elemImg2.setup("./images/leftRightHD.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);
 	
-    
-    
     //video starts at frame number 0, paused and no-looping
     elemV1.leftChannelPlayer.play();
     elemV1.rightChannelPlayer.play();
