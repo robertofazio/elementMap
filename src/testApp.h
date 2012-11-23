@@ -40,6 +40,7 @@ public:
     ofxUILabelButton*   doneButton;
     void guiEvent(ofxUIEventArgs &e);   
     bool            bOptionsDone;
+    bool            bSetIniziale;
     vector <string> resolutionsList;
     ofxUIDropDownList* resGUI;
     
@@ -51,5 +52,5 @@ public:
     bool        outputFullScreen;
 
     bool        QuadBufferCapable;
-
+    
 };

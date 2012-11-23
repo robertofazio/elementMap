@@ -32,14 +32,13 @@ void testApp::setup(){
     outputSizeHeight=0;
     bOptionsDone= false;
     selectOutputResolution();
+    bSetIniziale=true;
     
-    
-      
+
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMovedEvent(ofMouseEventArgs &args)
-{
+void testApp::mouseMovedEvent(ofMouseEventArgs &args){
 }
 
 //--------------------------------------------------------------
@@ -51,6 +50,10 @@ void testApp::update(){
 void testApp::draw(){
     
     if (bOptionsDone) {
+        if (bSetIniziale) {
+            selectResolutionGUI->disable();
+            bSetIniziale=false;
+        }
         if (QuadBufferCapable) glDrawBuffer(GL_BACK_LEFT);
         ofPushStyle();
         ofBackground(0, 0, 0);  
@@ -159,17 +162,84 @@ void testApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
-    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
+    if (bOptionsDone) {
+        
+        //imposto dimensioni e posizione della preview:
+        int altezza, larghezza, posizioneX, posizioneY;
+        
+        larghezza = 600;
+        posizioneX = 650;
+        if (mainWindow->elemMix.wideScreenPreview) 
+        {
+            altezza = 338;
+            posizioneY = 136;
+        }
+        else
+        {
+            altezza = 450;
+            posizioneY = 80;        
+        }
+        
+        //controllo se ho premuto dentro l'area della preview:
+        if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza) 
+        {
+            
+            //faccio le proporzioni:
+            x = (x-posizioneX)*outputSizeWidth/larghezza;
+            y = (y-posizioneY)*outputSizeHeight/altezza;
+            
+            //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO:
+            if (mainWindow->elemSy.isSelected==true && mainWindow->elemSy.isWarpable==true) mainWindow->elemSy.warper.mouseDragged(x, y, button);
+            else if (mainWindow->elemV1.isSelected==true && mainWindow->elemV1.isWarpable==true) mainWindow->elemV1.warper.mouseDragged(x, y, button);
+            else if (mainWindow->elemImg2.isSelected==true && mainWindow->elemImg2.isWarpable==true) mainWindow->elemImg2.warper.mouseDragged(x, y, button);     
+            
+        }
+        
+    }
     
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-    cout << "mouse Pressed sentito da TestApp" << endl;
+   
+     if (bOptionsDone) {
+         
+    //imposto dimensioni e posizione della preview:
+    int altezza, larghezza, posizioneX, posizioneY;
+    
+    larghezza = 600;
+    posizioneX = 650;
+    if (mainWindow->elemMix.wideScreenPreview) 
+    {
+        altezza = 338;
+        posizioneY = 136;
+    }
+    else
+    {
+        altezza = 450;
+        posizioneY = 80;        
+    }
+    
+    //controllo se ho premuto dentro l'area della preview:
+    if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza) 
+    {
+    
+        //faccio le proporzioni:
+        x = (x-posizioneX)*outputSizeWidth/larghezza;
+        y = (y-posizioneY)*outputSizeHeight/altezza;
+        
+        //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO:
+        if (mainWindow->elemSy.isSelected==true && mainWindow->elemSy.isWarpable==true) mainWindow->elemSy.warper.mousePressed(x, y, button);
+        else if (mainWindow->elemV1.isSelected==true && mainWindow->elemV1.isWarpable==true) mainWindow->elemV1.warper.mousePressed(x, y, button);
+        else if (mainWindow->elemImg2.isSelected==true && mainWindow->elemImg2.isWarpable==true) mainWindow->elemImg2.warper.mousePressed(x, y, button);     
+        
+    }
+    
+     }
 }
 
 //--------------------------------------------------------------

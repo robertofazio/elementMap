@@ -326,6 +326,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         {
             ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
             wideScreenPreview=!wideScreenPreview;
+            
         }
         //MAIN OPACITY
         if(e.widget->getName()=="MAIN OPACITY")
