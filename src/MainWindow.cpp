@@ -111,8 +111,8 @@ void MainWindow::setup()
 	fontMedium.setLetterSpacing(1.017);
     
     logo.loadImage("./utils/elementMapTrasp.png");
-    logoChristie.loadImage("./utils/logoChristie.png");
-    logoDigitalNetwork.loadImage("./utils/logoDigitalNetwork.png");
+//    logoChristie.loadImage("./utils/logoChristie.png");
+//    logoDigitalNetwork.loadImage("./utils/logoDigitalNetwork.png");
     previewGrid.loadImage("./utils/previewGrid.png");
 
     //di default il test pattern non è visibile:
@@ -275,7 +275,7 @@ void MainWindow::draw()
 
                 
         logo.draw(10, 9, 45, 45);
-        logoDigitalNetwork.draw(1150, 12, 110, 40);
+//        logoDigitalNetwork.draw(1150, 12, 110, 40);
 //        logoChristie.draw(950,20,235,35);
     }
     
@@ -286,9 +286,7 @@ void MainWindow::draw()
 //--------------------------------------------------------------
 void MainWindow::keyPressed(int key)
 {
-    
-    cout << "MAIN WINDOW KEY" << endl;
-	if(key == OF_KEY_RETURN)
+    if(key == OF_KEY_RETURN)
 	{
         drawUIs=!drawUIs;
         
@@ -307,6 +305,8 @@ void MainWindow::keyPressed(int key)
 			myElements[2]->UI->setVisible(false);
 			myElements[3]->UI->setVisible(false);
 			elemMix.UI->setVisible(false);
+            
+            
 		}
         
         bFullscreen=!bFullscreen;

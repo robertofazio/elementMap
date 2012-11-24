@@ -34,7 +34,6 @@ void testApp::setup(){
     bOptionsDone= false;
     selectOutputResolution();
     bSetIniziale=true;
-    
 
 }
 
