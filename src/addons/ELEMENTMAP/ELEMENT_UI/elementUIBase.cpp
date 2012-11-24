@@ -162,7 +162,7 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_vertMirror = new ofxUILabelButton(410, posY, 55, false, "flipV", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_vertMirror);
         //rotate
-        GUI_rotCW = new ofxUILabelButton(350, posY+=22, 55, false, "rotCW", OFX_UI_FONT_SMALL);
+        GUI_rotCW = new ofxUILabelButton(350, posY+=30, 55, false, "rotCW", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_rotCW);
         GUI_rotCCW = new ofxUILabelButton(410, posY, 55, false, "rotCCW", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_rotCCW);

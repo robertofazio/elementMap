@@ -28,8 +28,9 @@ void testApp::setup(){
 
     logoNew.loadImage("./utils/elementLogoNew.png");
     
-    outputSizeWidth=0;
-    outputSizeHeight=0;
+    //default resolution: HD
+    outputSizeWidth=1920;
+    outputSizeHeight=1080;
     bOptionsDone= false;
     selectOutputResolution();
     bSetIniziale=true;
