@@ -52,7 +52,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 		
 	setupUI(this);
     
-    
+    noMedia.loadImage("./utils/noMedia.png");
 	
 	printf("································································\n");
     
@@ -98,9 +98,11 @@ void element::drawGraphic(int x, int y, int w, int h)
         ofTranslate(0, 40);
         getLeftTexture().draw(x, y, w, h);
         
-        if (type!= 3) {
-        ofTranslate(105, 0);
-        getRightTexture().draw(x, y, w, h);
+        if (type!= 3) 
+        {
+            ofTranslate(105, 0);
+            if (parentElement->inputType == ELM_INPUT_MONO) noMedia.draw(x, y, w, h);
+            else getRightTexture().draw(x, y, w, h);
         }
         
         ofPopMatrix();

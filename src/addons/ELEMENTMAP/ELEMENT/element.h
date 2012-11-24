@@ -104,6 +104,7 @@ class element : public ofNode , public elementUIBase
 	bool			isClear;	// indicates if the fbo's have been cleared to black to avoid clearing on every draw
 	ofBlendMode		blendingMode;
     
+    ofImage         noMedia;
 	
 	private :
 	

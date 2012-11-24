@@ -38,8 +38,7 @@ void elementSyphon::setup(string _applicationName,string _serverName,int _width,
         lT.allocate(syphonWidth, syphonHeight*.5, GL_RGBA);
         rT.allocate(syphonWidth, syphonHeight*.5, GL_RGBA);
     }
-	
-	
+	    
 	// UI params
 	xPos = _posX;
 	yPos = _posY;

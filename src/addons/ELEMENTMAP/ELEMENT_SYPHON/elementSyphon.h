@@ -27,7 +27,6 @@ class elementSyphon : public element
 	ofTexture& getLeftTexture();
 	ofTexture& getRightTexture();
     
-
     //stereo input utilities:
     ofTexture lT;
     ofTexture rT;
