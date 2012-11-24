@@ -204,6 +204,16 @@ void MainWindow::draw()
 
         else fontMedium.drawString("NO ELEMENTs SELECTED", 660,100);
 
+        if (elemMix.getIsStereo()) {
+            string swapInfo = "first frame: ";
+            if (elemMix.getSwapLeftRight()) swapInfo+="RIGHT";
+            else swapInfo+="LEFT";
+            ofPushStyle();
+            ofSetColor(0, 255, 206);
+            fontMedium.drawString(swapInfo, 660, 520);
+            ofPopStyle();
+        }
+        
         elemMix.UI->draw();
         
         ofPushStyle();

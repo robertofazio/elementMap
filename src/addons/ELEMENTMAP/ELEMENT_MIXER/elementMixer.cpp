@@ -221,7 +221,7 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 		{
             
 			case ELM_MONO:
-                fboLeft.draw(_x,_y,_width,_height);
+                 fboLeft.draw(_x,_y,_width,_height);
             break;
                 
             case ELM_STEREO_ANAGLYPH:

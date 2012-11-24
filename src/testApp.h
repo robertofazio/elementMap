@@ -28,6 +28,7 @@ public:
     
     void selectOutputResolution();
     void firstSetup();
+    void createOutputWindow();
     
     ofxFenster* output;
     OutputWindow* outputWindow;

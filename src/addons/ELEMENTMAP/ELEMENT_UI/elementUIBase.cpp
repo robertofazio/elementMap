@@ -275,6 +275,7 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_fullscreen = new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_fullscreen);
         
+        
         // SAVE PROJECT
         UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
         
@@ -585,10 +586,15 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         }
     }
 
-//    for (int i=1; i<4; i++) 
+//    //CREATE NEW OUTPUT WINDOW
+//    if(e.widget->getName()=="CREATE OUTPUT")
 //    {
-//        allElementsPointer[i]->elementUIBase::aggiornaGUI();
-//    };
+//        ofxUIButton *button = (ofxUIButton *) e.widget;
+//        if (button->getValue()) {
+//            ((testApp*)ofGetAppPtr())->createOutputWindow();
+//        }
+//    }
+
 }
 
 

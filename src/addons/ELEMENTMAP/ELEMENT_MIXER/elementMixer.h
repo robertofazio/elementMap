@@ -42,7 +42,6 @@ class elementMixer : public element
     void openLeft(string _path){};
     void openRight(string _path){};
 
-        
     //utilities:
     int  getOutputMode();
 	void setOutputMode(int _mode);

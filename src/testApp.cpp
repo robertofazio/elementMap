@@ -284,6 +284,13 @@ void testApp::firstSetup() {
     
 	ofBackground(0,0,0);
     
+    createOutputWindow();
+    
+    
+}
+
+//--------------------------------------------------------------
+void testApp::createOutputWindow(){
     outputWindow = new OutputWindow(this);
     cout << "outputwindow created" << endl;
     output = ofxFensterManager::get()->createFenster(400, 200, 400, 300, OF_WINDOW);
