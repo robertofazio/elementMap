@@ -3,9 +3,15 @@
 
 Sterescopic media server tool for video mapping.
 
-elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in C++ usando OpenFrameworks e dedicato a video proiezioni stereoscopiche con tecnologia attiva sydebyside.
-os : OSX 10.7.4 
-scheda grafica : nVidia min 512MB e GL_STEREO supportate
+elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in C++ usando OpenFrameworks e dedicato a video proiezioni stereoscopiche con differenti modalità di visualizzazione.
+Sviluppato principalmente sul videoproiettore Christie CP2220 ( http://www.christiedigital.com/en-us/cinema/cinema-products/digital-cinema-projectors/pages/christie-cp2220-dlp-digital-cinema-projector.aspx )
+
+Piattaforma di sviluppo : MAC // Attuale OS : OSX 10.7.5
+Scheda grafica minima : nVidia o ATI min 512MB e OPEN GL_STEREO QUAD BUFFER supportate
+fare riferimento a questo link per aggiornare il sistema operativo o il vostro harwdare : http://arek.bdmonkeys.net/GLInfo/GLInfo.html
+Richiesto secondo monitor o videoproiettore connesso prima di lanciare elementMap
+
+Attualmente funziona con un video proiettore
 
 (C) 2012 Roberto Fazio Studio - www.robertofazio.com 
 Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario 
@@ -13,6 +19,7 @@ versione alpha 0.2.9 - 23/11/2012
 
 MAIN FEATURES:
 
+- Funziona con un video proiettore
 - LOAD con menu a tendina per caricare file contenuti nelle cartelle "images" e "movies"
 - Selezione INPUT mode: MONO, STEREO_TWO_CHANNLES, STEREO_TOP_BOTTOM, STEREO_LEFT_RIGHT
 - Selezione OUTPUT mode: MONO, ANAGLIPH, STEREO_OPENGL, LEFTRIGHT, TOPBOTTOM
@@ -34,7 +41,14 @@ MAIN FEATURES:
 KNOWN ISSUES:
 
 - il livello video non ha trasparenza esterna -> impostare BLENDING MODE = ADD
-- per visualizzare correttamente un file caricato la sequenza è: LOAD -> INPUT TYPE -> RESET GRID
+- FRAME RATE GENERALE PERFORMANCE : soprattuto quando carichi 2 video separati non mantiene il sincronismo
+- RESET GRID : per visualizzare correttamente un file caricato la sequenza è: LOAD -> INPUT TYPE -> RESET GRID
+- FINE WARPING : aumentando e diminuendo la risoluzione della griglia dsi modifica la dimensione del contenuto
+- IS ACTIVE BUTTON : quando lo selezioni non mantiene livello di Opacity corretto 
+- STEREOSCOPIC BUTTON : non funzionano nei vari element e nella Main Preview
+- SFONDO PREVIEW : mettiamo uno sfondo nero quando tutti i livelli sono OFF e la griglia è disattivata
+- VOLUME : Bug sul volumene quando lo alzi non mantiene il livello
+- NO MEDIA IMG : inserire NoMedia Img anche sul livello syphon e su 2Channel ( cambiare colore scritta in blu come interfaccia ) 
 
 TO DO LIST:
 
