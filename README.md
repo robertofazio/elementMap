@@ -63,7 +63,8 @@ TO DO LIST:
 - CONTRAST BUTTON: per ogni element
 - ROTATE FINE BUTTON: per ruotare ogni element potremmo usare quello già presente in ofxUI
 - ZOOM BUTTON: per zoomare su ogni punto del fine warping
-- SCALE BUTTON: 
+- SCALE BUTTON: importante, manca potrebbe essere con la rotella del mouse(!?) o con le frecce
+- MOVE/TRANSLATE BUTTON : si abilita via interfaccia e poi col mouse si muove (!) 
 - Usare il primo frame per la preview video. ofxUI.
 - Splash image appena si apre elementMap per i crediti,immagini etc..
 
@@ -72,7 +73,7 @@ WISH LIST:
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Maschera per ogni element
-- 
+- MIDI e OSC Controls : mi immagino un tasto che abilita il midi map e che in automatico riconosca i segnali MIDI ( poi ti spiego come dovrebbe funzionare ) 
 - Progettazione di una main area inspector
 - Edge Blending
 - Multiproiezioni
