@@ -48,6 +48,9 @@ KNOWN ISSUES:
 - STEREOSCOPIC BUTTON : non funzionano nei vari element e nella Main Preview
 - SFONDO PREVIEW : mettiamo uno sfondo nero quando tutti i livelli sono OFF e la griglia è disattivata
 - VOLUME : Bug sul volumene quando lo alzi non mantiene il livello
+- TASTO SAVE E OPEN non salvano bene tutte le caratteristiche
+- BLEND MODE BUTTON: non deve stare sopra INPUT
+- OUTPUT MODE BUTTON : non deve stare sopra i FPS
 - NO MEDIA IMG : inserire NoMedia Img anche sul livello syphon e su 2Channel ( cambiare colore scritta in blu come interfaccia ) 
 
 TO DO LIST:
@@ -55,7 +58,11 @@ TO DO LIST:
 - Interfaccia e usabilità
 - Possibilità di cambiare la priorità di ogni element
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
-- Tasto Crop left/right top/bottom su ogni element
+- CROP BUTTON: left/right top/bottom su ogni element
+- CONTRAST BUTTON: per ogni element
+- ROTATE FINE BUTTON: per ruotare ogni element potremmo usare quello già presente in ofxUI
+- ZOOM BUTTON: per zoomare su ogni punto del fine warping
+- SCALE BUTTON: 
 - Usare il primo frame per la preview video. ofxUI.
 - Splash image appena si apre elementMap per i crediti,immagini etc..
 
@@ -64,6 +71,7 @@ WISH LIST:
 - Possibilità di salvare e caricare più configurazioni, molto utile per gestire diversi mapping.
 - Possibilità di aggiungere n. quad element e possibilità di sceglierne il tipo, img, video , syphon etc
 - Maschera per ogni element
+- 
 - Progettazione di una main area inspector
 - Edge Blending
 - Multiproiezioni
