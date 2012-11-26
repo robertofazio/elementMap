@@ -144,10 +144,13 @@ void elementUIBase::setupUI(element* _parentElement)
         GUI_opacity = new ofxUIMinimalSlider(350, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity");
         UI->addWidget(GUI_opacity);
         GUI_red = new ofxUIMinimalSlider(350, posY+=20, 100,10, 0, 255, parentElement->getRed() ,"RED");
+        GUI_red->setColorFill(ofColor(255,0,0,25));
         UI->addWidget(GUI_red);
         GUI_green = new ofxUIMinimalSlider(350, posY+=20, 100,10, 0, 255, parentElement->getGreen() ,"GREEN");
+        GUI_green->setColorFill(ofColor(0,255,0,25));
         UI->addWidget(GUI_green);
         GUI_blue = new ofxUIMinimalSlider(350, posY+=20, 100,10, 0, 255, parentElement->getBlue() ,"BLUE");
+        GUI_blue->setColorFill(ofColor(0,0,255,25));
         UI->addWidget(GUI_blue);
         GUI_resetRGB = new ofxUIButton(350, posY+=20, 16, 16, false, "RGB reset");
         UI->addWidget(GUI_resetRGB);
