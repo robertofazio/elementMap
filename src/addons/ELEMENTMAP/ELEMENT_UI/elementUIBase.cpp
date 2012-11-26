@@ -223,7 +223,8 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(new ofxUILabel(5, 10, "ELEMENT MAIN CONTROL", 1));
         
         ofxUISpacer* spacer = new ofxUISpacer(5, 30, 590, 1);
-        spacer->setColorFill(ofColor(0, 255, 206));
+//        spacer->setColorFill(ofColor(0, 255, 206));
+        spacer->setColorFill(ofColor(36, 203, 228));
         UI->addWidget(spacer);
         
         // STEREOSCOPIC PLAYER

@@ -23,7 +23,7 @@ class element : public ofNode , public elementUIBase
 
     void init(int _type,int _width, int _height,int internalformat,string _name,int _inputType, bool _isWarpable);
 	virtual void update() =0;
-	virtual void drawIntoFbo(bool _drawMonoOrStereo) =0;
+	virtual void drawIntoFbo() =0;
 	virtual void drawGraphic(int x, int y, int w, int h);
 	virtual void drawLeft(int x, int y, int w, int h) =0;
 	virtual void drawRight(int x, int y, int w, int h) =0;

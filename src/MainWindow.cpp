@@ -92,7 +92,7 @@ void MainWindow::setup()
     
     bFullscreen=false;
     
-    comandi ="element.map v0.2.9 alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
+    comandi ="element.map v0.3.0 alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
 //    fontSmall.loadFont("CODEBold.otf", 7);
 //    fontMedium.loadFont("CODEBold.otf", 10);
@@ -111,9 +111,8 @@ void MainWindow::setup()
 	fontMedium.setLetterSpacing(1.017);
     
     logo.loadImage("./utils/elementMapTrasp.png");
-//    logoChristie.loadImage("./utils/logoChristie.png");
-//    logoDigitalNetwork.loadImage("./utils/logoDigitalNetwork.png");
     previewGrid.loadImage("./utils/previewGrid.png");
+    sfondo.loadImage("./utils/sfondoELMT02.jpg");
 
     //di default il test pattern non è visibile:
     elemImg.setIsActive(false);    
@@ -133,7 +132,7 @@ void MainWindow::update()
 {
     //disegno negli fbo
 	elemMix.update();  
-    elemMix.drawIntoFbo(true);
+    elemMix.drawIntoFbo();
     
     //aggiorno i valori sull'interfaccia
     for (int i=1; i<numOfElements; i++)
@@ -153,6 +152,7 @@ void MainWindow::draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     ofBackground(35, 31, 32);
+    sfondo.draw(0, 0, 1280, 800);
         
     if (bFullscreen) {
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
@@ -166,8 +166,9 @@ void MainWindow::draw()
         ofPushStyle();
         ofSetColor(255, 255, 255);
         
-        fontLarge.drawString("element.Map v0.2.9 ", 70 , 44);
-        ofSetColor(0, 255, 206);
+        fontLarge.drawString("element.Map v0.3.0 ", 70 , 44);
+//        ofSetColor(0, 255, 206);
+        ofSetColor(36, 203, 228);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
 
@@ -212,7 +213,8 @@ void MainWindow::draw()
             if (elemMix.getSwapLeftRight()) swapInfo+="RIGHT";
             else swapInfo+="LEFT";
             ofPushStyle();
-            ofSetColor(0, 255, 206);
+//            ofSetColor(0, 255, 206);
+            ofSetColor(36, 203, 228);
             fontMedium.drawString(swapInfo, 660, 520);
             ofPopStyle();
         }
@@ -257,7 +259,8 @@ void MainWindow::draw()
             
             for(int i = 0;i<numOfElements - 1;i++)
             {
-                ofSetColor(0, 255, 206);
+//                ofSetColor(0, 255, 206);
+                ofSetColor(36, 203, 228);
                 ofLine(margin, (margin * 6) + ((i) * 190), 645, (margin * 6) + ((i) * 190));
                 ofSetColor(255, 255, 255);
                 myElements[drawingOrder[i]]->drawGraphic(LEFT_MARGIN_X+5 ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
@@ -275,8 +278,6 @@ void MainWindow::draw()
 
                 
         logo.draw(10, 9, 45, 45);
-//        logoDigitalNetwork.draw(1150, 12, 110, 40);
-//        logoChristie.draw(950,20,235,35);
     }
     
 }

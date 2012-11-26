@@ -16,7 +16,7 @@ class elementVideo : public element
 	elementVideo();
 	
 	void setup(string _leftChannel, string _rightChannel, int _width, int _height, int inputType, int _posX, int _posY,string _name, bool _isWarpable);
-	void drawIntoFbo(bool _drawMonoOrStereo){};
+	void drawIntoFbo(){};
 	void update();
 	void drawLeft(int x, int y, int w, int h);
 	void drawRight(int x, int y, int w, int h);

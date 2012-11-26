@@ -200,7 +200,8 @@ void elementWarp::drawMarkers() {
             if (!bSposta)
             {
                 ofPushStyle();
-                ofSetColor(0,255,206); 
+//                ofSetColor(0,255,206); 
+                ofSetColor(36,203,228);
                 ofSetLineWidth(4);                        
                 ofLine(0, screenPos[mainIndex[corner]].y,10000,screenPos[mainIndex[corner]].y);
                 ofLine(screenPos[mainIndex[corner]].x,0,screenPos[mainIndex[corner]].x,10000);
@@ -233,7 +234,8 @@ void elementWarp::drawGrid() {
     int index=0;
     
     ofPushStyle();
-    ofSetColor(0,255,206);
+    ofSetColor(36,203,228);
+//    ofSetColor(0,255,206);
     ofFill();
     ofSetLineWidth(1);
     while (quad<nQuads) {

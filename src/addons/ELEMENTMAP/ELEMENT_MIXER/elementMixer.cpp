@@ -18,10 +18,8 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
 	yPos = _posY;
 
 	this->init(5,_width,_height,GL_RGBA,_name,1, _isWarpable);
-	
-    fboAnagliph.allocate(_width ,_height, GL_RGBA);
-    fboLeftRight.allocate(_width ,_height, GL_RGBA);
-    fboTopBottom.allocate(_width ,_height, GL_RGBA);
+	    
+    fboGui.allocate(_width ,_height, GL_RGBA);
         
     sceneElements = _elements;
 	numOfElements = _numOfElements;
@@ -59,10 +57,15 @@ void elementMixer::update()
 // somma tutte le uscite dei singoli element in ordine (secondo i blending modes definiti all'interno di ogni element)
 // e le prepara in due fbo nel caso di uscita stereoscopica, o soltanto nel sinistro per uscita mono
 
-void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
+void elementMixer::drawIntoFbo()
 {
-		//setDrawInStereo(_drawMonoOrStereo);
-		
+    //clear dall'fbo in cui disegno griglie e controlli warp
+    fboGui.begin();
+    ofClear(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    fboGui.end();
+    
+    
 		//////////////////////////
 		// LEFT FRAME:
 		//////////////////////////
@@ -90,8 +93,14 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                 ofDisableBlendMode();
                 
-                //NOTA: gli "special" sono solo sul canale sinistro, per non sdoppiarsi!
                 
+                
+                //NOTA: gli "special" sono diseganti in un fbo diverso, per essere fuori dagli stili (ad esempio non vengono toccati dalle maschere per l'anaglifo)
+                fboGui.begin();
+                
+                ofPushStyle();
+                ofSetColor(255, 255, 255, 255);
+
                 //se è selezionato disegna l'outline rosso, e i markers se il warp è attivo
                 if(sceneElements[elementsOrder[a]]->isSelected) 
                 {
@@ -104,6 +113,8 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                     if (sceneElements[elementsOrder[a]]->warper.bViewGrid) sceneElements[elementsOrder[a]]->warper.drawGrid();
                 }
                 
+                ofPopStyle();
+                fboGui.end();
                 
                 ofPopStyle();
             }
@@ -150,61 +161,8 @@ void elementMixer::drawIntoFbo(bool _drawMonoOrStereo)
                     }
                 
         ofPopMatrix();
-                
-                fboRight.end();
+        fboRight.end();
     }
-	
-    //fbo dedicato per l'uscita anaglifo
-    //nuova versione 18/08/2012
-    if(outputMode == ELM_STEREO_ANAGLYPH)
-    {
-        fboAnagliph.begin();
-    ofPushStyle();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glColorMask(false, true, true, true);
-        if (getSwapLeftRight()) fboRight.draw(0, 0);
-        else fboLeft.draw(0, 0);
-        
-    glColorMask(true, false, false, true);
-        if (getSwapLeftRight()) fboLeft.draw(0,0);
-        else fboRight.draw(0,0);
-    glColorMask(true, true, true, true);
-    ofPopStyle();
-        fboAnagliph.end();
-    }
-    //fbo dedicato per l'uscita leftright, utile per i 3Dtv che la supportano
-    else if (outputMode == ELM_STEREO_LEFTRIGHT)
-    {
-        fboLeftRight.begin();
-        ofPushStyle();
-        ofClear(0,0,0,0);
-        if (getSwapLeftRight()) {
-            fboRight.draw(0, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());
-            fboLeft.draw(fboLeftRight.getWidth()*.5, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());            
-        } else {
-            fboLeft.draw(0, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());
-            fboRight.draw(fboLeftRight.getWidth()*.5, 0, fboLeftRight.getWidth()*.5, fboLeftRight.getHeight());
-        }
-        ofPopStyle();
-        fboLeftRight.end();
-    }
-    //fbo dedicato per l'uscita topbottom, utile per i 3Dtv che la supportano
-    else if (outputMode == ELM_STEREO_TOPBOTTOM)
-    {
-        fboTopBottom.begin();
-        ofPushStyle();
-        ofClear(0,0,0,0);
-        if (getSwapLeftRight()) {
-            fboRight.draw(0, 0, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);
-            fboLeft.draw(0, fboTopBottom.getHeight()*.5, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);            
-        } else {
-            fboLeft.draw(0, 0, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);
-            fboRight.draw(0, fboTopBottom.getHeight()*.5, fboTopBottom.getWidth(), fboTopBottom.getHeight()*.5);            
-        }
-        ofPopStyle();
-        fboTopBottom.end();
-    }
-
 }
 
 
@@ -222,31 +180,73 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
             
 			case ELM_MONO:
                  fboLeft.draw(_x,_y,_width,_height);
+                ofPushStyle();
+                fboGui.draw(_x,_y,_width,_height);
+                ofPopStyle();
+
             break;
                 
             case ELM_STEREO_ANAGLYPH:
-                fboAnagliph.draw(_x,_y,_width,_height);
+                ofPushStyle();
+                glColorMask(false, true, true, true);
+                if (getSwapLeftRight()) fboRight.draw(_x,_y,_width,_height);
+                else fboLeft.draw(_x,_y,_width,_height);
+                
+                glColorMask(true, false, false, true);
+                if (getSwapLeftRight()) fboLeft.draw(_x,_y,_width,_height);
+                else fboRight.draw(_x,_y,_width,_height);
+                glColorMask(true, true, true, true);
+                ofPopStyle();
+                
+                ofPushStyle();
+                fboGui.draw(_x,_y,_width,_height);
+                ofPopStyle();
 				break;
 
             case ELM_STEREO_OPENGL:
-                
                 glDrawBuffer(GL_BACK_LEFT);
-//                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 if (getSwapLeftRight()) fboRight.draw(_x,_y,_width,_height);
                     else fboLeft.draw(_x,_y,_width,_height);
+                fboGui.draw(_x,_y,_width,_height);
 
                 glDrawBuffer(GL_BACK_RIGHT);
-//                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 if (getSwapLeftRight()) fboLeft.draw(_x,_y,_width,_height);
                     else fboRight.draw(_x,_y,_width,_height);
+                fboGui.draw(_x,_y,_width,_height);
                 break;
 
             case ELM_STEREO_LEFTRIGHT:
-                fboLeftRight.draw(_x,_y,_width,_height);
+                ofPushStyle();
+                if (getSwapLeftRight()) {
+                    fboRight.draw(_x,_y,_width*.5,_height);
+                    fboLeft.draw(_x+_width*.5,_y,_width*.5,_height);
+                } else {
+                    fboLeft.draw(_x,_y,_width*.5,_height);
+                    fboRight.draw(_x+_width*.5,_y,_width*.5,_height);
+                }
+                ofPopStyle();
+
+                ofPushStyle();
+                fboGui.draw(_x,_y,_width*.5,_height);
+                ofPopStyle();
+
                 break;
 
             case ELM_STEREO_TOPBOTTOM:
-                fboTopBottom.draw(_x,_y,_width,_height);
+                ofPushStyle();
+                if (getSwapLeftRight()) {
+                    fboRight.draw(_x,_y,_width,_height*.5);
+                    fboLeft.draw(_x,_y+_height*.5,_width,_height*.5);
+                } else {
+                    fboLeft.draw(_x,_y,_width,_height*.5);
+                    fboRight.draw(_x,_y+_height*.5,_width,_height*.5);
+                }
+                ofPopStyle();
+
+                ofPushStyle();
+                fboGui.draw(_x,_y,_width,_height*.5);
+                ofPopStyle();
+
                 break;
 
 			default:
@@ -254,7 +254,6 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
 		}   
 		
     ofPopStyle();
-    
     
 }
 
@@ -265,21 +264,12 @@ void elementMixer::drawInfo()
 {
     ofPushStyle();
   
-    
     //output mode
 	ofSetColor(255,0,206);
     switch (outputMode) 
 	{
 		case ELM_STEREO_OPENGL:
             fontMedium.drawString("STEREO OPENGL",950,690);
-//            if (((testApp*)ofGetAppPtr())->QuadBufferCapable) fontMedium.drawString("STEREO OPENGL",950,665);
-//            else 
-//            {
-//                ofPushStyle();
-//                ofSetColor(255,0,0,255);
-//                fontMedium.drawString("NOT SUPPORTED",950,665);
-//                ofPopStyle();
-//            }
 			break;
 			
 		case ELM_MONO:
@@ -302,10 +292,7 @@ void elementMixer::drawInfo()
 	ofSetColor(255,255,255);
     fontMedium.drawString(ofToString(ofGetFrameRate()),950,705);
     
-    
     ofPopStyle();
-    
-    
     
 }
 
@@ -407,8 +394,6 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             ofSystemAlertDialog("Project Loaded");
             }
             
-            
-
         }
         //OUTPUT MODE
         if( e.widget->getParent()->getName()=="Output Mode")

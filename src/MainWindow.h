@@ -69,9 +69,8 @@ public:
     ofTrueTypeFont          fontMedium;
     
     ofImage                 logo;
-    ofImage                 logoChristie;
-    ofImage                 logoDigitalNetwork;
     ofImage                 previewGrid;
+    ofImage                 sfondo;
     
 	
 };

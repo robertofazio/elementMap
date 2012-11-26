@@ -291,8 +291,14 @@ void testApp::firstSetup() {
 
 //--------------------------------------------------------------
 void testApp::createOutputWindow(){
+    
+    //from ofxFanster example: per mandare la seconda finsetra sul secondo schermo, se c'
+/*     ofxDisplayList displays = ofxDisplayManager::get()->getDisplays();
+     ofxDisplay* disp = displays[0];
+     if(displays.size() > 1) disp = displays[1];
+     ofxFensterManager::get()->setActiveDisplay(disp); */
+    
     outputWindow = new OutputWindow(this);
-    cout << "outputwindow created" << endl;
     output = ofxFensterManager::get()->createFenster(400, 200, 400, 300, OF_WINDOW);
     output->addListener(outputWindow);
     output->setWindowTitle("Output");

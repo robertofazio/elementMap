@@ -29,7 +29,7 @@ class elementMixer : public element
     void setup(MainWindow* _mainWindow, int _width, int _height, int _outputMode,element** _elements,int _numOfElements,int* _elementsOrder,int _posX, int _posY,string _name, bool _isWarpable);
 
     
-    void drawIntoFbo(bool _drawMonoOrStereo);
+    void drawIntoFbo();
 	void drawOutput(int _x, int _y,int _width, int _height);
 	void drawLeft(int x, int y, int w, int h){};
 	void drawRight(int x, int y, int w, int h){};
@@ -52,10 +52,8 @@ class elementMixer : public element
 	ofTexture& getRightTexture(){};
 
     MainWindow*  mainWindow;
-        
-    ofFbo        fboAnagliph;
-    ofFbo        fboLeftRight;
-    ofFbo        fboTopBottom;
+    
+    ofFbo        fboGui;
     
     private :
 
