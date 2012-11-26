@@ -52,12 +52,15 @@ KNOWN ISSUES:
 - PLAY STOP : buggy bisogno premere STOP più volte per farlo riprendere
 - BLEND MODE BUTTON: non deve stare sopra INPUT
 - OUTPUT MODE BUTTON : non deve stare sopra i FPS
+- SYPHON : bug sulla trasparenza (!) se abiliti la griglia te ne accorgi ( semrba un problema di priorità ) 
 - NO MEDIA IMG : inserire NoMedia Img anche sul livello syphon e su 2Channel ( cambiare colore scritta in blu come interfaccia ) 
 
 TO DO LIST:
 
 - Interfaccia e usabilità
+- Cambiare il nome Active Stero in OPEN GL
 - Possibilità di cambiare la priorità di ogni element
+- STEREO MODE PASSIVE Interlacciato orizzontale e verticale per TV Passivi
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
 - CROP BUTTON: left/right top/bottom su ogni element
 - CONTRAST BUTTON: per ogni element
@@ -66,6 +69,7 @@ TO DO LIST:
 - SCALE BUTTON: importante, manca potrebbe essere con la rotella del mouse(!?) o con le frecce
 - MOVE/TRANSLATE BUTTON : si abilita via interfaccia e poi col mouse si muove (!) 
 - Usare il primo frame per la preview video. ofxUI.
+- MEDIA LIBRARY : si potrebbe mettere sotto una media library e poi fare drag e drop sui vari element (?!)
 - Splash image appena si apre elementMap per i crediti,immagini etc..
 
 WISH LIST:
