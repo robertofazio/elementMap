@@ -57,7 +57,7 @@ KNOWN ISSUES:
 
 TO DO LIST:
 
-- Interfaccia e usabilità
+- Interfaccia e usabilità La cosa più importante è poter adattare i contenuti alle varie risoluzioni (!)
 - Cambiare il nome Active Stero in OPEN GL
 - Possibilità di cambiare la priorità di ogni element
 - STEREO MODE PASSIVE Interlacciato orizzontale e verticale per TV Passivi
