@@ -39,7 +39,7 @@
 #define OFX_UI_COLOR_BACK ofColor(0, 220)                                //the rect's back color
 #define OFX_UI_COLOR_OUTLINE ofColor(36, 203, 228, 100)                //the rect's outline color 
 //#define OFX_UI_COLOR_OUTLINE ofColor(0, 255, 206, 100)                //the rect's outline color 
-#define OFX_UI_COLOR_OUTLINE_HIGHLIGHT ofColor(255, 255, 255, 200)      //the rect's onMouseOver outline highlight color         
+#define OFX_UI_COLOR_OUTLINE_HIGHLIGHT ofColor(255, 255, 255, 100)      //the rect's onMouseOver outline highlight color         
 #define OFX_UI_COLOR_FILL ofColor(255, 255, 255, 200)                   //the rect's fill color 
 #define OFX_UI_COLOR_FILL_HIGHLIGHT ofColor(255, 255, 255, 255)         //the rect's onMouseDown highlight color
 

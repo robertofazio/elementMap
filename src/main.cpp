@@ -22,7 +22,8 @@
 
 //========================================================================
 int main( ){
-	ofSetupOpenGL(ofxFensterManager::get(), 1280, 800, OF_WINDOW);			// <-------- setup the GL context
+	ofSetupOpenGL(ofxFensterManager::get(), 1280, 800, OF_FULLSCREEN);			
+//	ofSetupOpenGL(ofxFensterManager::get(), 1280, 800, OF_WINDOW);			
     
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN

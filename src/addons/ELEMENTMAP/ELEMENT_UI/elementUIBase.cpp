@@ -45,15 +45,13 @@ void elementUIBase::setupUI(element* _parentElement)
     //interfaccia per gli element "generici" (tutti tranne il mixer)
     if (type!=ELEMENT_MIXER)
     {
-     
-//        UI = new ofxUICanvas(xPos,yPos, 630, 160);
-        UI = new ofxUICanvas(xPos,yPos, 630, 500);
+        UI = new ofxUICanvas(xPos,yPos, 630, 165);
         
         ofColor colorBack;
         colorBack.r = 0;
         colorBack.g = 255;
         colorBack.b = 206;
-        colorBack.a = 0;
+        colorBack.a = 20;
         
         UI->setColorBack(colorBack);
         UI->setDrawBack(true);
@@ -63,7 +61,7 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->setFontSize(OFX_UI_FONT_SMALL, 6);
         UI->setPadding(2);
         
-        int posY=10;
+        int posY=2;
     
     
         //sotto la preview: carica un file
@@ -140,7 +138,7 @@ void elementUIBase::setupUI(element* _parentElement)
         }
         
         
-        posY=10;
+        posY=2;
         
         //seconda colonna: opacità e componenti r,g,b
         GUI_opacity = new ofxUIMinimalSlider(350, posY, 100,10,0.0,1.0,parentElement->getOpacity() ,"Opacity");
@@ -168,7 +166,7 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_rotCCW);
         }
 
-        posY=10;
+        posY=2;
         
         //terza colonna: blending mode
         listBlendModes = new ofxUIDropDownList(500, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);

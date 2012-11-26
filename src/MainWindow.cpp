@@ -186,27 +186,29 @@ void MainWindow::draw()
 
         glDrawBuffer(GL_BACK);
         
+        int yInfo = 75;
+        
         //testo in alto nella preview:
         if (elemSy.isSelected==true)
         {
-            if (elemSy.warper.bWarpActive) fontMedium.drawString("SYHPON ELEMENT SELECTED - QUAD WARP", 660,100);
-            else if (elemSy.warper.bViewGrid) fontMedium.drawString("SYHPON ELEMENT SELECTED - GRID WARP", 660,100);
-            else fontMedium.drawString("SYHPON ELEMENT SELECTED", 660,100);
+            if (elemSy.warper.bWarpActive) fontMedium.drawString("SYHPON ELEMENT SELECTED - QUAD WARP", 660,yInfo);
+            else if (elemSy.warper.bViewGrid) fontMedium.drawString("SYHPON ELEMENT SELECTED - GRID WARP", 660,yInfo);
+            else fontMedium.drawString("SYHPON ELEMENT SELECTED", 660,yInfo);
         }
         else if (elemV1.isSelected==true) 
         {
-            if (elemV1.warper.bWarpActive) fontMedium.drawString("VIDEO ELEMENT SELECTED - QUAD WARP", 660,100);
-            else if (elemV1.warper.bViewGrid) fontMedium.drawString("VIDEO ELEMENT SELECTED - GRID WARP", 660,100);
-            else fontMedium.drawString("VIDEO ELEMENT SELECTED", 660,100);
+            if (elemV1.warper.bWarpActive) fontMedium.drawString("VIDEO ELEMENT SELECTED - QUAD WARP", 660,yInfo);
+            else if (elemV1.warper.bViewGrid) fontMedium.drawString("VIDEO ELEMENT SELECTED - GRID WARP", 660,yInfo);
+            else fontMedium.drawString("VIDEO ELEMENT SELECTED", 660,yInfo);
         }
         else if (elemImg2.isSelected==true) 
         {
-            if (elemImg2.warper.bWarpActive) fontMedium.drawString("IMAGE ELEMENT SELECTED - QUAD WARP", 660,100);
-            else if (elemImg2.warper.bViewGrid) fontMedium.drawString("IMAGE ELEMENT SELECTED - GRID WARP", 660,100);
-            else fontMedium.drawString("IMAGE ELEMENT SELECTED", 660,100);
+            if (elemImg2.warper.bWarpActive) fontMedium.drawString("IMAGE ELEMENT SELECTED - QUAD WARP", 660,yInfo);
+            else if (elemImg2.warper.bViewGrid) fontMedium.drawString("IMAGE ELEMENT SELECTED - GRID WARP", 660,yInfo);
+            else fontMedium.drawString("IMAGE ELEMENT SELECTED", 660,yInfo);
         }
 
-        else fontMedium.drawString("NO ELEMENTs SELECTED", 660,100);
+        else fontMedium.drawString("NO ELEMENTs SELECTED", 660,yInfo);
 
         if (elemMix.getIsStereo()) {
             string swapInfo = "first frame: ";
@@ -261,7 +263,7 @@ void MainWindow::draw()
             {
 //                ofSetColor(0, 255, 206);
                 ofSetColor(36, 203, 228);
-                ofLine(margin, (margin * 6) + ((i) * 190), 645, (margin * 6) + ((i) * 190));
+                ofLine(margin, (margin * 8)  + ((i) * 190), margin+630, (margin * 8) + ((i) * 190));
                 ofSetColor(255, 255, 255);
                 myElements[drawingOrder[i]]->drawGraphic(LEFT_MARGIN_X+5 ,(margin * 7) + ((numOfElements - i -2) * 190), PREVIEW_WIDTH,PREVIEW_HEIGHT);
                 myElements[drawingOrder[i]]->UI->draw();
@@ -269,8 +271,8 @@ void MainWindow::draw()
                 int yGridLabel = 95;
                 if(myElements[drawingOrder[i]]->getIsStereo()) yGridLabel+=20;
                 
-                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes-1), 235, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel);
-                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes-1), 235, (margin * 7) + ((numOfElements - i -2) * 190) + yGridLabel+20);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.xRes-1), 235, (margin * 7) -9 + ((numOfElements - i -2) * 190) + yGridLabel);
+                fontMedium.drawString(ofToString(myElements[drawingOrder[i]]->warper.yRes-1), 235, (margin * 7) -9+ ((numOfElements - i -2) * 190) + yGridLabel+20);
             }
             ofPopStyle();
         }

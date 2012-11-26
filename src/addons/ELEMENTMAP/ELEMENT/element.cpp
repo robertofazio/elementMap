@@ -72,25 +72,26 @@ void element::initFont()
 
 void element::drawGraphic(int x, int y, int w, int h)
 {
-    ofSetColor(255, 255, 255);
+    ofPushStyle();
+    ofSetColor(255,255,255,255);
     switch(this->type)
     {
         case 0:
             break;
         case 1:
-            fontMedium.drawString("element.video", x , y + 11);
+            fontMedium.drawString("element.VIDEO", x , y+5);
             break;
         case 2:
-            fontMedium.drawString("element.image", x , y + 11);
+            fontMedium.drawString("element.IMAGE", x , y+5);
             break;
         case 3:
-            fontMedium.drawString("element.syphon", x , y + 11);
+            fontMedium.drawString("element.SYPHON", x , y+5);
             break;
         case 5:
-            fontMedium.drawString("element.Map Main Preview", x , y);
+            fontMedium.drawString("element.Map MAIN PREVIEW", x , y);
             break;
     }
-    
+    ofPopStyle();
     
     if(type != 5)   //disegna la preview
     {
