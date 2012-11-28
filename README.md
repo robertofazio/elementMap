@@ -59,7 +59,8 @@ KNOWN ISSUES:
 TO DO LIST:
 
 - Interfaccia e usabilità La cosa più importante è poter adattare i contenuti alle varie risoluzioni (!)
-- Cambiare il nome Active Stero in OPEN GL
+- Cambiare il nome Active Stereo in OPEN GL
+- Inserire le info del video selezionato ( tipo di codec, dimensione, risoluzione etc.. )in alto sopra la preview
 - Possibilità di cambiare la priorità di ogni element
 - STEREO MODE PASSIVE Interlacciato orizzontale e verticale per TV Passivi
 - Una area di testo con le info su : risoluzione video , img di ingresso, aspect ratio, e nome.
