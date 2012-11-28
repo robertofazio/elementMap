@@ -64,8 +64,18 @@ void elementMixer::drawIntoFbo()
     ofClear(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     fboGui.end();
-    
-    
+
+    fboLeft.begin();
+    ofClear(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    fboLeft.end();
+
+
+    fboRight.begin();
+    ofClear(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    fboRight.end();
+
 		//////////////////////////
 		// LEFT FRAME:
 		//////////////////////////
@@ -73,9 +83,6 @@ void elementMixer::drawIntoFbo()
 		fboLeft.begin();
         ofClear(0,0,0,0);
         
-    ofPushMatrix();
-        
-    ofTranslate(parallax, 0);
     
         for(int a = 0; a < numOfElements; a++)
             if(sceneElements[elementsOrder[a]]->getIsActive())
@@ -90,11 +97,15 @@ void elementMixer::drawIntoFbo()
                 ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
                 
                 //disegna l'uscita dell'element secondo le sue dimensioni proprie
+                
+                ofPushMatrix();
+                if (sceneElements[elementsOrder[a]]->getDrawInStereo()==true && getDrawInStereo() && getOutputMode()!=ELM_MONO) ofTranslate(parallax, 0);
+
                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
                 ofDisableBlendMode();
-                
-                
-                
+                                
+                ofPopMatrix();
+
                 //NOTA: gli "special" sono diseganti in un fbo diverso, per essere fuori dagli stili (ad esempio non vengono toccati dalle maschere per l'anaglifo)
                 fboGui.begin();
                 
@@ -114,12 +125,12 @@ void elementMixer::drawIntoFbo()
                 }
                 
                 ofPopStyle();
+
                 fboGui.end();
                 
                 ofPopStyle();
             }
 		
-    ofPopMatrix();
 
 		fboLeft.end();
 		
@@ -132,15 +143,11 @@ void elementMixer::drawIntoFbo()
                 fboRight.begin();
                 ofClear(0,0,0,0);
                 
-        ofPushMatrix();
-        
-        ofTranslate(-parallax, 0);
-
                 for(int a = 0; a < numOfElements; a++)
                     if(sceneElements[elementsOrder[a]]->getIsActive())
                     {
                         ofPushStyle();
-                        
+                                                
                         //legge l'opacità del livello e la applica
                         float opacity = ofMap(sceneElements[elementsOrder[a]]->getOpacity(), 0, 1, 0, 255);
                         ofSetColor(255, 255, 255, opacity);
@@ -148,24 +155,24 @@ void elementMixer::drawIntoFbo()
                         //legge il blending mode associato al livello e lo applica
                         ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
                         
-                        //disegna l'uscita destra se sono in stereo sia l'element che il mixer
-                        if (sceneElements[elementsOrder[a]]->getDrawInStereo()==false || getDrawInStereo()==false)
+                        //disegna l'uscita sinistra se ho scelto mono per l'element o per il generale del mixer
+                        if (sceneElements[elementsOrder[a]]->getDrawInStereo()==false)
                             {
                                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());                                
                             }
-                            else sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
-
+                            else //oppure disegna la destra se sono in stereo sia l'element che il mixer
+                            {
+                                ofPushMatrix();
+                                if (sceneElements[elementsOrder[a]]->getDrawInStereo()==true && getDrawInStereo() && getOutputMode()!=ELM_MONO) ofTranslate(-parallax, 0);
+                                sceneElements[elementsOrder[a]]->drawRight(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());
+                                ofPopMatrix();
+                            }
                         ofDisableBlendMode();                        
-                        
                         ofPopStyle();
                     }
-                
-        ofPopMatrix();
-        fboRight.end();
+                    fboRight.end();
     }
 }
-
-
 
 
 //-----------------------------------------------------------------
@@ -183,18 +190,25 @@ void elementMixer::drawOutput(int _x, int _y,int _width, int _height)
                 ofPushStyle();
                 fboGui.draw(_x,_y,_width,_height);
                 ofPopStyle();
-
-            break;
+                break;
                 
             case ELM_STEREO_ANAGLYPH:
                 ofPushStyle();
                 glColorMask(false, true, true, true);
                 if (getSwapLeftRight()) fboRight.draw(_x,_y,_width,_height);
                 else fboLeft.draw(_x,_y,_width,_height);
-                
+
                 glColorMask(true, false, false, true);
+                if (getDrawInStereo()) 
+                {
                 if (getSwapLeftRight()) fboLeft.draw(_x,_y,_width,_height);
                 else fboRight.draw(_x,_y,_width,_height);
+                }
+                else                 
+                {
+                    if (getSwapLeftRight()) fboRight.draw(_x,_y,_width,_height);
+                    else fboLeft.draw(_x,_y,_width,_height);
+                }
                 glColorMask(true, true, true, true);
                 ofPopStyle();
                 

@@ -49,6 +49,7 @@ public:
     ofImage     splash;
     
     ofTrueTypeFont      msgFont;
+    ofTrueTypeFont      msgFontBold;
     
     int         outputSizeWidth;
     int         outputSizeHeight;

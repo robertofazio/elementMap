@@ -249,23 +249,23 @@
     </textVert>
     <screenPos>
         <totScreenPos>40</totScreenPos>
-        <values_0_x>0</values_0_x>
-        <values_0_y>0</values_0_y>
+        <values_0_x>-1.96911e-13</values_0_x>
+        <values_0_y>-2.95367e-13</values_0_y>
         <values_0_z>0</values_0_z>
         <values_1_x>384</values_1_x>
-        <values_1_y>0</values_1_y>
+        <values_1_y>-2.95367e-13</values_1_y>
         <values_1_z>0</values_1_z>
         <values_2_x>384</values_2_x>
         <values_2_y>540</values_2_y>
         <values_2_z>0</values_2_z>
-        <values_3_x>0</values_3_x>
+        <values_3_x>-1.96911e-13</values_3_x>
         <values_3_y>540</values_3_y>
         <values_3_z>0</values_3_z>
         <values_4_x>384</values_4_x>
-        <values_4_y>0</values_4_y>
+        <values_4_y>-2.95367e-13</values_4_y>
         <values_4_z>0</values_4_z>
         <values_5_x>768</values_5_x>
-        <values_5_y>0</values_5_y>
+        <values_5_y>-2.95367e-13</values_5_y>
         <values_5_z>0</values_5_z>
         <values_6_x>768</values_6_x>
         <values_6_y>540</values_6_y>
@@ -274,10 +274,10 @@
         <values_7_y>540</values_7_y>
         <values_7_z>0</values_7_z>
         <values_8_x>768</values_8_x>
-        <values_8_y>0</values_8_y>
+        <values_8_y>-2.95367e-13</values_8_y>
         <values_8_z>0</values_8_z>
         <values_9_x>1152</values_9_x>
-        <values_9_y>0</values_9_y>
+        <values_9_y>-2.95367e-13</values_9_y>
         <values_9_z>0</values_9_z>
         <values_10_x>1152</values_10_x>
         <values_10_y>540</values_10_y>
@@ -286,10 +286,10 @@
         <values_11_y>540</values_11_y>
         <values_11_z>0</values_11_z>
         <values_12_x>1152</values_12_x>
-        <values_12_y>0</values_12_y>
+        <values_12_y>-2.95367e-13</values_12_y>
         <values_12_z>0</values_12_z>
         <values_13_x>1536</values_13_x>
-        <values_13_y>0</values_13_y>
+        <values_13_y>-2.95367e-13</values_13_y>
         <values_13_z>0</values_13_z>
         <values_14_x>1536</values_14_x>
         <values_14_y>540</values_14_y>
@@ -298,10 +298,10 @@
         <values_15_y>540</values_15_y>
         <values_15_z>0</values_15_z>
         <values_16_x>1536</values_16_x>
-        <values_16_y>0</values_16_y>
+        <values_16_y>-2.95367e-13</values_16_y>
         <values_16_z>0</values_16_z>
         <values_17_x>1920</values_17_x>
-        <values_17_y>0</values_17_y>
+        <values_17_y>-2.95367e-13</values_17_y>
         <values_17_z>0</values_17_z>
         <values_18_x>1920</values_18_x>
         <values_18_y>540</values_18_y>
@@ -309,7 +309,7 @@
         <values_19_x>1536</values_19_x>
         <values_19_y>540</values_19_y>
         <values_19_z>0</values_19_z>
-        <values_20_x>0</values_20_x>
+        <values_20_x>-1.96911e-13</values_20_x>
         <values_20_y>540</values_20_y>
         <values_20_z>0</values_20_z>
         <values_21_x>384</values_21_x>
@@ -318,7 +318,7 @@
         <values_22_x>384</values_22_x>
         <values_22_y>1080</values_22_y>
         <values_22_z>0</values_22_z>
-        <values_23_x>0</values_23_x>
+        <values_23_x>-1.96911e-13</values_23_x>
         <values_23_y>1080</values_23_y>
         <values_23_z>0</values_23_z>
         <values_24_x>384</values_24_x>
@@ -372,8 +372,8 @@
     </screenPos>
     <mainVertici>
         <totMainVertici>4</totMainVertici>
-        <values_0_x>952</values_0_x>
-        <values_0_y>-2</values_0_y>
+        <values_0_x>0</values_0_x>
+        <values_0_y>0</values_0_y>
         <values_0_z>0</values_0_z>
         <values_1_x>1920</values_1_x>
         <values_1_y>0</values_1_y>
@@ -381,8 +381,8 @@
         <values_2_x>1920</values_2_x>
         <values_2_y>1080</values_2_y>
         <values_2_z>0</values_2_z>
-        <values_3_x>952</values_3_x>
-        <values_3_y>1078</values_3_y>
+        <values_3_x>0</values_3_x>
+        <values_3_y>1080</values_3_y>
         <values_3_z>0</values_3_z>
     </mainVertici>
     <mainIndex>

@@ -28,6 +28,7 @@ void testApp::setup(){
 
     splash.loadImage("./utils/splash.jpg");
     msgFont.loadFont("NEOSANS.otf", 10);
+    msgFontBold.loadFont("NEOSANSBOLD.otf", 10);
     
     //default resolution: HD
     outputSizeWidth=1920;
@@ -70,13 +71,13 @@ void testApp::draw(){
         selectResolutionGUI->draw();
         ofPushStyle();
         ofSetColor(ofColor :: white);
-        msgFont.drawString("OPEN_GL Stereo Mode\n\non this machine", 185,250);
+        msgFont.drawString("OPEN_GL Stereo Mode\n\non this machine", 170,250);
         string message = "\n";
         if (QuadBufferCapable) message += "SUPPORTED";
         else message += "NOT SUPPORTED";
         ofPushStyle();
         ofSetColor(36, 203, 228);
-        msgFont.drawString(message, 185,250);
+        msgFontBold.drawString(message, 170,252);
         ofPopStyle();
         ofPopStyle();
     }
@@ -96,7 +97,7 @@ void testApp::selectOutputResolution(){
     doneButton->setDrawOutline(true);
     selectResolutionGUI->addWidget(doneButton);
 
-    selectResolutionGUI->addWidget(new ofxUILabel(170, 320, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_MEDIUM));
+    selectResolutionGUI->addWidget(new ofxUILabel(170, 320, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_SMALL));
 //    selectResolutionGUI->addWidget(new ofxUILabel(30, 55, "subtitle", "2nd monitor or projector", OFX_UI_FONT_SMALL));
     
     resolutionsList.push_back("1024x768");
@@ -106,7 +107,7 @@ void testApp::selectOutputResolution(){
     resolutionsList.push_back("1600x1200");
     resolutionsList.push_back("1920x1080");
     
-    resGUI = new ofxUIDropDownList(185, 340, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
+    resGUI = new ofxUIDropDownList(170, 340, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
     resGUI->setDrawOutline(true);
     resGUI->setAutoClose(true);
     selectResolutionGUI->addWidget(resGUI);
