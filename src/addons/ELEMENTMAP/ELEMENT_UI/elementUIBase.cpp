@@ -256,11 +256,11 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_swapLeftRight);
 
         //SET PARALLAX
-        GUI_parallax = new ofxUIMinimalSlider(300, 80, 100, 20, -20.0, 20.0, parentElement->parallax, "ZERO PARALLAX");
+        GUI_parallax = new ofxUIMinimalSlider(300, 80, 120, 20, -20.0, 20.0, parentElement->parallax, "ZERO PARALLAX");
         UI->addWidget(GUI_parallax);
         
         // OUTPUT MODE
-        listOutputModes = new ofxUIDropDownList(300, 105, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
+        listOutputModes = new ofxUIDropDownList(300, 105, 120, "Output Mode", outputModesNames, OFX_UI_FONT_SMALL);
         listOutputModes->setDrawBack(true);
         listOutputModes->setDrawOutlineHighLight(false);
         listOutputModes->setDrawPaddingOutline(false);
@@ -278,11 +278,12 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_fullscreen);
         
         
-        // SAVE PROJECT
-        UI->addWidget(new ofxUILabelButton(490, 180, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
-        
         // OPEN PROJECT
-        UI->addWidget(new ofxUILabelButton(490, 150, 100, false, "OPEN PROJECT", OFX_UI_FONT_SMALL));
+        UI->addWidget(new ofxUILabelButton(490, 130, 100, false, "OPEN PROJECT", OFX_UI_FONT_SMALL));
+
+        // SAVE PROJECT
+        UI->addWidget(new ofxUILabelButton(490, 160, 100, false, "SAVE PROJECT", OFX_UI_FONT_SMALL));
+        
 
         
         
@@ -310,9 +311,9 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_volume);
 
         
-        posY=196;
-        UI->addWidget(new ofxUILabel(marginLeft, posY, "FRAME LEFT", 2));
-        UI->addWidget(new ofxUILabel(marginLeft, posY+= 12, "FRAME RIGHT", 2));
+//        posY=196;
+//        UI->addWidget(new ofxUILabel(marginLeft, posY, "FRAME LEFT", 2));
+//        UI->addWidget(new ofxUILabel(marginLeft, posY+= 12, "FRAME RIGHT", 2));
 
               
     }

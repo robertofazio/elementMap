@@ -46,6 +46,9 @@ public:
     ofxUIDropDownList* resGUI;
     
     ofImage     logoNew;
+    ofImage     splash;
+    
+    ofTrueTypeFont      msgFont;
     
     int         outputSizeWidth;
     int         outputSizeHeight;

@@ -16,9 +16,7 @@ int margin = 10;
 //--------------------------------------------------------------
 void MainWindow::setup()
 {	
-    drawPreviews		= true;
-	drawUIs				= true;
-
+    
 	ofEnableAlphaBlending();
     ofEnableSmoothing();
     
@@ -40,7 +38,7 @@ void MainWindow::setup()
     //video
     elemV1.setup("./movies/leftright.mov","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 
-//    elemV1.setup("./movies/left1024Audio.mov","./movies/right1024.mov", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
+//    elemV1.setup("./movies/L_02.mov","./movies/R_02.mov", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 	
     //image
     elemImg2.setup("./images/leftRightHD.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);
@@ -91,6 +89,7 @@ void MainWindow::setup()
 
     
     bFullscreen=false;
+    bRisparmio=false;
     
     comandi ="element.map v0.3.0 alpha\n\n'w'\t\tactivate/deactivate warp\n't'\t\tactivate/deactivate translate\n\n'z'/'x'\tincrease/decrease grid X resolution\n'q'/'a'\tincrease/decrease grid Y resolution\n'n'/'m'\tselect previous/next point\n'v'\t\tselect quad vertex\n'h'\t\thold to select multiple grid points\n'c'\t\tclear quad warp transformation\n'r'\t\treset point position\n'cmd'+'r'\treset all grid points\n\n'g'\t\tshow/hide mesh grid\n's'\t\tsave warp to xml\n'l'\t\tload warp from xml\n\n'return'\tin main window hide/show GUI\n'f'\t\tin second window change fullscreen mode\n\nSPACEBAR\tplay/pause video\nBACKSPACE\trewind video\n','/'.'\t\t\tframe by frame\n\n**********************************\n\nin output window press:\n\n'1'\tto select syphon layer\n'2'\tto select video layer\n'3'\tto select image layer\n'0'\tto deselect all";
     
@@ -125,6 +124,19 @@ void MainWindow::setup()
         myElements[i]->loadSettings();
         myElements[i]->elementUIBase::aggiornaGUI();
     }
+    
+    
+    //setup minimal interface
+    minimalGUI = new ofxUICanvas(10, 80, 380, 100);
+    minimalGUI->setDrawOutline(false);
+    minimalGUI->setDrawBack(false);
+    
+    minimalGUI->addWidget(new ofxUILabel(10, 10, "test", OFX_UI_FONT_MEDIUM));
+
+    minimalGUI->setVisible(true);
+//    minimalGUI->disable();
+    ofAddListener(minimalGUI->newGUIEvent, this, &MainWindow::guiEvent);
+
 }
 
 //--------------------------------------------------------------
@@ -154,9 +166,13 @@ void MainWindow::draw()
     ofBackground(35, 31, 32);
     sfondo.draw(0, 0, 1280, 800);
         
-    if (bFullscreen) {
+    if (bRisparmio) {
         ofPoint position(ofGetWindowWidth() - 100, ofGetWindowHeight() - 10);
         ofDrawBitmapString(ofToString(ofGetFrameRate()), position);
+        ofPushStyle();
+        ofSetColor(ofColor :: white);
+        fontLarge.drawString("MINIMAL INTERFACE", 60, 40);
+        ofPopStyle();
     }
     
     else 
@@ -167,7 +183,6 @@ void MainWindow::draw()
         ofSetColor(255, 255, 255);
         
         fontLarge.drawString("element.Map v0.3.0 ", 70 , 44);
-//        ofSetColor(0, 255, 206);
         ofSetColor(36, 203, 228);
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
@@ -215,9 +230,8 @@ void MainWindow::draw()
             if (elemMix.getSwapLeftRight()) swapInfo+="RIGHT";
             else swapInfo+="LEFT";
             ofPushStyle();
-//            ofSetColor(0, 255, 206);
             ofSetColor(36, 203, 228);
-            fontMedium.drawString(swapInfo, 660, 520);
+            fontMedium.drawString(swapInfo, 1100, 39);
             ofPopStyle();
         }
         
@@ -228,23 +242,29 @@ void MainWindow::draw()
         fontMedium.drawString("Press 'i' for info", 10 , ofGetWindowHeight() - 10);
         
         // DYSPLAY STEREOSCOPIC VIDEO SYNCHRONIZE
-        
         ofSetColor(255, 255, 255);
-        fontSmall.drawString(ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 735, 737);
-        fontSmall.drawString(ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 735, 749);
+        if (elemV1.inputType==ELM_INPUT_STEREO_TWO_CHANNEL) {
+            fontSmall.drawString("FRAME LEFT: "+ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 655, 36);
+            fontSmall.drawString("FRAME RIGHT: "+ofToString(elemV1.rightChannelPlayer.getCurrentFrame()), 655, 48);
         
         if (elemV1.leftChannelPlayer.getCurrentFrame() == elemV1.rightChannelPlayer.getCurrentFrame()) {
             ofPushStyle();
             ofSetColor(255, 206, 0);
-            fontMedium.drawString("STEROSCOPIC SYNC", 655,765);
+            fontMedium.drawString("STEROSCOPIC SYNC", 655,24);
             ofPopStyle();
-            
         }
-        
         else {
             ofPushStyle();
             ofSetHexColor(0xFF0000);
-            fontMedium.drawString("STEROSCOPIC NOT IN SYNC", 655, 765);
+            fontMedium.drawString("STEROSCOPIC NOT IN SYNC", 655, 24);
+            ofPopStyle();
+        }
+        } else {
+            ofPushStyle();
+            ofSetColor(255, 206, 0);
+            fontMedium.drawString("SINGLE VIDEO SOURCE", 655,24);
+            ofSetColor(255, 255, 255);
+            fontSmall.drawString("CURRENT FRAME: "+ofToString(elemV1.leftChannelPlayer.getCurrentFrame()), 655, 36);
             ofPopStyle();
         }
         
@@ -252,8 +272,6 @@ void MainWindow::draw()
 
         ofPopStyle();
         
-        if(drawPreviews)    
-        {
             // just draw the preview inputs of mixer
             ofPushStyle();
             ofSetColor(255,255);
@@ -261,7 +279,6 @@ void MainWindow::draw()
             
             for(int i = 0;i<numOfElements - 1;i++)
             {
-//                ofSetColor(0, 255, 206);
                 ofSetColor(36, 203, 228);
                 ofLine(margin, (margin * 8)  + ((i) * 190), margin+630, (margin * 8) + ((i) * 190));
                 ofSetColor(255, 255, 255);
@@ -276,11 +293,8 @@ void MainWindow::draw()
             }
             ofPopStyle();
         }
-        
-
                 
         logo.draw(10, 9, 45, 45);
-    }
     
 }
 
@@ -291,29 +305,32 @@ void MainWindow::keyPressed(int key)
 {
     if(key == OF_KEY_RETURN)
 	{
-        drawUIs=!drawUIs;
+        bRisparmio=!bRisparmio;
         
-        if(drawUIs)
+        if (bRisparmio) minimalGUI->enable();
+        else minimalGUI->disable();
+        minimalGUI->setVisible(bRisparmio);
+        
+        if(!bRisparmio)
 		{	
-//			myElements[0]->UI->setVisible(true);
 			myElements[1]->UI->setVisible(true);
 			myElements[2]->UI->setVisible(true);
 			myElements[3]->UI->setVisible(true);
 			elemMix.UI->setVisible(true);
+            
+            ofxFensterManager::get()->getWindowById(0)->setWindowShape(1280, 800);
+            ofxFensterManager::get()->getWindowById(0)->setWindowPosition(0, 0);
 		}
 		else 
 		{
-//			myElements[0]->UI->setVisible(false);
 			myElements[1]->UI->setVisible(false);
 			myElements[2]->UI->setVisible(false);
 			myElements[3]->UI->setVisible(false);
 			elemMix.UI->setVisible(false);
             
-            
-		}
-        
-        bFullscreen=!bFullscreen;
-        
+            ofxFensterManager::get()->getWindowById(0)->setWindowShape(400, 200);
+            ofxFensterManager::get()->getWindowById(0)->setWindowPosition(100, 100);
+		}        
 	}
     else if(key == ' ')
     {
@@ -328,31 +345,7 @@ void MainWindow::keyPressed(int key)
     else if(key == ',') elemV1.element_frameIndietro();        
     
     else if(key == 'i') ofSystemAlertDialog(comandi);
-    
-    else if(key == 's') 
-    {
-        //save elements settings
-        for (int i=1; i<numOfElements; i++)
-        {
-            myElements[i]->warper.save();
-            myElements[i]->saveSettings();
-        }
-        //save mixer settings
-//        elemMix.UI->saveSettings("./XML/MixerGUI.xml");
-    }
-    
-    else if(key == 'l') 
-    {
-        //load elements settings
-        for (int i=1; i<numOfElements; i++)
-        {
-            myElements[i]->warper.load();
-            myElements[i]->loadSettings();
-        }
-        //load mixer settings
-//        elemMix.UI->loadSettings("./XML/MixerGUI.xml");        
-    }
-    
+        
     else if(key == '0') {
     deselectAllElements();
     }
@@ -433,4 +426,9 @@ void MainWindow::deselectAllElements()
     }
 }
 
-
+//--------------------------------------------------------------
+void MainWindow::guiEvent(ofxUIEventArgs &e)
+{	
+	string name = e.widget->getName(); 
+	int kind = e.widget->getKind(); 
+}

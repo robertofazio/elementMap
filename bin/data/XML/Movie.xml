@@ -489,260 +489,260 @@
     </textVert>
     <screenPos>
         <totScreenPos>80</totScreenPos>
-        <values_0_x>239</values_0_x>
-        <values_0_y>153</values_0_y>
+        <values_0_x>-1.96911e-13</values_0_x>
+        <values_0_y>-2.95367e-13</values_0_y>
         <values_0_z>0</values_0_z>
-        <values_1_x>376.462</values_1_x>
-        <values_1_y>135.197</values_1_y>
+        <values_1_x>384</values_1_x>
+        <values_1_y>-2.95367e-13</values_1_y>
         <values_1_z>0</values_1_z>
-        <values_2_x>377.324</values_2_x>
-        <values_2_y>350.73</values_2_y>
+        <values_2_x>384</values_2_x>
+        <values_2_y>270</values_2_y>
         <values_2_z>0</values_2_z>
-        <values_3_x>240.004</values_3_x>
-        <values_3_y>361.027</values_3_y>
+        <values_3_x>-1.96911e-13</values_3_x>
+        <values_3_y>270</values_3_y>
         <values_3_z>0</values_3_z>
-        <values_4_x>376.462</values_4_x>
-        <values_4_y>135.197</values_4_y>
+        <values_4_x>384</values_4_x>
+        <values_4_y>-2.95367e-13</values_4_y>
         <values_4_z>0</values_4_z>
-        <values_5_x>524.196</values_5_x>
-        <values_5_y>116.063</values_5_y>
+        <values_5_x>768</values_5_x>
+        <values_5_y>-2.95367e-13</values_5_y>
         <values_5_z>0</values_5_z>
-        <values_6_x>524.892</values_6_x>
-        <values_6_y>339.664</values_6_y>
+        <values_6_x>768</values_6_x>
+        <values_6_y>270</values_6_y>
         <values_6_z>0</values_6_z>
-        <values_7_x>377.324</values_7_x>
-        <values_7_y>350.73</values_7_y>
+        <values_7_x>384</values_7_x>
+        <values_7_y>270</values_7_y>
         <values_7_z>0</values_7_z>
-        <values_8_x>524.196</values_8_x>
-        <values_8_y>116.063</values_8_y>
+        <values_8_x>768</values_8_x>
+        <values_8_y>-2.95367e-13</values_8_y>
         <values_8_z>0</values_8_z>
-        <values_9_x>683.399</values_9_x>
-        <values_9_y>95.444</values_9_y>
+        <values_9_x>1152</values_9_x>
+        <values_9_y>-2.95367e-13</values_9_y>
         <values_9_z>0</values_9_z>
-        <values_10_x>683.899</values_10_x>
-        <values_10_y>327.741</values_10_y>
+        <values_10_x>1152</values_10_x>
+        <values_10_y>270</values_10_y>
         <values_10_z>0</values_10_z>
-        <values_11_x>524.892</values_11_x>
-        <values_11_y>339.664</values_11_y>
+        <values_11_x>768</values_11_x>
+        <values_11_y>270</values_11_y>
         <values_11_z>0</values_11_z>
-        <values_12_x>683.399</values_12_x>
-        <values_12_y>95.444</values_12_y>
+        <values_12_x>1152</values_12_x>
+        <values_12_y>-2.95367e-13</values_12_y>
         <values_12_z>0</values_12_z>
-        <values_13_x>855.459</values_13_x>
-        <values_13_y>73.1597</values_13_y>
+        <values_13_x>1536</values_13_x>
+        <values_13_y>-2.95367e-13</values_13_y>
         <values_13_z>0</values_13_z>
-        <values_14_x>855.73</values_14_x>
-        <values_14_y>314.856</values_14_y>
+        <values_14_x>1536</values_14_x>
+        <values_14_y>270</values_14_y>
         <values_14_z>0</values_14_z>
-        <values_15_x>683.899</values_15_x>
-        <values_15_y>327.741</values_15_y>
+        <values_15_x>1152</values_15_x>
+        <values_15_y>270</values_15_y>
         <values_15_z>0</values_15_z>
-        <values_16_x>855.459</values_16_x>
-        <values_16_y>73.1597</values_16_y>
+        <values_16_x>1536</values_16_x>
+        <values_16_y>-2.95367e-13</values_16_y>
         <values_16_z>0</values_16_z>
-        <values_17_x>1042</values_17_x>
-        <values_17_y>49</values_17_y>
+        <values_17_x>1920</values_17_x>
+        <values_17_y>-2.95367e-13</values_17_y>
         <values_17_z>0</values_17_z>
-        <values_18_x>1042</values_18_x>
-        <values_18_y>300.888</values_18_y>
+        <values_18_x>1920</values_18_x>
+        <values_18_y>270</values_18_y>
         <values_18_z>0</values_18_z>
-        <values_19_x>855.73</values_19_x>
-        <values_19_y>314.856</values_19_y>
+        <values_19_x>1536</values_19_x>
+        <values_19_y>270</values_19_y>
         <values_19_z>0</values_19_z>
-        <values_20_x>240.004</values_20_x>
-        <values_20_y>361.027</values_20_y>
+        <values_20_x>-1.96911e-13</values_20_x>
+        <values_20_y>270</values_20_y>
         <values_20_z>0</values_20_z>
-        <values_21_x>377.324</values_21_x>
-        <values_21_y>350.73</values_21_y>
+        <values_21_x>384</values_21_x>
+        <values_21_y>270</values_21_y>
         <values_21_z>0</values_21_z>
-        <values_22_x>378.184</values_22_x>
-        <values_22_y>565.706</values_22_y>
+        <values_22_x>384</values_22_x>
+        <values_22_y>540</values_22_y>
         <values_22_z>0</values_22_z>
-        <values_23_x>241.005</values_23_x>
-        <values_23_y>568.535</values_23_y>
+        <values_23_x>-1.96911e-13</values_23_x>
+        <values_23_y>540</values_23_y>
         <values_23_z>0</values_23_z>
-        <values_24_x>377.324</values_24_x>
-        <values_24_y>350.73</values_24_y>
+        <values_24_x>384</values_24_x>
+        <values_24_y>270</values_24_y>
         <values_24_z>0</values_24_z>
-        <values_25_x>524.892</values_25_x>
-        <values_25_y>339.664</values_25_y>
+        <values_25_x>768</values_25_x>
+        <values_25_y>270</values_25_y>
         <values_25_z>0</values_25_z>
-        <values_26_x>525.586</values_26_x>
-        <values_26_y>562.666</values_26_y>
+        <values_26_x>768</values_26_x>
+        <values_26_y>540</values_26_y>
         <values_26_z>0</values_26_z>
-        <values_27_x>378.184</values_27_x>
-        <values_27_y>565.706</values_27_y>
+        <values_27_x>384</values_27_x>
+        <values_27_y>540</values_27_y>
         <values_27_z>0</values_27_z>
-        <values_28_x>524.892</values_28_x>
-        <values_28_y>339.664</values_28_y>
+        <values_28_x>768</values_28_x>
+        <values_28_y>270</values_28_y>
         <values_28_z>0</values_28_z>
-        <values_29_x>683.899</values_29_x>
-        <values_29_y>327.741</values_29_y>
+        <values_29_x>1152</values_29_x>
+        <values_29_y>270</values_29_y>
         <values_29_z>0</values_29_z>
-        <values_30_x>684.398</values_30_x>
-        <values_30_y>559.39</values_30_y>
+        <values_30_x>1152</values_30_x>
+        <values_30_y>540</values_30_y>
         <values_30_z>0</values_30_z>
-        <values_31_x>525.586</values_31_x>
-        <values_31_y>562.666</values_31_y>
+        <values_31_x>768</values_31_x>
+        <values_31_y>540</values_31_y>
         <values_31_z>0</values_31_z>
-        <values_32_x>683.899</values_32_x>
-        <values_32_y>327.741</values_32_y>
+        <values_32_x>1152</values_32_x>
+        <values_32_y>270</values_32_y>
         <values_32_z>0</values_32_z>
-        <values_33_x>855.73</values_33_x>
-        <values_33_y>314.856</values_33_y>
+        <values_33_x>1536</values_33_x>
+        <values_33_y>270</values_33_y>
         <values_33_z>0</values_33_z>
-        <values_34_x>856</values_34_x>
-        <values_34_y>555.851</values_34_y>
+        <values_34_x>1536</values_34_x>
+        <values_34_y>540</values_34_y>
         <values_34_z>0</values_34_z>
-        <values_35_x>684.398</values_35_x>
-        <values_35_y>559.39</values_35_y>
+        <values_35_x>1152</values_35_x>
+        <values_35_y>540</values_35_y>
         <values_35_z>0</values_35_z>
-        <values_36_x>855.73</values_36_x>
-        <values_36_y>314.856</values_36_y>
+        <values_36_x>1536</values_36_x>
+        <values_36_y>270</values_36_y>
         <values_36_z>0</values_36_z>
-        <values_37_x>1042</values_37_x>
-        <values_37_y>300.888</values_37_y>
+        <values_37_x>1920</values_37_x>
+        <values_37_y>270</values_37_y>
         <values_37_z>0</values_37_z>
-        <values_38_x>1042</values_38_x>
-        <values_38_y>552.015</values_38_y>
+        <values_38_x>1920</values_38_x>
+        <values_38_y>540</values_38_y>
         <values_38_z>0</values_38_z>
-        <values_39_x>856</values_39_x>
-        <values_39_y>555.851</values_39_y>
+        <values_39_x>1536</values_39_x>
+        <values_39_y>540</values_39_y>
         <values_39_z>0</values_39_z>
-        <values_40_x>241.005</values_40_x>
-        <values_40_y>568.535</values_40_y>
+        <values_40_x>-1.96911e-13</values_40_x>
+        <values_40_y>540</values_40_y>
         <values_40_z>0</values_40_z>
-        <values_41_x>378.184</values_41_x>
-        <values_41_y>565.706</values_41_y>
+        <values_41_x>384</values_41_x>
+        <values_41_y>540</values_41_y>
         <values_41_z>0</values_41_z>
-        <values_42_x>379.041</values_42_x>
-        <values_42_y>780.126</values_42_y>
+        <values_42_x>384</values_42_x>
+        <values_42_y>810</values_42_y>
         <values_42_z>0</values_42_z>
-        <values_43_x>242.004</values_43_x>
-        <values_43_y>775.525</values_43_y>
+        <values_43_x>-1.96911e-13</values_43_x>
+        <values_43_y>810</values_43_y>
         <values_43_z>0</values_43_z>
-        <values_44_x>378.184</values_44_x>
-        <values_44_y>565.706</values_44_y>
+        <values_44_x>384</values_44_x>
+        <values_44_y>540</values_44_y>
         <values_44_z>0</values_44_z>
-        <values_45_x>525.586</values_45_x>
-        <values_45_y>562.666</values_45_y>
+        <values_45_x>768</values_45_x>
+        <values_45_y>540</values_45_y>
         <values_45_z>0</values_45_z>
-        <values_46_x>526.277</values_46_x>
-        <values_46_y>785.069</values_46_y>
+        <values_46_x>768</values_46_x>
+        <values_46_y>810</values_46_y>
         <values_46_z>0</values_46_z>
-        <values_47_x>379.041</values_47_x>
-        <values_47_y>780.126</values_47_y>
+        <values_47_x>384</values_47_x>
+        <values_47_y>810</values_47_y>
         <values_47_z>0</values_47_z>
-        <values_48_x>525.586</values_48_x>
-        <values_48_y>562.666</values_48_y>
+        <values_48_x>768</values_48_x>
+        <values_48_y>540</values_48_y>
         <values_48_z>0</values_48_z>
-        <values_49_x>684.398</values_49_x>
-        <values_49_y>559.39</values_49_y>
+        <values_49_x>1152</values_49_x>
+        <values_49_y>540</values_49_y>
         <values_49_z>0</values_49_z>
-        <values_50_x>684.896</values_50_x>
-        <values_50_y>790.395</values_50_y>
+        <values_50_x>1152</values_50_x>
+        <values_50_y>810</values_50_y>
         <values_50_z>0</values_50_z>
-        <values_51_x>526.277</values_51_x>
-        <values_51_y>785.069</values_51_y>
+        <values_51_x>768</values_51_x>
+        <values_51_y>810</values_51_y>
         <values_51_z>0</values_51_z>
-        <values_52_x>684.398</values_52_x>
-        <values_52_y>559.39</values_52_y>
+        <values_52_x>1152</values_52_x>
+        <values_52_y>540</values_52_y>
         <values_52_z>0</values_52_z>
-        <values_53_x>856</values_53_x>
-        <values_53_y>555.851</values_53_y>
+        <values_53_x>1536</values_53_x>
+        <values_53_y>540</values_53_y>
         <values_53_z>0</values_53_z>
-        <values_54_x>856.269</values_54_x>
-        <values_54_y>796.149</values_54_y>
+        <values_54_x>1536</values_54_x>
+        <values_54_y>810</values_54_y>
         <values_54_z>0</values_54_z>
-        <values_55_x>684.896</values_55_x>
-        <values_55_y>790.395</values_55_y>
+        <values_55_x>1152</values_55_x>
+        <values_55_y>810</values_55_y>
         <values_55_z>0</values_55_z>
-        <values_56_x>856</values_56_x>
-        <values_56_y>555.851</values_56_y>
+        <values_56_x>1536</values_56_x>
+        <values_56_y>540</values_56_y>
         <values_56_z>0</values_56_z>
-        <values_57_x>1042</values_57_x>
-        <values_57_y>552.015</values_57_y>
+        <values_57_x>1920</values_57_x>
+        <values_57_y>540</values_57_y>
         <values_57_z>0</values_57_z>
-        <values_58_x>1042</values_58_x>
-        <values_58_y>802.384</values_58_y>
+        <values_58_x>1920</values_58_x>
+        <values_58_y>810</values_58_y>
         <values_58_z>0</values_58_z>
-        <values_59_x>856.269</values_59_x>
-        <values_59_y>796.149</values_59_y>
+        <values_59_x>1536</values_59_x>
+        <values_59_y>810</values_59_y>
         <values_59_z>0</values_59_z>
-        <values_60_x>242.004</values_60_x>
-        <values_60_y>775.525</values_60_y>
+        <values_60_x>-1.96911e-13</values_60_x>
+        <values_60_y>810</values_60_y>
         <values_60_z>0</values_60_z>
-        <values_61_x>379.041</values_61_x>
-        <values_61_y>780.126</values_61_y>
+        <values_61_x>384</values_61_x>
+        <values_61_y>810</values_61_y>
         <values_61_z>0</values_61_z>
-        <values_62_x>379.896</values_62_x>
-        <values_62_y>993.993</values_62_y>
+        <values_62_x>384</values_62_x>
+        <values_62_y>1080</values_62_y>
         <values_62_z>0</values_62_z>
-        <values_63_x>243</values_63_x>
-        <values_63_y>982</values_63_y>
+        <values_63_x>-1.96911e-13</values_63_x>
+        <values_63_y>1080</values_63_y>
         <values_63_z>0</values_63_z>
-        <values_64_x>379.041</values_64_x>
-        <values_64_y>780.126</values_64_y>
+        <values_64_x>384</values_64_x>
+        <values_64_y>810</values_64_y>
         <values_64_z>0</values_64_z>
-        <values_65_x>526.277</values_65_x>
-        <values_65_y>785.069</values_65_y>
+        <values_65_x>768</values_65_x>
+        <values_65_y>810</values_65_y>
         <values_65_z>0</values_65_z>
-        <values_66_x>526.967</values_66_x>
-        <values_66_y>1006.88</values_66_y>
+        <values_66_x>768</values_66_x>
+        <values_66_y>1080</values_66_y>
         <values_66_z>0</values_66_z>
-        <values_67_x>379.896</values_67_x>
-        <values_67_y>993.993</values_67_y>
+        <values_67_x>384</values_67_x>
+        <values_67_y>1080</values_67_y>
         <values_67_z>0</values_67_z>
-        <values_68_x>526.277</values_68_x>
-        <values_68_y>785.069</values_68_y>
+        <values_68_x>768</values_68_x>
+        <values_68_y>810</values_68_y>
         <values_68_z>0</values_68_z>
-        <values_69_x>684.896</values_69_x>
-        <values_69_y>790.395</values_69_y>
+        <values_69_x>1152</values_69_x>
+        <values_69_y>810</values_69_y>
         <values_69_z>0</values_69_z>
-        <values_70_x>685.392</values_70_x>
-        <values_70_y>1020.76</values_70_y>
+        <values_70_x>1152</values_70_x>
+        <values_70_y>1080</values_70_y>
         <values_70_z>0</values_70_z>
-        <values_71_x>526.967</values_71_x>
-        <values_71_y>1006.88</values_71_y>
+        <values_71_x>768</values_71_x>
+        <values_71_y>1080</values_71_y>
         <values_71_z>0</values_71_z>
-        <values_72_x>684.896</values_72_x>
-        <values_72_y>790.395</values_72_y>
+        <values_72_x>1152</values_72_x>
+        <values_72_y>810</values_72_y>
         <values_72_z>0</values_72_z>
-        <values_73_x>856.269</values_73_x>
-        <values_73_y>796.149</values_73_y>
+        <values_73_x>1536</values_73_x>
+        <values_73_y>810</values_73_y>
         <values_73_z>0</values_73_z>
-        <values_74_x>856.537</values_74_x>
-        <values_74_y>1035.75</values_74_y>
+        <values_74_x>1536</values_74_x>
+        <values_74_y>1080</values_74_y>
         <values_74_z>0</values_74_z>
-        <values_75_x>685.392</values_75_x>
-        <values_75_y>1020.76</values_75_y>
+        <values_75_x>1152</values_75_x>
+        <values_75_y>1080</values_75_y>
         <values_75_z>0</values_75_z>
-        <values_76_x>856.269</values_76_x>
-        <values_76_y>796.149</values_76_y>
+        <values_76_x>1536</values_76_x>
+        <values_76_y>810</values_76_y>
         <values_76_z>0</values_76_z>
-        <values_77_x>1042</values_77_x>
-        <values_77_y>802.384</values_77_y>
+        <values_77_x>1920</values_77_x>
+        <values_77_y>810</values_77_y>
         <values_77_z>0</values_77_z>
-        <values_78_x>1042</values_78_x>
-        <values_78_y>1052</values_78_y>
+        <values_78_x>1920</values_78_x>
+        <values_78_y>1080</values_78_y>
         <values_78_z>0</values_78_z>
-        <values_79_x>856.537</values_79_x>
-        <values_79_y>1035.75</values_79_y>
+        <values_79_x>1536</values_79_x>
+        <values_79_y>1080</values_79_y>
         <values_79_z>0</values_79_z>
     </screenPos>
     <mainVertici>
         <totMainVertici>4</totMainVertici>
-        <values_0_x>239</values_0_x>
-        <values_0_y>153</values_0_y>
+        <values_0_x>0</values_0_x>
+        <values_0_y>0</values_0_y>
         <values_0_z>0</values_0_z>
-        <values_1_x>1042</values_1_x>
-        <values_1_y>49</values_1_y>
+        <values_1_x>1920</values_1_x>
+        <values_1_y>0</values_1_y>
         <values_1_z>0</values_1_z>
-        <values_2_x>1042</values_2_x>
-        <values_2_y>1052</values_2_y>
+        <values_2_x>1920</values_2_x>
+        <values_2_y>1080</values_2_y>
         <values_2_z>0</values_2_z>
-        <values_3_x>243</values_3_x>
-        <values_3_y>982</values_3_y>
+        <values_3_x>0</values_3_x>
+        <values_3_y>1080</values_3_y>
         <values_3_z>0</values_3_z>
     </mainVertici>
     <mainIndex>

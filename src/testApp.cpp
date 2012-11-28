@@ -26,7 +26,11 @@ void testApp::setup(){
         printf(">> testApp: GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
     }
 
-    logoNew.loadImage("./utils/elementLogoNew.png");
+//    logoNew.loadImage("./utils/elementLogoNew.png");
+    splash.loadImage("./utils/splash.jpg");
+
+    msgFont.loadFont("NEOSANS.otf", 10);
+
     
     //default resolution: HD
     outputSizeWidth=1920;
@@ -63,14 +67,15 @@ void testApp::draw(){
     } 
     else 
     {
-        logoNew.draw(ofGetWindowWidth()*.5+100,ofGetWindowHeight()*.5-120, 150, 96);
+        splash.draw(0,0,1280,800);
+//        logoNew.draw(ofGetWindowWidth()*.5+100,ofGetWindowHeight()*.5-120, 150, 96);
         selectResolutionGUI->draw();
         ofPushStyle();
         ofSetColor(ofColor :: white);
         string message = "";
-        if (QuadBufferCapable) message = "OPEN_GL quad buffered Stereo mode SUPPORTED on this machine";
-        else message = "OPEN_GL quad buffered Stereo mode NOT SUPPORTED on this machine";
-        ofDrawBitmapString(message, (ofGetWindowWidth()-600)*.5+10,(ofGetWindowHeight()-400)*.5+380);
+        if (QuadBufferCapable) message = "OPEN_GL Stereo mode\nSUPPORTED on this machine";
+        else message = "OPEN_GL Stereo mode\nNOT SUPPORTED on this machine";
+        msgFont.drawString(message, 80,720);
         ofPopStyle();
     }
 
@@ -80,12 +85,17 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::selectOutputResolution(){
 
-    selectResolutionGUI = new ofxUICanvas((ofGetWindowWidth()-600)*.5,(ofGetWindowHeight()-400)*.5, 600, 400);
+    selectResolutionGUI = new ofxUICanvas(0,0, 1280, 800);
     selectResolutionGUI->setDrawOutline(true);
     selectResolutionGUI->setDrawBack(false);
-    
-    selectResolutionGUI->addWidget(new ofxUILabel(30, 30, "title", "OUTPUT RESOLUTION", OFX_UI_FONT_MEDIUM));
-    selectResolutionGUI->addWidget(new ofxUILabel(30, 55, "subtitle", "2nd monitor or projector", OFX_UI_FONT_SMALL));
+
+    selectResolutionGUI->addWidget(new ofxUILabel(190, 225, "run", "LAUNCH ELEMENT", OFX_UI_FONT_MEDIUM));
+    doneButton = new ofxUILabelButton(185, 255, 150, false, "ELEMENT.MAP", OFX_UI_FONT_SMALL);
+    doneButton->setDrawOutline(true);
+    selectResolutionGUI->addWidget(doneButton);
+
+    selectResolutionGUI->addWidget(new ofxUILabel(170, 325, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_MEDIUM));
+//    selectResolutionGUI->addWidget(new ofxUILabel(30, 55, "subtitle", "2nd monitor or projector", OFX_UI_FONT_SMALL));
     
     resolutionsList.push_back("1024x768");
     resolutionsList.push_back("1280x800");
@@ -94,14 +104,10 @@ void testApp::selectOutputResolution(){
     resolutionsList.push_back("1600x1200");
     resolutionsList.push_back("1920x1080");
     
-    resGUI = new ofxUIDropDownList(30, 80, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
+    resGUI = new ofxUIDropDownList(185, 355, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
     resGUI->setDrawOutline(true);
     resGUI->setAutoClose(true);
     selectResolutionGUI->addWidget(resGUI);
-    
-    doneButton = new ofxUILabelButton(400, 30, 150, false, "DONE", OFX_UI_FONT_LARGE);
-    doneButton->setDrawOutline(true);
-    selectResolutionGUI->addWidget(doneButton);
     
     selectResolutionGUI->setVisible(true);
     ofAddListener(selectResolutionGUI->newGUIEvent,this,&testApp::guiEvent); 
@@ -116,10 +122,14 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 	int kind = e.widget->getKind(); 
 	
     //DONE BUTTON
-    if( name=="DONE")
+    if( name=="ELEMENT.MAP")
     {
         if (doneButton->getValue()) 
         {
+            ofPushStyle();
+            ofSetColor(255, 0, 0,125);
+            msgFont.drawString("LOADING...", 600,550);
+            ofPopStyle();
             bOptionsDone=true;
             firstSetup();
         }

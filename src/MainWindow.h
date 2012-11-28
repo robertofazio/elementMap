@@ -14,8 +14,9 @@
 #include "elementMain.h"
 #include "ElementFX.h"
 #include "ElementFXMask.h"
-
+#include "ofxFensterManager.h"
 #include "elementWarp.h"
+#include "ofxUI.h"
 
 
 class MainWindow : public ofBaseApp{
@@ -50,11 +51,10 @@ public:
 	int						outputResolutionX;
 	int						outputResolutionY;
 	
-	bool					drawPreviews;
-	bool					drawUIs;
 	int*					drawingOrder;
     
     bool                    bFullscreen;
+    bool                    bRisparmio;
     
     bool                    frameByframe;
     
@@ -72,5 +72,11 @@ public:
     ofImage                 previewGrid;
     ofImage                 sfondo;
     
+    //interfaccia minimale
+    void guiEvent(ofxUIEventArgs &e);   
+    ofxUICanvas*            minimalGUI;
+    ofxUILabelButton*       minPlay;
+    ofxUILabelButton*       minPause;
+    ofxUILabelButton*       minRev;
 	
 };
