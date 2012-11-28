@@ -187,14 +187,23 @@ void MainWindow::draw()
         ofLine(650, margin * 6, ofGetWindowWidth() - 10, margin * 6);
         ofPopStyle();
 
-
+        
+        
         if (elemMix.wideScreenPreview) 
         {
+            ofPushStyle();
+            ofSetColor(ofColor :: black);
+            ofRect(650, margin*8+56, 600, 338);
+            ofPopStyle();
             if (elemMix.showGrid) previewGrid.draw(650, margin*8+56, 600, 338);
             elemMix.drawOutput(650, (margin * 8)+56, 600, 338   );
         }
         else 
         {
+            ofPushStyle();
+            ofSetColor(ofColor :: black);
+            ofRect(650, margin*8, 600, 450);
+            ofPopStyle();
             if (elemMix.showGrid) previewGrid.draw(650, margin*8, 600, 450);
             elemMix.drawOutput(650, margin * 8, 600, 450   );
         }
