@@ -70,7 +70,8 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     }
 
     mute    =    false;
-    volume  =    100;
+    volume  =    1000;
+    leftChannelPlayer.setVolume(volume);
         
 }
 

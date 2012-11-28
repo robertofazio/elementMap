@@ -27,7 +27,7 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
     
     ofAddListener(UI->newGUIEvent,this,&elementMixer::guiEvent); 
     
-    actualVolume = 50;
+    actualVolume = 1000;
 	
     wideScreenPreview=false;
     showGrid=true;
