@@ -362,6 +362,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 		parentElement->setOpacity(slider->getScaledValue());
+        parentElement->memOpacity(parentElement->getLastOpacity());
 	}
     //RED CHANNEL
 	else if(e.widget->getName()=="RED")
@@ -436,8 +437,15 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		parentElement->setIsActive(toggle->getValue());
 
-		if (toggle->getValue()) parentElement->setOpacity(1);
-        else parentElement->setOpacity(0);
+        //from non-active to active: save opacity value then set it to ero
+        if (toggle->getValue()==false) {
+            parentElement->memOpacity(parentElement->getOpacity());
+            parentElement->setOpacity(0);
+        }
+		//from active to non-active: load last opacity value
+        else {
+            parentElement->setOpacity(parentElement->getLastOpacity());
+        }
         
 	}
     //QUAD WARPING

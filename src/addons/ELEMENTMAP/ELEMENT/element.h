@@ -41,6 +41,7 @@ class element : public ofNode , public elementUIBase
     virtual void    setElementInputType(int _inType) =0;
 	void			setSwapLeftRight(bool b);
 	void			setOpacity(float f);
+    void            memOpacity(float f);
 	void			setRed(int red);
 	void			setGreen(int green);
 	void			setBlue(int blue);
@@ -60,6 +61,7 @@ class element : public ofNode , public elementUIBase
 	bool			getIsShow();
 	bool			getIsActive();
 	float			getOpacity();
+    float           getLastOpacity();
     int             getRed();
     int             getGreen();
     int             getBlue();
@@ -115,6 +117,7 @@ class element : public ofNode , public elementUIBase
     int             g;
     int             b;
 	float			opacity;
+    float           lastOpacity;
     bool			swapLeftRight;
 	
 	

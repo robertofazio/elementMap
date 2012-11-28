@@ -15,6 +15,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
     inputType       = _inputType;
 	elementName		= _name;
 	opacity			= 1.0;
+    lastOpacity     = opacity;
     r               = 255;
     g               = 255;    
     b               = 255;
@@ -165,6 +166,11 @@ void element::setOpacity(float f)
 	opacity = f;	
 }
 //-----------------------------------------------------------------------
+void element::memOpacity(float f)
+{
+	lastOpacity = f;	
+}
+//-----------------------------------------------------------------------
 void element::setRed(int red)
 {
 	r = red;	
@@ -252,6 +258,11 @@ bool element::getIsActive()
 float element::getOpacity()
 {
 	return (opacity);
+}
+//-----------------------------------------------------------------------
+float element::getLastOpacity()
+{
+	return (lastOpacity);
 }
 //-----------------------------------------------------------------------
 int element::getRed()
