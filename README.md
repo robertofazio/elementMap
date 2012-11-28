@@ -43,6 +43,7 @@ KNOWN ISSUES:
 - il livello video non ha trasparenza esterna -> impostare BLENDING MODE = ADD
 - FRAME RATE GENERALE PERFORMANCE : soprattuto quando carichi 2 video separati non mantiene il sincronismo
 - RESET GRID : per visualizzare correttamente un file caricato la sequenza è: LOAD -> INPUT TYPE -> RESET GRID
+- RESET GRID ISSUE : Deve funzionare solo quando è attivato FINE WARPING altrimenti non ha effetto
 - FINE WARPING : aumentando e diminuendo la risoluzione della griglia dsi modifica la dimensione del contenuto
 - IS ACTIVE BUTTON : quando lo selezioni non mantiene livello di Opacity corretto 
 - PREVIEW BUTTON : buggy , quando attivo 16:9 anche il warp è soggetto al cambio aspect Ratio
