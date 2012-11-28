@@ -40,22 +40,7 @@ MAIN FEATURES:
 
 KNOWN ISSUES:
 
-- il livello video non ha trasparenza esterna -> impostare BLENDING MODE = ADD
-- FRAME RATE GENERALE PERFORMANCE : soprattuto quando carichi 2 video separati non mantiene il sincronismo
-- RESET GRID : per visualizzare correttamente un file caricato la sequenza è: LOAD -> INPUT TYPE -> RESET GRID
-- RESET GRID ISSUE : Deve funzionare solo quando è attivato FINE WARPING altrimenti non ha effetto
-- FINE WARPING : aumentando e diminuendo la risoluzione della griglia dsi modifica la dimensione del contenuto
-- IS ACTIVE BUTTON : quando lo selezioni non mantiene livello di Opacity corretto 
-- PREVIEW BUTTON : buggy , quando attivo 16:9 anche il warp è soggetto al cambio aspect Ratio
-- STEREOSCOPIC BUTTON : non funzionano nei vari element e nella Main Preview
-- SFONDO PREVIEW : mettiamo uno sfondo nero quando tutti i livelli sono OFF e la griglia è disattivata
-- VOLUME : Bug sul volumene quando lo alzi non mantiene il livello
-- TASTO SAVE E OPEN non salvano bene tutte le caratteristiche
-- PLAY STOP : buggy bisogno premere STOP più volte per farlo riprendere
-- BLEND MODE BUTTON: non deve stare sopra INPUT
-- OUTPUT MODE BUTTON : non deve stare sopra i FPS
-- SYPHON : bug sulla trasparenza (!) se abiliti la griglia te ne accorgi ( semrba un problema di priorità ) 
-- NO MEDIA IMG : inserire NoMedia Img anche sul livello syphon e su 2Channel ( cambiare colore scritta in blu come interfaccia ) 
+vedi sezione Issues
 
 TO DO LIST:
 
