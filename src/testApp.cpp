@@ -26,15 +26,13 @@ void testApp::setup(){
         printf(">> testApp: GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
     }
 
-//    logoNew.loadImage("./utils/elementLogoNew.png");
     splash.loadImage("./utils/splash.jpg");
-
     msgFont.loadFont("NEOSANS.otf", 10);
-
     
     //default resolution: HD
     outputSizeWidth=1920;
     outputSizeHeight=1080;
+    outputWidescreen=true;
     bOptionsDone= false;
     selectOutputResolution();
     bSetIniziale=true;
@@ -72,10 +70,14 @@ void testApp::draw(){
         selectResolutionGUI->draw();
         ofPushStyle();
         ofSetColor(ofColor :: white);
-        string message = "";
-        if (QuadBufferCapable) message = "OPEN_GL Stereo mode\nSUPPORTED on this machine";
-        else message = "OPEN_GL Stereo mode\nNOT SUPPORTED on this machine";
-        msgFont.drawString(message, 80,720);
+        msgFont.drawString("OPEN_GL Stereo Mode\n\non this machine", 185,250);
+        string message = "\n";
+        if (QuadBufferCapable) message += "SUPPORTED";
+        else message += "NOT SUPPORTED";
+        ofPushStyle();
+        ofSetColor(36, 203, 228);
+        msgFont.drawString(message, 185,250);
+        ofPopStyle();
         ofPopStyle();
     }
 
@@ -89,12 +91,12 @@ void testApp::selectOutputResolution(){
     selectResolutionGUI->setDrawOutline(true);
     selectResolutionGUI->setDrawBack(false);
 
-    selectResolutionGUI->addWidget(new ofxUILabel(190, 225, "run", "LAUNCH ELEMENT", OFX_UI_FONT_MEDIUM));
-    doneButton = new ofxUILabelButton(185, 255, 150, false, "ELEMENT.MAP", OFX_UI_FONT_SMALL);
+//    selectResolutionGUI->addWidget(new ofxUILabel(600, 500, "run", "LAUNCH ELEMENT", OFX_UI_FONT_MEDIUM));
+    doneButton = new ofxUILabelButton(490, 600, 300, false, "LAUNCH ELEMENT.MAP", OFX_UI_FONT_LARGE);
     doneButton->setDrawOutline(true);
     selectResolutionGUI->addWidget(doneButton);
 
-    selectResolutionGUI->addWidget(new ofxUILabel(170, 325, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_MEDIUM));
+    selectResolutionGUI->addWidget(new ofxUILabel(170, 320, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_MEDIUM));
 //    selectResolutionGUI->addWidget(new ofxUILabel(30, 55, "subtitle", "2nd monitor or projector", OFX_UI_FONT_SMALL));
     
     resolutionsList.push_back("1024x768");
@@ -104,7 +106,7 @@ void testApp::selectOutputResolution(){
     resolutionsList.push_back("1600x1200");
     resolutionsList.push_back("1920x1080");
     
-    resGUI = new ofxUIDropDownList(185, 355, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
+    resGUI = new ofxUIDropDownList(185, 340, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
     resGUI->setDrawOutline(true);
     resGUI->setAutoClose(true);
     selectResolutionGUI->addWidget(resGUI);
@@ -122,14 +124,10 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 	int kind = e.widget->getKind(); 
 	
     //DONE BUTTON
-    if( name=="ELEMENT.MAP")
+    if( name=="LAUNCH ELEMENT.MAP")
     {
         if (doneButton->getValue()) 
         {
-            ofPushStyle();
-            ofSetColor(255, 0, 0,125);
-            msgFont.drawString("LOADING...", 600,550);
-            ofPopStyle();
             bOptionsDone=true;
             firstSetup();
         }
@@ -137,26 +135,33 @@ void testApp::guiEvent(ofxUIEventArgs &e)
     else if (name == "1024x768") {
         outputSizeWidth=1024;
         outputSizeHeight=768;
+        outputWidescreen=false;
+
     }
     else if (name == "1280x800") {
         outputSizeWidth=1280;
         outputSizeHeight=800;
+        outputWidescreen=true;
     }
     else if (name == "1280x1024") {
         outputSizeWidth=1280;
         outputSizeHeight=1024;
+        outputWidescreen=false;
     }
     else if (name == "1440x900") {
         outputSizeWidth=1440;
         outputSizeHeight=900;
+        outputWidescreen=true;
     }
     else if (name == "1600x1200") {
         outputSizeWidth=1600;
         outputSizeHeight=1200;
+        outputWidescreen=false;
     }
     else if (name == "1920x1080") {
         outputSizeWidth=1920;
         outputSizeHeight=1080;
+        outputWidescreen=true;
     }
 
 }
@@ -290,6 +295,7 @@ void testApp::firstSetup() {
     mainWindow = new MainWindow();
     mainWindow->outputResolutionX = outputSizeWidth;
     mainWindow->outputResolutionY = outputSizeHeight;
+    mainWindow->outputRatioWide = outputWidescreen;
     mainWindow->setup();
     
 	ofBackground(0,0,0);

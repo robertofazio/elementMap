@@ -50,6 +50,7 @@ public:
 		
 	int						outputResolutionX;
 	int						outputResolutionY;
+    bool                    outputRatioWide;
 	
 	int*					drawingOrder;
     

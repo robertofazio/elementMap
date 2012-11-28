@@ -345,12 +345,12 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
             showGrid=!showGrid;
         }
         //WIDESCREEN PREVIEW
-        if(e.widget->getName()=="PREVIEW 16:9")
-        {
-            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-            wideScreenPreview=!wideScreenPreview;
-            
-        }
+//        if(e.widget->getName()=="PREVIEW 16:9")
+//        {
+//            ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+//            wideScreenPreview=!wideScreenPreview;
+//            
+//        }
         //MAIN OPACITY
         if(e.widget->getName()=="MAIN OPACITY")
         {

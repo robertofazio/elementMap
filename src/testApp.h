@@ -52,6 +52,7 @@ public:
     
     int         outputSizeWidth;
     int         outputSizeHeight;
+    bool        outputWidescreen;
     
     bool        outputFullScreen;
 

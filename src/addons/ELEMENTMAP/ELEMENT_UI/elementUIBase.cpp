@@ -240,8 +240,8 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(GUI_viewGridPreview);
         
         // WIDESCREEN PREVIEW
-        GUI_widescreenPreview = new ofxUILabelToggle(490, 6, 100, 20, false, "PREVIEW 16:9", OFX_UI_FONT_SMALL);
-        UI->addWidget(GUI_widescreenPreview);
+//        GUI_widescreenPreview = new ofxUILabelToggle(490, 6, 100, 20, false, "PREVIEW 16:9", OFX_UI_FONT_SMALL);
+//        UI->addWidget(GUI_widescreenPreview);
                 
         //MAIN OPACITY
         GUI_mainOpacity = new ofxUIMinimalSlider(490, 40, 100,20,0.0,1.0,parentElement->getOpacity() ,"MAIN OPACITY");
@@ -270,11 +270,11 @@ void elementUIBase::setupUI(element* _parentElement)
         UI->addWidget(listOutputModes);
         
         // TEST PATTERN
-        GUI_testPattern = new ofxUILabelToggle(490,70,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL);
+        GUI_testPattern = new ofxUILabelToggle(490,6,100,20,false,"TEST PATTERN", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_testPattern);
         
         // FULL SCREEN
-        GUI_fullscreen = new ofxUILabelToggle(490, 95, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL);
+        GUI_fullscreen = new ofxUILabelToggle(490, 70, 100,20,false, "FULL SCREEN", OFX_UI_FONT_SMALL);
         UI->addWidget(GUI_fullscreen);
         
         

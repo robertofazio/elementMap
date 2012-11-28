@@ -78,7 +78,8 @@ void MainWindow::setup()
 	drawingOrder[3]=0;
 	    
 	elemMix.setup(this, outputResolutionX,outputResolutionY,ELM_MONO,myElements,numOfElements,drawingOrder, 650, (margin * 9) - 7,"mixer", false);
-	
+    elemMix.wideScreenPreview=outputRatioWide;
+    
 	ofSetLogLevel(OF_LOG_VERBOSE);
     
     //comunico il puntatore al mixer a tutti gli element
@@ -188,7 +189,7 @@ void MainWindow::draw()
         ofPopStyle();
 
         
-        
+        //preview area: nero di sfondo, griglia se selezionata
         if (elemMix.wideScreenPreview) 
         {
             ofPushStyle();
