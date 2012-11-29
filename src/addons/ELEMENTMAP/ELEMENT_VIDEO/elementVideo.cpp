@@ -42,7 +42,11 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     //file ref
     leftChannelPath=_leftChannel;
     rightChannelPath=_rightChannel;
-    
+
+    leftChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+    rightChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+
+
     leftChannelPlayer.loadMovie(leftChannelPath);
         
 	this->init(1,int(_width),int(_height),leftChannelPlayer.getTextureReference().getTextureData().glTypeInternal,_name,inputType, _isWarpable);

@@ -24,7 +24,7 @@ elementUIBase::elementUIBase()
 	
     outputModesNames.push_back("ANAGLYPH");
     outputModesNames.push_back("MONO");
-    outputModesNames.push_back("ACTIVE STEREO");
+    outputModesNames.push_back("OPEN GL");
     outputModesNames.push_back("LEFT-RIGHT");
     outputModesNames.push_back("TOP-BOTTOM");
     

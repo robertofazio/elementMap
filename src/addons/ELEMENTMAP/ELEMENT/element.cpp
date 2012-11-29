@@ -99,11 +99,19 @@ void element::drawGraphic(int x, int y, int w, int h)
         ofPushMatrix();
         
         ofTranslate(0, 40);
+        ofPushStyle();
+        ofSetColor(0, 0, 0, 255);
+        ofRect(x, y, w, h);
+        ofPopStyle();
         getLeftTexture().draw(x, y, w, h);
         
         if (type!= 3) 
         {
             ofTranslate(105, 0);
+            ofPushStyle();
+            ofSetColor(0, 0, 0, 255);
+            ofRect(x, y, w, h);
+            ofPopStyle();
             if (parentElement->inputType == ELM_INPUT_MONO) noMedia.draw(x, y, w, h);
             else getRightTexture().draw(x, y, w, h);
         }

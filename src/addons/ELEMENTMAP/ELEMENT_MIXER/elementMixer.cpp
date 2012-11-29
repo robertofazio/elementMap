@@ -59,6 +59,7 @@ void elementMixer::update()
 
 void elementMixer::drawIntoFbo()
 {
+    
     //clear dall'fbo in cui disegno griglie e controlli warp
     fboGui.begin();
     ofClear(0,0,0,0);
@@ -95,7 +96,7 @@ void elementMixer::drawIntoFbo()
                 
                 //legge il blending mode associato al livello e lo applica
                 ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
-                
+
                 //disegna l'uscita dell'element secondo le sue dimensioni proprie
                 
                 ofPushMatrix();
@@ -155,6 +156,7 @@ void elementMixer::drawIntoFbo()
                         //legge il blending mode associato al livello e lo applica
                         ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
                         
+                        
                         //disegna l'uscita sinistra se ho scelto mono per l'element o per il generale del mixer
                         if (sceneElements[elementsOrder[a]]->getDrawInStereo()==false)
                             {
@@ -172,6 +174,7 @@ void elementMixer::drawIntoFbo()
                     }
                     fboRight.end();
     }
+    
 }
 
 
@@ -416,7 +419,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         {
             if(name=="ANAGLYPH") setOutputMode(ELM_STEREO_ANAGLYPH);
             else if(name=="MONO") setOutputMode(ELM_MONO);
-            else if(name=="ACTIVE STEREO") {
+            else if(name=="OPEN GL") {
                 if (mainWindow->bGLStereoCapable) setOutputMode(ELM_STEREO_OPENGL);   
                 else ofSystemAlertDialog("GL STEREO MODE NOT SUPPORTED ON THIS MACHINE!");
             }
