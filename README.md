@@ -5,13 +5,14 @@
 
 **elementMap** è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in C++ usando OpenFrameworks e dedicato a video proiezioni stereoscopiche con differenti modalità di visualizzazione. Sviluppato principalmente sul videoproiettore stereoscopico **[Christie](http://goo.gl/U4w0n)** con tecnologia attiva.
 
-**Principali caratteristiche **:
+**Principali caratteristiche**
 
 - Media Player per Mapping Stereoscopico con tecnologia attiva e anaglifo
 - File supportati .MOV ( codec PhotoJPG 85% ottimizzato per lo streaming ) e H264 con audio incorporato
 - Stereoscopia attiva sidebyside Left/Right e Top/Bottom
 - Eyes Separation
 - Riproduzione di filmati in fullHD 1920x1080 fino 6 minuti progettati per video mapping 1.0
+- ...etc..
 
 
 **Requisiti di sistema**
