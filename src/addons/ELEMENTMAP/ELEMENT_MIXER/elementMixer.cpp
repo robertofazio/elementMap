@@ -139,8 +139,8 @@ void elementMixer::drawIntoFbo()
 		// RIGHT FRAME:
 		//////////////////////////
         
-    if (outputMode!=ELM_MONO)
-    {
+//    if (outputMode!=ELM_MONO)
+//    {
                 fboRight.begin();
                 ofClear(0,0,0,0);
                 
@@ -157,8 +157,8 @@ void elementMixer::drawIntoFbo()
                         ofEnableBlendMode(sceneElements[elementsOrder[a]]->getBlendingMode());
                         
                         
-                        //disegna l'uscita sinistra se ho scelto mono per l'element o per il generale del mixer
-                        if (sceneElements[elementsOrder[a]]->getDrawInStereo()==false)
+                        //disegna l'uscita sinistra se ho scelto mono per l'element
+                        if (sceneElements[elementsOrder[a]]->getElementInputType()==ELM_INPUT_MONO)
                             {
                                 sceneElements[elementsOrder[a]]->drawLeft(0,0,sceneElements[elementsOrder[a]]->getWidth(),sceneElements[elementsOrder[a]]->getHeight());                                
                             }
@@ -173,7 +173,7 @@ void elementMixer::drawIntoFbo()
                         ofPopStyle();
                     }
                     fboRight.end();
-    }
+//    }
     
 }
 
