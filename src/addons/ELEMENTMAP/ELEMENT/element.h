@@ -71,6 +71,8 @@ class element : public ofNode , public elementUIBase
     bool            isSelected;
     bool            isWarpable;
     
+    bool            inputModeChanged;
+    
     ofTrueTypeFont  fontMedium;
     
 	ofFbo			fboLeft;
