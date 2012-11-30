@@ -24,7 +24,7 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	isShow			= true;
 	isActive		= true;
 	isClear			= false;
-    inputModeChanged= false;
+    somethingHasChanged= false;
         
       if(inputType==0) isStereo=false;
       else isStereo=true;
@@ -75,9 +75,9 @@ void element::initFont()
 void element::drawGraphic(int x, int y, int w, int h)
 {
     
-    if(this->inputModeChanged)
+    if(this->somethingHasChanged)
     {
-        this->inputModeChanged = false;
+        this->somethingHasChanged = false;
         this->warper.createGrid(this->warper.xRes, this->warper.yRes);
     }
     
@@ -120,8 +120,11 @@ void element::drawGraphic(int x, int y, int w, int h)
             ofSetColor(0, 0, 0, 255);
             ofRect(x, y, w, h);
             ofPopStyle();
-            if (parentElement->inputType == ELM_INPUT_MONO) noMedia.draw(x, y, w, h);
-            else getRightTexture().draw(x, y, w, h);
+//            if (parentElement->inputType == ELM_INPUT_MONO) noMedia.draw(x, y, w, h);
+//            else getRightTexture().draw(x, y, w, h);
+            getRightTexture().draw(x, y, w, h);
+
+        
         }
         
         ofPopMatrix();

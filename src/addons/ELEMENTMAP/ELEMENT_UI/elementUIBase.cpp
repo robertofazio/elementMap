@@ -81,6 +81,7 @@ void elementUIBase::setupUI(element* _parentElement)
                 fileNames.push_back(dir.getFileName(i));
                 cout << dir.getFileName(i) << endl;
             }
+            fileNames.push_back("NO MEDIA");
             
             GUI_openLeftFile = new ofxUIDropDownList(5, posY, 100, "LOAD LEFT", fileNames, OFX_UI_FONT_SMALL);
             GUI_openLeftFile->setDrawBack(true);
@@ -335,8 +336,16 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         string path;
         if (parentElement->getElementType()==ELEMENT_IMG) path = "./images/";
         else if (parentElement->getElementType()==ELEMENT_VIDEO) path = "./movies/";
-        path+=name;
+        if (name == "NO MEDIA") {
+            if (parentElement->getElementType()==ELEMENT_IMG) path="./utils/empty.jpg";
+            else if (parentElement->getElementType()==ELEMENT_VIDEO) path = "./utils/empty.mov";
+
+        } else path+=name;
+        
         parentElement->openLeft(path);
+        
+        parentElement->somethingHasChanged = true;
+        
     }
     
     if( e.widget->getParent()->getName()=="LOAD RIGHT" )
@@ -344,8 +353,16 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         string path;
         if (parentElement->getElementType()==ELEMENT_IMG) path = "./images/";
         else if (parentElement->getElementType()==ELEMENT_VIDEO) path = "./movies/";
-        path+=name;
+        if (name == "NO MEDIA") {
+            if (parentElement->getElementType()==ELEMENT_IMG) path="./utils/empty.jpg";
+            else if (parentElement->getElementType()==ELEMENT_VIDEO) path = "./utils/empty.mov";
+            
+        } else path+=name;
+
         parentElement->openRight(path);
+        
+        parentElement->somethingHasChanged = true;
+
     }
 
     
@@ -357,7 +374,8 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
         else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
         
-        parentElement->inputModeChanged = true;
+        parentElement->somethingHasChanged = true;
+        
     }
     //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")

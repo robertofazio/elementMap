@@ -27,7 +27,7 @@ void elementMixer::setup(MainWindow* _mainWindow, int _width, int _height, int _
     
     ofAddListener(UI->newGUIEvent,this,&elementMixer::guiEvent); 
     
-    actualVolume = 1000;
+    actualVolume = 1;
 	
     wideScreenPreview=false;
     showGrid=true;
@@ -494,7 +494,7 @@ void elementMixer::guiEvent(ofxUIEventArgs &e)
         if( name == "SOUND VOLUME")
         {
             ofxUISlider *slider = (ofxUISlider *) e.widget;
-            actualVolume = slider->getValue() * 1000;
+            actualVolume = slider->getValue();
             mainWindow->elemV1.element_soundVolume(actualVolume);
         }
     

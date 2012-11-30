@@ -61,7 +61,7 @@ class elementMixer : public element
 	int					numOfElements;
 	int*				elementsOrder;
 
-    int                 actualVolume;
+    float                 actualVolume;
 
     int					outputMode;
 	
