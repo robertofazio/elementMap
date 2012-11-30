@@ -36,7 +36,7 @@ void MainWindow::setup()
     elemSy.setup("","",outputResolutionX,outputResolutionY, LEFT_MARGIN_X , UPPER_MARGIN_Y,"Syphon", true);
 	
     //video
-    elemV1.setup("","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
+    elemV1.setup("./movies/alpha_test.mov","", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_TWO_CHANNEL, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT,"Movie", true);
 
     //image
     elemImg2.setup("./images/leftRightHD.jpg", "", outputResolutionX,outputResolutionY, ELM_INPUT_STEREO_LEFTRIGHT, LEFT_MARGIN_X , UPPER_MARGIN_Y+STRIP_HEIGHT*2,"Image", true);

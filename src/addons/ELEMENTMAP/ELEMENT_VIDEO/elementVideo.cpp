@@ -312,11 +312,16 @@ void elementVideo::setElementInputType(int _inType)
 
     if (getElementInputType() == ELM_INPUT_MONO)
     {
+        leftChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+        rightChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+
         rightChannelPlayer.close();
 
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TWO_CHANNEL)
     {
+        leftChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+        rightChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
         if (rightChannelPath!="") rightChannelPlayer.loadMovie(rightChannelPath);   
         else ofSystemAlertDialog("ERROR: this mode requires TWO separate videos!");        
         
@@ -324,7 +329,9 @@ void elementVideo::setElementInputType(int _inType)
     }
     if (getElementInputType() == ELM_INPUT_STEREO_LEFTRIGHT)
     {
-        
+        leftChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+        rightChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+
         rightChannelPlayer.close();
 
         //prepare left:
@@ -340,6 +347,9 @@ void elementVideo::setElementInputType(int _inType)
     }
     else if (getElementInputType() == ELM_INPUT_STEREO_TOPBOTTOM)
     {
+        leftChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+        rightChannelPlayer.setPixelFormat(OF_PIXELS_RGBA);
+
         rightChannelPlayer.close();
         //prepare left:
         tempLeft.allocate(leftChannelPlayer.getWidth(), leftChannelPlayer.getHeight()*.5);

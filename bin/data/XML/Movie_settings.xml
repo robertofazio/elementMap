@@ -3,7 +3,7 @@
     <r>255</r>
     <g>255</g>
     <b>255</b>
-    <opacity>0.000000000</opacity>
+    <opacity>1.000000000</opacity>
     <blendingMode>0</blendingMode>
-    <isActive>0</isActive>
+    <isActive>1</isActive>
 </SETTINGS>
