@@ -71,7 +71,7 @@ void elementImage::setup(string _leftImage, string _rightImage, int _width, int 
 //-----------------------------------------------------------------
 void elementImage::update()
 {
-    if (isWarpable) warper.updateCoordinates();
+    if (isWarpable) warper.updateCoordinates();  
 }
 
 

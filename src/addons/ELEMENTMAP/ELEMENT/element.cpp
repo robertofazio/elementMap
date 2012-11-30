@@ -24,7 +24,6 @@ void element::init(int _type,int _width, int _height, int _internalFormat, strin
 	isShow			= true;
 	isActive		= true;
 	isClear			= false;
-    inputModeChanged= false;
         
       if(inputType==0) isStereo=false;
       else isStereo=true;
@@ -74,13 +73,6 @@ void element::initFont()
 
 void element::drawGraphic(int x, int y, int w, int h)
 {
-    
-    if(this->inputModeChanged)
-    {
-        this->inputModeChanged = false;
-        this->warper.createGrid(this->warper.xRes, this->warper.yRes);
-    }
-    
     ofPushStyle();
     ofSetColor(255,255,255,255);
     switch(this->type)

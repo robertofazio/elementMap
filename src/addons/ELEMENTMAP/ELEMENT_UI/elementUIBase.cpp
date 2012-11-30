@@ -355,10 +355,8 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
         if(name=="MONO") parentElement->setElementInputType(ELM_INPUT_MONO);
         else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
         else if(name=="LEFTRIGHT")parentElement->setElementInputType(ELM_INPUT_STEREO_LEFTRIGHT);
-        else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);
-        
-        parentElement->inputModeChanged = true;
-    }
+        else if(name=="TOPBOTTOM")parentElement->setElementInputType(ELM_INPUT_STEREO_TOPBOTTOM);        
+    }    
     //ELEMENT OPACITY
 	if(e.widget->getName()=="Opacity")
 	{
@@ -557,10 +555,17 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     else if (e.widget->getName()=="reset grid")
     {
         ofxUIButton *button = (ofxUIButton *) e.widget;
-        if (button->getValue())
+        if (button->getValue()) {
+
+		if(parentElement->getIsActive() )
         {
-            if(parentElement->getIsActive() && parentElement->warper.bViewGrid)
-                parentElement->warper.createGrid(parentElement->warper.xRes, parentElement->warper.yRes);
+            bool gridState = parentElement->warper.bViewGrid;
+            parentElement->warper.bViewGrid=true;
+            parentElement->warper.createGrid(parentElement->warper.xRes, parentElement->warper.yRes);
+            parentElement->warper.bViewGrid = gridState;
+
+
+        }
         }
     }
     //IS DRAW IN STEREO
