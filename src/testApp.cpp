@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
-        
+    
     ofSetLogLevel(OF_LOG_SILENT);
     
     // test that GL_STEREO is working on this machine
@@ -13,19 +13,19 @@ void testApp::setup(){
     
     GLint maxVertexTextureImageUnits;
 	glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&maxVertexTextureImageUnits);
-
-    if (QuadBufferCapable) 
+    
+    if (QuadBufferCapable)
     {
         glDrawBuffer(GL_BACK);
-        printf(">> testApp: GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+        printf(">> testApp: GL_STEREO OK \n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);
     }
 	else {
         
         glDrawBuffer(GL_BACK);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        printf(">> testApp: GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);	
+        printf(">> testApp: GL_STEREO KO !!\n MaxVertexTextureImageUnits %d\n",maxVertexTextureImageUnits);
     }
-
+    
     splash.loadImage("./utils/splash.jpg");
     msgFont.loadFont("NEOSANS.otf", 10);
     msgFontBold.loadFont("NEOSANSBOLD.otf", 10);
@@ -37,7 +37,7 @@ void testApp::setup(){
     bOptionsDone= false;
     selectOutputResolution();
     bSetIniziale=true;
-
+    
 }
 
 //--------------------------------------------------------------
@@ -60,14 +60,14 @@ void testApp::draw(){
         }
         if (QuadBufferCapable) glDrawBuffer(GL_BACK_LEFT);
         ofPushStyle();
-        ofBackground(0, 0, 0);  
+        ofBackground(0, 0, 0);
         mainWindow->draw();
         ofPopStyle();
-    } 
-    else 
+    }
+    else
     {
         splash.draw(0,0,1280,800);
-//        logoNew.draw(ofGetWindowWidth()*.5+100,ofGetWindowHeight()*.5-120, 150, 96);
+        //        logoNew.draw(ofGetWindowWidth()*.5+100,ofGetWindowHeight()*.5-120, 150, 96);
         selectResolutionGUI->draw();
         ofPushStyle();
         ofSetColor(ofColor :: white);
@@ -81,31 +81,36 @@ void testApp::draw(){
         ofPopStyle();
         ofPopStyle();
     }
-
+    
 }
 
 
 //--------------------------------------------------------------
 void testApp::selectOutputResolution(){
-
+    
     selectResolutionGUI = new ofxUICanvas(0,0, 1280, 800);
     selectResolutionGUI->setDrawOutline(true);
     selectResolutionGUI->setDrawBack(false);
-
-//    selectResolutionGUI->addWidget(new ofxUILabel(600, 500, "run", "LAUNCH ELEMENT", OFX_UI_FONT_MEDIUM));
+    
+    //    selectResolutionGUI->addWidget(new ofxUILabel(600, 500, "run", "LAUNCH ELEMENT", OFX_UI_FONT_MEDIUM));
     doneButton = new ofxUILabelButton(490, 600, 300, false, "LAUNCH ELEMENT.MAP", OFX_UI_FONT_LARGE);
     doneButton->setDrawOutline(true);
     selectResolutionGUI->addWidget(doneButton);
-
-    selectResolutionGUI->addWidget(new ofxUILabel(170, 320, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_SMALL));
-//    selectResolutionGUI->addWidget(new ofxUILabel(30, 55, "subtitle", "2nd monitor or projector", OFX_UI_FONT_SMALL));
     
+    selectResolutionGUI->addWidget(new ofxUILabel(170, 320, "res", "SET OUTPUT RESOLUTION", OFX_UI_FONT_SMALL));
+    //    selectResolutionGUI->addWidget(new ofxUILabel(30, 55, "subtitle", "2nd monitor or projector", OFX_UI_FONT_SMALL));
+    
+    resolutionsList.push_back("800x600");
     resolutionsList.push_back("1024x768");
+    resolutionsList.push_back("1280x720");
     resolutionsList.push_back("1280x800");
     resolutionsList.push_back("1280x1024");
+    resolutionsList.push_back("1400x1050");
     resolutionsList.push_back("1440x900");
     resolutionsList.push_back("1600x1200");
+    resolutionsList.push_back("1680x1050");
     resolutionsList.push_back("1920x1080");
+    resolutionsList.push_back("2048x1080");
     
     resGUI = new ofxUIDropDownList(170, 340, 150, "RESOLUTION", resolutionsList, OFX_UI_FONT_SMALL);
     resGUI->setDrawOutline(true);
@@ -113,31 +118,42 @@ void testApp::selectOutputResolution(){
     selectResolutionGUI->addWidget(resGUI);
     
     selectResolutionGUI->setVisible(true);
-    ofAddListener(selectResolutionGUI->newGUIEvent,this,&testApp::guiEvent); 
+    ofAddListener(selectResolutionGUI->newGUIEvent,this,&testApp::guiEvent);
     
 }
 
 
 //--------------------------------------------------------------
 void testApp::guiEvent(ofxUIEventArgs &e)
-{	
-	string name = e.widget->getName(); 
-	int kind = e.widget->getKind(); 
+{
+	string name = e.widget->getName();
+	int kind = e.widget->getKind();
 	
     //DONE BUTTON
     if( name=="LAUNCH ELEMENT.MAP")
     {
-        if (doneButton->getValue()) 
+        if (doneButton->getValue())
         {
             bOptionsDone=true;
             firstSetup();
         }
     }
+    else if (name == "800x600") {
+        outputSizeWidth=800;
+        outputSizeHeight=600;
+        outputWidescreen=false;
+        
+    }
     else if (name == "1024x768") {
         outputSizeWidth=1024;
         outputSizeHeight=768;
         outputWidescreen=false;
-
+        
+    }
+    else if (name == "1280x720") {
+        outputSizeWidth=1280;
+        outputSizeHeight=720;
+        outputWidescreen=true;
     }
     else if (name == "1280x800") {
         outputSizeWidth=1280;
@@ -149,6 +165,11 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         outputSizeHeight=1024;
         outputWidescreen=false;
     }
+    else if (name == "1400x1050") {
+        outputSizeWidth=1400;
+        outputSizeHeight=1050;
+        outputWidescreen=true;
+    }
     else if (name == "1440x900") {
         outputSizeWidth=1440;
         outputSizeHeight=900;
@@ -159,22 +180,32 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         outputSizeHeight=1200;
         outputWidescreen=false;
     }
+    else if (name == "1680x1050") {
+        outputSizeWidth=1680;
+        outputSizeHeight=1050;
+        outputWidescreen=false;
+    }
     else if (name == "1920x1080") {
         outputSizeWidth=1920;
         outputSizeHeight=1080;
         outputWidescreen=true;
     }
-
+    else if (name == "2048x1080") {
+        outputSizeWidth=2048;
+        outputSizeHeight=1080;
+        outputWidescreen=true;
+    }
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    if (bOptionsDone) mainWindow->keyPressed(key);    
+    if (bOptionsDone) mainWindow->keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-    if (bOptionsDone) mainWindow->keyReleased(key);       
+    if (bOptionsDone) mainWindow->keyReleased(key);
 }
 
 //--------------------------------------------------------------
@@ -192,7 +223,7 @@ void testApp::mouseDragged(int x, int y, int button){
         else larghezza = 600;
         posizioneX = 650;
         
-        if (mainWindow->elemMix.wideScreenPreview) 
+        if (mainWindow->elemMix.wideScreenPreview)
         {
             if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 169;
             else altezza = 338;
@@ -202,11 +233,11 @@ void testApp::mouseDragged(int x, int y, int button){
         {
             if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 225;
             else altezza = 450;
-            posizioneY = 80;        
+            posizioneY = 80;
         }
         
         //controllo se ho premuto dentro l'area della preview:
-        if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza) 
+        if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza)
         {
             
             //faccio le proporzioni:
@@ -216,7 +247,7 @@ void testApp::mouseDragged(int x, int y, int button){
             //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO:
             if (mainWindow->elemSy.isSelected==true && mainWindow->elemSy.isWarpable==true) mainWindow->elemSy.warper.mouseDragged(x, y, button);
             else if (mainWindow->elemV1.isSelected==true && mainWindow->elemV1.isWarpable==true) mainWindow->elemV1.warper.mouseDragged(x, y, button);
-            else if (mainWindow->elemImg2.isSelected==true && mainWindow->elemImg2.isWarpable==true) mainWindow->elemImg2.warper.mouseDragged(x, y, button);     
+            else if (mainWindow->elemImg2.isSelected==true && mainWindow->elemImg2.isWarpable==true) mainWindow->elemImg2.warper.mouseDragged(x, y, button);
             
         }
         
@@ -226,46 +257,46 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-   
-     if (bOptionsDone) {
-         
-    //imposto dimensioni e posizione della preview:
-    int altezza, larghezza, posizioneX, posizioneY;
     
-         if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_LEFTRIGHT) larghezza = 300;
-         else larghezza = 600;
-
-    posizioneX = 650;
-   
-         if (mainWindow->elemMix.wideScreenPreview) 
-         {
-             if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 169;
-             else altezza = 338;
-             posizioneY = 136;
-         }
-         else
-         {
-             if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 225;
-             else altezza = 450;
-             posizioneY = 80;        
-         }
+    if (bOptionsDone) {
         
-    //controllo se ho premuto dentro l'area della preview:
-    if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza) 
-    {
-    
-        //faccio le proporzioni:
-        x = (x-posizioneX)*outputSizeWidth/larghezza;
-        y = (y-posizioneY)*outputSizeHeight/altezza;
+        //imposto dimensioni e posizione della preview:
+        int altezza, larghezza, posizioneX, posizioneY;
         
-        //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO:
-        if (mainWindow->elemSy.isSelected==true && mainWindow->elemSy.isWarpable==true) mainWindow->elemSy.warper.mousePressed(x, y, button);
-        else if (mainWindow->elemV1.isSelected==true && mainWindow->elemV1.isWarpable==true) mainWindow->elemV1.warper.mousePressed(x, y, button);
-        else if (mainWindow->elemImg2.isSelected==true && mainWindow->elemImg2.isWarpable==true) mainWindow->elemImg2.warper.mousePressed(x, y, button);     
+        if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_LEFTRIGHT) larghezza = 300;
+        else larghezza = 600;
+        
+        posizioneX = 650;
+        
+        if (mainWindow->elemMix.wideScreenPreview)
+        {
+            if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 169;
+            else altezza = 338;
+            posizioneY = 136;
+        }
+        else
+        {
+            if (mainWindow->elemMix.getOutputMode()==ELM_STEREO_TOPBOTTOM) altezza = 225;
+            else altezza = 450;
+            posizioneY = 80;
+        }
+        
+        //controllo se ho premuto dentro l'area della preview:
+        if (x>posizioneX && x<posizioneX+larghezza && y>posizioneY && y<posizioneY+altezza)
+        {
+            
+            //faccio le proporzioni:
+            x = (x-posizioneX)*outputSizeWidth/larghezza;
+            y = (y-posizioneY)*outputSizeHeight/altezza;
+            
+            //MANDO I COMANDI AL WARPER DEL LIVELLO SELEZIONATO:
+            if (mainWindow->elemSy.isSelected==true && mainWindow->elemSy.isWarpable==true) mainWindow->elemSy.warper.mousePressed(x, y, button);
+            else if (mainWindow->elemV1.isSelected==true && mainWindow->elemV1.isWarpable==true) mainWindow->elemV1.warper.mousePressed(x, y, button);
+            else if (mainWindow->elemImg2.isSelected==true && mainWindow->elemImg2.isWarpable==true) mainWindow->elemImg2.warper.mousePressed(x, y, button);
+            
+        }
         
     }
-    
-     }
 }
 
 //--------------------------------------------------------------
@@ -286,7 +317,7 @@ void testApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
+void testApp::dragEvent(ofDragInfo dragInfo){
 }
 
 
@@ -310,7 +341,7 @@ void testApp::firstSetup() {
 void testApp::createOutputWindow(){
     
     //from ofxFanster example: per mandare la seconda finsetra sul secondo schermo, se c'
-/*     ofxDisplayList displays = ofxDisplayManager::get()->getDisplays();
+    /*     ofxDisplayList displays = ofxDisplayManager::get()->getDisplays();
      ofxDisplay* disp = displays[0];
      if(displays.size() > 1) disp = displays[1];
      ofxFensterManager::get()->setActiveDisplay(disp); */
