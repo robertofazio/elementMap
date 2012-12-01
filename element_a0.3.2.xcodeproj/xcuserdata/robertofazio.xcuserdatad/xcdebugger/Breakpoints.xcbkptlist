@@ -52,7 +52,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "193"
          endingLineNumber = "193"
-         landmarkName = "MainWindow::keyPressed(int key)"
+         landmarkName = "MainWindow::draw()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -64,7 +64,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "192"
-         endingLineNumber = "192">
+         endingLineNumber = "192"
+         landmarkName = "MainWindow::draw()"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

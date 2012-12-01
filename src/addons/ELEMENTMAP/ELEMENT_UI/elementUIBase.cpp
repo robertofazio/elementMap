@@ -173,7 +173,7 @@ void elementUIBase::setupUI(element* _parentElement)
         posY=2;
         
         //terza colonna: blending mode
-        listBlendModes = new ofxUIDropDownList(500, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes = new ofxUIDropDownList(455, posY, 100, "Blend Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
@@ -184,7 +184,7 @@ void elementUIBase::setupUI(element* _parentElement)
         
         //input type (mono, two channel, left/right, top/bottom)
         //NOTA: serve solo per debug, lo sceglierò al momento del caricamento del file!!
-        GUI_inputType = new ofxUIDropDownList(500, posY+22, 100, "input", inputTypeNames, OFX_UI_FONT_SMALL);
+        GUI_inputType = new ofxUIDropDownList(560, posY, 100, "Input", inputTypeNames, OFX_UI_FONT_SMALL);
         GUI_inputType->setDrawBack(true);
         GUI_inputType->setDrawOutlineHighLight(false);
         GUI_inputType->setDrawPaddingOutline(false);
@@ -367,7 +367,7 @@ void elementUIBase::guiEvent(ofxUIEventArgs &e)
     
     
     //INPUT MODE
-    if( e.widget->getParent()->getName()=="input")
+    if( e.widget->getParent()->getName()=="Input")
 	{
         if(name=="MONO") parentElement->setElementInputType(ELM_INPUT_MONO);
         else if(name=="2CHANNEL") parentElement->setElementInputType(ELM_INPUT_STEREO_TWO_CHANNEL);
