@@ -173,7 +173,7 @@ void elementUIBase::setupUI(element* _parentElement)
         posY=2;
         
         //terza colonna: blending mode
-        listBlendModes = new ofxUIDropDownList(455, posY, 100, "Blend Mode", blendingNames, OFX_UI_FONT_SMALL);
+        listBlendModes = new ofxUIDropDownList(455, posY, 100, "Blending Mode", blendingNames, OFX_UI_FONT_SMALL);
         listBlendModes->setDrawBack(true);
         listBlendModes->setDrawOutlineHighLight(false);
         listBlendModes->setDrawPaddingOutline(false);
