@@ -1,12 +1,12 @@
 elementMap alpha 0.3.0 28/11/2012
 
-Sterescopic Media Server for 3D Projection Mapping elementMap è il primo strumento destinato alla gestione di videoproiezioni stereoscopiche di 3d mapping, sviluppato in C++ usando OpenFrameworks e dedicato a video proiezioni stereoscopiche con differenti modalità di visualizzazione. Sviluppato principalmente sul videoproiettore stereoscopico Christie con tecnologia attiva.
+OPEN SOURCE SOFTWARE FOR 3D STEREOSCOPIC PROJECTION MAPPING 
 
-**Principali caratteristiche**:
+Element.Map is an open source project that enhances the use of stereoscopic contents for 3d projection mapping. It is developed entirely in openFrameworks,  an open source C++ toolkit for creative coding.  Element.Map allows you to manage 3d stereoscopic video contents to project them onto architectural structures and volumes.
 
-Media Player per Mapping Stereoscopico con tecnologia attiva e anaglifo
-Stereoscopia attiva sidebyside Left/Right e Top/Bottom
 
-MAC OSX 10.7.5 Scheda grafica minima : nVidia o ATI min 512MB ( OpenGl QUAD BUFFER supportate ) fare riferimento a questo link per aggiornare il sistema operativo o il vostro harwdare : (http://goo.gl/gdCgv) Richiesto secondo monitor o videoproiettore connesso prima di lanciare elementMap. .
 
-(C) 2012 Roberto Fazio Studio - www.robertofazio.com Creative coders : Matteo Cinzio Riva , Eloi Maduell , Mauro Ferrario
+Basically it is a simple stereoscopic video player with some useful functions for  projection mapping projects such as Quad warping and Fine Warping. It works in side by side L/R and T/B active, Anagliph, and OpenGL modes. It is based on the stereo active mode and requires an OpenGL quad buffer hardware capability [ here ].
+
+One of its main feature is the ability to broadcast Full HD 1920 x 1080 contents in photojpeg codec  up to 10 GB end even more.
+
